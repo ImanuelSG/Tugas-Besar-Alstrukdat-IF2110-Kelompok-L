@@ -2,7 +2,8 @@
 #include <stdlib.h>
 #include "data.h"
 #include "kicau.h"
-#include "boolean.h"
+#include "ADT_Bawaan/boolean.h"
+#include "ADT_Tambahan/tmp.c"
 
 
 // ini buat contoh aja untuk skema nya,
