@@ -14,7 +14,7 @@ boolean isSameWord(Word w1, Word w2);
 
 Word stringToWord(char letters[], int length);
 /* Mengubah string literal dengan panjang length menjadi word */
-/* Contoh: stringToWord("KICAU") akan mengembalikan Word dengan length 5
+/* Contoh: stringToWord("KICAU", 5) akan mengembalikan Word dengan length 5
 dan elemen TabWord berisi 'K', 'I', 'C', 'A', dan 'U'. */
 
 void displayWord(Word w);
