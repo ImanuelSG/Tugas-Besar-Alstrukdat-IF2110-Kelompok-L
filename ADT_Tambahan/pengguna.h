@@ -10,7 +10,6 @@ typedef struct
     Word nomor ;
     Word weton ;
     int tipe_akun ;
-    boolean login ;
 } Pengguna ;
 
 void Daftar() ;

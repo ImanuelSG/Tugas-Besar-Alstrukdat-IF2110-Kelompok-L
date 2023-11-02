@@ -3,4 +3,6 @@
 #include "stdlib.h"
 
 Pengguna currentPengguna ;
-currentPengguna.login = false ; // Initialize to NULL
+int banyakPengguna ;
+Pengguna dataPengguna[20] ;
+boolean login = false ;

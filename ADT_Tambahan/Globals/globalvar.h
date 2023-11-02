@@ -3,5 +3,8 @@
 
 #include "../pengguna.h"
 
-extern Pengguna currentPengguna;
+extern Pengguna currentPengguna ;
+extern int banyakPengguna ;
+extern Pengguna dataPengguna[20] ;
+extern boolean login ;
 #endif
