@@ -7,7 +7,7 @@
 #include "boolean.h"
 #include "charmachine.h"
 
-#define NMax 100
+#define NMax 280
 #define BLANK ' '
 
 typedef struct
@@ -47,4 +47,12 @@ void CopyWord();
           currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
           Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
 
+void STARTKalimat();
+
+void BacaKalimat();
+/* Mengakuisisi kalimat, menyimpan dalam currentword
+   I.S. : currentChar adalah karakter pertama dari kata
+   F.S. : current word berisi kalimat yang sudah diakuisisi
+          currentChar= MARK */
+         
 #endif

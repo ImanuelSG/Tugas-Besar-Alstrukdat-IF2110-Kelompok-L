@@ -19,7 +19,6 @@ void IgnoreBlanks() {
 
 void STARTWORD() {
    START();
-   IgnoreBlanks();
    if (currentChar == MARK) {
       EndWord = true;
    }
@@ -71,3 +70,32 @@ void CopyWord() {
           currentChar = BLANK atau currentChar = MARK;
           currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
           Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
+
+
+void STARTKalimat() {
+   START();
+   if (currentChar == MARK) {
+      EndWord = true;
+   }
+   else {
+      EndWord = false;
+      BacaKalimat();
+   }
+}
+
+void BacaKalimat() {
+   int i = 0 ;
+   boolean flag = true ;
+   while (flag) {
+      currentWord.TabWord[i] = currentChar ;
+      ADV() ;
+      i++ ;
+
+      if (currentChar == MARK || i == NMax) {
+         flag = false ;
+      }
+   }
+
+   ADV() ;
+   currentWord.Length = i ;
+}
