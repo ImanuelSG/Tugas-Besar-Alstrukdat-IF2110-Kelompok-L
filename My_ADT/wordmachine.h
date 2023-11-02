@@ -54,11 +54,7 @@ void BacaKalimat();
    I.S. : currentChar adalah karakter pertama dari kata
    F.S. : current word berisi kalimat yang sudah diakuisisi
           currentChar= MARK */
-<<<<<<< HEAD:wordmachine.h
 
 void printWord(Word W);
  
-=======
-         
->>>>>>> 22311776abd10260ad985ba2025da829ec6c1f00:ADT_Bawaan/wordmachine.h
 #endif
