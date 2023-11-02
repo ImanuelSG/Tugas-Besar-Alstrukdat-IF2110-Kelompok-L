@@ -98,6 +98,7 @@ void BacaKalimat() {
 
    ADV() ;
    currentWord.Length = i ;
+<<<<<<< HEAD:wordmachine.c
 }
 
 void printWord(Word W) {
@@ -106,4 +107,6 @@ void printWord(Word W) {
     for (int i = 0; i < W.Length; i++) {
         printf("%c", W.TabWord[i]);
     }
+=======
+>>>>>>> 22311776abd10260ad985ba2025da829ec6c1f00:ADT_Bawaan/wordmachine.c
 }
