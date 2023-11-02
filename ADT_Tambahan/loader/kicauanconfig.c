@@ -1,15 +1,6 @@
+#include "../Kicauan/Kicau.h"
 #include <stdio.h>
 #include <stdlib.h>
-
-#define MAX_KICAUAN 100
-
-typedef struct {
-    int id;
-    char text[256];
-    int like;
-    char author[64];
-    char datetime[20];
-} Kicauan;
 
 int main() {
     int banyakKicauan;

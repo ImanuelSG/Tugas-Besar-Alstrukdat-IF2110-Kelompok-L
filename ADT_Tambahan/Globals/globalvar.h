@@ -1,5 +1,15 @@
-#include 
-#include 
+#ifndef GLOBALVAR_H
+#define GLOBALVAR_H
 
-extern Pengguna currentpengguna /*Ini berisi siapa pengguna yang login */
-extern ListDinamis ListPengguna /*Ini berisi List pengguna */
+#include "../pengguna.h"
+#include "../Kicauan/Kicau.h"
+#include "boolean.h"
+
+extern Pengguna currentPengguna; /*Berisi Data Current Pengguna*/
+
+extern boolean isLoggedIn; /*True jika ada pengguna sedang login, false sebaliknya.*/
+
+extern int jumlahpengguna; /*Berisi jumlah pengguna saat ini*/
+
+extern ListKicauan ListKicauan; /*Berisi List Kicauan saat ini*/
+#endif
