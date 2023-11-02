@@ -99,3 +99,11 @@ void BacaKalimat() {
    ADV() ;
    currentWord.Length = i ;
 }
+
+void printWord(Word W) {
+/* I.S. : W sembarang
+   F.S. : W tercetak di layar dengan format */
+    for (int i = 0; i < W.Length; i++) {
+        printf("%c", W.TabWord[i]);
+    }
+}

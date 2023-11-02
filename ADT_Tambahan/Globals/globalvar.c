@@ -3,4 +3,9 @@
 
 Pengguna currentPengguna;
 boolean isLoggedIn = false;
-int 
+
+int jumlahpengguna = 0;
+
+ListKicauan ListKicauanData;
+
+IDkicau currentIDKicau = -1;
