@@ -16,7 +16,7 @@ void CreateKicauan(Kicauan *K, Word Penulis, DATETIME Waktu, Word Tweet) {
 }
 
 /* MENCETAK STRUCT KICAUAN */
-void PrintKicauan(Kicauan K, ID id) {
+void PrintKicauan(Kicauan K, IDkicau id) {
 /* I.S. K terdefinisi */
 /* F.S. Struct Kicauan tercetak di layar dengan format:
     | ID = <idkicauan>
@@ -77,13 +77,13 @@ int listLength(ListKicauan l) {
 }
 
 /* *** Selektor INDEKS *** */
-ID getFirstIdx(ListKicauan l) {
+IDkicau getFirstIdx(ListKicauan l) {
 /* Prekondisi : List l tidak kosong */
 /* Mengirimkan indeks elemen l pertama */
     return IDX_MIN;
 }
 
-ID getLastIdx(ListKicauan l) {
+IDkicau getLastIdx(ListKicauan l) {
 /* Prekondisi : List l tidak kosong */
 /* Mengirimkan indeks elemen l terakhir */
 /* indeks dimulai dari 1 */
@@ -91,13 +91,13 @@ ID getLastIdx(ListKicauan l) {
 }
 
 /* ********** Test Indeks yang valid ********** */
-boolean isIdxValid(ListKicauan l, ID i) {
+boolean isIdxValid(ListKicauan l, IDkicau i) {
 /* Mengirimkan true jika i adalah indeks yang valid utk kapasitas list l */
 /* yaitu antara indeks yang terdefinisi utk container*/
     return ((i >= IDX_MIN) && (i < CAPACITY(l)));
 }
 
-boolean isIdxEff(ListKicauan l, ID i) {
+boolean isIdxEff(ListKicauan l, IDkicau i) {
 /* Mengirimkan true jika i adalah indeks yang terdefinisi utk list */
 /* yaitu antara 1..NEFF(l) */
     return ((i >= IDX_MIN) && (i <= NEFF(l)));
@@ -140,7 +140,7 @@ void printList(ListKicauan l) {
 /* I.S. l boleh kosong */
 /* F.S. Jika l tidak kosong: tercetak daftar seluruh kicauan */
 /*      Penulisan dari kicauan terbaru ke yang terlama */
-    ID i;
+    IDkicau i;
 
     for (i = getLastIdx(l); i >= getFirstIdx(l); i--) {
         PrintKicauan(ELMT(l, i), i);

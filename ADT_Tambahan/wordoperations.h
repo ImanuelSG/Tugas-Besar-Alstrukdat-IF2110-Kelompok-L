@@ -5,7 +5,7 @@
 #define WORDOPERATIONS_H
 
 #include "../ADT_Bawaan/boolean.h"
-#include "../ADT_Bawaan/wordmachine.h"
+#include "../ADT_Bawaan/wordmachine/wordmachine.h"
 #include <stdio.h>
 
 boolean isSameWord(Word w1, Word w2);

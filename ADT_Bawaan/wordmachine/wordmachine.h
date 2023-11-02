@@ -54,7 +54,5 @@ void BacaKalimat();
    I.S. : currentChar adalah karakter pertama dari kata
    F.S. : current word berisi kalimat yang sudah diakuisisi
           currentChar= MARK */
-
-void printWord(Word W);
- 
+         
 #endif

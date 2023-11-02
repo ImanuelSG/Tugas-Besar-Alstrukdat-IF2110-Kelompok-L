@@ -7,7 +7,7 @@
 #include "datetime.h"
 
 /* ********** DEFINISI TYPE KICAUAN ********** */
-typedef int ID;
+typedef int IDkicau;
 
 typedef struct {
     Word PenulisKicauan;
@@ -17,7 +17,7 @@ typedef struct {
     int JumlahBalasan;
 } Kicauan;
 
-ID CURRENTID;
+IDkicau CURRENTIDkicau;
 
 #define PENULIS_KICAUAN(K) (K).PenulisKicauan
 #define WAKTU_KICAUAN(K) (K).WaktuKicaun
