@@ -9,7 +9,7 @@ typedef struct
     Word bio ;
     Word nomor ;
     Word weton ;
-    int tipe_akun ;
+    int tipe_akun ; // 0 itu public, 1 itu private
 } Pengguna ;
 
 void Daftar() ;

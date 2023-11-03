@@ -34,6 +34,7 @@ void Daftar() {
             printf("Pengguna telah berhasil terdaftar. Masuk untuk menikmati fitur-fitur BurBir.\n") ;
 
             banyakPengguna += 1 ;
+            daftarPengguna.tipe_akun = 0 ;
             dataPengguna[banyakPengguna-1] = daftarPengguna ;
         }
     }
