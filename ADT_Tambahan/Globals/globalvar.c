@@ -1,11 +1,12 @@
 #include "globalvar.h"
-#include "stdlib.h"
+#include <stdlib.h>
 
 Pengguna currentPengguna;
+
 boolean isLoggedIn = false;
 
 int jumlahpengguna = 0;
 
-ListKicauan ListKicauanData;
+ListKicauan LIST_KICAUAN_DATA;
 
-IDkicau currentIDKicau = -1;
+ID CURRENT_ID_KICAUAN = 0;

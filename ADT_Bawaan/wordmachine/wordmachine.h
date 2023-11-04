@@ -5,13 +5,12 @@
 #define __WORDMACHINE_H__
 
 #include "boolean.h"
-#include "charmachine.h"
+#include "../charmachine/charmachine.h"
 
 #define NMax 280
 #define BLANK ' '
 
-typedef struct
-{
+typedef struct {
    char TabWord[NMax]; /* container penyimpan kata, indeks yang dipakai [0..NMax-1] */
    int Length;
 } Word;
@@ -48,11 +47,19 @@ void CopyWord();
           Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
 
 void STARTKalimat();
+/* I.S. : currentChar sembarang
+   F.S. : EndWord = true, dan currentChar = MARK;
+          atau EndWord = false, currentword adalah kalimat yang sudah diakuisisi,
+          currentChar = MARK */
 
 void BacaKalimat();
 /* Mengakuisisi kalimat, menyimpan dalam currentword
    I.S. : currentChar adalah karakter pertama dari kata
-   F.S. : current word berisi kalimat yang sudah diakuisisi
-          currentChar= MARK */
-         
+   F.S. : currentword berisi kalimat yang sudah diakuisisi
+          currentChar = MARK */
+
+void PrintWord(Word W);
+/* I.S. : W sembarang
+   F.S. : W tercetak di layar */
+
 #endif

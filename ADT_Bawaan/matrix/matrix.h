@@ -130,15 +130,11 @@ float determinant(Matrix m);
 /* Prekondisi: isSquare(m) */
 /* Menghitung nilai determinan m */
 Matrix transpose(Matrix m);
-Matrix getANSOnly(Matrix m);
-Matrix getSPLOnly(Matrix m);
 /* I.S. m terdefinisi dan IsSquare(m) */
 /* F.S. menghasilkan salinan transpose dari m, yaitu setiap elemen m(i,j) ditukar nilainya dengan elemen m(j,i) */
 void pTranspose(Matrix *m);
 /* I.S. m terdefinisi dan IsSquare(m) */
 /* F.S. m "di-transpose", yaitu setiap elemen m(i,j) ditukar nilainya dengan elemen m(j,i) */
-void Cramer(Matrix m);
-
 boolean isSegitigaBawah (Matrix m);
 
 #endif

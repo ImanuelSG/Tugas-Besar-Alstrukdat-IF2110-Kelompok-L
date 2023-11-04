@@ -5,18 +5,18 @@
 /* ********** PRIMITIF-PRIMITIF UNTUK TYPE KICAUAN ********** */
 /* *** KONSTRUKTOR *** */
 /* MEMBUAT STRUCT KICAUAN */
-void CreateKicauan(Kicauan *K, Word Penulis, DATETIME Waktu, Word Tweet) {
+void CreateKicauan(Kicauan *K, Word Penulis, DATETIME WaktuKicauan, Word Tweet) {
 /* I.S. K sembarang */
 /* F.S. Terbentuk struct Kicauan dengan PenulisKicauan = Penulis, WaktuKicaun = Waktu, Tweet = Tweet, LikeKicauan = 0, JumlahBalasan = 0 */
     PENULIS_KICAUAN(*K) = Penulis;
-    WAKTU_KICAUAN(*K) = Waktu;
+    WAKTU_KICAUAN(*K) = WaktuKicauan;
     TWEET(*K) = Tweet;
     LIKE(*K) = 0;
     JUMLAH_BALASAN(*K) = 0;
 }
 
 /* MENCETAK STRUCT KICAUAN */
-void PrintKicauan(Kicauan K, IDkicau id) {
+void PrintKicauan(Kicauan K, ID id) {
 /* I.S. K terdefinisi */
 /* F.S. Struct Kicauan tercetak di layar dengan format:
     | ID = <idkicauan>
@@ -24,7 +24,8 @@ void PrintKicauan(Kicauan K, IDkicau id) {
     | <Waktu post kicauan>
     | <Isi kicauan>
     | Disukai: <like>
-*/
+*/  
+    printf("\n");
     printf("| ID = %d\n", id);
     printf("| "); printWord(PENULIS_KICAUAN(K)); printf("\n");
     printf("| "); TulisDATETIME(WAKTU_KICAUAN(K)); printf("\n");
@@ -34,15 +35,15 @@ void PrintKicauan(Kicauan K, IDkicau id) {
 
 /* MENAMBAH LIKE */
 void AddLike(Kicauan *K) {
-/* I.S. L terdefinisi, id terdefinisi */
-/* F.S. Jika id terdapat pada list, LIKE(K) bertambah 1 */
+/* I.S. K terdefinisi */
+/* F.S. Like pada K bertambah 1 */
     LIKE(*K) += 1;
 }
 
 /* MENGUBAH ISI TWEET */
 void EditTweet(Kicauan *K, Word Tweet) {
-/* I.S. L terdefinisi, id terdefinisi, Tweet terdefinisi */
-/* F.S. Jika id terdapat pada list, TWEET(K) berubah menjadi Tweet */
+/* I.S. K terdefinisi */
+/* F.S. Tweet pada K diubah menjadi NewTweet */
     TWEET(*K) = Tweet;
 }
 
@@ -59,7 +60,7 @@ void CreateListDinKicauan(ListKicauan *l, int capacity) {
     BANYAK_BALASAN(*l) = 0;
 }
 
-void dealocateList(ListKicauan *l) {
+void dealocateListDinKicauan(ListKicauan *l) {
 /* I.S. l terdefinisi; */
 /* F.S. (l) dikembalikan ke system, CAPACITY(l)=0; NEFF(l)=0; BANYAK_BALASAN(l)=0 */
     CAPACITY(*l) = 0;
@@ -77,13 +78,13 @@ int listLength(ListKicauan l) {
 }
 
 /* *** Selektor INDEKS *** */
-IDkicau getFirstIdx(ListKicauan l) {
+ID getFirstIdx(ListKicauan l) {
 /* Prekondisi : List l tidak kosong */
 /* Mengirimkan indeks elemen l pertama */
-    return IDX_MIN;
+    return IDX_MIN_LIST_KICAUAN;
 }
 
-IDkicau getLastIdx(ListKicauan l) {
+ID getLastIdx(ListKicauan l) {
 /* Prekondisi : List l tidak kosong */
 /* Mengirimkan indeks elemen l terakhir */
 /* indeks dimulai dari 1 */
@@ -91,16 +92,16 @@ IDkicau getLastIdx(ListKicauan l) {
 }
 
 /* ********** Test Indeks yang valid ********** */
-boolean isIdxValid(ListKicauan l, IDkicau i) {
+boolean isIdxValid(ListKicauan l, ID i) {
 /* Mengirimkan true jika i adalah indeks yang valid utk kapasitas list l */
 /* yaitu antara indeks yang terdefinisi utk container*/
-    return ((i >= IDX_MIN) && (i < CAPACITY(l)));
+    return ((i >= IDX_MIN_LIST_KICAUAN) && (i < CAPACITY(l)));
 }
 
-boolean isIdxEff(ListKicauan l, IDkicau i) {
+boolean isIdxEff(ListKicauan l, ID i) {
 /* Mengirimkan true jika i adalah indeks yang terdefinisi utk list */
 /* yaitu antara 1..NEFF(l) */
-    return ((i >= IDX_MIN) && (i <= NEFF(l)));
+    return ((i >= IDX_MIN_LIST_KICAUAN) && (i <= NEFF(l)));
 }
 
 /* ********** TEST KOSONG/PENUH ********** */
@@ -124,14 +125,13 @@ void printListKicauan(ListKicauan l, Word NamaPengguna) {
 /* I.S. l boleh kosong */
 /* F.S. Jika l tidak kosong: tercetak daftar kicauan pengguna dan temannya */
 /*      Penulisan dari kicauan terbaru ke yang terlama */
-//    ID i;
-//
-//    for (i = getLastIdx(l); i >= getFirstIdx(l); i--) {
-//        if (IsBerteman(NamaPengguna, PENULIS_KICAUAN(ELMT(l, i)))) {
-//            PrintKicauan(ELMT(l, i), i);
-//            printf("\n");
-//        }
-//    }
+    ID i;
+
+    for (i = getLastIdx(l); i >= getFirstIdx(l); i--) {
+        if (IsBerteman(NamaPengguna, PENULIS_KICAUAN(ELMT(l, i)))) {
+            PrintKicauan(ELMT(l, i), i);
+        }
+    }
 }
 
 void printList(ListKicauan l) {
@@ -140,7 +140,7 @@ void printList(ListKicauan l) {
 /* I.S. l boleh kosong */
 /* F.S. Jika l tidak kosong: tercetak daftar seluruh kicauan */
 /*      Penulisan dari kicauan terbaru ke yang terlama */
-    IDkicau i;
+    ID i;
 
     for (i = getLastIdx(l); i >= getFirstIdx(l); i--) {
         PrintKicauan(ELMT(l, i), i);
@@ -198,4 +198,85 @@ void compressList(ListKicauan *l) {
 /* F.S. Ukuran capacity = nEff */
     CAPACITY(*l) = NEFF(*l) + 1;
     BUFFER(*l) = (Kicauan *) realloc (BUFFER(*l), CAPACITY(*l) * sizeof(Kicauan));
+}
+
+/* ********** PERINTAH-PERINTAH PADA FITUR KICAUAN ********** */
+/* ********** UNTUK MAIN PROGRAM ********** */
+/* KICAU */
+void KICAU() {
+/* Membuat sebuah Kicauan */
+    Word NewTweet;
+
+    printf("\nMasukkan kicauan:\n");
+    BacaKalimat();
+    NewTweet = currentWord;
+
+    if (IsAllBlank(NewTweet)) {
+        printf("\nKicauan tidak boleh hanya berisi spasi!\n");
+    } else {                        // tweet valid
+        Kicauan NewKicauan;
+        DATETIME WaktuKicauan;
+
+        BacaDATETIME(&WaktuKicauan);
+        CURRENT_ID_KICAUAN += 1;
+        CreateKicauan(&NewKicauan, CURRENT_PENGGUNA, WaktuKicauan, NewTweet);
+        insertLast(&LIST_KICAUAN_DATA, NewKicauan);
+
+        printf("\nSelamat! kicauan telah diterbitkan!\n");
+        printf("Detil kicauan:");
+        PrintKicauan(NewKicauan, CURRENT_ID_KICAUAN);
+        printf("\n");
+    }
+}
+
+/* KICAUAN */
+void KICAUAN() {
+/* Menampilkan semua kicauan yang dibuat pengguna dan teman pengguna ke layar */
+/* Terurut berdasarkan kicauan terbaru (ID Kicauan terbesar) */
+    printListKicauan(LIST_KICAUAN_DATA, CURRENT_PENGGUNA);
+}
+
+/* SUKA_KICAUAN */
+void SUKA_KICAUAN(ID IDKicauan) {
+/* Menambahkan like pada kicauan yang dipilih pengguna */
+    printf("\n");
+    if (!isIdxEff(LIST_KICAUAN_DATA, IDKicauan)) { // IDKicauan tidak valid
+        printf("Tidak ditemukan kicauan dengan ID = %d;\n", IDKicauan);
+    } else {
+        if (/* jika akun yang di like privat, dan tidak berteman */) {
+            printf("Wah, kicauan tersebut dibuat oleh akun privat! Ikuti akun itu dulu ya\n");
+        } else { /* akun privat dan berteman, atau akun bersifat publik */
+            AddLike(&ELMT(LIST_KICAUAN_DATA, IDKicauan));
+            printf("Selamat! kicauan telah disukai!\n");
+            printf("Detil kicauan:");
+            PrintKicauan(ELMT(LIST_KICAUAN_DATA, IDKicauan), IDKicauan);
+        }
+    }
+    printf("\n");
+}
+
+/* UBAH_KICAUAN */
+void UBAH_KICAUAN(ID IDKicauan) {
+/* Mengubah isi kicauan yang dipilih pengguna */
+    printf("\n");
+    if (/* bukan kicauan milik pengguna */) {
+        printf("Kicauan dengan ID = %d bukan milikmu!\n", IDKicauan);
+    } else if (isIdxEff(LIST_KICAUAN_DATA, IDKicauan)) {                        // IDKicauan tidak valid
+        printf("Tidak ditemukan kicauan dengan ID = %d!;\n", IDKicauan);
+    } else {                                                                    // kicauan milik pengguna
+        Word NewTweet;
+        printf("Masukkan kicauan baru:\n");
+        BacaKalimat();
+        NewTweet = currentWord;
+        
+        if (IsAllBlank(NewTweet)) {
+            printf("\nKicauan tidak boleh hanya berisi spasi!\n");
+        } else {                    //tweet valid
+            EditTweet(&ELMT(LIST_KICAUAN_DATA, IDKicauan), NewTweet);
+            printf("\nSelamat! kicauan telah diterbitkan!\n");
+            printf("Detil kicauan:");
+            PrintKicauan(ELMT(LIST_KICAUAN_DATA, IDKicauan), IDKicauan);
+        }
+    }
+    printf("\n");
 }

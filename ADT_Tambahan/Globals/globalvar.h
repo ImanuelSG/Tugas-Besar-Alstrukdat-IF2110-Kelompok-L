@@ -11,8 +11,8 @@ extern boolean isLoggedIn; /*True jika ada pengguna sedang login, false sebalikn
 
 extern int jumlahpengguna; /*Berisi jumlah pengguna saat ini*/
 
-extern ListKicauan ListKicauanData; /*Berisi List Kicauan saat ini*/
+extern ListKicauan LIST_KICAUAN_DATA; /*Berisi List Kicauan saat ini*/
 
-extern IDkicau currentIDKicau;
+extern ID CURRENT_ID_KICAUAN;
 
 #endif
