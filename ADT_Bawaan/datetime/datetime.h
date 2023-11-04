@@ -1,16 +1,14 @@
 /* File: datetime.h */
-/* Tanggal: 30 Agustus 2023 */
 /* Definisi ADT DATETIME */
 
 #ifndef DATETIME_H
 #define DATETIME_H
 
 #include "boolean.h"
-#include "time.h"
+#include "jam.h"
 
 /* *** Definisi TYPE DATETIME <DD/MM/YY HH:MM:SS> *** */
-typedef struct
-{
+typedef struct {
     int DD;   /* integer [1..31] */
     int MM;   /* integer [1..12] */
     int YYYY; /* integer [1900..2030] */
@@ -53,17 +51,7 @@ void CreateDATETIME(DATETIME *D, int DD, int MM, int YYYY, int hh, int mm, int s
 void BacaDATETIME(DATETIME *D);
 /* I.S. : D tidak terdefinisi */
 /* F.S. : D terdefinisi dan merupakan DATETIME yang valid */
-/* Proses : mengulangi membaca komponen DD, MM, YY, h, m, s sehingga membentuk D */
-/* yang valid. Tidak mungkin menghasilkan D yang tidak valid. */
-/* Pembacaan dilakukan dengan mengetikkan komponen DD, MM, YY, h, m, s
-   dalam satu baris, masing-masing dipisahkan 1 spasi, diakhiri enter. */
-/* Jika DATETIME tidak valid maka diberikan pesan: "DATETIME tidak valid", dan pembacaan
-    diulangi hingga didapatkan DATETIME yang valid. */
-/* Contoh:
-    32 13 2023 12 34 56
-    DATETIME tidak valid
-    31 12 2023 12 34 56
-    --> akan terbentuk DATETIME <31,12,2023,12,34,56> */
+/* Proses : membaca waktu lokal yang ada pada perangkat */
 
 void TulisDATETIME(DATETIME D);
 /* I.S. : D sembarang */

@@ -1,24 +1,28 @@
 /* Modul Kicauan */
+/* Definisi ADT KICAUAN dengan memanfaatkan list dinamik untuk menyimpan list kicauan */
+
 #ifndef __KICAUAN_H__
 #define __KICAUAN_H__
 
-#include "boolean.h"
-#include "wordmachine.h"
-#include "datetime.h"
+#include "../boolean.h"
+#include "../wordmachine/wordmachine.h"
+#include "../datetime/datetime.h"
+#include "../Globals/globalvar.h"
 
 /* ********** DEFINISI TYPE KICAUAN ********** */
-typedef int IDkicau;
+typedef int ID;
 
 typedef struct {
-    Word PenulisKicauan;
-    DATETIME WaktuKicaun;
-    Word Tweet;
-    int LikeKicauan;
-    int JumlahBalasan;
+    Word PenulisKicauan;    // Username pengguna pembuat kicauan
+    DATETIME WaktuKicaun;   // Waktu kicauan dibuat (diambil dari waktu lokal)
+    Word Tweet;             // Isi kicauan
+    int LikeKicauan;        // Banyaknya like pada kicauan
+    int JumlahBalasan;      // Banyaknya balasan utama pada kicauan
 } Kicauan;
 
-IDkicau CURRENTIDkicau;
+ID CURRENT_ID_KICAUAN;               // ID kicauan terakhir yang dibuat
 
+/* ********** SELEKTOR KICAUAN ********** */
 #define PENULIS_KICAUAN(K) (K).PenulisKicauan
 #define WAKTU_KICAUAN(K) (K).WaktuKicaun
 #define TWEET(K) (K).Tweet
@@ -26,14 +30,14 @@ IDkicau CURRENTIDkicau;
 #define JUMLAH_BALASAN(K) (K).JumlahBalasan
 
 /* ********** DEFINISI TYPE LIST DINAMIK UNTUK KICAUAN ********** */
-#define IDX_MIN 1       /* Indeks minimum list */
+#define IDX_MIN_LIST_KICAUAN 1       /* Indeks minimum list */
 #define IDX_UNDEF 0     /* Indeks tak terdefinisi*/
 
 /* Definisi elemen dan koleksi objek */
 typedef struct {
     Kicauan *buffer;    /* memori tempat penyimpan elemen (container) */
-    int nEff;           /* >=0, banyaknya elemen efektif */
-    int capacity;       /* ukuran elemen */
+    int nEff;           /* >= 0, banyaknya elemen efektif */
+    int capacity;       /* ukuran list */
     int BanyakBalasan;  /* Banyaknya ID yang punya balasan */
 } ListKicauan;
 /* Indeks yang digunakan [1..capacity-1] */
@@ -44,9 +48,9 @@ typedef struct {
    l.buffer    untuk mengakses seluruh nilai elemen list
    l.buffer[i] untuk mengakses elemen ke-i */
 /* Definisi :
-  list kosong: l.nEff = 0
-  Definisi elemen pertama : l.buffer[i] dengan i=1
-  Definisi elemen terakhir yang terdefinisi: l.buffer[i] dengan i=l.capacity */
+   list kosong: l.nEff = 0
+   Definisi elemen pertama : l.buffer[i] dengan i = 1
+   Definisi elemen terakhir yang terdefinisi: l.buffer[i] dengan i = l.capacity */
 
 /* ********** SELEKTOR ********** */
 #define NEFF(l) (l).nEff
@@ -58,9 +62,9 @@ typedef struct {
 /* ********** PRIMITIF-PRIMITIF UNTUK TYPE KICAUAN ********** */
 /* *** KONSTRUKTOR *** */
 /* MEMBUAT STRUCT KICAUAN */
-void CreateKicauan(Kicauan *K, Word Penulis, DATETIME Waktu, Word Tweet);
+void CreateKicauan(Kicauan *K, Word Penulis, DATETIME WaktuKicauan, Word Tweet);
 /* I.S. K sembarang */
-/* F.S. Terbentuk struct Kicauan dengan PenulisKicauan = Penulis, WaktuKicaun = Waktu, Tweet = Tweet, LikeKicauan = 0, JumlahBalasan = 0 */
+/* F.S. Terbentuk struct Kicauan dengan K.PenulisKicauan = Penulis, K.WaktuKicaun = WaktuKicauan, K.Tweet = Tweet, K.LikeKicauan = 0, K.JumlahBalasan = 0 */
 
 /* MENCETAK STRUCT KICAUAN */
 void PrintKicauan(Kicauan K, ID id);
@@ -75,13 +79,13 @@ void PrintKicauan(Kicauan K, ID id);
 
 /* MENAMBAH LIKE */
 void AddLike(Kicauan *K);
-/* I.S. L terdefinisi, id terdefinisi */
-/* F.S. Jika id terdapat pada list, LIKE(K) bertambah 1 */
+/* I.S. K terdefinisi */
+/* F.S. Like pada K bertambah 1 */
 
 /* MENGUBAH ISI TWEET */
-void EditTweet(Kicauan *K, Word Tweet);
-/* I.S. L terdefinisi, id terdefinisi, Tweet terdefinisi */
-/* F.S. Jika id terdapat pada list, TWEET(K) berubah menjadi Tweet */
+void EditTweet(Kicauan *K, Word NewTweet);
+/* I.S. K terdefinisi */
+/* F.S. Tweet pada K diubah menjadi NewTweet */
 
 
 /* ********** PRIMITIF-PRIMITIF UNTUK TYPE LISTKICAUAN ********** */
@@ -91,7 +95,7 @@ void CreateListDinKicauan(ListKicauan *l, int capacity);
 /* I.S. l sembarang, capacity > 0 */
 /* F.S. Terbentuk list dinamis l kosong dengan kapasitas capacity */
 
-void dealocateList(ListKicauan *l);
+void dealocateListDinKicauan(ListKicauan *l);
 /* I.S. l terdefinisi; */
 /* F.S. (l) dikembalikan ke system, CAPACITY(l)=0; NEFF(l)=0 */
 
@@ -100,7 +104,6 @@ void dealocateList(ListKicauan *l);
 int listLength(ListKicauan l);
 /* Mengirimkan banyaknya elemen efektif list */
 /* Mengirimkan nol jika list l kosong */
-/* *** Daya tampung container *** */
 
 /* *** Selektor INDEKS *** */
 ID getFirstIdx(ListKicauan l);
@@ -172,18 +175,23 @@ void compressList(ListKicauan *l);
 /* I.S. List tidak kosong */
 /* F.S. Ukuran capacity = nEff */
 
-/* PERINTAH-PERINTAH PADA FITUR KICAUAN */
-/* UNTUK MAIN PROGRAM */
+/* ********** PERINTAH-PERINTAH PADA FITUR KICAUAN ********** */
+/* ********** UNTUK MAIN PROGRAM ********** */
 /* KICAU */
-void KICAU();
+void KICAU(); 
+/* Membuat sebuah Kicauan */
 
 /* KICAUAN */
 void KICAUAN();
+/* Menampilkan semua kicauan yang dibuat pengguna dan teman pengguna ke layar */
+/* Terurut berdasarkan kicauan terbaru (ID Kicauan terbesar) */
 
 /* SUKA_KICAUAN */
 void SUKA_KICAUAN();
+/* Menambahkan like pada kicauan yang dipilih pengguna */
 
 /* UBAH_KICAUAN */
 void UBAH_KICAUAN();
+/* Mengubah isi kicauan yang dipilih pengguna */
 
 #endif
