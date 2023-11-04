@@ -62,4 +62,7 @@ void PrintWord(Word W);
 /* I.S. : W sembarang
    F.S. : W tercetak di layar */
 
+boolean IsAllBlank(Word W);
+/* Mengembalikan true jika semua karakter W adalah BLANK */
+
 #endif
