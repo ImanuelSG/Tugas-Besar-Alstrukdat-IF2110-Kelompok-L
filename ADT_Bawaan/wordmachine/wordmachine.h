@@ -55,7 +55,14 @@ void STARTKalimat();
 void BacaKalimat();
 /* Mengakuisisi kalimat, menyimpan dalam currentword
    I.S. : currentChar adalah karakter pertama dari kata
-   F.S. : current word berisi kalimat yang sudah diakuisisi
-          currentChar= MARK */
-         
+   F.S. : currentword berisi kalimat yang sudah diakuisisi
+          currentChar = MARK */
+
+void PrintWord(Word W);
+/* I.S. : W sembarang
+   F.S. : W tercetak di layar */
+
+boolean IsAllBlank(Word W);
+/* Mengembalikan true jika semua karakter W adalah BLANK */
+
 #endif
