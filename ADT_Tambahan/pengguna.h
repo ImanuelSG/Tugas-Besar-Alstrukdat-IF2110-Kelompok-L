@@ -1,5 +1,8 @@
-#include "../ADT_Bawaan/wordmachine.h"
-#include "../ADT_Bawaan/charmachine.h"
+#ifndef PENGGUNA_H
+#define PENGGUNA_H
+
+#include "../ADT_Bawaan/wordmachine/wordmachine.h"
+#include "../ADT_Bawaan/charmachine/charmachine.h"
 #include <stdio.h>
 
 typedef struct
@@ -11,9 +14,11 @@ typedef struct
     Word weton ;
     int tipe_akun ; // 0 itu public, 1 itu private
 } Pengguna ;
+   
 
-void Daftar() ;
+void Daftar();
 
-void Masuk() ;
+void Masuk();
 
-void Keluar() ;
+void Keluar();
+

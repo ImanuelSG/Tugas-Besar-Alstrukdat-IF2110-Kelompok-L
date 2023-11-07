@@ -1,5 +1,5 @@
-#include "../ADT_Bawaan/wordmachine.h"
-#include "../ADT_Bawaan/charmachine.h"
+#include "../ADT_Bawaan/wordmachine/wordmachine.h"
+#include "../ADT_Bawaan/charmachine/charmachine.h"
 #include "pengguna.h"
 #include "./Globals/globalvar.h"
 #include "wordoperations.h"
@@ -8,10 +8,10 @@
 
 
 void Daftar() {
-    if (login == true) {
+    if (isLoggedIn == true) {
         printf("Anda sudah masuk. Keluar terlebih dahulu untuk melakukan daftar.\n") ;
     }
-    else if (banyakPengguna == 20) {
+    else if (jumlahpengguna == 20) {
          printf("Maaf, Burbir hanya bisa mendaftarkan 20 pengguna!\n") ;
     }
     else {
@@ -33,15 +33,15 @@ void Daftar() {
             daftarPengguna.sandi = currentWord ;
             printf("Pengguna telah berhasil terdaftar. Masuk untuk menikmati fitur-fitur BurBir.\n") ;
 
-            banyakPengguna += 1 ;
+            jumlahpengguna += 1 ;
             daftarPengguna.tipe_akun = 0 ;
-            dataPengguna[banyakPengguna-1] = daftarPengguna ;
+            dataPengguna[jumlahpengguna-1] = daftarPengguna ;
         }
     }
 }
 
 void Masuk() {
-    if (login == true) {
+    if (isLoggedIn == true) {
         printf("Wah Anda sudah masuk. Keluar dulu yuk!\n") ;
     }
     else {
@@ -70,25 +70,25 @@ void Masuk() {
         }
         printf("Anda telah berhasil masuk. Mari menjelajahi BurBir bersama Ande-Ande Lumut!\n") ;
 
-        login = true ;
+        isLoggedIn = true ;
         currentPengguna = dataPengguna[idxPengguna] ;
     }
 }
 
 void Keluar() {
-    if (login == false) {
+    if (isLoggedIn == false) {
         printf("Anda belum login! Masuk terlebih dahulu untuk menikmati layanan BurBir.\n") ;
     }
     else {
         printf("Anda berhasil logout. Sampai jumpa di pertemuan berikutnya!\n") ;
-        login = false ;
+        isLoggedIn = false ;
     }
 }
 
 int getIdPengguna(Word nama) {
     int i = 0 ;
     boolean found = false ;
-    while (!found && i < banyakPengguna) {
+    while (!found && i < jumlahpengguna) {
         if (isSameWord(nama, dataPengguna[i].nama)) {
             found = true ;
         }
