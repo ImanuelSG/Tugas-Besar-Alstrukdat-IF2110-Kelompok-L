@@ -1,20 +1,16 @@
 #ifndef PENGGUNA_H
 #define PENGGUNA_H
 
-#include "../../ADT_Bawaan/wordmachine/wordmachine.h"
-#include "../../ADT_Bawaan/charmachine/charmachine.h"
 #include <stdio.h>
+#include "../Globals/globalvar.c"
 
-typedef struct
-{
-    Word nama ; 
-    Word sandi ;
-    Word bio ;
-    Word nomor ;
-    Word weton ;
-    int tipe_akun ; // 0 itu public, 1 itu private
-} Pengguna ;
+// #include "../Profil/profil.c"
+
+
    
+void CreatePengguna (Pengguna *akun, Word nama, Word sandi, Word bio, Word nomor, Word weton, int tipe_akun, MatrixProfil profil) ;
+
+void InsertPengguna (Pengguna akun) ; // masukin pengguna ke data pengguan 
 
 void Daftar();
 
@@ -22,6 +18,5 @@ void Masuk();
 
 void Keluar();
 
-int getIdPengguna(Word nama) ;
 
 #endif

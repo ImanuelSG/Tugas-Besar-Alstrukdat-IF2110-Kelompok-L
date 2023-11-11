@@ -5,9 +5,8 @@
 #define UTILS_H
 
 #include "../boolean.h"
-#include "wordmachine.h"
-#include "pengguna.h"
 #include <stdio.h>
+#include "../Globals/globalvar.c"
 
 /**
  * @brief fungsi untuk menentukan apakah Pengguna A berteman dengan Pengguna B
@@ -16,9 +15,9 @@
  * @param B Pengguna 2
  * @return boolean True jika iya, False jika tidak
  */
-boolean isBerteman (Pengguna A, Pengguna B){
+boolean isBerteman (Pengguna A, Pengguna B) ;
 
-}
+int getIdPengguna(Word nama) ;
 
 
 

@@ -1,109 +1,59 @@
-/* File : prioqueue.h */
-/* Representasi priority queue dengan array eksplisit dan alokasi stastik */
-/* Queue terurut mengecil berdasarkan elemen score (nilai Daspro) */
-/* Jika score sama, diurutkan membesar berdasarkan tKedatangan (waktu kedatangan) */
-#ifndef PRIOQUEUE_H
-#define PRIOQUEUE_H
-
-#include "boolean.h"
-#include <stdlib.h>
-
-/* Konstanta */
-#define IDX_UNDEF -1
-#define CAPACITY 100
-
-/* Deklarasi ElType */
-typedef struct
-{
-    int id;       /* id mahasiswa */
-    int tArrival; /* waktu kedatangan */
-    int score;    /* skor Daspro */
-    int dService; /* durasi/lama persiapan makanan untuk mahasiswa */
-} ElType;
-
-/* Definisi PrioQueue */
-typedef struct
-{
-    ElType buffer[CAPACITY];
-    int idxHead;
-    int idxTail;
-} PrioQueue;
-
-/* ********* AKSES (Selektor) ********* */
-/* Jika pq adalah PrioQueue, maka akses elemen : */
-#define IDX_HEAD(pq) (pq).idxHead
-#define IDX_TAIL(pq) (pq).idxTail
-#define HEAD(pq) (pq).buffer[(pq).idxHead]
-#define TAIL(pq) (pq).buffer[(pq).idxTail]
+#include <stdio.h>
+#include "prioqueue.h"
 
 /* *** Kreator *** */
-void CreatePrioQueue(PrioQueue *pq)
-{
-    IDX_HEAD(*pq) = IDX_UNDEF;
-    IDX_TAIL(*pq) = IDX_UNDEF;
-}
+void CreatePrioQueue(PrioQueue *pq) {
 /* I.S. sembarang */
 /* F.S. Sebuah pq kosong terbentuk dengan kondisi sbb: */
 /* - Index head bernilai IDX_UNDEF */
 /* - Index tail bernilai IDX_UNDEF */
 /* Proses : Melakukan alokasi, membuat sebuah pq kosong */
+    IDX_HEAD(*pq) = IDX_UNDEF;
+    IDX_TAIL(*pq) = IDX_UNDEF;
+}
 
-boolean isEmpty(PrioQueue pq)
-{
+boolean isEmpty(PrioQueue pq) {
+/* Mengirim true jika pq kosong: lihat definisi di atas */
     return (IDX_HEAD(pq) == IDX_UNDEF && IDX_TAIL(pq) == IDX_UNDEF);
 }
-/* Mengirim true jika pq kosong: lihat definisi di atas */
 
-boolean isFull(PrioQueue pq)
-{
-    return (IDX_HEAD(pq) == 0 && IDX_TAIL(pq) == 99);
-}
+boolean isFull(PrioQueue pq) {
 /* Mengirim true jika tabel penampung elemen pq sudah penuh */
 /* yaitu jika index head bernilai 0 dan index tail bernilai CAPACITY-1 */
+    return (IDX_HEAD(pq) == 0 && IDX_TAIL(pq) == 99);
+}
 
-int length(PrioQueue pq)
-{
-    if (isEmpty(pq))
-    {
+int length(PrioQueue pq) {
+/* Mengirimkan banyaknya elemen queue. Mengirimkan 0 jika pq kosong. */
+    if (isEmpty(pq)) {
         return 0;
-    }
-    else
-    {
+    } else {
         return (IDX_TAIL(pq) - IDX_HEAD(pq) + 1);
     }
 }
 
-/* Mengirimkan banyaknya elemen queue. Mengirimkan 0 jika pq kosong. */
-
 /*** Primitif Add/Delete ***/
-void enqueue(PrioQueue *pq, ElType val)
-{
-    if (isEmpty(*pq))
-    {
-        IDX_HEAD(*pq) = 0;
-        IDX_TAIL(*pq) = 0;
-
-        TAIL(*pq) = val;
-    }
-    else
-    {
-        if (IDX_TAIL(*pq) == 99 && IDX_HEAD(*pq) != 0)
-        {
-            int idx = 0;
-            for (int i = IDX_HEAD(*pq); i <= IDX_TAIL(*pq); i++)
-            {
-                (*pq).buffer[idx] = (*pq).buffer[i];
-                idx += 1;
-            }
-            
-        }
-    }
-}
+void enqueue(PrioQueue *pq, ElType val) {
 /* Proses: Menambahkan val pada pq dengan aturan FIFO */
 /* I.S. pq mungkin kosong, tabel penampung elemen pq TIDAK penuh */
 /* F.S. val menjadi TAIL yang baru, IDX_TAIL "mundur".
         Jika q penuh semu, maka perlu dilakukan aksi penggeseran "maju" elemen-elemen pq
         menjadi rata kiri untuk membuat ruang kosong bagi TAIL baru  */
+    if (isEmpty(*pq)) {
+        IDX_HEAD(*pq) = 0;
+        IDX_TAIL(*pq) = 0;
+
+        TAIL(*pq) = val;
+    } else {
+        if (IDX_TAIL(*pq) == 99 && IDX_HEAD(*pq) != 0) {
+            int idx = 0;
+            for (int i = IDX_HEAD(*pq); i <= IDX_TAIL(*pq); i++) {
+                (*pq).buffer[idx] = (*pq).buffer[i];
+                idx += 1;
+            }
+        }
+    }
+}
 
 void dequeue(PrioQueue *pq, ElType *val);
 /* Proses: Menghapus val pada q dengan aturan FIFO */
@@ -111,5 +61,3 @@ void dequeue(PrioQueue *pq, ElType *val);
 /* F.S. val = nilai elemen HEAD pd
 I.S., HEAD dan IDX_HEAD "mundur";
         pq mungkin kosong */
-
-#endif

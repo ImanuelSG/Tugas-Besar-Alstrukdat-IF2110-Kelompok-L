@@ -1,12 +1,9 @@
-#include "../../ADT_Bawaan/wordmachine/wordmachine.h"
-#include "../../ADT_Bawaan/charmachine/charmachine.h"
 #include "profil.h"
-#include "../Globals/globalvar.h"
-#include "../wordoperations.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include "../../pcolor.c"
-#include "../Pengguna/pengguna.h" // buat pake fungsi idPengguna
+#include "../utils/utils.c"
+#include "../Globals/globalvar.h"
 
 boolean cekWeton(Word weton, Word *kata) {
     Word kembali ;
@@ -99,21 +96,21 @@ boolean cekWeton(Word weton, Word *kata) {
     return valid ;
 }
 
-void displayProfil (int idxPengguna) {
+void displayProfil (MatrixProfil profil) {
     int i, j ;
     for (i = 0 ; i < 5 ; i++) {
         for (j = 0 ; j < 10 ; j++) {
-            if (profil[idxPengguna][i][j].TabWord[0] == 'R') {
+            if (profil.mem[i][j].TabWord[0] == 'R') {
                 j += 1 ;
-                print_red(profil[idxPengguna][i][j].TabWord[0]) ;
+                print_red(profil.mem[i][j].TabWord[0]) ;
             }
-            else if (profil[idxPengguna][i][j].TabWord[0] == 'G') {
+            else if (profil.mem[i][j].TabWord[0] == 'G') {
                 j += 1 ;
-                print_green(profil[idxPengguna][i][j].TabWord[0]) ;
+                print_green(profil.mem[i][j].TabWord[0]) ;
             }
             else {
                 j += 1 ;
-                print_blue(profil[idxPengguna][i][j].TabWord[0]) ;
+                print_blue(profil.mem[i][j].TabWord[0]) ;
             }
         }
         printf("\n") ;
@@ -269,7 +266,7 @@ void Lihat_Profil (Word nama) {
         printf("Foto profil akun ") ;
         displayWord(dataPengguna[id].nama) ;
         printf("\n") ;
-        displayProfil(id) ;   
+        displayProfil(dataPengguna[id].profil) ;   
     }
     else {
         printf("Wah, akunnya diprivat nih. Ikuti dulu untuk melihat profil!\n") ;
@@ -281,7 +278,7 @@ void ubah_foto_profil () {
     int id ;
     id = getIdPengguna(currentPengguna.nama) ;
     printf("Foto profil anda saat ini adalah \n") ;
-    displayProfil(id) ;
+    displayProfil(dataPengguna[id].profil) ;
     printf("\n") ;
 
     // input profil baru
@@ -291,13 +288,34 @@ void ubah_foto_profil () {
     for (i = 0 ; i < 5 ; i++) {
         for (j = 0 ; j < 10 ; j++) {
             if (i == 0 && j == 0) {
-                profil[id][i][j] = currentWord ;
+                dataPengguna[id].profil.mem[i][j] = currentWord ;
             }
             else {
                 ADVWORD ;
-                profil[id][i][j] = currentWord ; 
+                dataPengguna[id].profil.mem[i][j] = currentWord ;
             }
         }
     }
     printf("Foto profil anda sudah berhasil diganti!\n") ;
+}
+
+void createProfilDefault (MatrixProfil *profil) {
+    char warna[1], bintang[1] ;
+    warna[0] = 'R' ;
+    bintang[0] = '*' ;
+    Word color, asterisk ;
+    color = stringToWord(warna, 1) ;
+    asterisk = stringToWord(bintang, 1) ;
+
+    int i, j ;
+    for (i = 0 ; i < 5 ; i++) {
+        for (j = 0 ; j < 10 ; j++) {
+            if (j % 2 == 0) {
+                (*profil).mem[i][j] = color ;
+            }
+            else {
+                (*profil).mem[i][j] = asterisk ;
+            }
+        }
+    }
 }

@@ -1,12 +1,27 @@
-#include "../../ADT_Bawaan/wordmachine/wordmachine.c"
-#include "../../ADT_Bawaan/charmachine/charmachine.c"
-// #include "pengguna.c"
-#include "../Globals/globalvar.c"
-#include "../wordoperations.c"
+// #include "pengguna.h"
+// #include "../wordoperations.c"
+// #include <stdio.h>
+// #include <stdlib.h>
+// #include "../utils/utils.c"
+
 #include <stdio.h>
-#include <stdlib.h>
+#include "pengguna.h"
 #include "../Profil/profil.c"
 
+void CreatePengguna (Pengguna *akun, Word NAMA, Word SANDI, Word BIO, Word NOMOR, Word WETON, int TIPE_AKUN, MatrixProfil PROFIL) {
+    (*akun).nama = NAMA ;
+    (*akun).sandi = SANDI ;
+    (*akun).bio = BIO ;
+    (*akun).nomor = NOMOR ;
+    (*akun).weton = WETON ;
+    (*akun).tipe_akun = TIPE_AKUN ;
+    (*akun).profil = PROFIL ;
+}
+
+void InsertPengguna (Pengguna akun) {
+    dataPengguna[jumlahpengguna] = akun ;
+    jumlahpengguna += 1 ;
+}
 
 void Daftar() {
     if (isLoggedIn == true) {
@@ -38,30 +53,11 @@ void Daftar() {
             daftarPengguna.bio.Length = 0 ;
             daftarPengguna.nomor.Length = 0 ;
             daftarPengguna.weton.Length = 0 ;
+            MatrixProfil profil ;
+            createProfilDefault(&profil) ;
+            daftarPengguna.profil = profil ;
 
-            jumlahpengguna += 1 ;
-            dataPengguna[jumlahpengguna-1] = daftarPengguna ;
-            idxPengguna = jumlahpengguna - 1 ;
-
-            // ISI PROFIL DEFAULT
-            char warna[1], bintang[1] ;
-            warna[0] = 'R' ;
-            bintang[0] = '*' ;
-            Word color, asterisk ;
-            color = stringToWord(warna, 1) ;
-            asterisk = stringToWord(bintang, 1) ;
-
-            int i, j ;
-            for (i = 0 ; i < 5 ; i++) {
-                for (j = 0 ; j < 10 ; j++) {
-                    if (j % 2 == 0) {
-                        profil[idxPengguna][i][j] = color ;
-                    }
-                    else {
-                        profil[idxPengguna][i][j] = asterisk ;
-                    }
-                }
-            }
+            InsertPengguna(daftarPengguna) ;
         }
     }
 } 
@@ -111,18 +107,6 @@ void Keluar() {
     }
 }
 
-int getIdPengguna(Word nama) {
-    int i = 0 ;
-    boolean found = false ;
-    while (!found && i < jumlahpengguna) {
-        if (isSameWord(nama, dataPengguna[i].nama)) {
-            found = true ;
-        }
-        else i++ ;
-    }
-    if (found) return i ;
-    else return -1 ;
-}
 
 int main () {
     isLoggedIn = false;
@@ -135,7 +119,7 @@ int main () {
     Daftar() ;
     displayWord(dataPengguna[0].nama) ;
     printf("\n") ;
-    displayProfil(0) ;
+    displayProfil(dataPengguna[0].profil) ;
 
     return 0 ;
 }
