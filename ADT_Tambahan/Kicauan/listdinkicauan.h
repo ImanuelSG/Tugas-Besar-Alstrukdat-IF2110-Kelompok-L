@@ -69,7 +69,7 @@ ID getLastIdx(ListKicauan l);
 boolean isIdxValid(ListKicauan l, ID i);
 /* Mengirimkan true jika i adalah indeks yang valid utk kapasitas list l */
 /* yaitu antara indeks yang terdefinisi utk container*/
-boolean isIdxEff(ListKicauan l, ID i);
+boolean isIdxEffKicau(ListKicauan l, ID i);
 /* Mengirimkan true jika i adalah indeks yang terdefinisi utk list */
 /* yaitu antara 0..NEFF(l) */
 

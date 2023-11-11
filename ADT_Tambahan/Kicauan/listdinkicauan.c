@@ -50,7 +50,7 @@ boolean isIdxValid(ListKicauan l, ID i) {
     return ((i >= IDX_MIN_LIST_KICAUAN) && (i < CAPACITY(l)));
 }
 
-boolean isIdxEff(ListKicauan l, ID i) {
+boolean isIdxEffKicau(ListKicauan l, ID i) {
 /* Mengirimkan true jika i adalah indeks yang terdefinisi utk list */
 /* yaitu antara 1..NEFF(l) */
     return ((i >= IDX_MIN_LIST_KICAUAN) && (i <= NEFF(l)));

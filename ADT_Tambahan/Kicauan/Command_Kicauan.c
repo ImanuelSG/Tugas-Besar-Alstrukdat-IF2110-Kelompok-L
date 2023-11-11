@@ -50,7 +50,7 @@ void SUKA_KICAUAN(ID IDKicauan)
 {
     /* Menambahkan like pada kicauan yang dipilih pengguna */
     printf("\n");
-    if (!isIdxEff(ListKicauanData, IDKicauan))
+    if (!isIdxEffKicau(ListKicauanData, IDKicauan))
     { // IDKicauan tidak valid
         printf("Tidak ditemukan kicauan dengan ID = %d;\n", IDKicauan);
     }
@@ -77,7 +77,7 @@ void UBAH_KICAUAN(ID IDKicauan)
     /* Mengubah isi kicauan yang dipilih pengguna */
     printf("\n");
 
-    if (isIdxEff(ListKicauanData, IDKicauan))
+    if (isIdxEffKicau(ListKicauanData, IDKicauan))
     { // IDKicauan tidak valid
         printf("Tidak ditemukan kicauan dengan ID = %d!;\n", IDKicauan);
     }
