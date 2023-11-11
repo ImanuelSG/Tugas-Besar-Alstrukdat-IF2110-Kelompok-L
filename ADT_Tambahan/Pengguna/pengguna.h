@@ -1,10 +1,21 @@
 #ifndef PENGGUNA_H
 #define PENGGUNA_H
 
+#include "../../ADT_Bawaan/wordmachine/wordmachine.h"
+#include "../../ADT_Bawaan/charmachine/charmachine.h"
+#include "../Profil/profil.h"
 #include <stdio.h>
-#include "../Globals/globalvar.c"
 
-// #include "../Profil/profil.c"
+typedef struct
+{
+    Word nama;
+    Word sandi;
+    Word bio;
+    Word nomor;
+    Word weton;
+    int tipe_akun;
+    MatrixProfil profil ;
+} Pengguna;
 
 
    

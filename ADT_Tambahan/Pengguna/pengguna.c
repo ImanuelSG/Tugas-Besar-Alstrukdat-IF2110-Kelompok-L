@@ -1,12 +1,10 @@
-// #include "pengguna.h"
-// #include "../wordoperations.c"
-// #include <stdio.h>
-// #include <stdlib.h>
-// #include "../utils/utils.c"
-
-#include <stdio.h>
+#include "../ADT_Bawaan/wordmachine/wordmachine.h"
+#include "../ADT_Bawaan/charmachine/charmachine.h"
 #include "pengguna.h"
-#include "../Profil/profil.c"
+#include "./Globals/globalvar.h"
+#include "wordoperations.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 void CreatePengguna (Pengguna *akun, Word NAMA, Word SANDI, Word BIO, Word NOMOR, Word WETON, int TIPE_AKUN, MatrixProfil PROFIL) {
     (*akun).nama = NAMA ;
@@ -19,15 +17,15 @@ void CreatePengguna (Pengguna *akun, Word NAMA, Word SANDI, Word BIO, Word NOMOR
 }
 
 void InsertPengguna (Pengguna akun) {
-    dataPengguna[jumlahpengguna] = akun ;
-    jumlahpengguna += 1 ;
+    dataPengguna[banyakPengguna] = akun ;
+    banyakPengguna += 1 ;
 }
 
 void Daftar() {
     if (isLoggedIn == true) {
         printf("Anda sudah masuk. Keluar terlebih dahulu untuk melakukan daftar.\n") ;
     }
-    else if (jumlahpengguna == 20) {
+    else if (banyakPengguna == 20) {
         printf("Maaf, Burbir hanya bisa mendaftarkan 20 pengguna!\n") ;
     }
     else {
@@ -110,7 +108,7 @@ void Keluar() {
 
 int main () {
     isLoggedIn = false;
-    jumlahpengguna = 0 ;
+    banyakPengguna = 0 ;
     char vanson[1] ;
     vanson[0] = 'a' ;
     Word nama ;

@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include "../../pcolor.c"
 #include "../utils/utils.c"
-#include "../Globals/globalvar.h"
+#include "../wordoperations.h"
 
 boolean cekWeton(Word weton, Word *kata) {
     Word kembali ;

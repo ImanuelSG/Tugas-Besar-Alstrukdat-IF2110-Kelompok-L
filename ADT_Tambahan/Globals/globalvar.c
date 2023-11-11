@@ -1,14 +1,20 @@
 #include "globalvar.h"
+
 #include <stdlib.h>
 
 Pengguna currentPengguna;
+
+int banyakPengguna = 0;
+
+
 Pengguna dataPengguna[20] ;
 
 boolean isLoggedIn ;
 
-int jumlahpengguna ;
+ListKicauan ListKicauanData;
 
-ListKicauan LIST_KICAUAN_DATA;
+ID CURRENT_ID_KICAUAN = 0;
 
-ID currentIDKicau ;
+Matrix matrixPertemanan;
 
+ListBalasan ListBalasanData;

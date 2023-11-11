@@ -2,7 +2,10 @@
 #include "../Globals/globalvar.h"
 
 
-
+typedef struct
+{
+   Word mem[5][10];
+} MatrixProfil;
 
 
 void Ganti_Profil () ;
