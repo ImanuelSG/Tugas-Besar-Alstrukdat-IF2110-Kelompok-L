@@ -3,6 +3,7 @@
 
 #include "../pengguna.h"
 #include "../Kicauan/Kicau.h"
+#include "../Utas/utas.h"
 #include "boolean.h"
 
 extern Pengguna currentPengguna; /*Berisi Data Current Pengguna*/
@@ -14,5 +15,7 @@ extern int jumlahpengguna; /*Berisi jumlah pengguna saat ini*/
 extern ListKicauan LIST_KICAUAN_DATA; /*Berisi List Kicauan saat ini*/
 
 extern ID CURRENT_ID_KICAUAN;
+
+extern ListUtas LIST_UTAS;
 
 #endif
