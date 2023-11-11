@@ -13,8 +13,6 @@ typedef struct
     Word nomor;
     Word weton;
     int tipe_akun;
-    int Jumlahteman;
-    int id;
 } Pengguna;
 
 void Daftar();

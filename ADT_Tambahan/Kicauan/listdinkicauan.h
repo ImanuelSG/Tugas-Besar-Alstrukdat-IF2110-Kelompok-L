@@ -1,44 +1,26 @@
-/* Modul Kicauan */
-/* Definisi ADT KICAUAN dengan memanfaatkan list dinamik untuk menyimpan list kicauan */
+/* MODUL LIST DINAMIK UNTUK KICAUAN */
+/* Berisi definisi dan semua primitif pemrosesan list kicauan */
+/* Penempatan elemen selalu rapat kiri */
+/* Versi II : dengan banyaknya elemen didefinisikan secara eksplisit,
+   memori list dinamik */
 
-#ifndef __KICAUAN_H__
-#define __KICAUAN_H__
+#ifndef __LISTDINKICAUAN_H__
+#define __LISTDINKICAUAN_H__
 
 #include "../boolean.h"
-#include "../wordmachine/wordmachine.h"
-#include "../datetime/datetime.h"
-#include "../Globals/globalvar.h"
-
-/* ********** DEFINISI TYPE KICAUAN ********** */
-typedef int ID;
-
-typedef struct {
-    Word PenulisKicauan;    // Username pengguna pembuat kicauan
-    DATETIME WaktuKicaun;   // Waktu kicauan dibuat (diambil dari waktu lokal)
-    Word Tweet;             // Isi kicauan
-    int LikeKicauan;        // Banyaknya like pada kicauan
-    int JumlahBalasan;      // Banyaknya balasan utama pada kicauan
-} Kicauan;
-
-ID CURRENT_ID_KICAUAN;               // ID kicauan terakhir yang dibuat
-
-/* ********** SELEKTOR KICAUAN ********** */
-#define PENULIS_KICAUAN(K) (K).PenulisKicauan
-#define WAKTU_KICAUAN(K) (K).WaktuKicaun
-#define TWEET(K) (K).Tweet
-#define LIKE(K) (K).LikeKicauan
-#define JUMLAH_BALASAN(K) (K).JumlahBalasan
+#include "ADT_Kicauan.h"
 
 /* ********** DEFINISI TYPE LIST DINAMIK UNTUK KICAUAN ********** */
-#define IDX_MIN_LIST_KICAUAN 1       /* Indeks minimum list */
-#define IDX_UNDEF 0     /* Indeks tak terdefinisi*/
+#define IDX_MIN_LIST_KICAUAN 1      /* Indeks minimum list */
+#define IDX_UNDEF 0                 /* Indeks tak terdefinisi*/
 
 /* Definisi elemen dan koleksi objek */
+typedef Kicauan ElType;             /* type elemen list */
+
 typedef struct {
-    Kicauan *buffer;    /* memori tempat penyimpan elemen (container) */
+    ElType *buffer;     /* memori tempat penyimpan elemen (container) */
     int nEff;           /* >= 0, banyaknya elemen efektif */
     int capacity;       /* ukuran list */
-    int BanyakBalasan;  /* Banyaknya ID yang punya balasan */
 } ListKicauan;
 /* Indeks yang digunakan [1..capacity-1] */
 /* Jika l adalah : ListKicauan, cara deklarasi dan akses: */
@@ -55,38 +37,8 @@ typedef struct {
 /* ********** SELEKTOR ********** */
 #define NEFF(l) (l).nEff
 #define BUFFER(l) (l).buffer
-#define ELMT(l, i) (l).buffer[i]
+#define ELMTKicau(l, i) (l).buffer[i]
 #define CAPACITY(l) (l).capacity
-#define BANYAK_BALASAN(l) (l).BanyakBalasan
-
-/* ********** PRIMITIF-PRIMITIF UNTUK TYPE KICAUAN ********** */
-/* *** KONSTRUKTOR *** */
-/* MEMBUAT STRUCT KICAUAN */
-void CreateKicauan(Kicauan *K, Word Penulis, DATETIME WaktuKicauan, Word Tweet);
-/* I.S. K sembarang */
-/* F.S. Terbentuk struct Kicauan dengan K.PenulisKicauan = Penulis, K.WaktuKicaun = WaktuKicauan, K.Tweet = Tweet, K.LikeKicauan = 0, K.JumlahBalasan = 0 */
-
-/* MENCETAK STRUCT KICAUAN */
-void PrintKicauan(Kicauan K, ID id);
-/* I.S. K terdefinisi */
-/* F.S. Struct Kicauan tercetak di layar dengan format:
-    | ID = <idkicauan>
-    | <Nama Pengguna>
-    | <Waktu post kicauan>
-    | <Isi kicauan>
-    | Disukai: <like>
-*/
-
-/* MENAMBAH LIKE */
-void AddLike(Kicauan *K);
-/* I.S. K terdefinisi */
-/* F.S. Like pada K bertambah 1 */
-
-/* MENGUBAH ISI TWEET */
-void EditTweet(Kicauan *K, Word NewTweet);
-/* I.S. K terdefinisi */
-/* F.S. Tweet pada K diubah menjadi NewTweet */
-
 
 /* ********** PRIMITIF-PRIMITIF UNTUK TYPE LISTKICAUAN ********** */
 /* ********** KONSTRUKTOR ********** */
@@ -174,24 +126,5 @@ void compressList(ListKicauan *l);
 /* Proses : Mengubah capacity sehingga capacity = nEff */
 /* I.S. List tidak kosong */
 /* F.S. Ukuran capacity = nEff */
-
-/* ********** PERINTAH-PERINTAH PADA FITUR KICAUAN ********** */
-/* ********** UNTUK MAIN PROGRAM ********** */
-/* KICAU */
-void KICAU(); 
-/* Membuat sebuah Kicauan */
-
-/* KICAUAN */
-void KICAUAN();
-/* Menampilkan semua kicauan yang dibuat pengguna dan teman pengguna ke layar */
-/* Terurut berdasarkan kicauan terbaru (ID Kicauan terbesar) */
-
-/* SUKA_KICAUAN */
-void SUKA_KICAUAN();
-/* Menambahkan like pada kicauan yang dipilih pengguna */
-
-/* UBAH_KICAUAN */
-void UBAH_KICAUAN();
-/* Mengubah isi kicauan yang dipilih pengguna */
 
 #endif

@@ -1,8 +1,9 @@
 #ifndef GLOBALVAR_H
 #define GLOBALVAR_H
 
-#include "pengguna.h"
-#include "../Kicauan/Kicau.h"
+#include "../Pengguna/pengguna.h"
+#include "../Kicauan/ADT_Kicauan.h"
+#include "../Kicauan/listdinkicauan.h"
 #include "boolean.h"
 #include "matrix.h"
 
