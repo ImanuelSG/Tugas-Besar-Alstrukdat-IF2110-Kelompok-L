@@ -1,15 +1,13 @@
-#include  "Kicau.h"
-#include  <stdio.h>
+#include "listdinkicauan.h"
+#include "../Kicauan/ADT_kicauan.h"
+#include <stdio.h>
 #include "globalvar.h"
 
 ListKicauan ListKicauanData;
 
-void loadkicau(){
+void loadkicau()
+{
     CreateListDinKicauan(&ListKicauanData, 100);
-    
-    for (int i = )
 
-    
+    for (int i =)
 }
-
-

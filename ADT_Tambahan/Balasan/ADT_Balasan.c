@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "ADT_Balasan.h"
+#include "../utils/utils.h"
 
 /* ********** PRIMITIF-PRIMITIF UNTUK TYPE BALASAN ********** */
 /* *** KONSTRUKTOR *** */
@@ -33,7 +34,7 @@ void PrintBalasan(Balasan B, int indentasi) {
 */ 
    printf("\n");
    
-   if (/*penulis kicauan privat dan tidak berteman*/) {
+   if (!isBerteman(currentPengguna.nama, PENULIS_BALASAN(B)) && getPengguna(PENULIS_BALASAN(B)).tipe_akun == 1) {
       PrintIndentasi(indentasi);    printf("| ID = %d\n", ID_BALASAN(B));
       PrintIndentasi(indentasi);    printf("| PRIVAT\n");
       PrintIndentasi(indentasi);    printf("| PRIVAT\n");

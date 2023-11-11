@@ -6,7 +6,7 @@ Pengguna currentPengguna;
 
 int banyakPengguna = 0;
 
-Pengguna dataPengguna[20] ;
+Pengguna dataPengguna[20];
 
 boolean isLoggedIn = false;
 
@@ -16,5 +16,4 @@ ID CURRENT_ID_KICAUAN = 0;
 
 Matrix matrixPertemanan;
 
-
-
+ListBalasan ListBalasanData;
