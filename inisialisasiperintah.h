@@ -1,8 +1,7 @@
 /* File inisialisasi untuk fungsi/prosedur inisialisasi dan perintah main */
 
 #include <stdio.h>
-#include "wordoperations.h"
-#include "ADT_Bawaan/boolean.h"
+#include "ADT_Tambahan\\wordoperations.h"
 
 #define enter printf("\n")
 
@@ -19,47 +18,49 @@ void displayBurbir();
 void inputConfigFile(FILE* file);
 // Prosedur meminta string file input
 
-boolean fileExists(char* filename);
+boolean fileExists(char filename[], int filename_length);
 // Mengembalikan true jika nama file ditemukan, false jika tidak
 
-boolean isLoggedIn();
-// Mengembalikan true jika user sudah login
+void bacaInput(Word* input);
+// Membaca masukkan dari pengguna
+
+void clearFirstCharacter(Word* word);
 
 /*
-MASUK
-DAFTAR
-TUTUP_PROGRAM
-MUAT
+stringToWord("MASUK")
+stringToWord("DAFTAR")
+stringToWord("TUTUP_PROGRAM")
+stringToWord("MUAT")
 
-KELUAR
-GANTI_PROFIL
-LIHAT_PROFIL
-ATUR_JENIS_AKUN
-UBAH_FOTO_PROFIL
-DAFTAR_TEMAN
-HAPUS_TEMAN
-TAMBAH_TEMAN
-BATAL_TAMBAH_TEMAN
-DAFTAR_PERMINTAAN_PERTEMANAN
-SETUJUI_PERTEMANAN
+stringToWord("KELUAR")
+stringToWord("GANTI_PROFIL")
+stringToWord("LIHAT_PROFIL")
+stringToWord("ATUR_JENIS_AKUN")
+stringToWord("UBAH_FOTO_PROFIL")
+stringToWord("DAFTAR_TEMAN")
+stringToWord("HAPUS_TEMAN")
+stringToWord("TAMBAH_TEMAN")
+stringToWord("BATAL_TAMBAH_TEMAN")
+stringToWord("DAFTAR_PERMINTAAN_PERTEMANAN")
+stringToWord("SETUJUI_PERTEMANAN")
 
-KICAU
-KICAUAN
-SUKA_KICAUAN
-UBAH_KICAUAN
+stringToWord("KICAU")
+stringToWord("KICAUAN")
+stringToWord("SUKA_KICAUAN")
+stringToWord("UBAH_KICAUAN")
 
-BALAS
-BALASAN
-HAPUS_BALASAN
+stringToWord("BALAS")
+stringToWord("BALASAN")
+stringToWord("HAPUS_BALASAN")
 
-BUAT_DRAF
-lIHAT_DRAF
+stringToWord("BUAT_DRAF")
+stringToWord("lIHAT_DRAF")
 
-UTAS
-SAMBUNG_UTAS
-HAPUS_UTAS
-CETAK_UTAS
+stringToWord("UTAS")
+stringToWord("SAMBUNG_UTAS")
+stringToWord("HAPUS_UTAS")
+stringToWord("CETAK_UTAS")
 
-SIMPAN
-MUAT
+stringToWord("SIMPAN")
+stringToWord("MUAT")
 */

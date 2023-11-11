@@ -1,7 +1,6 @@
 /* File : word similarity.c */
 
 #include "wordsimilarity.h"
-#include "boolean.h"
 #include <stdio.h>
 
 int min3(int a, int b, int c) {
@@ -31,23 +30,29 @@ Word tailOf(Word wIn) {
 }
 
 
-int CalculateLevenshteinDistance(Word w1, Word w2) {
-    if (w1.Length == 0) {
-        return w2.Length; // insert sisa dari w2
-    }
-    else if (w2.Length == 0) {
-        return w1.Length; // insert sisa dari w1
-    }
-    else if (firstLetter(w1) == firstLetter(w2)) {
-        return CalculateLevenshteinDistance(tailOf(w1), tailOf(w2));
+int CalculateLevenshteinDistance(Word w1, Word w2, int steps) {
+    if (steps > 3) {
+        return 727322;
     }
 
     else {
-        return 1 + min3(
-            CalculateLevenshteinDistance(tailOf(w1), w2), // delete head dari w1
-            CalculateLevenshteinDistance(w1, tailOf(w2)), // delete head dari w2
-            CalculateLevenshteinDistance(tailOf(w1), tailOf(w2)) // substitusi
-        );
+        if (w1.Length == 0) {
+            return w2.Length; // insert sisa dari w2
+        }
+        else if (w2.Length == 0) {
+            return w1.Length; // insert sisa dari w1
+        }
+        else if (firstLetter(w1) == firstLetter(w2)) {
+            return CalculateLevenshteinDistance(tailOf(w1), tailOf(w2), steps);
+        }
+
+        else {
+            return 1 + min3(
+                CalculateLevenshteinDistance(tailOf(w1), w2, steps + 1), // delete head dari w1
+                CalculateLevenshteinDistance(w1, tailOf(w2), steps + 1), // delete head dari w2
+                CalculateLevenshteinDistance(tailOf(w1), tailOf(w2), steps + 1) // substitusi
+            );
+        }
     }
 } 
 
