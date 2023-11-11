@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "stdlib.h": "c",
+        "globalvar.h": "c",
+        "wordmachine.h": "c",
+        "charmachine.h": "c"
+    }
+}

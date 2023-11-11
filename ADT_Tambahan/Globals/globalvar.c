@@ -11,3 +11,5 @@ int jumlahpengguna = 0;
 ListKicauan ListKicauanData;
 
 IDkicau currentIDKicau = -1;
+
+Word profil [20][5][10] ;

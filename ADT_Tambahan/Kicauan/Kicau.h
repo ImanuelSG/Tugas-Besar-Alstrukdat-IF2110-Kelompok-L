@@ -2,9 +2,9 @@
 #ifndef __KICAUAN_H__
 #define __KICAUAN_H__
 
-#include "boolean.h"
-#include "wordmachine.h"
-#include "datetime.h"
+#include "../boolean.h"
+#include "../../ADT_Bawaan/wordmachine/wordmachine.h"
+#include "../../ADT_Bawaan/datetime/datetime.h"
 
 /* ********** DEFINISI TYPE KICAUAN ********** */
 typedef int IDkicau;
@@ -63,7 +63,7 @@ void CreateKicauan(Kicauan *K, Word Penulis, DATETIME Waktu, Word Tweet);
 /* F.S. Terbentuk struct Kicauan dengan PenulisKicauan = Penulis, WaktuKicaun = Waktu, Tweet = Tweet, LikeKicauan = 0, JumlahBalasan = 0 */
 
 /* MENCETAK STRUCT KICAUAN */
-void PrintKicauan(Kicauan K, ID id);
+void PrintKicauan(Kicauan K, IDkicau id);
 /* I.S. K terdefinisi */
 /* F.S. Struct Kicauan tercetak di layar dengan format:
     | ID = <idkicauan>
@@ -103,18 +103,18 @@ int listLength(ListKicauan l);
 /* *** Daya tampung container *** */
 
 /* *** Selektor INDEKS *** */
-ID getFirstIdx(ListKicauan l);
+IDkicau getFirstIdx(ListKicauan l);
 /* Prekondisi : List l tidak kosong */
 /* Mengirimkan indeks elemen l pertama */
-ID getLastIdx(ListKicauan l);
+IDkicau getLastIdx(ListKicauan l);
 /* Prekondisi : List l tidak kosong */
 /* Mengirimkan indeks elemen l terakhir */
 
 /* ********** Test Indeks yang valid ********** */
-boolean isIdxValid(ListKicauan l, ID i);
+boolean isIdxValid(ListKicauan l, IDkicau i);
 /* Mengirimkan true jika i adalah indeks yang valid utk kapasitas list l */
 /* yaitu antara indeks yang terdefinisi utk container*/
-boolean isIdxEff(ListKicauan l, ID i);
+boolean isIdxEff(ListKicauan l, IDkicau i);
 /* Mengirimkan true jika i adalah indeks yang terdefinisi utk list */
 /* yaitu antara 0..NEFF(l) */
 

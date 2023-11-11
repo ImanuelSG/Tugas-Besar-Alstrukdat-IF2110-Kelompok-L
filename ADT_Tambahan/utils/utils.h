@@ -4,7 +4,7 @@
 #ifndef UTILS_H
 #define UTILS_H
 
-#include "boolean.h"
+#include "../boolean.h"
 #include "wordmachine.h"
 #include "pengguna.h"
 #include <stdio.h>
