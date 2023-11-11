@@ -1,6 +1,6 @@
 #include "globalvar.h"
-#include "stdlib.h"
 
+#include <stdlib.h>
 
 Pengguna currentPengguna;
 
@@ -12,4 +12,9 @@ boolean isLoggedIn = false;
 
 ListKicauan ListKicauanData;
 
-IDkicau currentIDKicau = -1;
+ID CURRENT_ID_KICAUAN = 0;
+
+Matrix matrixPertemanan;
+
+
+

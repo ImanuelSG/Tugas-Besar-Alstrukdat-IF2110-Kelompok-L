@@ -97,21 +97,3 @@ void Keluar()
     }
 }
 
-int getIdPengguna(Word nama)
-{
-    int i = 0;
-    boolean found = false;
-    while (!found && i < banyakPengguna)
-    {
-        if (isSameWord(nama, dataPengguna[i].nama))
-        {
-            found = true;
-        }
-        else
-            i++;
-    }
-    if (found)
-        return i;
-    else
-        return -1;
-}
