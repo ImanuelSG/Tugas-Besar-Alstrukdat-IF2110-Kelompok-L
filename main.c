@@ -1,5 +1,5 @@
 /* Main */
-#include "inisialisasiperintah.h"
+#include "ADT_Tambahan\\inisialisasi\\inisialisasiperintah.h"
 #include "ADT_Tambahan\\wordsimilarity.h"
 
 #define not(n) !n
@@ -8,6 +8,7 @@
 
 int main() {
     
+    nl;
     initializeKeyWords();
     displayBurbir();
     FILE *f;

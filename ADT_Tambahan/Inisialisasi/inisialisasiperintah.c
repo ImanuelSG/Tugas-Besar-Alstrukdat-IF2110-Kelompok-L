@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "ADT_Tambahan\\wordoperations.h"
+#include "..\\wordoperations.h"
 #include "inisialisasiperintah.h"
-#include "ADT_Tambahan\\wordsimilarity.h"
+#include "..\\wordsimilarity.h"
 
 void displayBurbir() {
     printf(".______    __    __  .______      .______    __  .______"); enter;  

@@ -1,7 +1,7 @@
 /* File inisialisasi untuk fungsi/prosedur inisialisasi dan perintah main */
 
 #include <stdio.h>
-#include "ADT_Tambahan\\wordoperations.h"
+#include "..\\wordoperations.h"
 
 #define enter printf("\n")
 

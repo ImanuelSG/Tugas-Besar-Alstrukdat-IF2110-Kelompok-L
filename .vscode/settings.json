@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "wordoperations.h": "c",
+        "wordsimilarity.h": "c"
+    }
+}
