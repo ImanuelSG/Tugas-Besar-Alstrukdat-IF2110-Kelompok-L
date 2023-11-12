@@ -5,7 +5,7 @@
 #include "wordoperations.h"
 #include <stdio.h>
 #include <stdlib.h>
-
+                    
 void CreatePengguna (Pengguna *akun, Word NAMA, Word SANDI, Word BIO, Word NOMOR, Word WETON, int TIPE_AKUN, MatrixProfil PROFIL) {
     (*akun).nama = NAMA ;
     (*akun).sandi = SANDI ;
