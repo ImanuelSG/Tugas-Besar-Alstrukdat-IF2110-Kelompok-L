@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "listdinkicauan.h"
+#include "../utils/utils.h"
 
+ListKicauan ListKicauanData;
 /* ********** PRIMITIF-PRIMITIF UNTUK TYPE LISTKICAUAN ********** */
 /* ********** KONSTRUKTOR ********** */
 /* Konstruktor : create list kosong  */
@@ -78,9 +80,8 @@ void printListKicauan(ListKicauan l, Word NamaPengguna) {
 /* F.S. Jika l tidak kosong: tercetak daftar kicauan pengguna dan temannya */
 /*      Penulisan dari kicauan terbaru ke yang terlama */
     ID i;
-
     for (i = getLastIdx(l); i >= getFirstIdx(l); i--) {
-        if (IsBerteman(NamaPengguna, PENULIS_KICAUAN(ELMTKicau(l, i)))) {
+        if (isBerteman(NamaPengguna, PENULIS_KICAUAN(ELMTKicau(l, i)))) {
             PrintKicauan(ELMTKicau(l, i), i);
         }
     }
@@ -115,7 +116,7 @@ void copyList(ListKicauan lIn, ListKicauan *lOut) {
 
 /* ********** MENAMBAH DAN MENGHAPUS ELEMEN DI AKHIR ********** */
 /* *** Menambahkan elemen terakhir *** */
-void insertLast(ListKicauan *l, Kicauan val) {
+void insertLastKicau(ListKicauan *l, Kicauan val) {
 /* Proses: Menambahkan val sebagai elemen terakhir list */
 /* I.S. List l boleh kosong, mungkin penuh */
 /* F.S. val adalah elemen terakhir l yang baru */

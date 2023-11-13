@@ -6,7 +6,7 @@
 
 #include "../../ADT_Bawaan/boolean.h"
 #include "../../ADT_Bawaan/wordmachine/wordmachine.h"
-#include "../datetime/datetime.h"
+#include "../../ADT_Bawaan/datetime/datetime.h"
 
 /* ********** DEFINISI TYPE KICAUAN ********** */
 typedef int ID;
@@ -19,7 +19,7 @@ typedef struct {
     int CurrentIDBalasan;      // Banyaknya balasan utama pada kicauan
 } Kicauan;
 
-int JUMLAH_KICAUAN_DENGAN_BALASAN;   // Banyaknya kicauan yang memiliki balasan
+extern int JUMLAH_KICAUAN_DENGAN_BALASAN;   // Banyaknya kicauan yang memiliki balasan
 
 /* ********** SELEKTOR KICAUAN ********** */
 #define PENULIS_KICAUAN(K) (K).PenulisKicauan
@@ -31,7 +31,7 @@ int JUMLAH_KICAUAN_DENGAN_BALASAN;   // Banyaknya kicauan yang memiliki balasan
 /* ********** PRIMITIF-PRIMITIF UNTUK TYPE KICAUAN ********** */
 /* *** KONSTRUKTOR *** */
 /* MEMBUAT STRUCT KICAUAN */
-void CreateKicauan(Kicauan *K, Word Penulis, DATETIME WaktuKicauan, Word Tweet);
+void CreateKicauan(Kicauan *K, Word Penulis, DATETIME WaktuKicauan, Word Tweet, int Like);
 /* I.S. K sembarang */
 /* F.S. Terbentuk struct Kicauan dengan K.PenulisKicauan = Penulis, K.WaktuKicaun = WaktuKicauan, K.Tweet = Tweet, K.LikeKicauan = 0, K.CurrentIDBalasan = 0 */
 

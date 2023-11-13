@@ -5,15 +5,15 @@
 #ifndef __TREEBALASAN_H__
 #define __TREEBALASAN_H__
 
-#include "../boolean.h"
+#include "../../ADT_Bawaan/boolean.h"
 #include "ADT_Balasan.h"
 
 /* ********** DEFINISI TYPE ADT TREE UNTUK BALASAN ********** */
 /* ADT TREE DENGAN REPRESENTASI LEFT-CHILD RIGHT-SIBLING */
-typedef Balasan ElType;
+typedef Balasan ElTypeBalasan;
 typedef struct treeNode* Address;
 typedef struct treeNode { 
-     ElType info;
+     ElTypeBalasan info;
      Address left_Child;
      Address right_Sibling;
 } TreeNode;
@@ -38,17 +38,17 @@ typedef struct {
 
 
 /* ********** PRIMITIF-PRIMITIF UNTUK TYPE ADT TREE UNTUK BALASAN ********** */
-Tree NewTree (ElType root, Tree left_child, Tree right_sibling); 
+Tree NewTree (ElTypeBalasan root, Tree left_child, Tree right_sibling); 
 /* Menghasilkan sebuah pohon dari root, left_child, dan right_sibling 
    Menghasilkan pohon kosong (NULL) jika alokasi gagal */
 
-void CreateTree (Tree *p, ElType root, Tree left_child, Tree right_sibling);
+void CreateTree (Tree *p, ElTypeBalasan root, Tree left_child, Tree right_sibling);
 /* I.S. Sembarang
    F.S. Menghasilkan sebuah pohon p
    Menghasilkan sebuah pohon biner p dari akar, l, dan r, jika alokasi berhasil
    Menghasilkan pohon p yang kosong (NULL) jika alokasi gagal */
 
-Address newTreeNode(ElType val);
+Address newTreeNode(ElTypeBalasan val);
 /* Alokasi sebuah address p, bernilai tidak NULL jika berhasil */
 /* Mengirimkan address hasil alokasi sebuah elemen bernilai val
    Jika alokasi berhasil, maka address tidak NULL, dan misalnya 
@@ -103,12 +103,12 @@ void printTree(Tree p, int h);
    Penulisan setiap node juga diakhiri newline */
 
 /* ****** Penambahan dan Penghapusan Elemen ****** */
-void insertChild(Tree *p, ElType val);
+void insertChild(Tree *p, ElTypeBalasan val);
 /* I.S. p boleh kosong, i adalah posisi anak (1..n) */
 /* F.S. Jika alokasi berhasil, maka p menjadi pohon dengan tambahan simpul anak bernilai val pada posisi i */
 /*      Jika alokasi gagal, maka p tetap */
 
-void insertSiblingLast(Tree *p, ElType val);
+void insertSiblingLast(Tree *p, ElTypeBalasan val);
 /* I.S. p boleh kosong, i adalah posisi saudara (1..n) */
 /* F.S. Jika alokasi berhasil, maka p menjadi pohon dengan tambahan simpul saudara bernilai val pada posisi i */
 /*      Jika alokasi gagal, maka p tetap */

@@ -7,20 +7,21 @@
 #ifndef __LISTDINKICAUAN_H__
 #define __LISTDINKICAUAN_H__
 
-#include "../boolean.h"
+#include "../../ADT_Bawaan/boolean.h"
 #include "ADT_Kicauan.h"
 
 /* ********** DEFINISI TYPE LIST DINAMIK UNTUK KICAUAN ********** */
-#define IDX_MIN_LIST_KICAUAN 1      /* Indeks minimum list */
-#define IDX_UNDEF 0                 /* Indeks tak terdefinisi*/
+#define IDX_MIN_LIST_KICAUAN 1 /* Indeks minimum list */
+#define IDX_UNDEF 0            /* Indeks tak terdefinisi*/
 
 /* Definisi elemen dan koleksi objek */
-typedef Kicauan ElType;             /* type elemen list */
+typedef Kicauan ElType; /* type elemen list */
 
-typedef struct {
-    ElType *buffer;     /* memori tempat penyimpan elemen (container) */
-    int nEff;           /* >= 0, banyaknya elemen efektif */
-    int capacity;       /* ukuran list */
+typedef struct
+{
+   ElType *buffer; /* memori tempat penyimpan elemen (container) */
+   int nEff;       /* >= 0, banyaknya elemen efektif */
+   int capacity;   /* ukuran list */
 } ListKicauan;
 /* Indeks yang digunakan [1..capacity-1] */
 /* Jika l adalah : ListKicauan, cara deklarasi dan akses: */
@@ -39,6 +40,8 @@ typedef struct {
 #define BUFFER(l) (l).buffer
 #define ELMTKicau(l, i) (l).buffer[i]
 #define CAPACITY(l) (l).capacity
+
+extern ListKicauan ListKicauanData; /*Berisi List Kicauan saat ini*/
 
 /* ********** PRIMITIF-PRIMITIF UNTUK TYPE LISTKICAUAN ********** */
 /* ********** KONSTRUKTOR ********** */
@@ -92,7 +95,7 @@ void printListKicauan(ListKicauan l, Word NamaPengguna);
 /* Jika list kosong : menulis [] */
 
 void printList(ListKicauan l);
-/* Proses : Menuliskan isi list dengan traversal, 
+/* Proses : Menuliskan isi list dengan traversal,
    list yang ditulis hanya Kicauan milik pengguna beserta teman-temannya
 /* I.S. l boleh kosong */
 /* F.S. Jika l tidak kosong: tercetak daftar seluruh kicauan */
@@ -102,11 +105,11 @@ void printList(ListKicauan l);
 void copyList(ListKicauan lIn, ListKicauan *lOut);
 /* I.S. lIn terdefinisi tidak kosong, lOut sembarang */
 /* F.S. lOut berisi salinan dari lIn (identik, nEff dan capacity sama) */
-/* Proses : Menyalin isi lIn ke lOut */ 
+/* Proses : Menyalin isi lIn ke lOut */
 
 /* ********** MENAMBAH DAN MENGHAPUS ELEMEN DI AKHIR ********** */
 /* *** Menambahkan elemen terakhir *** */
-void insertLast(ListKicauan *l, Kicauan val);
+void insertLastKicau(ListKicauan *l, Kicauan val);
 /* Proses: Menambahkan val sebagai elemen terakhir list */
 /* I.S. List l boleh kosong, tetapi tidak penuh */
 /* F.S. val adalah elemen terakhir l yang baru */

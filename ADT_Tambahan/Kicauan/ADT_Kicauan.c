@@ -1,10 +1,11 @@
 #include <stdio.h>
 #include "ADT_Kicauan.h"
 
+int JUMLAH_KICAUAN_DENGAN_BALASAN;
 /* ********** PRIMITIF-PRIMITIF UNTUK TYPE KICAUAN ********** */
 /* *** KONSTRUKTOR *** */
 /* MEMBUAT STRUCT KICAUAN */
-void CreateKicauan(Kicauan *K, Word Penulis, DATETIME WaktuKicauan, Word Tweet) {
+void CreateKicauan(Kicauan *K, Word Penulis, DATETIME WaktuKicauan, Word Tweet, int Like) {
 /* I.S. K sembarang */
 /* F.S. Terbentuk struct Kicauan dengan PenulisKicauan = Penulis, WaktuKicaun = Waktu, Tweet = Tweet, LikeKicauan = 0, JumlahBalasan = 0 */
     PENULIS_KICAUAN(*K) = Penulis;
@@ -26,9 +27,9 @@ void PrintKicauan(Kicauan K, ID id) {
 */  
     printf("\n");
     printf("| ID = %d\n", id);
-    printf("| "); printWord(PENULIS_KICAUAN(K)); printf("\n");
+    printf("| "); PrintWord(PENULIS_KICAUAN(K)); printf("\n");
     printf("| "); TulisDATETIME(WAKTU_KICAUAN(K)); printf("\n");
-    printf("| "); printWord(TWEET(K)); printf("\n");
+    printf("| "); PrintWord(TWEET(K)); printf("\n");
     printf("| Disukai: %d\n", LIKE(K));
 }
 

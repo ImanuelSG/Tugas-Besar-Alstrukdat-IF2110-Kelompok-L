@@ -3,7 +3,7 @@
 #include "treebalasan.h"
 
 /* ********** PRIMITIF-PRIMITIF UNTUK TYPE ADT TREE UNTUK BALASAN ********** */
-Tree NewTree (ElType root, Tree left_child, Tree right_sibling) {
+Tree NewTree (ElTypeBalasan root, Tree left_child, Tree right_sibling) {
 /* Menghasilkan sebuah pohon dari root, left_child, dan right_sibling 
    Menghasilkan pohon kosong (NULL) jika alokasi gagal */
    Tree p = (Address) malloc(sizeof(TreeNode));
@@ -15,7 +15,7 @@ Tree NewTree (ElType root, Tree left_child, Tree right_sibling) {
    return p;
 }
 
-void CreateTree (Tree *p, ElType root, Tree left_child, Tree right_sibling) {
+void CreateTree (Tree *p, ElTypeBalasan root, Tree left_child, Tree right_sibling) {
 /* I.S. Sembarang
    F.S. Menghasilkan sebuah pohon p
    Menghasilkan sebuah pohon biner p dari akar, l, dan r, jika alokasi berhasil
@@ -28,7 +28,7 @@ void CreateTree (Tree *p, ElType root, Tree left_child, Tree right_sibling) {
    }
 }
 
-Address newTreeNode(ElType val) {
+Address newTreeNode(ElTypeBalasan val) {
 /* Alokasi sebuah address p, bernilai tidak NULL jika berhasil */
 /* Mengirimkan address hasil alokasi sebuah elemen bernilai val
    Jika alokasi berhasil, maka address tidak NULL, dan misalnya 
@@ -159,7 +159,7 @@ void printTree(Tree p, int h) {
 }
 
 /* ****** Penambahan dan Penghapusan Elemen ****** */
-void insertChild(Tree *p, ElType val) {
+void insertChild(Tree *p, ElTypeBalasan val) {
 /* I.S. p boleh kosong */
 /* F.S. Jika alokasi berhasil, maka p menjadi pohon dengan simpul left_child bernilai val */
 /*      Jika alokasi gagal, maka p tetap */
@@ -181,7 +181,7 @@ void insertChild(Tree *p, ElType val) {
    }
 }
 
-void insertSiblingLast(Tree *p, ElType val) {
+void insertSiblingLast(Tree *p, ElTypeBalasan val) {
 /* I.S. p boleh kosong */
 /* F.S. Jika alokasi berhasil, maka p menjadi pohon dengan tambahan simpul right_sibling bernilai val */
 /*      Jika alokasi gagal, maka p tetap */

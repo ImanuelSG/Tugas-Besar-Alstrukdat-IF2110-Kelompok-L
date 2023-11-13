@@ -1,15 +1,8 @@
-#include "matrix.h"
-#include "globalvar.h"
+#include "../../ADT_Bawaan/matrix/matrix.h"
+#include "../Globals/globalvar.h"
+#include "../wordoperations.h"
+#include "utils.h"
 
-Matrix matrixPertemanan;
-
-boolean isBerteman(Word namaA, Word namaB)
-{
-    int idA = getIdPengguna(namaA);
-    int idB = getIdPengguna(namaB);
-
-    return (Elmt(matrixPertemanan, idA, idB) == 1);
-}
 
 int getIdPengguna(Word nama)
 {
@@ -29,7 +22,13 @@ int getIdPengguna(Word nama)
     else
         return -1;
 }
+boolean isBerteman(Word namaA, Word namaB)
+{
+    int idA = getIdPengguna(namaA);
+    int idB = getIdPengguna(namaB);
 
+    return (ELMT(matrixPertemanan, idA, idB) == 1);
+}
 Pengguna getPengguna(Word nama)
 {
     int i = 0;
@@ -47,4 +46,4 @@ Pengguna getPengguna(Word nama)
         return dataPengguna[i];
     else
         return dataPengguna[0];
-}   
+}

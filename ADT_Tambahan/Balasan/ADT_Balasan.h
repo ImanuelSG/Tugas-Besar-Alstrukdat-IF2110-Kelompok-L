@@ -2,9 +2,9 @@
 #ifndef __BALASAN_H__
 #define __BALASAN_H__
 
-#include "../boolean.h"
-#include "../wordmachine/wordmachine.h"
-#include "../datetime/datetime.h"
+#include "../../ADT_Bawaan/boolean.h"
+#include "../../ADT_Bawaan/wordmachine/wordmachine.h"
+#include "../../ADT_Bawaan/datetime/datetime.h"
 #include "../Globals/globalvar.h"
 #include "../Kicauan/ADT_Kicauan.h"
 

@@ -1,8 +1,8 @@
 #ifndef PENGGUNA_H
 #define PENGGUNA_H
 
-#include "../ADT_Bawaan/wordmachine/wordmachine.h"
-#include "../ADT_Bawaan/charmachine/charmachine.h"
+#include "../../ADT_Bawaan/wordmachine/wordmachine.h"
+#include "../../ADT_Bawaan/charmachine/charmachine.h"
 #include <stdio.h>
 
 typedef struct

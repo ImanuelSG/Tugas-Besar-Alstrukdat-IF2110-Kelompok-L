@@ -1,8 +1,9 @@
-#include "../ADT_Bawaan/wordmachine/wordmachine.h"
-#include "../ADT_Bawaan/charmachine/charmachine.h"
+#include "../../ADT_Bawaan/wordmachine/wordmachine.h"
+#include "../../ADT_Bawaan/charmachine/charmachine.h"
 #include "pengguna.h"
-#include "./Globals/globalvar.h"
-#include "wordoperations.h"
+#include "../Globals/globalvar.h"
+#include "../wordoperations.h"
+#include "../utils/utils.h"
 #include <stdio.h>
 #include <stdlib.h>
 
