@@ -65,4 +65,12 @@ int makePuluhanfromWord(Word w, int index1, int index2);
 
 DATETIME wordToDatetime(Word w);
 
+
+char* wordToString(Word w);
+/* Mengembalikan string literal (array of char) dari word */
+/* IMPORTANT: ADA PENAMBAHAN 'NULL' CHARACTER (\0) DI AKHIR*/
+
+Word DuplicateWord(Word W);
+/* Returns a copy of W */
+
 #endif

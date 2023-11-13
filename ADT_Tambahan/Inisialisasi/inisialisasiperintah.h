@@ -17,7 +17,7 @@ void displayBurbir();
 void inputConfigFile(FILE* file);
 // Prosedur meminta string file input
 
-boolean fileExists(char filename[], int filename_length);
+boolean validatePath(Word foldername);
 // Mengembalikan true jika nama file ditemukan, false jika tidak
 
 void bacaInput(Word* input);

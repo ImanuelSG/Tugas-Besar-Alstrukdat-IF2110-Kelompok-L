@@ -36,8 +36,7 @@ boolean isAKeyWord(Word w) {
 }
 
 void inputConfigFile(FILE* file) {
-    Word fileNameWord;
-    char * fileNameStr;
+    Word folderNameWord;
     int i;
 
     boolean firstInput = true;
@@ -47,49 +46,60 @@ void inputConfigFile(FILE* file) {
         printf("Silahkan masukan folder konfigurasi untuk dimuat: ");
         START();
         ADVWORD();
-        if (!firstInput) {
-            clearFirstCharacter(&currentWord);
-        }
-        fileNameWord = currentWord;
-        fileNameStr = (char*) malloc (currentWord.Length);
-        for (i = 0; i < fileNameWord.Length; i++) {
-            fileNameStr[i] = fileNameWord.TabWord[i];
-        }
+        folderNameWord = currentWord;
 
-        if (!fileExists(fileNameStr, fileNameWord.Length)) {
+        if (!validatePath(folderNameWord)) {
             printf("Tidak ada folder yang dimaksud!\n");
             printf("\n");
         }
-        firstInput = false;
 
-        // displayWord(stringToWord(fileNameStr, fileNameWord.Length + 2));
-        // printf("\n");
-
-    } while (!fileExists(fileNameStr, fileNameWord.Length));
+    } while (!validatePath(folderNameWord));
 }
 
-boolean fileExists(char *filename, int filename_length) {
+boolean validatePath(Word folderNameWord) {
 
-    char* path = (char*) malloc (filename_length + 1);
-    int i;
+    Word path_config1, path_config2, path_config3, path_config4, path_config5;
+    
+    path_config1 = DuplicateWord(folderNameWord);
+    path_config2 = DuplicateWord(folderNameWord);
+    path_config3 = DuplicateWord(folderNameWord);
+    path_config4 = DuplicateWord(folderNameWord);
+    path_config5 = DuplicateWord(folderNameWord);
 
-    for (i = 0; i < filename_length; i++) {
-        path[i] = filename[i];
-    }
-    path [filename_length] = NULL;
-    // printf("%s", path);
+    appendWord(&path_config1, stringToWord("/pengguna.config", 16));
+    appendWord(&path_config2, stringToWord("/kicauan.config", 15));
+    appendWord(&path_config3, stringToWord("/balasan.config", 15));
+    appendWord(&path_config4, stringToWord("/draf.config", 12));
+    appendWord(&path_config5, stringToWord("/utas.config", 12));
 
-    FILE* file = fopen(path, "r");
-    if (file == NULL) {
-        free(path);
+    char* path_config1_str = wordToString(path_config1);
+    char* path_config2_str = wordToString(path_config2);
+    char* path_config3_str = wordToString(path_config3);
+    char* path_config5_str = wordToString(path_config5);
+    char* path_config4_str = wordToString(path_config4);
+
+    FILE* file1 = fopen(path_config1_str, "r");
+    FILE* file2 = fopen(path_config2_str, "r");
+    FILE* file3 = fopen(path_config3_str, "r");
+    FILE* file4 = fopen(path_config5_str, "r");
+    FILE* file5 = fopen(path_config4_str, "r");
+
+    if (file1 == NULL || file2 == NULL || file3 == NULL || file4 == NULL || file5 == NULL) {
+        fclose(file1);
+        fclose(file2);
+        fclose(file3);
+        fclose(file4);
+        fclose(file5);
         return false;
     }
     else {
-        free(path);
-        fclose(file);
+        fclose(file1);
+        fclose(file2);
+        fclose(file3);
+        fclose(file4);
+        fclose(file5);
         return true;
     }
-
 }
 // Mengembalikan true jika nama file ditemukan, false jika tidak
 

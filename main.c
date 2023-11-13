@@ -5,6 +5,11 @@
 
 #define not(n) !n
 
+    // Yang bikin char machine skill isu gk ngerti ada karakter backslash n :(
+    // Nanti harusnya ini gk butuh karena gua udh modif ignore blanks,
+    // but just in case komentar ini gua gak hapus dulu
+
+
 int main() {
     
     nl;
@@ -20,24 +25,24 @@ int main() {
     boolean stopped = false;
 
     while (not(stopped)) {
+
         Word perintah;
         bacaInput(&perintah);
-        clearFirstCharacter(&perintah);
 
         if (isAKeyWord(perintah)) {
 
          /*---------------------------PENGGUNA--------------------------------------*/
 
             if (isSameWord(perintah, stringToWord("DAFTAR", 6))) {
-                printf("Panggil fungsi DAFTAR");
+                Daftar();
             }
 
             else if (isSameWord(perintah, stringToWord("MASUK", 5))) {
-                printf("Panggil fungsi MASUK");
+                Masuk();
             }
 
             else if (isSameWord(perintah, stringToWord("KELUAR", 5))) {
-                printf("Panggil fungsi KELUAR");
+                Keluar();
             }
 
             else if (isSameWord(perintah, stringToWord("TUTUP_PROGRAM", 5))) {
@@ -136,8 +141,6 @@ int main() {
                 printf("Panggil fungsi HAPUS_BALASAN");
             }
 
-        // BALAS [IDKicau] [IDBalasan], BALASAN [IDKicau], HAPUS_BALASAN [IDKicau] [IDBalasan]
-
 
         /*------------------------------ DRAF ---------------------------------*/
 
@@ -207,6 +210,4 @@ int main() {
         
         nl;
     }
-
-
 }

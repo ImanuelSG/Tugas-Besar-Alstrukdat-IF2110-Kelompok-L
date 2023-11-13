@@ -150,3 +150,25 @@ DATETIME wordToDatetime(Word w)
     CreateDATETIME(&D, day, month, year, hour, minute, second);
     return D;
 }
+
+char* wordToString(Word w) {
+    int i;
+    char* benang = (char*) malloc (w.Length + 1);
+    for (i = 0; i < w.Length; i++) {
+        benang[i] = w.TabWord[i];
+    }
+
+    benang [w.Length + 1] = KARAKTER_NULL;
+    return benang;
+}
+
+Word DuplicateWord(Word w) {
+    Word w_out;
+    w_out.Length = w.Length;
+    int i;
+    for(i = 0; i < w.Length; i++) {
+        w_out.TabWord[i] = w.TabWord[i];
+    }
+
+    return w_out;
+}
