@@ -4,44 +4,54 @@
 boolean EndBaris;
 Word currentBaris;
 
-void STARTBaris (char namafile[]){
+void STARTBaris(char namafile[])
+{
     startMKarFile(namafile);
-    if (EOPFile){
+    if (EOPFile)
+    {
         EndBaris = true;
     }
-    else{
+    else
+    {
         EndBaris = false;
         CopyBaris();
-        advMKarFile();  
+        advMKarFile();
     }
 }
 
-void ADVBaris (){
-    if (EOPFile){
+void ADVBaris()
+{
+    if (EOPFile)
+    {
         EndBaris = true;
     }
-    else{
+    else
+    {
         CopyBaris();
-        advMKarFile();   
+        advMKarFile();
     }
-
 }
 
-void CopyBaris (){
+void CopyBaris()
+{
     int i = 0;
-    while ((currentCharFile != '\n') && !EOPFile){
+    while ((currentCharFile != '\n') && !EOPFile)
+    {
         currentBaris.TabWord[i] = currentCharFile;
         advMKarFile();
         i++;
     }
-
     currentBaris.Length = i;
 }
 
-void PrintBaris(Word B){
-    for (int i = 0 ; i<B.Length; i++){
-        printf("%c", B.TabWord[i]);
+void PrintBaris(Word B)
+{
+    for (int i = 0; i < B.Length; i++)
+    {
+        if (B.TabWord[i] != '\n')
+            printf("%c", B.TabWord[i]);
+        else{
+            printf("ini slashn\n");
+        }
     }
 }
-
-

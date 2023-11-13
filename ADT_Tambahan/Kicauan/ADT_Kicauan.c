@@ -11,7 +11,7 @@ void CreateKicauan(Kicauan *K, Word Penulis, DATETIME WaktuKicauan, Word Tweet, 
     PENULIS_KICAUAN(*K) = Penulis;
     WAKTU_KICAUAN(*K) = WaktuKicauan;
     TWEET(*K) = Tweet;
-    LIKE(*K) = 0;
+    LIKE(*K) = Like;
     CURRENT_ID_BALASAN(*K) = 0;
 }
 
