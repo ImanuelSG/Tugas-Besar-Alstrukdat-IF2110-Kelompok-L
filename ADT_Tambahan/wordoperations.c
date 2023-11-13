@@ -3,13 +3,10 @@
 
 #include <stdio.h>
 #include "wordoperations.h"
-#include "../ADT_Bawaan/boolean.h"
 
-boolean isSameWord(Word w1, Word w2)
-{
-    if (w1.Length == w2.Length)
-    {
-        int i;
+boolean isSameWord (Word w1, Word w2) {
+    if (w1.Length == w2.Length) {
+        int i = 0;
         boolean same = true;
 
         while ((same) && i < w1.Length)

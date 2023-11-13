@@ -1,0 +1,1 @@
+gcc main.c ADT_Tambahan\\Inisialisasi\\inisialisasiperintah.c ADT_Tambahan\\wordsimilarity.c ADT_Tambahan\\wordoperations.c ADT_Bawaan\\wordmachine\\wordmachine.c ADT_Bawaan\\charmachine\\charmachine.c -o a.exe
