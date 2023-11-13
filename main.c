@@ -5,9 +5,10 @@
 
 #define not(n) !n
 
+/* Header Note */
     // Yang bikin char machine skill isu gk ngerti ada karakter backslash n :(
-    // Nanti harusnya ini gk butuh karena gua udh modif ignore blanks,
-    // but just in case komentar ini gua gak hapus dulu
+    // Nanti harusnya clearFirstCharacter gk butuh karena gua udh modif ignore blanks buat
+    // nge ignore '\n' juga, but just in case komentar ini gua gak hapus dulu
 
 
 int main() {
@@ -210,4 +211,7 @@ int main() {
         
         nl;
     }
+
+
+    printf("Anda telah keluar dari program BurBir. Sampai jumpa di penjelajahan berikutnya."); nl;
 }

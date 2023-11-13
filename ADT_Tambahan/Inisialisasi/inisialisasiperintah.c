@@ -75,14 +75,14 @@ boolean validatePath(Word folderNameWord) {
     char* path_config1_str = wordToString(path_config1);
     char* path_config2_str = wordToString(path_config2);
     char* path_config3_str = wordToString(path_config3);
-    char* path_config5_str = wordToString(path_config5);
     char* path_config4_str = wordToString(path_config4);
+    char* path_config5_str = wordToString(path_config5);
 
     FILE* file1 = fopen(path_config1_str, "r");
     FILE* file2 = fopen(path_config2_str, "r");
     FILE* file3 = fopen(path_config3_str, "r");
-    FILE* file4 = fopen(path_config5_str, "r");
-    FILE* file5 = fopen(path_config4_str, "r");
+    FILE* file4 = fopen(path_config4_str, "r");
+    FILE* file5 = fopen(path_config5_str, "r");
 
     if (file1 == NULL || file2 == NULL || file3 == NULL || file4 == NULL || file5 == NULL) {
         fclose(file1);

@@ -1,6 +1,7 @@
 /* File: wordoperations.c*/
 /* Tambahan operasi dan primitif word */
 
+#include <stdlib.h>
 #include <stdio.h>
 #include "wordoperations.h"
 
@@ -158,7 +159,8 @@ char* wordToString(Word w) {
         benang[i] = w.TabWord[i];
     }
 
-    benang [w.Length + 1] = KARAKTER_NULL;
+    benang [w.Length] = KARAKTER_NULL;
+
     return benang;
 }
 

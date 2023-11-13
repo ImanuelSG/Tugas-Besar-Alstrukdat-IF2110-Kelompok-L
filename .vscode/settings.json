@@ -3,6 +3,7 @@
         "datetime.h": "c",
         "adt_kicauan.h": "c",
         "wordmachine.h": "c",
-        "boolean.h": "c"
+        "boolean.h": "c",
+        "inisialisasiperintah.h": "c"
     }
 }

@@ -18,7 +18,7 @@ void inputConfigFile(FILE* file);
 // Prosedur meminta string file input
 
 boolean validatePath(Word foldername);
-// Mengembalikan true jika nama file ditemukan, false jika tidak
+// Mengembalikan true jika ada foldernya dan berisi semua file config yang dibutuhkan
 
 void bacaInput(Word* input);
 // Membaca masukkan dari pengguna

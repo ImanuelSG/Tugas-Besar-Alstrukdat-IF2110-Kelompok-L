@@ -21,7 +21,7 @@ void Daftar()
     {
         Pengguna daftarPengguna;
         printf("Masukkan nama: ");
-        BacaKalimat();
+        STARTKalimat();
         printf("\n");
         daftarPengguna.nama = currentWord;
 
@@ -34,7 +34,7 @@ void Daftar()
         else
         {
             printf("Masukkan kata sandi: ");
-            BacaKalimat();
+            STARTKalimat();
             printf("\n");
             daftarPengguna.sandi = currentWord;
             printf("Pengguna telah berhasil terdaftar. Masuk untuk menikmati fitur-fitur BurBir.\n");
@@ -54,7 +54,7 @@ void Masuk()
     else
     {
         printf("Masukkan nama: ");
-        BacaKalimat();
+        STARTKalimat();
         printf("\n");
         boolean found = false;
         int idxPengguna = getIdPengguna(currentWord);
@@ -63,19 +63,19 @@ void Masuk()
         {
             printf("Wah, nama yang Anda cari tidak ada. Masukkan nama lain!\n");
             printf("Masukkan nama: ");
-            BacaKalimat();
+            STARTKalimat();
             printf("\n");
             idxPengguna = getIdPengguna(currentWord);
         }
 
         printf("Masukkan kata sandi: ");
-        BacaKalimat();
+        STARTKalimat();
         printf("\n");
         while (!isSameWord(dataPengguna[idxPengguna].sandi, currentWord))
         {
             printf("Wah, kata sandi yang Anda masukkan belum tepat. Periksa kembali kata sandi Anda!\n");
             printf("Masukkan kata sandi: ");
-            BacaKalimat();
+            STARTKalimat();
             printf("\n");
         }
         printf("Anda telah berhasil masuk. Mari menjelajahi BurBir bersama Ande-Ande Lumut!\n");
