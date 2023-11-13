@@ -1,13 +1,49 @@
-#include "listdinkicauan.h"
-#include "../Kicauan/ADT_kicauan.h"
-#include <stdio.h>
-#include "globalvar.h"
+#include "../MesinBarisFile/MBarisFile.h"
+#include "../Kicauan/listdinkicauan.h"
+#include "../wordoperations.h"
 
-ListKicauan ListKicauanData;
+// Word BaristoWord(Baris B)
+// {
+//     Word w;
+//     int i;
+//     for (i = 0; i < B.Length; i++)
+//     {
+//         w.TabWord[i] = B.TabWord[i];
+//     }
+//     w.Length = B.Length;
+//     return w;
+// }
 
-void loadkicau()
+void ReadKicauanConfig(char namafile[])
 {
     CreateListDinKicauan(&ListKicauanData, 100);
+    int iteration, like;
+    Kicauan kicau;
+    Word Penulis, WaktuKicauan, Tweet;
+    DATETIME Waktu;
 
-    for (int i =)
+    STARTBaris(namafile);
+
+    iteration = wordToInteger(currentBaris);
+    ADVBaris();
+    for (int i = 0; i < iteration; i++)
+    {
+        ADVBaris();
+        Tweet = currentBaris;
+        ADVBaris();
+        like = wordToInteger(currentBaris);
+        ADVBaris();
+        Penulis = currentBaris;
+        ADVBaris();
+        Waktu = wordToDatetime(currentBaris);
+        ADVBaris();
+        CreateKicauan(&kicau, Penulis, Waktu, Tweet, like);
+        insertLastKicau(&ListKicauanData, kicau);
+    }
+}
+
+int main()
+{
+    ReadKicauanConfig("kicauan.config");
+    printList(ListKicauanData);
 }
