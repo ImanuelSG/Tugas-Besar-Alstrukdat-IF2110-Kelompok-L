@@ -4,11 +4,12 @@
 #ifndef DATETIME_H
 #define DATETIME_H
 
-#include "boolean.h"
+#include "../boolean.h"
 #include "jam.h"
 
 /* *** Definisi TYPE DATETIME <DD/MM/YY HH:MM:SS> *** */
-typedef struct {
+typedef struct
+{
     int DD;   /* integer [1..31] */
     int MM;   /* integer [1..12] */
     int YYYY; /* integer [1900..2030] */
