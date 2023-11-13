@@ -23,20 +23,27 @@ void ReadKicauanConfig(char namafile[])
     DATETIME Waktu;
 
     STARTBaris(namafile);
-
+    
     iteration = wordToInteger(currentBaris);
+
     ADVBaris();
+    
     for (int i = 0; i < iteration; i++)
     {
         ADVBaris();
         Tweet = currentBaris;
+        
         ADVBaris();
+
         like = wordToInteger(currentBaris);
+        printf("%d\n", like); 
+        
         ADVBaris();
         Penulis = currentBaris;
         ADVBaris();
         Waktu = wordToDatetime(currentBaris);
         ADVBaris();
+        
         CreateKicauan(&kicau, Penulis, Waktu, Tweet, like);
         insertLastKicau(&ListKicauanData, kicau);
     }
