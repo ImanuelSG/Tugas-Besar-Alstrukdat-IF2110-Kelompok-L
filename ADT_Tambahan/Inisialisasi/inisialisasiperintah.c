@@ -5,13 +5,14 @@
 #include "inisialisasiperintah.h"
 #include "..\\wordsimilarity.h"
 
+
 void displayBurbir() {
-    printf(".______    __    __  .______      .______    __  .______"); enter;  
-    printf("|   _  \\  |  |  |  | |   _  \\     |   _  \\  |  | |   _  \\    ");  enter;
-    printf("|  |_)  | |  |  |  | |  |_)  |    |  |_)  | |  | |  |_)  |    "); enter;
-    printf("|   _  <  |  |  |  | |      /     |   _  <  |  | |      /     "); enter;
-    printf("|  |_)  | |  `--'  | |  |\\  \\----.|  |_)  | |  | |  |\\  \\----. "); enter;
-    printf("|______/   \\______/  | _| `._____||______/  |__| | _| `._____| "); enter;
+    printf(".______    __    __  .______      .______    __  .______");                 nl;
+    printf("|   _  \\  |  |  |  | |   _  \\     |   _  \\  |  | |   _  \\    ");        nl;
+    printf("|  |_)  | |  |  |  | |  |_)  |    |  |_)  | |  | |  |_)  |    ");           nl;
+    printf("|   _  <  |  |  |  | |      /     |   _  <  |  | |      /     ");           nl;
+    printf("|  |_)  | |  `--'  | |  |\\  \\----.|  |_)  | |  | |  |\\  \\----. ");      nl;
+    printf("|______/   \\______/  | _| `._____||______/  |__| | _| `._____| ");         nl;
 
     printf("Selamat datang di BurBir.\n");
     printf("Aplikasi untuk studi kualitatif mengenai perilaku manusia dengan menggunakan metode");
@@ -107,6 +108,31 @@ void clearFirstCharacter(Word* word) {
     }
 
     --word->Length;
+}
+
+void checkSpellingError(Word perintah) {
+    Word saltik;
+    int i = 0;
+    boolean found = false;
+    while(!found && (i < 100)) {
+        int ld = CalculateLevenshteinDistance(perintah, KeyWords[i], 0);
+        if (ld < 3) {
+            found = true;
+            saltik = KeyWords[i];
+        }
+        else {
+            ++i;
+        }
+    }
+
+    if (!found) {
+        printf("Input tidak dikenali!"); nl;
+    }
+    else {
+        printf("Input tidak dikenali!"); nl;
+        printf("Apakah Anda bermaksud untuk mengetik '");
+        displayWord(saltik); printf("'..?"); nl;
+    }
 }
 
 

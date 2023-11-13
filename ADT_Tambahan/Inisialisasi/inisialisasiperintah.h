@@ -2,8 +2,7 @@
 
 #include <stdio.h>
 #include "..\\wordoperations.h"
-
-#define enter printf("\n")
+#define nl printf("\n")
 
 Word KeyWords[100];
 void initializeKeyWords();
@@ -25,6 +24,9 @@ void bacaInput(Word* input);
 // Membaca masukkan dari pengguna
 
 void clearFirstCharacter(Word* word);
+
+// Gabut hehehe
+void checkSpellingError(Word perintah);
 
 /*
 stringToWord("MASUK")
