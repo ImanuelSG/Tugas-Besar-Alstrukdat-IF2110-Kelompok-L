@@ -8,15 +8,13 @@
 
 extern Pengguna currentPengguna; /*Berisi Data Current Pengguna*/
 
-extern int banyakPengguna; /*Berisi jumlah pengguna saat ini*/
-
-extern Pengguna dataPengguna[20];/*List Pengguna*/
-
 extern boolean isLoggedIn; /*True jika ada pengguna sedang login, false sebaliknya.*/
 
 extern ID CURRENT_ID_KICAUAN;/*Berisi Current Id Kicau*/
 
 extern Matrix matrixPertemanan;/*Matrix Pertemanan*/
+
+extern Matrix matrixPermintaan;/*Matrix Permintaan*/
 
 extern ListBalasan ListBalasanData;/*List Dari Balasan yang ada*/
 

@@ -17,8 +17,10 @@ typedef struct
     MatrixProfil profil ;
 } Pengguna;
 
+extern int banyakPengguna ;
+extern Pengguna dataPengguna[20];/*List Pengguna*/ ;
 
-   
+
 void CreatePengguna (Pengguna *akun, Word nama, Word sandi, Word bio, Word nomor, Word weton, int tipe_akun, MatrixProfil profil) ;
 
 void InsertPengguna (Pengguna akun) ; // masukin pengguna ke data pengguan 

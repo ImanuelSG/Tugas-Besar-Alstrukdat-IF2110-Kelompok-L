@@ -291,7 +291,7 @@ void ubah_foto_profil () {
                 dataPengguna[id].profil.mem[i][j] = currentWord ;
             }
             else {
-                ADVWORD ;
+                ADVWORD() ;
                 dataPengguna[id].profil.mem[i][j] = currentWord ;
             }
         }

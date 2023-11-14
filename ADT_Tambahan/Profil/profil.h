@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "../Globals/globalvar.h"
-
+#ifndef PROFIL_H
+#define PROFIL_H
 
 typedef struct
 {
@@ -21,3 +22,5 @@ boolean cekWeton (Word weton, Word *kata) ;
 void displayProfil (MatrixProfil profil) ;
 
 void createProfilDefault (MatrixProfil *profil) ;
+
+#endif

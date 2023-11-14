@@ -1,7 +1,7 @@
 #include "../MesinBarisFile/MBarisFile.h"
 #include "../Kicauan/listdinkicauan.h"
 #include "../wordoperations.h"
-
+#include <stdio.h>
 // Word BaristoWord(Baris B)
 // {
 //     Word w;
@@ -23,30 +23,38 @@ void ReadKicauanConfig(char namafile[])
     DATETIME Waktu;
 
     STARTBaris(namafile);
-    
+
     iteration = wordToInteger(currentBaris);
 
     ADVBaris();
-    
+
     for (int i = 0; i < iteration; i++)
     {
         ADVBaris();
         Tweet = currentBaris;
-        
+
         ADVBaris();
 
         like = wordToInteger(currentBaris);
-        printf("%d\n", like); 
-        
+        printf("%d\n", like);
+
         ADVBaris();
         Penulis = currentBaris;
         ADVBaris();
         Waktu = wordToDatetime(currentBaris);
         ADVBaris();
-        
+
         CreateKicauan(&kicau, Penulis, Waktu, Tweet, like);
         insertLastKicau(&ListKicauanData, kicau);
     }
+}
+
+void WriteKicauanConfig(char namafile[])
+{
+    FILE *filesave;
+
+    // Check if the file already exists
+    filesave = fopen("pengguna.config", "w");
 }
 
 int main()

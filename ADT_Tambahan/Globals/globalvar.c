@@ -3,15 +3,12 @@
 
 Pengguna currentPengguna;
 
-int banyakPengguna = 0;
-
-
-Pengguna dataPengguna[20] ;
-
 boolean isLoggedIn ;
 
 ID CURRENT_ID_KICAUAN = 0;
 
 Matrix matrixPertemanan;
+
+Matrix matrixPermintaan;
 
 ListBalasan ListBalasanData;

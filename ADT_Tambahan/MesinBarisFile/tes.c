@@ -8,12 +8,14 @@ int main (){
     STARTBaris("tes.config");
     int i = 1;
     while (!EndBaris){
-        D = wordToDatetime(currentBaris);
-        TulisDATETIME(D);
+        
+        (currentBaris);
+        if(currentBaris.Length == 0){
+            printf("%c", currentBaris.TabWord[0]);
+        }
         printf("\n");
         ADVBaris();
     }
     
-
     printf("Pembacaan Selesai");
 }
