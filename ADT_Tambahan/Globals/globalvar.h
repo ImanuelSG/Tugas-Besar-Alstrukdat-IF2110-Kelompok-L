@@ -1,12 +1,11 @@
 #ifndef GLOBALVAR_H
 #define GLOBALVAR_H
 
-#include "../Pengguna/pengguna.h"
 #include "../../ADT_Bawaan/boolean.h"
 #include "../../ADT_Bawaan/matrix/matrix.h"
 #include "../Balasan/treebalasan.h"
 
-extern Pengguna currentPengguna; /*Berisi Data Current Pengguna*/
+
 
 extern boolean isLoggedIn; /*True jika ada pengguna sedang login, false sebaliknya.*/
 

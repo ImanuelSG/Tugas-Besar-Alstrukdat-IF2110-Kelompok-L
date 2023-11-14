@@ -10,10 +10,10 @@
 #define COL_CAP 100
 
 typedef int IdxType; /* Index baris, kolom */
-typedef int ElType;
+typedef int ElTypeMatrix;
 typedef struct
 {
-   ElType mem[ROW_CAP][COL_CAP];
+   ElTypeMatrix mem[ROW_CAP][COL_CAP];
    int rowEff; /* banyaknya/ukuran baris yg terdefinisi */
    int colEff; /* banyaknya/ukuran kolom yg terdefinisi */
 } Matrix;
@@ -87,9 +87,9 @@ Matrix multiplyMatrix(Matrix m1, Matrix m2);
 Matrix multiplyMatrixWithMod(Matrix m1, Matrix m2, int mod);
 /* Prekondisi : Ukuran kolom efektif m1 = ukuran baris efektif m2 */
 /* Mengirim hasil perkalian matriks: salinan (m1 * m2)%mod, artinya setiap elemen matrix hasil perkalian m1 * m2 dilakukan modulo terhadap mod */
-Matrix multiplyByConst(Matrix m, ElType x);
+Matrix multiplyByConst(Matrix m, ElTypeMatrix x);
 /* Mengirim hasil perkalian setiap elemen m dengan x */
-void pMultiplyByConst(Matrix *m, ElType k);
+void pMultiplyByConst(Matrix *m, ElTypeMatrix k);
 /* I.S. m terdefinisi, k terdefinisi */
 /* F.S. Mengalikan setiap elemen m dengan k */
 

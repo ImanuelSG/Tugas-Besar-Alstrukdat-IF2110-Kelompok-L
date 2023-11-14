@@ -1,8 +1,9 @@
-#include <stdio.h>
-#include "../Globals/globalvar.h"
+
 #ifndef PROFIL_H
 #define PROFIL_H
 
+#include <stdio.h>
+#include "../../ADT_Bawaan/wordmachine/wordmachine.h"
 typedef struct
 {
    Word mem[5][10];

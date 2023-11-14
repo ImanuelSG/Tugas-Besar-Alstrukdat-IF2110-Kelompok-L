@@ -13,6 +13,6 @@ int main() {
     BacaKalimat();
     kicauan = currentWord;
     BacaDATETIME(&waktu);
-    CreateKicauan(&K, namapengguna, waktu, kicauan);
+    CreateKicauan(&K, namapengguna, waktu, kicauan, 0);
     PrintKicauan(K, id);
 }
