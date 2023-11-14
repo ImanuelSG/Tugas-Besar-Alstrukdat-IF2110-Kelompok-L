@@ -5,4 +5,12 @@
         "wordmachine.h": "c",
         "boolean.h": "c"
     }
+}{
+    "files.associations": {
+        "stdlib.h": "c",
+        "globalvar.h": "c",
+        "wordmachine.h": "c",
+        "charmachine.h": "c",
+        "pengguna.h": "c"
+    }
 }

@@ -5,9 +5,10 @@ Pengguna currentPengguna;
 
 int banyakPengguna = 0;
 
-Pengguna dataPengguna[20];
 
-boolean isLoggedIn = false;
+Pengguna dataPengguna[20] ;
+
+boolean isLoggedIn ;
 
 ID CURRENT_ID_KICAUAN = 0;
 

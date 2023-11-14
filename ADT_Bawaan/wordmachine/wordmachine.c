@@ -1,6 +1,8 @@
 /* File: wordmachine.h */
 /* Definisi Mesin Word: Model Akuisisi Versi I */
 #include <stdio.h>
+#include "../boolean.h"
+#include "../charmachine/charmachine.h"
 #include "wordmachine.h"
 
 boolean EndWord;

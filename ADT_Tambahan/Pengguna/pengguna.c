@@ -6,95 +6,119 @@
 #include "../utils/utils.h"
 #include <stdio.h>
 #include <stdlib.h>
+                    
+void CreatePengguna (Pengguna *akun, Word NAMA, Word SANDI, Word BIO, Word NOMOR, Word WETON, int TIPE_AKUN, MatrixProfil PROFIL) {
+    (*akun).nama = NAMA ;
+    (*akun).sandi = SANDI ;
+    (*akun).bio = BIO ;
+    (*akun).nomor = NOMOR ;
+    (*akun).weton = WETON ;
+    (*akun).tipe_akun = TIPE_AKUN ;
+    (*akun).profil = PROFIL ;
+}
 
-void Daftar()
-{
-    if (isLoggedIn == true)
-    {
-        printf("Anda sudah masuk. Keluar terlebih dahulu untuk melakukan daftar.\n");
+void InsertPengguna (Pengguna akun) {
+    dataPengguna[banyakPengguna] = akun ;
+    banyakPengguna += 1 ;
+}
+
+void Daftar() {
+    if (isLoggedIn == true) {
+        printf("Anda sudah masuk. Keluar terlebih dahulu untuk melakukan daftar.\n") ;
     }
-    else if (banyakPengguna == 20)
-    {
-        printf("Maaf, Burbir hanya bisa mendaftarkan 20 pengguna!\n");
+    else if (banyakPengguna == 20) {
+        printf("Maaf, Burbir hanya bisa mendaftarkan 20 pengguna!\n") ;
     }
-    else
-    {
-        Pengguna daftarPengguna;
-        printf("Masukkan nama: ");
-        BacaKalimat();
-        printf("\n");
-        daftarPengguna.nama = currentWord;
+    else {
+        Pengguna daftarPengguna ;
+        printf("Masukkan nama: ") ;
+        STARTKalimat() ;
+        printf("\n") ;
+        daftarPengguna.nama = currentWord ;
+        
+        int idxPengguna = getIdPengguna(daftarPengguna.nama) ;
 
-        int idxPengguna = getIdPengguna(daftarPengguna.nama);
-
-        if (idxPengguna != -1)
-        {
-            printf("Wah, sayang sekali nama tersebut telah diambil.\n");
+        if (idxPengguna != -1) {
+            printf("Wah, sayang sekali nama tersebut telah diambil.\n") ;
         }
-        else
-        {
-            printf("Masukkan kata sandi: ");
-            BacaKalimat();
-            printf("\n");
-            daftarPengguna.sandi = currentWord;
-            printf("Pengguna telah berhasil terdaftar. Masuk untuk menikmati fitur-fitur BurBir.\n");
+        else {
+            printf("Masukkan kata sandi: ") ;
+            STARTKalimat() ;
+            printf("\n") ;
+            daftarPengguna.sandi = currentWord ;
+            printf("Pengguna telah berhasil terdaftar. Masuk untuk menikmati fitur-fitur BurBir.\n") ;
 
-            banyakPengguna += 1;
-            dataPengguna[banyakPengguna - 1] = daftarPengguna;
+            daftarPengguna.tipe_akun = 0 ;
+            daftarPengguna.bio.Length = 0 ;
+            daftarPengguna.nomor.Length = 0 ;
+            daftarPengguna.weton.Length = 0 ;
+            MatrixProfil profil ;
+            createProfilDefault(&profil) ;
+            daftarPengguna.profil = profil ;
+
+            InsertPengguna(daftarPengguna) ;
         }
+    }
+} 
+
+void Masuk() {
+    if (isLoggedIn == true) {
+        printf("Wah Anda sudah masuk. Keluar dulu yuk!\n") ;
+    }
+    else {
+        printf("Masukkan nama: ") ;
+        STARTKalimat() ;
+        printf("\n") ;
+        boolean found = false ;
+        int idxPengguna = getIdPengguna(currentWord) ;
+
+        while (idxPengguna == -1) {
+            printf("Wah, nama yang Anda cari tidak ada. Masukkan nama lain!\n") ;
+            printf("Masukkan nama: ") ;
+            STARTKalimat() ;
+            printf("\n") ;        
+            idxPengguna = getIdPengguna(currentWord) ;    
+        }
+
+        printf("Masukkan kata sandi: ") ;
+        STARTKalimat() ;
+        printf("\n") ;
+        while (!isSameWord(dataPengguna[idxPengguna].sandi, currentWord)) {
+            printf("Wah, kata sandi yang Anda masukkan belum tepat. Periksa kembali kata sandi Anda!\n") ;
+            printf("Masukkan kata sandi: ") ;
+            STARTKalimat() ;
+            printf("\n") ;
+        }
+        printf("Anda telah berhasil masuk. Mari menjelajahi BurBir bersama Ande-Ande Lumut!\n") ;
+
+        isLoggedIn = true ;
+        currentPengguna = dataPengguna[idxPengguna] ;
     }
 }
 
-void Masuk()
-{
-    if (isLoggedIn == true)
-    {
-        printf("Wah Anda sudah masuk. Keluar dulu yuk!\n");
+void Keluar() {
+    if (isLoggedIn == false) {
+        printf("Anda belum login! Masuk terlebih dahulu untuk menikmati layanan BurBir.\n") ;
     }
-    else
-    {
-        printf("Masukkan nama: ");
-        BacaKalimat();
-        printf("\n");
-        boolean found = false;
-        int idxPengguna = getIdPengguna(currentWord);
-
-        while (idxPengguna == -1)
-        {
-            printf("Wah, nama yang Anda cari tidak ada. Masukkan nama lain!\n");
-            printf("Masukkan nama: ");
-            BacaKalimat();
-            printf("\n");
-            idxPengguna = getIdPengguna(currentWord);
-        }
-
-        printf("Masukkan kata sandi: ");
-        BacaKalimat();
-        printf("\n");
-        while (!isSameWord(dataPengguna[idxPengguna].sandi, currentWord))
-        {
-            printf("Wah, kata sandi yang Anda masukkan belum tepat. Periksa kembali kata sandi Anda!\n");
-            printf("Masukkan kata sandi: ");
-            BacaKalimat();
-            printf("\n");
-        }
-        printf("Anda telah berhasil masuk. Mari menjelajahi BurBir bersama Ande-Ande Lumut!\n");
-
-        isLoggedIn = true;
-        currentPengguna = dataPengguna[idxPengguna];
+    else {
+        printf("Anda berhasil logout. Sampai jumpa di pertemuan berikutnya!\n") ;
+        isLoggedIn = false ;
     }
 }
 
-void Keluar()
-{
-    if (isLoggedIn == false)
-    {
-        printf("Anda belum login! Masuk terlebih dahulu untuk menikmati layanan BurBir.\n");
-    }
-    else
-    {
-        printf("Anda berhasil logout. Sampai jumpa di pertemuan berikutnya!\n");
-        isLoggedIn = false;
-    }
-}
 
+int main () {
+    isLoggedIn = false;
+    banyakPengguna = 0 ;
+    char vanson[1] ;
+    vanson[0] = 'a' ;
+    Word nama ;
+    nama = stringToWord(vanson, 1) ;
+    dataPengguna[0].nama = nama ;
+    Daftar() ;
+    displayWord(dataPengguna[0].nama) ;
+    printf("\n") ;
+    displayProfil(dataPengguna[0].profil) ;
+
+    return 0 ;
+}

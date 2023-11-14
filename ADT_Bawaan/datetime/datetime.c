@@ -1,6 +1,22 @@
 #include <stdio.h>
+#include "../boolean.h"
 #include <time.h>
 #include "datetime.h"
+
+/* *** Definisi TYPE DATETIME <DD/MM/YY HH:MM:SS> *** */
+typedef struct
+{
+    int DD;   /* integer [1..31] */
+    int MM;   /* integer [1..12] */
+    int YYYY; /* integer [1900..2030] */
+    TIME T;
+} DATETIME;
+
+/* *** Notasi Akses: selektor DATETIME *** */
+#define Day(D) (D).DD
+#define Month(D) (D).MM
+#define Year(D) (D).YYYY
+#define Time(D) (D).T
 
 /* ***************************************************************** */
 /* DEFINISI PRIMITIF                                                 */
