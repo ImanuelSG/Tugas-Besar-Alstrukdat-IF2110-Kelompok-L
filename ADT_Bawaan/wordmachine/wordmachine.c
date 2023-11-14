@@ -12,7 +12,7 @@ void IgnoreBlanks() {
 /* Mengabaikan satu atau beberapa BLANK
    I.S. : currentChar sembarang
    F.S. : currentChar ≠ BLANK atau currentChar = MARK */
-    while (currentChar == BLANK && currentChar != MARK) {
+    while ((currentChar == BLANK || currentChar == BACKLASH_N) && (currentChar != MARK)) {
         ADV();
     }
 }

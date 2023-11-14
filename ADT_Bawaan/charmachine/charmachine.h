@@ -6,7 +6,10 @@
 
 #include "../boolean.h"
 
+#define BACKLASH_N '\n'
+#define KARAKTER_NULL '\0'
 #define MARK ';'
+
 /* State Mesin */
 extern char currentChar;
 extern boolean EOP;
