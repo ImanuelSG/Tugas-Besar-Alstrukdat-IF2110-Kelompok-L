@@ -142,7 +142,7 @@ void displayProfil(MatrixProfil profil)
     }
 }
 
-void ganti_profil()
+void Ganti_Profil()
 {
     // display nama, bio, nomor, weton
     printf("| Nama: ");
@@ -300,7 +300,12 @@ void Lihat_Profil(Word nama)
     int id;
     id = getIdPengguna(nama);
 
-    if (dataPengguna[id].tipe_akun == 0)
+    if (id == -1)
+    {
+        printf("Pengguna tidak ditemukan!\n");
+    }
+
+    else if (dataPengguna[id].tipe_akun == 0)
     {
         // display nama, bio, nomor, weton
         printf("| Nama: ");
@@ -325,7 +330,7 @@ void Lihat_Profil(Word nama)
     }
 }
 
-void ubah_foto_profil()
+void Ubah_Foto_Profil()
 {
     // display profil
     int id;

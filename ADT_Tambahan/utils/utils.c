@@ -1,21 +1,23 @@
-#include "../../ADT_Bawaan/matrix/matrix.h"
-#include "../Globals/globalvar.h"
-#include "../wordoperations.h"
 #include "utils.h"
-
 
 int getIdPengguna(Word nama)
 {
     int i = 0;
     boolean found = false;
+
     while (!found && i < banyakPengguna)
     {
+        printf("%d <--nama    datapenggunai--> %d", nama.Length, dataPengguna[i].nama.Length);
+
         if (isSameWord(nama, dataPengguna[i].nama))
         {
             found = true;
         }
         else
+        {
+            displayProfil(dataPengguna[i].profil);
             i++;
+        }
     }
     if (found)
         return i;
@@ -29,7 +31,7 @@ boolean isBerteman(Word namaA, Word namaB)
 
     return (ELMT(matrixPertemanan, idA, idB) == 1);
 }
-Pengguna getPengguna(Word nama)
+Pengguna *getPengguna(Word nama)
 {
     int i = 0;
     boolean found = false;
@@ -43,7 +45,7 @@ Pengguna getPengguna(Word nama)
             i++;
     }
     if (found)
-        return dataPengguna[i];
+        return &dataPengguna[i];
     else
-        return dataPengguna[0];
+        return NULL;
 }

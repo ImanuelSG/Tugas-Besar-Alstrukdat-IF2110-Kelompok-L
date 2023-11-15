@@ -9,7 +9,6 @@
 
 extern boolean isLoggedIn; /*True jika ada pengguna sedang login, false sebaliknya.*/
 
-extern ID CURRENT_ID_KICAUAN;/*Berisi Current Id Kicau*/
 
 extern Matrix matrixPertemanan;/*Matrix Pertemanan*/
 

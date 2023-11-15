@@ -60,4 +60,5 @@ int main()
 {
     ReadKicauanConfig("kicauan.config");
     printList(ListKicauanData);
+    
 }

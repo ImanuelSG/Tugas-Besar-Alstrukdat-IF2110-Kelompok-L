@@ -4,13 +4,15 @@
 #include "../Globals/globalvar.h"
 #include "../wordoperations.h"
 #include "../utils/utils.h"
+#include "../DrafKicauan/StackDraf.h"
 #include <stdio.h>
 #include <stdlib.h>
 
 Pengguna dataPengguna[20]; /*List Pengguna*/
 int banyakPengguna = 0;
 Pengguna currentPengguna;
-void CreatePengguna(Pengguna *akun, Word NAMA, Word SANDI, Word BIO, Word NOMOR, Word WETON, int TIPE_AKUN, MatrixProfil PROFIL)
+
+void CreatePengguna(Pengguna *akun, Word NAMA, Word SANDI, Word BIO, Word NOMOR, Word WETON, int TIPE_AKUN, MatrixProfil PROFIL, StackDraf DRAF)
 {
     (*akun).nama = NAMA;
     (*akun).sandi = SANDI;
@@ -19,10 +21,12 @@ void CreatePengguna(Pengguna *akun, Word NAMA, Word SANDI, Word BIO, Word NOMOR,
     (*akun).weton = WETON;
     (*akun).tipe_akun = TIPE_AKUN;
     (*akun).profil = PROFIL;
+    (*akun).draf = DRAF;
 }
 
 void InsertPengguna(Pengguna akun)
 {
+
     dataPengguna[banyakPengguna] = akun;
     banyakPengguna += 1;
 }
@@ -66,7 +70,9 @@ void Daftar()
             MatrixProfil profil;
             createProfilDefault(&profil);
             daftarPengguna.profil = profil;
-
+            StackDraf draf;
+            CreateStackDraf(&draf);
+            daftarPengguna.draf = draf;
             InsertPengguna(daftarPengguna);
         }
     }

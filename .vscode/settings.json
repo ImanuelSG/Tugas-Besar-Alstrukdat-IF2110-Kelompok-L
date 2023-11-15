@@ -1,5 +1,7 @@
 {
   "files.associations": {
-    "matrix.h": "c"
+    "matrix.h": "c",
+    "globalvar.h": "c",
+    "wordoperations.h": "c"
   }
 }
