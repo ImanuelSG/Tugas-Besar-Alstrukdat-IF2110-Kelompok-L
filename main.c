@@ -170,7 +170,7 @@ int main()
 
             /*------------------------------ UTAS ----------------------------------*/
 
-            else if (isSameWord(perintah, stringToWord("UTAS", 5)))
+            else if (isSameWord(perintah, stringToWord("UTAS", 4)))
             {
                 ADVWORD();
                 int id = wordToInteger(currentWord);

@@ -10,45 +10,6 @@
 #include <stdio.h>
 
 /**
- * @brief Prosedur Membaca Konfig Kicau
- *
- * @param namafile relatif terhadap posisi pemanggilan prosedur
- */
-void ReadKicauanConfig(char namafile[])
-{
-    CreateListDinKicauan(&ListKicauanData, 100);
-    int iteration, like;
-    Kicauan kicau;
-    Word Penulis, WaktuKicauan, Tweet;
-    DATETIME Waktu;
-
-    STARTBaris(namafile);
-
-    iteration = wordToInteger(currentBaris);
-
-    ADVBaris();
-
-    for (int i = 0; i < iteration; i++)
-    {
-        ADVBaris();
-        Tweet = currentBaris;
-
-        ADVBaris();
-
-        like = wordToInteger(currentBaris);
-
-        ADVBaris();
-        Penulis = currentBaris;
-        ADVBaris();
-        Waktu = wordToDatetime(currentBaris);
-        ADVBaris();
-
-        CreateKicauan(&kicau, Penulis, Waktu, Tweet, like);
-        insertLastKicau(&ListKicauanData, kicau);
-    }
-}
-
-/**
  * @brief Prosedur membaca config pengguna
  *
  * @param namafile file yang ingin dibaca relatif terhadap tempat pemanggilan prosedur
@@ -127,16 +88,56 @@ void ReadPenggunaConfig(char namafile[])
         ADVBaris();
     }
 }
+/**
+ * @brief Prosedur Membaca Konfig Kicau
+ *
+ * @param namafile relatif terhadap posisi pemanggilan prosedur
+ */
+void ReadKicauanConfig(char namafile[])
+{
+    CreateListDinKicauan(&ListKicauanData, 100);
+    int iteration, like;
+    Kicauan kicau;
+    Word Penulis, WaktuKicauan, Tweet;
+    DATETIME Waktu;
 
+    STARTBaris(namafile);
+
+    iteration = wordToInteger(currentBaris);
+
+    ADVBaris();
+
+    for (int i = 0; i < iteration; i++)
+    {
+        ADVBaris();
+        Tweet = currentBaris;
+
+        ADVBaris();
+
+        like = wordToInteger(currentBaris);
+
+        ADVBaris();
+        Penulis = currentBaris;
+        ADVBaris();
+        Waktu = wordToDatetime(currentBaris);
+        ADVBaris();
+
+        CreateKicauan(&kicau, Penulis, Waktu, Tweet, like);
+        insertLastKicau(&ListKicauanData, kicau);
+    }
+}
+/**
+ * @brief Prosedur Membaca Konfig Draf
+ *
+ * @param namafile
+ */
 void ReadDrafConfig(char namafile[])
 {
     int iteration, banyak;
     Word username, isi;
     DATETIME Date;
-
     STARTBaris(namafile);
     iteration = wordToInteger(currentBaris);
-
     ADVBaris(); // baris == "username"
     for (int i = 0; i < iteration; i++)
     {
@@ -145,7 +146,7 @@ void ReadDrafConfig(char namafile[])
         int pengkali = 1;
         while (currentBaris.TabWord[i] != ' ')
         {
-            banyak += charToDigit(currentBaris.TabWord[i] * pengkali);
+            banyak += charToDigit(currentBaris.TabWord[i]) * pengkali;
             pengkali *= 10;
             i--;
             currentBaris.Length--;
@@ -167,36 +168,137 @@ void ReadDrafConfig(char namafile[])
         ReverseStackDraf(&curr->draf);
     }
 }
+/**
+ * @brief Prosedur Membaca Konfig Utas
+ *
+ * @param namafile
+ */
+void ReadUtasConfig(char namafile[])
+{
+    int iteration, like;
+
+    Word Penulis, WaktuKicauan, Tweet;
+    DATETIME Waktu;
+
+    STARTBaris(namafile); // curr baris == iteration
+
+    iteration = wordToInteger(currentBaris);
+
+    for (int i = 0; i < iteration; i++)
+    {
+        ADVBaris(); // curr baris == "ID"
+        ID IDKicauUtama = wordToInteger(currentBaris);
+        ADVBaris(); // curr baris == jumlahUtas
+        int jumlahUtas = wordToInteger(currentBaris);
+        for (int i = 0; i < jumlahUtas; i++)
+        {
+            ADVBaris();
+            Word Text = currentBaris;
+            ADVBaris();
+            Word Author = currentBaris;
+            ADVBaris();
+            DATETIME Waktu = wordToDatetime(currentBaris);
+            /*Create Utas and insert it to the list*/
+        }
+    }
+}
+/**
+ * @brief  Prosedur Membaca Konfig Balasan
+ *
+ * @param namafile
+ */
+
+void parseId(Word w, int *idparent, int *idbalasan)
+{
+    int i = 0;
+    int id = 0;
+    int isneg = 1;
+    while (w.TabWord[i] != ' ')
+    {
+        if (w.TabWord[i] == '-')
+        {
+            isneg = -1;
+            i++;
+        }
+        else
+        {
+            id *= 10;
+            id += charToDigit(w.TabWord[i]);
+            i++;
+        }
+    }
+    *idparent = id * isneg;
+    int last = w.Length - 1;
+    int num = 0;
+    int pengkali = 1;
+    while (w.TabWord[last] != ' ')
+    {
+        num += charToDigit(w.TabWord[last]) * pengkali;
+        pengkali *= 10;
+        last--;
+    }
+    *idbalasan = num;
+}
+
+void ReadBalasanConfig(char namafile[])
+{
+    int iteration;
+    STARTBaris(namafile);
+    iteration = wordToInteger(currentBaris);
+
+    ADVBaris();
+    ID IDKicauUtama = wordToInteger(currentBaris);
+    for (int i = 0; i < iteration; i++)
+    {
+        ADVBaris();
+        int jumlahbalasan = wordToInteger(currentBaris);
+        for (int j = 0; j < jumlahbalasan; j++)
+        {
+            ADVBaris();
+            int idparent, idbalasan;
+            parseId(currentBaris, &idparent, &idbalasan);
+            ADVBaris();
+            Word te
+            ADVBaris();
+            Word Author = currentBaris;
+            ADVBaris();
+            DATETIME Waktu = wordToDatetime(currentBaris);
+            /*Create Balasan and insert it to the list*/
+        }
+    }
+}
 
 int main()
 {
-    ReadPenggunaConfig("pengguna.config");
-    ReadKicauanConfig("kicauan.config");
-    ReadDrafConfig("draf.config");
-    for (int i = 0; i < banyakPengguna; i++)
-    {
-        printf("Nama : ");
-        displayWord(dataPengguna[i].nama);
-        printf("\n");
-        printf("Sandi : ");
-        displayWord(dataPengguna[i].sandi);
-        printf("\n");
-        printf("Bio : ");
-        displayWord(dataPengguna[i].bio);
-        printf("\n");
-        printf("Nomor : ");
-        displayWord(dataPengguna[i].nomor);
-        printf("\n");
-        printf("Weton : ");
-        displayWord(dataPengguna[i].weton);
-        printf("\n");
-        printf("Tipe Akun : %d\n", dataPengguna[i].tipe_akun);
-        printf("Profil : \n");
-        displayProfil(dataPengguna[i].profil);
-        DisplayStackDraf(dataPengguna[i].draf);
-        printf("\n");
-    }
-    displayMatrix(matrixPertemanan);
-    displayMatrix(matrixPermintaan);
-    printList(ListKicauanData);
+    // ReadPenggunaConfig("pengguna.config");
+    // ReadKicauanConfig("kicauan.config");
+    // ReadDrafConfig("draf.config");
+    // for (int i = 0; i < banyakPengguna; i++)
+    // {
+    //     printf("Nama : ");
+    //     displayWord(dataPengguna[i].nama);
+    //     printf("\n");
+    //     printf("Sandi : ");
+    //     displayWord(dataPengguna[i].sandi);
+    //     printf("\n");
+    //     printf("Bio : ");
+    //     displayWord(dataPengguna[i].bio);
+    //     printf("\n");
+    //     printf("Nomor : ");
+    //     displayWord(dataPengguna[i].nomor);
+    //     printf("\n");
+    //     printf("Weton : ");
+    //     displayWord(dataPengguna[i].weton);
+    //     printf("\n");
+    //     printf("Tipe Akun : %d\n", dataPengguna[i].tipe_akun);
+    //     printf("Profil : \n");
+    //     displayProfil(dataPengguna[i].profil);
+    //     printf("Draf Kicau: \n");
+    //     DisplayStackDraf(dataPengguna[i].draf);
+
+    //     printf("\n");
+    // }
+    // displayMatrix(matrixPertemanan);
+    // displayMatrix(matrixPermintaan);
+    // printList(ListKicauanData);
 }

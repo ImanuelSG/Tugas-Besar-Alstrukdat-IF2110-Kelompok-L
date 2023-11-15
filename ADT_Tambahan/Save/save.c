@@ -4,7 +4,6 @@
 int isDirectoryExists(const char *path)
 {
     struct stat info;
-
     if (stat(path, &info) != 0)
     {
 
@@ -14,6 +13,15 @@ int isDirectoryExists(const char *path)
     return S_ISDIR(info.st_mode);
 }
 
+void SavePenggunaConfig(char namafile[])
+{
+    FILE *filesave;
+    filesave = fopen(namafile, "w");
+    fprintf(filesave, "Hello");
+
+    // Close the file after writing
+    fclose(filesave);
+}
 int main()
 {
     FILE *filesave;

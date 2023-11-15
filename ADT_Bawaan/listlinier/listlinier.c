@@ -13,7 +13,7 @@ Address newNode(ElType val) {
         NEXT(new) = NULL;
     }
     return new;
-}
+} 
 
 /* PROTOTYPE */
 /****************** PEMBUATAN LIST KOSONG ******************/
