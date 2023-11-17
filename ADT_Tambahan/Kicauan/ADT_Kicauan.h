@@ -58,23 +58,4 @@ void EditTweet(Kicauan *K, Word NewTweet);
 /* I.S. K terdefinisi */
 /* F.S. Tweet pada K diubah menjadi NewTweet */
 
-// /* ********** PERINTAH-PERINTAH PADA FITUR KICAUAN ********** */
-// /* ********** UNTUK MAIN PROGRAM ********** */
-// /* KICAU */
-// void KICAU();
-// /* Membuat sebuah Kicauan */
-//
-// /* KICAUAN */
-// void KICAUAN();
-// /* Menampilkan semua kicauan yang dibuat pengguna dan teman pengguna ke layar */
-// /* Terurut berdasarkan kicauan terbaru (ID Kicauan terbesar) */
-//
-// /* SUKA_KICAUAN */
-// void SUKA_KICAUAN(ID IDKicauan);
-// /* Menambahkan like pada kicauan yang dipilih pengguna */
-//
-// /* UBAH_KICAUAN */
-// void UBAH_KICAUAN(ID IDKicauan);
-// /* Mengubah isi kicauan yang dipilih pengguna */
-
 #endif

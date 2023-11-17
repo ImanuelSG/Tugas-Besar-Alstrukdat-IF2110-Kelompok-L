@@ -2,6 +2,8 @@
 #include "ADT_Tambahan\\wordsimilarity.h"
 #include "ADT_Tambahan\\inisialisasi\\inisialisasiperintah.h"
 #include "ADT_Tambahan\\Pengguna\pengguna.h"
+#include "ADT_Tambahan\\Kicauan\\Command_Kicauan.h"
+#include "ADT_Tambahan\\Balasan\\Command_Balasan.h"
 
 #define not(n) !n
 
@@ -111,6 +113,16 @@ int main()
 
             /*-------------------------------KICAU-----------------------------------*/
 
+<<<<<<< HEAD
+        /*-------------------------------KICAU-----------------------------------*/
+
+            else if (isSameWord(perintah, stringToWord("KICAU", 5))) {
+                KICAU();
+            }
+
+            else if (isSameWord(perintah, stringToWord("KICAUAN", 7))) {
+                KICAUAN();
+=======
             else if (isSameWord(perintah, stringToWord("KICAU", 5)))
             {
                 printf("Panggil fungsi KICAU");
@@ -119,6 +131,7 @@ int main()
             else if (isSameWord(perintah, stringToWord("KICAUAN", 7)))
             {
                 printf("Panggil fungsi KICAUAN");
+>>>>>>> a38c5293cdd2f9dd50126706fb523c8875a28ffb
             }
 
             else if (isSameWord(perintah, stringToWord("SUKA_KICAUAN", 12)))
@@ -126,7 +139,7 @@ int main()
                 ADVWORD();
                 int id = wordToInteger(currentWord);
 
-                printf("Panggil fungsi SUKA_KICAUAN dengan parameter [IDKicauan]: %d", id);
+                SUKA_KICAUAN(id);
                 nl;
             }
 
@@ -135,7 +148,7 @@ int main()
                 ADVWORD();
                 int id = wordToInteger(currentWord);
 
-                printf("Panggil fungsi UBAH_KICAUAN dengan parameter [IDKicauan]: %d", id);
+                UBAH_KICAUAN(id);
                 nl;
             }
 
