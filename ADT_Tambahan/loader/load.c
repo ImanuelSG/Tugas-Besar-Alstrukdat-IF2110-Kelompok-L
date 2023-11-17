@@ -240,65 +240,120 @@ void parseId(Word w, int *idparent, int *idbalasan)
     *idbalasan = num;
 }
 
-void ReadBalasanConfig(char namafile[])
-{
-    int iteration;
-    STARTBaris(namafile);
-    iteration = wordToInteger(currentBaris);
+// void ReadBalasanConfig(char namafile[])
+// {
+//     int iteration;
+//     STARTBaris(namafile);
+//     iteration = wordToInteger(currentBaris);
 
-    ADVBaris();
-    ID IDKicauUtama = wordToInteger(currentBaris);
-    for (int i = 0; i < iteration; i++)
-    {
-        ADVBaris();
-        int jumlahbalasan = wordToInteger(currentBaris);
-        for (int j = 0; j < jumlahbalasan; j++)
-        {
-            ADVBaris();
-            int idparent, idbalasan;
-            parseId(currentBaris, &idparent, &idbalasan);
-            ADVBaris();
-            Word te
-            ADVBaris();
-            Word Author = currentBaris;
-            ADVBaris();
-            DATETIME Waktu = wordToDatetime(currentBaris);
-            /*Create Balasan and insert it to the list*/
-        }
-    }
-}
+//     ADVBaris();
+//     ID IDKicauUtama = wordToInteger(currentBaris);
+//     for (int i = 0; i < iteration; i++)
+//     {
+//         ADVBaris();
+//         int jumlahbalasan = wordToInteger(currentBaris);
+//         for (int j = 0; j < jumlahbalasan; j++)
+//         {
+//             ADVBaris();
+//             int idparent, idbalasan;
+//             parseId(currentBaris, &idparent, &idbalasan);
+//             ADVBaris();
+//             Word te
+//             ADVBaris();
+//             Word Author = currentBaris;
+//             ADVBaris();
+//             DATETIME Waktu = wordToDatetime(currentBaris);
+//             /*Create Balasan and insert it to the list*/
+//         }
+//     }
+// }
+// void Load(char *namafolder)
+// {
 
+//     Word path_config1, path_config2, path_config3, path_config4, path_config5;
+
+//     path_config1 = DuplicateWord(folderNameWord);
+//     path_config2 = DuplicateWord(folderNameWord);
+//     path_config3 = DuplicateWord(folderNameWord);
+//     path_config4 = DuplicateWord(folderNameWord);
+//     path_config5 = DuplicateWord(folderNameWord);
+
+//     appendWord(&path_config1, stringToWord("/pengguna.config", 16));
+//     appendWord(&path_config2, stringToWord("/kicauan.config", 15));
+//     appendWord(&path_config3, stringToWord("/balasan.config", 15));
+//     appendWord(&path_config4, stringToWord("/draf.config", 12));
+//     appendWord(&path_config5, stringToWord("/utas.config", 12));
+
+//     char *path_config1_str = wordToString(path_config1);
+//     char *path_config2_str = wordToString(path_config2);
+//     char *path_config3_str = wordToString(path_config3);
+//     char *path_config4_str = wordToString(path_config4);
+//     char *path_config5_str = wordToString(path_config5);
+
+//     ReadPenggunaConfig(path_config1_str);
+//     ReadKicauanConfig(path_config2_str);
+//     ReadDrafConfig(path_config4_str);
+
+//      for (int i = 0; i < banyakPengguna; i++)
+//     {
+//         printf("Nama : ");
+//         displayWord(dataPengguna[i].nama);
+//         printf("\n");
+//         printf("Sandi : ");
+//         displayWord(dataPengguna[i].sandi);
+//         printf("\n");
+//         printf("Bio : ");
+//         displayWord(dataPengguna[i].bio);
+//         printf("\n");
+//         printf("Nomor : ");
+//         displayWord(dataPengguna[i].nomor);
+//         printf("\n");
+//         printf("Weton : ");
+//         displayWord(dataPengguna[i].weton);
+//         printf("\n");
+//         printf("Tipe Akun : %d\n", dataPengguna[i].tipe_akun);
+//         printf("Profil : \n");
+//         displayProfil(dataPengguna[i].profil);
+//         printf("Draf Kicau: \n");
+//         DisplayStackDraf(dataPengguna[i].draf);
+
+//         printf("\n");
+//     }
+//     displayMatrix(matrixPertemanan);
+//     displayMatrix(matrixPermintaan);
+//     printList(ListKicauanData);
+// }
 int main()
 {
-    // ReadPenggunaConfig("pengguna.config");
-    // ReadKicauanConfig("kicauan.config");
-    // ReadDrafConfig("draf.config");
-    // for (int i = 0; i < banyakPengguna; i++)
-    // {
-    //     printf("Nama : ");
-    //     displayWord(dataPengguna[i].nama);
-    //     printf("\n");
-    //     printf("Sandi : ");
-    //     displayWord(dataPengguna[i].sandi);
-    //     printf("\n");
-    //     printf("Bio : ");
-    //     displayWord(dataPengguna[i].bio);
-    //     printf("\n");
-    //     printf("Nomor : ");
-    //     displayWord(dataPengguna[i].nomor);
-    //     printf("\n");
-    //     printf("Weton : ");
-    //     displayWord(dataPengguna[i].weton);
-    //     printf("\n");
-    //     printf("Tipe Akun : %d\n", dataPengguna[i].tipe_akun);
-    //     printf("Profil : \n");
-    //     displayProfil(dataPengguna[i].profil);
-    //     printf("Draf Kicau: \n");
-    //     DisplayStackDraf(dataPengguna[i].draf);
+    ReadPenggunaConfig("pengguna.config");
+    ReadKicauanConfig("kicauan.config");
+    ReadDrafConfig("draf.config");
+    for (int i = 0; i < banyakPengguna; i++)
+    {
+        printf("Nama : ");
+        displayWord(dataPengguna[i].nama);
+        printf("\n");
+        printf("Sandi : ");
+        displayWord(dataPengguna[i].sandi);
+        printf("\n");
+        printf("Bio : ");
+        displayWord(dataPengguna[i].bio);
+        printf("\n");
+        printf("Nomor : ");
+        displayWord(dataPengguna[i].nomor);
+        printf("\n");
+        printf("Weton : ");
+        displayWord(dataPengguna[i].weton);
+        printf("\n");
+        printf("Tipe Akun : %d\n", dataPengguna[i].tipe_akun);
+        printf("Profil : \n");
+        displayProfil(dataPengguna[i].profil);
+        printf("Draf Kicau: \n");
+        DisplayStackDraf(dataPengguna[i].draf);
 
-    //     printf("\n");
-    // }
-    // displayMatrix(matrixPertemanan);
-    // displayMatrix(matrixPermintaan);
-    // printList(ListKicauanData);
+        printf("\n");
+    }
+    displayMatrix(matrixPertemanan);
+    displayMatrix(matrixPermintaan);
+    printList(ListKicauanData);
 }
