@@ -7,6 +7,7 @@
 
 #include "../boolean.h"
 #include "ADT_Balasan.h"
+#include "../Kicauan/ADT_Kicauan.h"
 
 /* ********** DEFINISI TYPE ADT TREE UNTUK BALASAN ********** */
 /* ADT TREE DENGAN REPRESENTASI LEFT-CHILD RIGHT-SIBLING */

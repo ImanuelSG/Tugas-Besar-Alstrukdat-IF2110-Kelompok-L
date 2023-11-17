@@ -14,6 +14,4 @@ extern Matrix matrixPertemanan;/*Matrix Pertemanan*/
 
 extern Matrix matrixPermintaan;/*Matrix Permintaan*/
 
-extern ListBalasan ListBalasanData;/*List Dari Balasan yang ada*/
-
 #endif

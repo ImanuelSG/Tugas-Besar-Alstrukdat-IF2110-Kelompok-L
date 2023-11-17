@@ -2,6 +2,12 @@
   "files.associations": {
     "matrix.h": "c",
     "globalvar.h": "c",
-    "wordoperations.h": "c"
+    "wordoperations.h": "c",
+    "adt_kicauan.h": "c",
+    "datetime.h": "c",
+    "boolean.h": "c",
+    "command_balasan.h": "c",
+    "treebalasan.h": "c",
+    "adt_balasan.h": "c"
   }
 }

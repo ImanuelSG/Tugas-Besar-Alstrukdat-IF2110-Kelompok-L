@@ -41,8 +41,8 @@ void PrintBalasan(Balasan B, int indentasi) {
       PrintIndentasi(indentasi);    printf("| PRIVAT\n");
    } else {
       PrintIndentasi(indentasi);    printf("| ID = %d\n", ID_BALASAN(B));
-      PrintIndentasi(indentasi);    printf("| "); printWord(PENULIS_BALASAN(B)); printf("\n");
+      PrintIndentasi(indentasi);    printf("| "); PrintWord(PENULIS_BALASAN(B)); printf("\n");
       PrintIndentasi(indentasi);    printf("| "); TulisDATETIME(WAKTU_BALASAN(B)); printf("\n");
-      PrintIndentasi(indentasi);    printf("| "); printWord(ISI_BALASAN(B)); printf("\n");
+      PrintIndentasi(indentasi);    printf("| "); PrintWord(ISI_BALASAN(B)); printf("\n");
    }
 }
