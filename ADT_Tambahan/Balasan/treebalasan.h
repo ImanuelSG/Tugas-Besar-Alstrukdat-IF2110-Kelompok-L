@@ -5,7 +5,7 @@
 #ifndef __TREEBALASAN_H__
 #define __TREEBALASAN_H__
 
-#include "../../ADT_Bawaan/boolean.h"
+#include "../boolean.h"
 #include "ADT_Balasan.h"
 
 /* ********** DEFINISI TYPE ADT TREE UNTUK BALASAN ********** */

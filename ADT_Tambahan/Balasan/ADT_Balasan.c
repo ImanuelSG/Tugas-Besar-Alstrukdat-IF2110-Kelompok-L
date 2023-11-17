@@ -33,8 +33,8 @@ void PrintBalasan(Balasan B, int indentasi) {
     | <Isi balasan>
 */ 
    printf("\n");
-   
-   if (!isBerteman(currentPengguna.nama, PENULIS_BALASAN(B)) && getPengguna(PENULIS_BALASAN(B)).tipe_akun == 1) {
+   Pengguna *Penulis_Balasan = getPengguna(PENULIS_BALASAN(B));
+   if (!isBerteman(currentPengguna.nama, PENULIS_BALASAN(B)) && (*Penulis_Balasan).tipe_akun == 1) {
       PrintIndentasi(indentasi);    printf("| ID = %d\n", ID_BALASAN(B));
       PrintIndentasi(indentasi);    printf("| PRIVAT\n");
       PrintIndentasi(indentasi);    printf("| PRIVAT\n");
