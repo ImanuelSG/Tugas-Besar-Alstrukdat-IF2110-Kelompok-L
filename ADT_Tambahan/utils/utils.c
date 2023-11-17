@@ -7,7 +7,7 @@ int getIdPengguna(Word nama)
 
     while (!found && i < banyakPengguna)
     {
-        printf("%d <--nama    datapenggunai--> %d", nama.Length, dataPengguna[i].nama.Length);
+        // printf("%d <--nama    datapenggunai--> %d", nama.Length, dataPengguna[i].nama.Length);
 
         if (isSameWord(nama, dataPengguna[i].nama))
         {

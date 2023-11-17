@@ -144,48 +144,36 @@ void displayProfil(MatrixProfil profil)
 
 void Ganti_Profil()
 {
-    // display nama, bio, nomor, weton
-    printf("| Nama: ");
-    displayWord(currentPengguna.nama);
-    printf("\n| Bio Akun: ");
-    displayWord(currentPengguna.bio);
-    printf("\n| No HP: ");
-    displayWord(currentPengguna.nomor);
-    printf("\n| Weton: ");
-    displayWord(currentPengguna.weton);
-    printf("\n");
+    if (isLoggedIn) {
+        // display nama, bio, nomor, weton
+        printf("| Nama: ");
+        displayWord(currentPengguna.nama);
+        printf("\n| Bio Akun: ");
+        displayWord(currentPengguna.bio);
+        printf("\n| No HP: ");
+        displayWord(currentPengguna.nomor);
+        printf("\n| Weton: ");
+        displayWord(currentPengguna.weton);
+        printf("\n");
 
-    // input bio
-    printf("Masukkan bio akun:\n");
-    STARTKalimat();
-    while (currentWord.Length > 135)
-    {
-        printf("Bio anda tidak valid! \n");
+        // input bio
         printf("Masukkan bio akun:\n");
         STARTKalimat();
-    }
-    currentPengguna.bio = currentWord;
-
-    // input no.hp
-    printf("Masukkan No HP :\n"); // maksimum merupakan panjang dari adt word itu sendiri
-    STARTKalimat();
-    // validasi nomor telpon
-    boolean valid;
-    valid = true;
-    int i;
-    for (i = 0; i < currentWord.Length; i++)
-    {
-        if (currentWord.TabWord[i] < 48 || currentWord.TabWord[i] > 57)
+        while (currentWord.Length > 135)
         {
-            valid = false;
+            printf("Bio anda tidak valid! \n");
+            printf("Masukkan bio akun:\n");
+            STARTKalimat();
         }
-    }
-    while (!valid)
-    {
-        valid = true;
-        printf("No HP tidak valid. Masukkan lagi yuk!\n");
-        printf("Masukkan No HP :\n");
+        currentPengguna.bio = currentWord;
+
+        // input no.hp
+        printf("Masukkan No HP :\n"); // maksimum merupakan panjang dari adt word itu sendiri
         STARTKalimat();
+        // validasi nomor telpon
+        boolean valid;
+        valid = true;
+        int i;
         for (i = 0; i < currentWord.Length; i++)
         {
             if (currentWord.TabWord[i] < 48 || currentWord.TabWord[i] > 57)
@@ -193,172 +181,198 @@ void Ganti_Profil()
                 valid = false;
             }
         }
-    }
-    currentPengguna.nomor = currentWord;
+        while (!valid)
+        {
+            valid = true;
+            printf("No HP tidak valid. Masukkan lagi yuk!\n");
+            printf("Masukkan No HP :\n");
+            STARTKalimat();
+            for (i = 0; i < currentWord.Length; i++)
+            {
+                if (currentWord.TabWord[i] < 48 || currentWord.TabWord[i] > 57)
+                {
+                    valid = false;
+                }
+            }
+        }
+        currentPengguna.nomor = currentWord;
 
-    // input weton
-    Word weton;
-    printf("Masukkan weton : \n");
-    STARTKalimat();
-    while (!cekWeton(currentWord, &weton))
-    {
-        printf("Weton anda tidak valid!\n");
+        // input weton
+        Word weton;
         printf("Masukkan weton : \n");
         STARTKalimat();
+        while (!cekWeton(currentWord, &weton))
+        {
+            printf("Weton anda tidak valid!\n");
+            printf("Masukkan weton : \n");
+            STARTKalimat();
+        }
+        currentPengguna.weton = weton;
+        printf("Profil anda sudah berhasil diperbaharui!\n");
     }
-    currentPengguna.weton = weton;
-    printf("Profil anda sudah berhasil diperbaharui!\n");
+    else {
+        printf("Maaf, anda belum login!\n") ;
+    }
 }
 
 void Atur_Jenis_Akun()
 {
-    char y[2];
-    y[0] = 'Y';
-    y[1] = 'A';
-    char n[5];
-    n[0] = 'T';
-    n[1] = 'I';
-    n[2] = 'D';
-    n[3] = 'A';
-    n[4] = 'K';
+    if (isLoggedIn) {
+        char y[2];
+        y[0] = 'Y';
+        y[1] = 'A';
+        char n[5];
+        n[0] = 'T';
+        n[1] = 'I';
+        n[2] = 'D';
+        n[3] = 'A';
+        n[4] = 'K';
 
-    Word ya, no;
-    ya = stringToWord(y, 2);
-    no = stringToWord(n, 5);
+        Word ya, no;
+        ya = stringToWord(y, 2);
+        no = stringToWord(n, 5);
 
-    boolean valid;
-    if (currentPengguna.tipe_akun == 0)
-    {
-        printf("Saat ini, akun Anda adalah akun Publik. Ingin mengubah ke akun Privat? (YA/TIDAK)\n");
-        STARTKalimat();
-        if (isSameWord(currentWord, ya))
+        boolean valid;
+        if (currentPengguna.tipe_akun == 0)
         {
-            currentPengguna.tipe_akun = 1;
-        }
-        else if (isSameWord(currentWord, no))
-        {
-            // do nothing
+            printf("Saat ini, akun Anda adalah akun Publik. Ingin mengubah ke akun Privat? (YA/TIDAK)\n");
+            STARTKalimat();
+            if (isSameWord(currentWord, ya))
+            {
+                currentPengguna.tipe_akun = 1;
+            }
+            else if (isSameWord(currentWord, no))
+            {
+                // do nothing
+            }
+            else
+            {
+                valid = false;
+                while (!valid)
+                {
+                    valid = true;
+                    printf("(YA/TIDAK) huruf besar!\n");
+                    STARTKalimat();
+                    if (isSameWord(currentWord, ya))
+                    {
+                        currentPengguna.tipe_akun = 1;
+                    }
+                    else if (isSameWord(currentWord, no))
+                    {
+                        // do nothing
+                    }
+                    else
+                        valid = false;
+                }
+            }
         }
         else
         {
-            valid = false;
-            while (!valid)
+            printf("Saat ini, akun Anda adalah akun Privat. Ingin mengubah ke akun Publik? (YA/TIDAK)\n");
+            STARTKalimat();
+            if (isSameWord(currentWord, ya))
             {
-                valid = true;
-                printf("(YA/TIDAK) huruf besar!\n");
-                STARTKalimat();
-                if (isSameWord(currentWord, ya))
+                currentPengguna.tipe_akun = 0;
+            }
+            else if (isSameWord(currentWord, no))
+            {
+                // do nothing
+            }
+            else
+            {
+                valid = false;
+                while (!valid)
                 {
-                    currentPengguna.tipe_akun = 1;
+                    valid = true;
+                    printf("(YA/TIDAK) huruf besar!\n");
+                    STARTKalimat();
+                    if (isSameWord(currentWord, ya))
+                    {
+                        currentPengguna.tipe_akun = 0;
+                    }
+                    else if (isSameWord(currentWord, no))
+                    {
+                        // do nothing
+                    }
+                    else
+                        valid = false;
                 }
-                else if (isSameWord(currentWord, no))
-                {
-                    // do nothing
-                }
-                else
-                    valid = false;
             }
         }
     }
-    else
-    {
-        printf("Saat ini, akun Anda adalah akun Privat. Ingin mengubah ke akun Publik? (YA/TIDAK)\n");
-        STARTKalimat();
-        if (isSameWord(currentWord, ya))
-        {
-            currentPengguna.tipe_akun = 0;
-        }
-        else if (isSameWord(currentWord, no))
-        {
-            // do nothing
-        }
-        else
-        {
-            valid = false;
-            while (!valid)
-            {
-                valid = true;
-                printf("(YA/TIDAK) huruf besar!\n");
-                STARTKalimat();
-                if (isSameWord(currentWord, ya))
-                {
-                    currentPengguna.tipe_akun = 0;
-                }
-                else if (isSameWord(currentWord, no))
-                {
-                    // do nothing
-                }
-                else
-                    valid = false;
-            }
-        }
+    else {
+        printf("Maaf, anda belum login!\n") ;
     }
 }
 
 void Lihat_Profil(Word nama)
 {
-    int id;
-    id = getIdPengguna(nama);
+    if (isLoggedIn) {
+        int id;
+        id = getIdPengguna(nama);
 
-    if (id == -1)
-    {
-        printf("Pengguna tidak ditemukan!\n");
-    }
+        if (id == -1)
+        {
+            printf("Pengguna tidak ditemukan!\n");
+        }
 
-    else if (dataPengguna[id].tipe_akun == 0)
-    {
-        // display nama, bio, nomor, weton
-        printf("| Nama: ");
-        displayWord(dataPengguna[id].nama);
-        printf("\n| Bio Akun: ");
-        displayWord(dataPengguna[id].bio);
-        printf("\n| No HP: ");
-        displayWord(dataPengguna[id].nomor);
-        printf("\n| Weton: ");
-        displayWord(dataPengguna[id].weton);
-        printf("\n");
+        else if (dataPengguna[id].tipe_akun == 0)
+        {
+            // display nama, bio, nomor, weton
+            printf("| Nama: ");
+            displayWord(dataPengguna[id].nama);
+            printf("\n| Bio Akun: ");
+            displayWord(dataPengguna[id].bio);
+            printf("\n| No HP: ");
+            displayWord(dataPengguna[id].nomor);
+            printf("\n| Weton: ");
+            displayWord(dataPengguna[id].weton);
+            printf("\n");
 
-        // display foto
-        printf("Foto profil akun ");
-        displayWord(dataPengguna[id].nama);
-        printf("\n");
-        displayProfil(dataPengguna[id].profil);
-    }
-    else
-    {
-        printf("Wah, akunnya diprivat nih. Ikuti dulu untuk melihat profil!\n");
+            // display foto
+            printf("Foto profil akun ");
+            displayWord(dataPengguna[id].nama);
+            printf("\n");
+            displayProfil(dataPengguna[id].profil);
+        }
+        else
+        {
+            printf("Wah, akunnya diprivat nih. Ikuti dulu untuk melihat profil!\n");
+        }
     }
 }
 
 void Ubah_Foto_Profil()
 {
-    // display profil
-    int id;
-    id = getIdPengguna(currentPengguna.nama);
-    printf("Foto profil anda saat ini adalah \n");
-    displayProfil(dataPengguna[id].profil);
-    printf("\n");
+    if (isLoggedIn) {
+        // display profil
+        int id;
+        id = getIdPengguna(currentPengguna.nama);
+        printf("Foto profil anda saat ini adalah \n");
+        displayProfil(dataPengguna[id].profil);
+        printf("\n");
 
-    // input profil baru
-    printf("Masukkan foto profil yang baru\n");
-    int i, j;
-    STARTKalimat();
-    for (i = 0; i < 5; i++)
-    {
-        for (j = 0; j < 10; j++)
+        // input profil baru
+        printf("Masukkan foto profil yang baru\n");
+        int i, j;
+        STARTKalimat();
+        for (i = 0; i < 5; i++)
         {
-            if (i == 0 && j == 0)
+            for (j = 0; j < 10; j++)
             {
-                dataPengguna[id].profil.mem[i][j] = currentWord;
-            }
-            else
-            {
-                ADVWORD();
-                dataPengguna[id].profil.mem[i][j] = currentWord;
+                if (i == 0 && j == 0)
+                {
+                    dataPengguna[id].profil.mem[i][j] = currentWord;
+                }
+                else
+                {
+                    ADVWORD();
+                    dataPengguna[id].profil.mem[i][j] = currentWord;
+                }
             }
         }
+        printf("Foto profil anda sudah berhasil diganti!\n");
     }
-    printf("Foto profil anda sudah berhasil diganti!\n");
 }
 
 void createProfilDefault(MatrixProfil *profil)
