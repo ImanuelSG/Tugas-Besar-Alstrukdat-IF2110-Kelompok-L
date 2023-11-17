@@ -1,8 +1,12 @@
 #include "../MesinBarisFile/MBarisFile.h"
-#include "../Kicauan/listdinkicauan.h"
 #include "../Pengguna/pengguna.h"
 #include "../wordoperations.h"
+#include "../Profil/profil.h"
 #include "../Globals/globalvar.h"
+#include "../Kicauan/listdinkicauan.h"
+#include "../DrafKicauan/StackDraf.h"
+#include "../utils/utils.h"
+
 #include <stdio.h>
 
 /**
@@ -32,7 +36,6 @@ void ReadKicauanConfig(char namafile[])
         ADVBaris();
 
         like = wordToInteger(currentBaris);
-        printf("%d\n", like);
 
         ADVBaris();
         Penulis = currentBaris;
@@ -61,7 +64,7 @@ void ReadPenggunaConfig(char namafile[])
     STARTBaris(namafile);
     iteration = wordToInteger(currentBaris);
     ADVBaris();
-    createMatrix(&matrixPertemanan, iteration, iteration);
+    createMatrix(iteration, iteration, &matrixPertemanan);
 
     for (int i = 0; i < iteration; i++)
     {
@@ -73,6 +76,8 @@ void ReadPenggunaConfig(char namafile[])
         bio = currentBaris;
         ADVBaris();
         nomor = currentBaris;
+        ADVBaris();
+        weton = currentBaris;
         ADVBaris();
         temp = currentBaris;
         /*tipe akun*/
@@ -94,28 +99,104 @@ void ReadPenggunaConfig(char namafile[])
                 // To Place the index in the right position
             }
         }
-        CreatePengguna(&pengguna, nama, password, bio, nomor, weton, tipeakun, profil);
+        StackDraf S;
+        CreateStackDraf(&S);
+        CreatePengguna(&pengguna, nama, password, bio, nomor, weton, tipeakun, profil, S);
         InsertPengguna(pengguna);
+
         ADVBaris();
     }
+
     for (int i = 0; i < iteration; i++)
     {
         for (int j = 0; j < iteration; j++)
         {
-            ELMT(matrixPertemanan, i, j) = currentBaris.TabWord[j * 2];
+            ELMT(matrixPertemanan, i, j) = charToDigit(currentBaris.TabWord[j * 2]);
         }
         ADVBaris();
     }
+
     jumlahpermintaan = wordToInteger(currentBaris);
     createMatrix(jumlahpermintaan, 3, &matrixPermintaan);
     for (int i = 0; i < jumlahpermintaan; i++)
     {
         for (int j = 0; j < 3; j++)
         {
-            ELMT(matrixPermintaan, i, j) = currentBaris.TabWord[j * 2];
+            ELMT(matrixPermintaan, i, j) = charToDigit(currentBaris.TabWord[j * 2]);
         }
         ADVBaris();
     }
 }
 
+void ReadDrafConfig(char namafile[])
+{
+    int iteration, banyak;
+    Word username, isi;
+    DATETIME Date;
 
+    STARTBaris(namafile);
+    iteration = wordToInteger(currentBaris);
+
+    ADVBaris(); // baris == "username"
+    for (int i = 0; i < iteration; i++)
+    {
+        banyak = 0;
+        i = currentBaris.Length - 1;
+        int pengkali = 1;
+        while (currentBaris.TabWord[i] != ' ')
+        {
+            banyak += charToDigit(currentBaris.TabWord[i] * pengkali);
+            pengkali *= 10;
+            i--;
+            currentBaris.Length--;
+        }
+        currentBaris.Length--;
+        username = currentBaris;
+        Pengguna *curr = getPengguna(username);
+        ADVBaris(); // baris == "isi"
+        for (int j = 0; j < banyak; j++)
+        {
+            DrafKicau currdraf;
+            isi = currentBaris;
+            ADVBaris(); // baris == "tanggal"
+            Date = wordToDatetime(currentBaris);
+            ADVBaris(); // baris == "isi"
+            CreateDraf(&currdraf, isi, Date);
+            SimpanDraf(&curr->draf, currdraf);
+        }
+        ReverseStackDraf(&curr->draf);
+    }
+}
+
+int main()
+{
+    ReadPenggunaConfig("pengguna.config");
+    ReadKicauanConfig("kicauan.config");
+    ReadDrafConfig("draf.config");
+    for (int i = 0; i < banyakPengguna; i++)
+    {
+        printf("Nama : ");
+        displayWord(dataPengguna[i].nama);
+        printf("\n");
+        printf("Sandi : ");
+        displayWord(dataPengguna[i].sandi);
+        printf("\n");
+        printf("Bio : ");
+        displayWord(dataPengguna[i].bio);
+        printf("\n");
+        printf("Nomor : ");
+        displayWord(dataPengguna[i].nomor);
+        printf("\n");
+        printf("Weton : ");
+        displayWord(dataPengguna[i].weton);
+        printf("\n");
+        printf("Tipe Akun : %d\n", dataPengguna[i].tipe_akun);
+        printf("Profil : \n");
+        displayProfil(dataPengguna[i].profil);
+        DisplayStackDraf(dataPengguna[i].draf);
+        printf("\n");
+    }
+    displayMatrix(matrixPertemanan);
+    displayMatrix(matrixPermintaan);
+    printList(ListKicauanData);
+}

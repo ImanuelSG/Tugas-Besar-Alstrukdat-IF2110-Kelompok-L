@@ -36,7 +36,6 @@ void ReadKicauanConfig(char namafile[])
         ADVBaris();
 
         like = wordToInteger(currentBaris);
-        printf("%d\n", like);
 
         ADVBaris();
         Penulis = currentBaris;
@@ -61,4 +60,5 @@ int main()
 {
     ReadKicauanConfig("kicauan.config");
     printList(ListKicauanData);
+    
 }

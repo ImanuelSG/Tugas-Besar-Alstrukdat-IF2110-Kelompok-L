@@ -1,17 +1,7 @@
 {
-    "files.associations": {
-        "datetime.h": "c",
-        "adt_kicauan.h": "c",
-        "wordmachine.h": "c",
-        "boolean.h": "c",
-        "inisialisasiperintah.h": "c"
-    }
-}{
-    "files.associations": {
-        "stdlib.h": "c",
-        "globalvar.h": "c",
-        "wordmachine.h": "c",
-        "charmachine.h": "c",
-        "pengguna.h": "c"
-    }
+  "files.associations": {
+    "matrix.h": "c",
+    "globalvar.h": "c",
+    "wordoperations.h": "c"
+  }
 }

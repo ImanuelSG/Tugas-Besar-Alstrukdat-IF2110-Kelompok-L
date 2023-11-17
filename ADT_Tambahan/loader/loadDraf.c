@@ -1,9 +1,10 @@
 #include "../MesinBarisFile/MBarisFile.h"
 #include "../Kicauan/listdinkicauan.h"
-#include "../wordoperations.h"
+#include "../DrafKicauan/StackDraf.h"
+#include "../utils/utils.h"
 #include <stdio.h>
 
-void ReadDraftConfig(char namafile[])
+void ReadDrafConfig(char namafile[])
 {
     int iteration, banyak;
     Word username, isi;
@@ -11,7 +12,8 @@ void ReadDraftConfig(char namafile[])
 
     STARTBaris(namafile);
     iteration = wordToInteger(currentBaris);
-    ADVBaris();// baris == "username"
+
+    ADVBaris(); // baris == "username"
     for (int i = 0; i < iteration; i++)
     {
         banyak = 0;
@@ -26,14 +28,18 @@ void ReadDraftConfig(char namafile[])
         }
         currentBaris.Length--;
         username = currentBaris;
-        ADVBaris();// baris == "isi"
+        Pengguna *curr = getPengguna(username);
+        ADVBaris(); // baris == "isi"
         for (int j = 0; j < banyak; j++)
         {
+            DrafKicau currdraf;
             isi = currentBaris;
-            ADVBaris();//baris == "tanggal"
+            ADVBaris(); // baris == "tanggal"
             Date = wordToDatetime(currentBaris);
-            ADVBaris();//baris == "isi"
-            /*Create Draft Kicau*/
+            ADVBaris(); // baris == "isi"
+            CreateDraf(&currdraf, isi, Date);
+            SimpanDraf(&curr->draf, currdraf);
         }
+        ReverseStackDraf(&curr->draf);
     }
 }

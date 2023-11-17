@@ -4,6 +4,7 @@
 #include "../../ADT_Bawaan/wordmachine/wordmachine.h"
 #include "../../ADT_Bawaan/charmachine/charmachine.h"
 #include "../Profil/profil.h"
+#include "../DrafKicauan/StackDraf.h"
 #include <stdio.h>
 
 typedef struct
@@ -14,22 +15,22 @@ typedef struct
     Word nomor;
     Word weton;
     int tipe_akun;
-    MatrixProfil profil ;
+    MatrixProfil profil;
+    StackDraf draf;
 } Pengguna;
 
-extern int banyakPengguna ;
-extern Pengguna dataPengguna[20];/*List Pengguna*/ ;
+extern int banyakPengguna;
+extern Pengguna dataPengguna[20]; /*List Pengguna*/
+extern Pengguna currentPengguna;  /*Berisi Data Current Pengguna*/
 
+void CreatePengguna(Pengguna *akun, Word nama, Word sandi, Word bio, Word nomor, Word weton, int tipe_akun, MatrixProfil profil, StackDraf draf);
 
-void CreatePengguna (Pengguna *akun, Word nama, Word sandi, Word bio, Word nomor, Word weton, int tipe_akun, MatrixProfil profil) ;
-
-void InsertPengguna (Pengguna akun) ; // masukin pengguna ke data pengguan 
+void InsertPengguna(Pengguna akun); // masukin pengguna ke data pengguan
 
 void Daftar();
 
 void Masuk();
 
 void Keluar();
-
 
 #endif

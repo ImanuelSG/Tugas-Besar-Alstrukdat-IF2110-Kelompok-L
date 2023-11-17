@@ -1,10 +1,13 @@
 /* File inisialisasi untuk fungsi/prosedur inisialisasi dan perintah main */
 
+#ifndef _INIT_
+#define _INIT_
+
 #include <stdio.h>
 #include "..\\wordoperations.h"
 #define nl printf("\n")
 
-Word KeyWords[100];
+extern Word KeyWords[100];
 void initializeKeyWords();
 // Array yang berisi semua keyword perintah dan prosedur untuk inisialisasinya
 
@@ -14,16 +17,16 @@ boolean isAKeyWord(Word w);
 void displayBurbir();
 // Prosedur menampilkan tampilan awal program
 
-void inputConfigFile(FILE* file);
+void inputConfigFile(FILE *file);
 // Prosedur meminta string file input
 
 boolean validatePath(Word foldername);
 // Mengembalikan true jika ada foldernya dan berisi semua file config yang dibutuhkan
 
-void bacaInput(Word* input);
+void bacaInput(Word *input);
 // Membaca masukkan dari pengguna
 
-void clearFirstCharacter(Word* word);
+void clearFirstCharacter(Word *word);
 
 // Gabut hehehe
 void checkSpellingError(Word perintah);
@@ -64,5 +67,6 @@ stringToWord("HAPUS_UTAS")
 stringToWord("CETAK_UTAS")
 
 stringToWord("SIMPAN")
-stringToWord("MUAT")
+stringToWord("MUAT")/
 */
+#endif

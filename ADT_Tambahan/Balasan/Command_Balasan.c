@@ -9,10 +9,13 @@ void BALAS(ID id_Kicau, ID id_Balasan) {
 /* jika id_Balasan = -1, balasan akan dibuat pada kicauan dengan id_Kicau */
     if (id_Balasan == -1) {
         if (isIdxEffKicau(ListKicauanData, id_Kicau)) { // ID_Kicau valid
+            Pengguna *Penulis_Kicau = getPengguna(PENULIS_KICAUAN(ELMT_LIST_KICAUAN(ListKicauanData, id_Kicau)));
+            
             if (!isBerteman(currentPengguna.nama, PENULIS_KICAUAN(ELMT_LIST_KICAUAN(ListKicauanData, id_Kicau))) 
-                && getPengguna(PENULIS_KICAUAN(ELMT_LIST_KICAUAN(ListKicauanData, id_Kicau))).tipe_akun == 1) { // penulis kicauan privat dan tidak berteman
+                 && (*Penulis_Kicau).tipe_akun == 1) { // penulis kicauan privat dan tidak berteman
                 printf("Wah, akun tersebut merupakan akun privat dan anda belum berteman dengan akun tersebut!\n");
-            } else {/*pengguna berteman or penulis kicauan publik*/ 
+            } 
+            else {/*pengguna berteman or penulis kicauan publik*/ 
                 Word NewBalasan;
 
                 printf("\nMasukkan balasan:\n");
@@ -36,7 +39,8 @@ void BALAS(ID id_Kicau, ID id_Balasan) {
                     printf("\n");
                 }
             }
-        } else { // kicauan tidak ada
+        } 
+        else { // kicauan tidak ada
             printf("Wah, tidak terdapat kicauan yang ingin Anda balas!\n");
         }
     } 
@@ -45,8 +49,10 @@ void BALAS(ID id_Kicau, ID id_Balasan) {
         if (isIdxEffKicau(ListKicauanData, id_Kicau)) {// kicauan ada
             if(searchTree(ELMT_LIST_BALASAN(ListBalasanData, id_Kicau), id_Balasan) != NULL) { // balasan ada
                 Address balas = searchTree(ELMT_LIST_BALASAN(ListBalasanData, id_Kicau), id_Balasan);
+                Pengguna *Penulis_Balasan = getPengguna(PENULIS_BALASAN(INFO_TREE(balas)));
                 
-                if (!isBerteman(currentPengguna.nama, PENULIS_BALASAN(INFO_TREE(balas))) && getPengguna(PENULIS_BALASAN(INFO_TREE(balas))).tipe_akun == 1) {// penulis balasan privat dan tidak berteman
+                if (!isBerteman(currentPengguna.nama, PENULIS_BALASAN(INFO_TREE(balas))) 
+                    && (*Penulis_Balasan).tipe_akun == 1) {// penulis balasan privat dan tidak berteman
                     printf("Wah, akun tersebut merupakan akun privat dan anda belum berteman dengan akun tersebut!\n");
                 } 
                 else {/*pengguna berteman or penulis kicauan publik*/ 
@@ -89,9 +95,10 @@ void BALASAN(ID id_Kicau) {
 /* Menampilkan semua balasan pada kicauan dengan id_Kicau ke layar */
 /* Terurut berdasarkan struktur tree */
     if (isIdxEffKicau(ListKicauanData, id_Kicau)) { // ID_Kicau valid
+        Pengguna *Penulis_Kicau = getPengguna(PENULIS_KICAUAN(ELMT_LIST_KICAUAN(ListKicauanData, id_Kicau)));
         
         if (!isBerteman(currentPengguna.nama, PENULIS_KICAUAN(ELMT_LIST_KICAUAN(ListKicauanData, id_Kicau))) 
-             && getPengguna(PENULIS_KICAUAN(ELMT_LIST_KICAUAN(ListKicauanData, id_Kicau))).tipe_akun == 1) { // penulis kicuan privat dan tidak berteman
+             && (*Penulis_Kicau).tipe_akun == 1) { // penulis kicuan privat dan tidak berteman
             printf("Wah, kicauan tersebut dibuat oleh pengguna dengan akun privat!\n");
         } 
         

@@ -7,8 +7,10 @@
 #include "../../ADT_Bawaan/boolean.h"
 #include "../../ADT_Bawaan/wordmachine/wordmachine.h"
 #include "../Pengguna/pengguna.h"
+#include "../../ADT_Bawaan/matrix/matrix.h"
+#include "../Globals/globalvar.h"
+#include "../wordoperations.h"
 #include <stdio.h>
-
 
 /**
  * @brief fungsi untuk menentukan apakah Pengguna A berteman dengan Pengguna B
@@ -34,6 +36,6 @@ int getIdPengguna(Word nama);
  * @return Pengguna data pengguna
  */
 
-Pengguna getPengguna(Word nama);
+Pengguna *getPengguna(Word nama);
 
 #endif

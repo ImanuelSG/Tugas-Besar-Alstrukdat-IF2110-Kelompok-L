@@ -73,12 +73,13 @@ boolean isFullListKicau(ListKicauan l) {
 }
 
 /* ********** TULIS LIST ********** */
-void printListKicauan(ListKicauan l, Word NamaPengguna) {
-/* Proses : Menuliskan isi list dengan traversal, 
-   list yang ditulis hanya Kicauan milik pengguna beserta teman-temannya
-/* I.S. l boleh kosong */
-/* F.S. Jika l tidak kosong: tercetak daftar kicauan pengguna dan temannya */
-/*      Penulisan dari kicauan terbaru ke yang terlama */
+void printListKicauan(ListKicauan l, Word NamaPengguna)
+{
+    /* Proses : Menuliskan isi list dengan traversal,
+       list yang ditulis hanya Kicauan milik pengguna beserta teman-temannya
+    /* I.S. l boleh kosong */
+    /* F.S. Jika l tidak kosong: tercetak daftar kicauan pengguna dan temannya */
+    /*      Penulisan dari kicauan terbaru ke yang terlama */
     ID i;
     for (i = getLastIdxKicau(l); i >= getFirstIdxKicau(l); i--) {
         if (isBerteman(NamaPengguna, PENULIS_KICAUAN(ELMT_LIST_KICAUAN(l, i)))) {
@@ -87,12 +88,13 @@ void printListKicauan(ListKicauan l, Word NamaPengguna) {
     }
 }
 
-void printList(ListKicauan l) {
-/* Proses : Menuliskan isi list dengan traversal, 
-   list yang ditulis hanya Kicauan milik pengguna beserta teman-temannya
-/* I.S. l boleh kosong */
-/* F.S. Jika l tidak kosong: tercetak daftar seluruh kicauan */
-/*      Penulisan dari kicauan terbaru ke yang terlama */
+void printList(ListKicauan l)
+{
+    /* Proses : Menuliskan isi list dengan traversal,
+       list yang ditulis hanya Kicauan milik pengguna beserta teman-temannya
+    /* I.S. l boleh kosong */
+    /* F.S. Jika l tidak kosong: tercetak daftar seluruh kicauan */
+    /*      Penulisan dari kicauan terbaru ke yang terlama */
     ID i;
 
     for (i = getLastIdxKicau(l); i >= getFirstIdxKicau(l); i--) {

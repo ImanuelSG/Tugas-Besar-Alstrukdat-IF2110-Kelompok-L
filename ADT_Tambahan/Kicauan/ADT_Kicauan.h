@@ -11,15 +11,17 @@
 /* ********** DEFINISI TYPE KICAUAN ********** */
 typedef int ID;
 
-typedef struct {
-    Word PenulisKicauan;    // Username pengguna pembuat kicauan
-    DATETIME WaktuKicaun;   // Waktu kicauan dibuat (diambil dari waktu lokal)
-    Word Tweet;             // Isi kicauan
-    int LikeKicauan;        // Banyaknya like pada kicauan
-    int CurrentIDBalasan;      // Banyaknya balasan utama pada kicauan
+typedef struct
+{
+    Word PenulisKicauan;  // Username pengguna pembuat kicauan
+    DATETIME WaktuKicaun; // Waktu kicauan dibuat (diambil dari waktu lokal)
+    Word Tweet;           // Isi kicauan
+    int LikeKicauan;      // Banyaknya like pada kicauan
+    int CurrentIDBalasan; // Banyaknya balasan utama pada kicauan
 } Kicauan;
 
-extern int JUMLAH_KICAUAN_DENGAN_BALASAN;   // Banyaknya kicauan yang memiliki balasan
+extern ID CURRENT_ID_KICAUAN;
+extern int JUMLAH_KICAUAN_DENGAN_BALASAN; // Banyaknya kicauan yang memiliki balasan
 
 /* ********** SELEKTOR KICAUAN ********** */
 #define PENULIS_KICAUAN(K) (K).PenulisKicauan

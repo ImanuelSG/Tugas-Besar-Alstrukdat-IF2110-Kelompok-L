@@ -15,7 +15,7 @@ void ReadPenggunaConfig(char namafile[])
     STARTBaris(namafile);
     iteration = wordToInteger(currentBaris);
     ADVBaris();
-    createMatrix(&matrixPertemanan, iteration, iteration);
+    createMatrix(iteration, iteration, &matrixPertemanan);
 
     for (int i = 0; i < iteration; i++)
     {
@@ -27,6 +27,8 @@ void ReadPenggunaConfig(char namafile[])
         bio = currentBaris;
         ADVBaris();
         nomor = currentBaris;
+        ADVBaris();
+        weton = currentBaris;
         ADVBaris();
         temp = currentBaris;
         /*tipe akun*/
@@ -56,7 +58,7 @@ void ReadPenggunaConfig(char namafile[])
     {
         for (int j = 0; j < iteration; j++)
         {
-            ELMT(matrixPertemanan, i, j) = currentBaris.TabWord[j * 2];
+            ELMT(matrixPertemanan, i, j) = charToDigit(currentBaris.TabWord[j * 2]);
         }
         ADVBaris();
     }
@@ -66,14 +68,37 @@ void ReadPenggunaConfig(char namafile[])
     {
         for (int j = 0; j < 3; j++)
         {
-            ELMT(matrixPermintaan, i, j) = currentBaris.TabWord[j * 2];
+            ELMT(matrixPermintaan, i, j) = charToDigit(currentBaris.TabWord[j * 2]);
         }
         ADVBaris();
     }
 }
 
-int main()
-{
-    ReadPenggunaConfig("pengguna.config");
-    displayProfil(dataPengguna[0].profil);
-}
+// int main()
+// {
+//     ReadPenggunaConfig("pengguna.config");
+//     for(int i = 0 ; i < banyakPengguna ; i++){
+//         printf("Nama : ");
+//         displayWord(dataPengguna[i].nama);
+//         printf("\n");
+//         printf("Sandi : ");
+//         displayWord(dataPengguna[i].sandi);
+//         printf("\n");
+//         printf("Bio : ");
+//         displayWord(dataPengguna[i].bio);
+//         printf("\n");
+//         printf("Nomor : ");
+//         displayWord(dataPengguna[i].nomor);
+//         printf("\n");
+//         printf("Weton : ");
+//         displayWord(dataPengguna[i].weton);
+//         printf("\n");
+//         printf("Tipe Akun : %d\n", dataPengguna[i].tipe_akun);
+//         printf("Profil : \n");
+//         displayProfil(dataPengguna[i].profil);
+//         printf("\n");
+//     }
+//     displayMatrix(matrixPertemanan);
+//     displayMatrix(matrixPermintaan);
+    
+// }

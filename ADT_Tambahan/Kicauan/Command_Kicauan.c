@@ -19,7 +19,7 @@ void KICAU() {
         DATETIME WaktuKicauan;
 
         BacaDATETIME(&WaktuKicauan);
-        CURRENT_ID_KICAUAN += 1;
+        
         CreateKicauan(&NewKicauan, currentPengguna.nama, WaktuKicauan, NewTweet, 0);
         insertLast(&ListKicauanData, NewKicauan);
 
@@ -40,13 +40,14 @@ void KICAUAN() {
 /* SUKA_KICAUAN */
 void SUKA_KICAUAN(ID IDKicauan) {
 /* Menambahkan like pada kicauan yang dipilih pengguna */
+    Pengguna *Penulis_Kicau = getPengguna(PENULIS_KICAUAN(ELMT_LIST_KICAUAN(ListKicauanData, IDKicauan)));
     printf("\n");
     if (!isIdxEffKicau(ListKicauanData, IDKicauan)) { // IDKicauan tidak valid
         printf("Tidak ditemukan kicauan dengan ID = %d;\n", IDKicauan);
     }
     else {
         if (!isBerteman(currentPengguna.nama, PENULIS_KICAUAN(ELMT_LIST_KICAUAN(ListKicauanData, IDKicauan))) 
-            && getPengguna(PENULIS_KICAUAN(ELMT_LIST_KICAUAN(ListKicauanData, IDKicauan))).tipe_akun == 1) {
+            && (*Penulis_Kicau).tipe_akun == 1) {
             printf("Wah, kicauan tersebut dibuat oleh akun privat! Ikuti akun itu dulu ya\n");
         }
         else { /* akun privat dan berteman, atau akun bersifat publik */
