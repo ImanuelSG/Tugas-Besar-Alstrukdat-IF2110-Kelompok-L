@@ -364,7 +364,6 @@ void TAMBAH_TEMAN() {
         kasus = 1;
     }
 
-
     else {
 
         printf("Masukkan nama pengguna: ");
@@ -373,6 +372,10 @@ void TAMBAH_TEMAN() {
 
         if (getIdPengguna(query_user) == -1) {
             kasus = 2;
+        }
+
+        else if(isSameWord(query_user, currentPengguna.nama)) {
+            kasus = 6;
         }
 
         else if (isTeman(&dataTeman, *getPengguna(query_user), currentPengguna)) {
@@ -432,6 +435,9 @@ void TAMBAH_TEMAN() {
         printf("Permintaan pertemanan kepada "); 
         displayWord(currentWord);
         printf(" telah dikirim. Tunggu beberapa saat hingga permintaan Anda disetujui.");
+    }
+    else if (kasus == 6) {
+        printf("Anda tidak bisa berteman dengan diri sendiri. Silakan cari teman yang merupakan pengguna lain.\n.");
     }
 }
 
