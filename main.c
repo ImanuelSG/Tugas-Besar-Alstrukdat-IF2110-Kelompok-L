@@ -113,6 +113,7 @@ int main()
 
             /*-------------------------------KICAU-----------------------------------*/
 
+<<<<<<< HEAD
             else if (isSameWord(perintah, stringToWord("KICAU", 5))) 
             {
                 KICAU();
@@ -121,6 +122,16 @@ int main()
             else if (isSameWord(perintah, stringToWord("KICAUAN", 7))) 
             {
                 KICAUAN();
+=======
+            else if (isSameWord(perintah, stringToWord("KICAU", 5)))
+            {
+                printf("Panggil fungsi KICAU");
+            }
+
+            else if (isSameWord(perintah, stringToWord("KICAUAN", 7)))
+            {
+                printf("Panggil fungsi KICAUAN");
+>>>>>>> 2eb13a12bfad7a650ee4c180a95c9f3ef6083d4e
             }
 
             else if (isSameWord(perintah, stringToWord("SUKA_KICAUAN", 12)))
@@ -172,7 +183,7 @@ int main()
 
             /*------------------------------ UTAS ----------------------------------*/
 
-            else if (isSameWord(perintah, stringToWord("UTAS", 5)))
+            else if (isSameWord(perintah, stringToWord("UTAS", 4)))
             {
                 ADVWORD();
                 int id = wordToInteger(currentWord);

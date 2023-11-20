@@ -154,8 +154,12 @@ void printTree(Tree p, int h) {
    Penulisan setiap node juga diakhiri newline */
    if (p!=NULL) {
       PrintBalasan(INFO_TREE(p), h);
-      printTree(LEFT_CHILD(p), h+3);
-      printTree(RIGHT_SIBLING(p), h);
+      if (LEFT_CHILD(p) != NULL) {
+         printTree(LEFT_CHILD(p), h+3);
+      }
+      if (RIGHT_SIBLING(p) != NULL) {
+         printTree(RIGHT_SIBLING(p), h);
+      }
    }
 }
 

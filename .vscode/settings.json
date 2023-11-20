@@ -11,3 +11,9 @@
     "adt_balasan.h": "c"
   }
 }
+{
+    "files.associations": {
+        "listlinier.h": "c"
+    },
+    "C_Cpp.errorSquiggles": "enabled"
+}

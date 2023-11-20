@@ -5,7 +5,7 @@
 
 int BanyakPenggunaDenganDraf = 0;
 
-AddressDraf newNode(ElTypeDraf x)
+AddressDraf newNodeDraf(ElTypeDraf x)
 {
     AddressDraf P = (AddressDraf)malloc(sizeof(Node));
     if (P != NULL)
@@ -67,7 +67,7 @@ void DisplayStackDraf(StackDraf s)
 void SimpanDraf(StackDraf *s, ElTypeDraf x)
 {
 
-    AddressDraf Num = newNode(x);
+    AddressDraf Num = newNodeDraf(x);
     if (Num != NULL)
     {
         if (isEmptyStackDraf(*s))
