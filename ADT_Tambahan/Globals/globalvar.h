@@ -2,8 +2,8 @@
 #define GLOBALVAR_H
 
 #include "../pengguna.h"
-#include "../Kicauan/Kicau.h"
-#include "../Utas/utas.h"
+#include "../Kicauan/ADT_Kicauan.h"
+#include "../Kicauan/listdinkicauan.h"
 #include "boolean.h"
 
 extern Pengguna currentPengguna; /*Berisi Data Current Pengguna*/

@@ -42,18 +42,6 @@ ElType getElmt(List l, int idx) {
     return INFO(p);
 }
 
-void setElmt(List *l, int idx, ElType val) {
-/* I.S. l terdefinisi, idx indeks yang valid dalam l, yaitu 0..length(l) */
-/* F.S. Mengubah elemen l pada indeks ke-idx menjadi val */
-    Address p = FIRST(*l);
-    int i = 0;
-    while (i < idx) {
-        i++;
-        p = NEXT(p);
-    }
-    INFO(p) = val;
-}
-
 int indexOf(List l, ElType val) {
 /* I.S. l, val terdefinisi */
 /* F.S. Mencari apakah ada elemen list l yang bernilai val */
