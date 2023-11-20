@@ -19,7 +19,7 @@
  * @param namaB nama Pengguna 2
  * @return boolean True jika iya, False jika tidak
  */
-boolean isBerteman(Word namaA, Word namaB);
+boolean isBerteman(Word user1, Word user2);
 
 /**
  * @brief fungsi untuk mendapatkan id dari suatu pengguna

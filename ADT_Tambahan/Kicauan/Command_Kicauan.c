@@ -21,7 +21,7 @@ void KICAU() {
         BacaDATETIME(&WaktuKicauan);
         
         CreateKicauan(&NewKicauan, currentPengguna.nama, WaktuKicauan, NewTweet, 0);
-        insertLast(&ListKicauanData, NewKicauan);
+        insertLastKicau(&ListKicauanData, NewKicauan);
 
         printf("\nSelamat! kicauan telah diterbitkan!\n");
         printf("Detil kicauan:");

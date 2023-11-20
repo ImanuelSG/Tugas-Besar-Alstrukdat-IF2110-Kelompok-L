@@ -1,19 +1,7 @@
-#include "../MesinBarisFile/MBarisFile.h"
-#include "../Pengguna/pengguna.h"
-#include "../wordoperations.h"
-#include "../Profil/profil.h"
-#include "../Globals/globalvar.h"
-#include "../Kicauan/listdinkicauan.h"
-#include "../DrafKicauan/StackDraf.h"
-#include "../utils/utils.h"
+#include "load.h"
 
 #include <stdio.h>
 
-/**
- * @brief Prosedur membaca config pengguna
- *
- * @param namafile file yang ingin dibaca relatif terhadap tempat pemanggilan prosedur
- */
 void ReadPenggunaConfig(char namafile[])
 {
 
@@ -78,6 +66,7 @@ void ReadPenggunaConfig(char namafile[])
     }
 
     jumlahpermintaan = wordToInteger(currentBaris);
+    ADVBaris();
     createMatrix(jumlahpermintaan, 3, &matrixPermintaan);
     for (int i = 0; i < jumlahpermintaan; i++)
     {
@@ -88,11 +77,7 @@ void ReadPenggunaConfig(char namafile[])
         ADVBaris();
     }
 }
-/**
- * @brief Prosedur Membaca Konfig Kicau
- *
- * @param namafile relatif terhadap posisi pemanggilan prosedur
- */
+
 void ReadKicauanConfig(char namafile[])
 {
     CreateListDinKicauan(&ListKicauanData, 100);
@@ -126,11 +111,7 @@ void ReadKicauanConfig(char namafile[])
         insertLastKicau(&ListKicauanData, kicau);
     }
 }
-/**
- * @brief Prosedur Membaca Konfig Draf
- *
- * @param namafile
- */
+
 void ReadDrafConfig(char namafile[])
 {
     int iteration, banyak;
@@ -142,20 +123,20 @@ void ReadDrafConfig(char namafile[])
     for (int i = 0; i < iteration; i++)
     {
         banyak = 0;
-        i = currentBaris.Length - 1;
+        int j = currentBaris.Length - 1;
         int pengkali = 1;
-        while (currentBaris.TabWord[i] != ' ')
+        while (currentBaris.TabWord[j] != ' ')
         {
-            banyak += charToDigit(currentBaris.TabWord[i]) * pengkali;
+            banyak += charToDigit(currentBaris.TabWord[j]) * pengkali;
             pengkali *= 10;
-            i--;
+            j--;
             currentBaris.Length--;
         }
         currentBaris.Length--;
         username = currentBaris;
         Pengguna *curr = getPengguna(username);
         ADVBaris(); // baris == "isi"
-        for (int j = 0; j < banyak; j++)
+        for (int k = 0; k < banyak; k++)
         {
             DrafKicau currdraf;
             isi = currentBaris;
@@ -168,11 +149,7 @@ void ReadDrafConfig(char namafile[])
         ReverseStackDraf(&curr->draf);
     }
 }
-/**
- * @brief Prosedur Membaca Konfig Utas
- *
- * @param namafile
- */
+
 void ReadUtasConfig(char namafile[])
 {
     int iteration, like;
@@ -202,55 +179,51 @@ void ReadUtasConfig(char namafile[])
         }
     }
 }
-/**
- * @brief  Prosedur Membaca Konfig Balasan
- *
- * @param namafile
- */
 
-void parseId(Word w, int *idparent, int *idbalasan)
-{
-    int i = 0;
-    int id = 0;
-    int isneg = 1;
-    while (w.TabWord[i] != ' ')
-    {
-        if (w.TabWord[i] == '-')
-        {
-            isneg = -1;
-            i++;
-        }
-        else
-        {
-            id *= 10;
-            id += charToDigit(w.TabWord[i]);
-            i++;
-        }
-    }
-    *idparent = id * isneg;
-    int last = w.Length - 1;
-    int num = 0;
-    int pengkali = 1;
-    while (w.TabWord[last] != ' ')
-    {
-        num += charToDigit(w.TabWord[last]) * pengkali;
-        pengkali *= 10;
-        last--;
-    }
-    *idbalasan = num;
-}
+// void parseId(Word w, int *idparent, int *idbalasan)
+// {
+//     int i = 0;
+//     int id = 0;
+//     int isneg = 1;
+//     while (w.TabWord[i] != ' ')
+//     {
+//         if (w.TabWord[i] == '-')
+//         {
+//             isneg = -1;
+//             i++;
+//         }
+//         else
+//         {
+//             id *= 10;
+//             id += charToDigit(w.TabWord[i]);
+//             i++;
+//         }
+//     }
+//     *idparent = id * isneg;
+//     int last = w.Length - 1;
+//     int num = 0;
+//     int pengkali = 1;
+//     while (w.TabWord[last] != ' ')
+//     {
+//         num += charToDigit(w.TabWord[last]) * pengkali;
+//         pengkali *= 10;
+//         last--;
+//     }
+//     *idbalasan = num;
+// }
 
 // void ReadBalasanConfig(char namafile[])
 // {
 //     int iteration;
 //     STARTBaris(namafile);
 //     iteration = wordToInteger(currentBaris);
+//     JUMLAH_KICAUAN_DENGAN_BALASAN = iteration;
 
-//     ADVBaris();
-//     ID IDKicauUtama = wordToInteger(currentBaris);
 //     for (int i = 0; i < iteration; i++)
 //     {
-//         ADVBaris();
+//         ADVBaris(); // curr baris == "ID Kicau Utama"
+//         ID IDKicauUtama = wordToInteger(currentBaris);
+//         ADVBaris(); // vurr baris == "jumlah balasan"
 //         int jumlahbalasan = wordToInteger(currentBaris);
 //         for (int j = 0; j < jumlahbalasan; j++)
 //         {
@@ -258,102 +231,167 @@ void parseId(Word w, int *idparent, int *idbalasan)
 //             int idparent, idbalasan;
 //             parseId(currentBaris, &idparent, &idbalasan);
 //             ADVBaris();
-//             Word te
+//             Word text = currentBaris;
 //             ADVBaris();
 //             Word Author = currentBaris;
 //             ADVBaris();
 //             DATETIME Waktu = wordToDatetime(currentBaris);
-//             /*Create Balasan and insert it to the list*/
+//             Balasan B;
+//             CreateBalasan(&B, Author, Waktu, text, &ELMT_LIST_KICAUAN(ListKicauanData, IDKicauUtama));
 //         }
 //     }
 // }
-// void Load(char *namafolder)
-// {
 
-//     Word path_config1, path_config2, path_config3, path_config4, path_config5;
-
-//     path_config1 = DuplicateWord(folderNameWord);
-//     path_config2 = DuplicateWord(folderNameWord);
-//     path_config3 = DuplicateWord(folderNameWord);
-//     path_config4 = DuplicateWord(folderNameWord);
-//     path_config5 = DuplicateWord(folderNameWord);
-
-//     appendWord(&path_config1, stringToWord("/pengguna.config", 16));
-//     appendWord(&path_config2, stringToWord("/kicauan.config", 15));
-//     appendWord(&path_config3, stringToWord("/balasan.config", 15));
-//     appendWord(&path_config4, stringToWord("/draf.config", 12));
-//     appendWord(&path_config5, stringToWord("/utas.config", 12));
-
-//     char *path_config1_str = wordToString(path_config1);
-//     char *path_config2_str = wordToString(path_config2);
-//     char *path_config3_str = wordToString(path_config3);
-//     char *path_config4_str = wordToString(path_config4);
-//     char *path_config5_str = wordToString(path_config5);
-
-//     ReadPenggunaConfig(path_config1_str);
-//     ReadKicauanConfig(path_config2_str);
-//     ReadDrafConfig(path_config4_str);
-
-//      for (int i = 0; i < banyakPengguna; i++)
-//     {
-//         printf("Nama : ");
-//         displayWord(dataPengguna[i].nama);
-//         printf("\n");
-//         printf("Sandi : ");
-//         displayWord(dataPengguna[i].sandi);
-//         printf("\n");
-//         printf("Bio : ");
-//         displayWord(dataPengguna[i].bio);
-//         printf("\n");
-//         printf("Nomor : ");
-//         displayWord(dataPengguna[i].nomor);
-//         printf("\n");
-//         printf("Weton : ");
-//         displayWord(dataPengguna[i].weton);
-//         printf("\n");
-//         printf("Tipe Akun : %d\n", dataPengguna[i].tipe_akun);
-//         printf("Profil : \n");
-//         displayProfil(dataPengguna[i].profil);
-//         printf("Draf Kicau: \n");
-//         DisplayStackDraf(dataPengguna[i].draf);
-
-//         printf("\n");
-//     }
-//     displayMatrix(matrixPertemanan);
-//     displayMatrix(matrixPermintaan);
-//     printList(ListKicauanData);
-// }
-int main()
+int isDirectoryExists(const char *path)
 {
-    ReadPenggunaConfig("pengguna.config");
-    ReadKicauanConfig("kicauan.config");
-    ReadDrafConfig("draf.config");
+    struct stat info;
+    if (stat(path, &info) != 0)
+    {
+
+        return 0;
+    }
+
+    return S_ISDIR(info.st_mode);
+}
+
+void WriteKicauanConfig(char namafile[])
+{
+    FILE *file = fopen(namafile, "w"); // buka file
+
+    if (file == NULL)
+    {
+        printf("Gagal Membuat File :(\n");
+        return;
+    }
+
+    fprintf(file, "%d\n", NEFF_LIST_KICAUAN(ListKicauanData)); // ini buat iterasi
+    // ini buat nulis data kicauan
+    for (int i = 1; i <= NEFF_LIST_KICAUAN(ListKicauanData); i++)
+    {
+        Kicauan curr = ELMT_LIST_KICAUAN(ListKicauanData, i);
+        fprintf(file, "%d\n", i);
+        fprintf(file, "%s\n", wordToString(TWEET(curr)));
+        fprintf(file, "%d\n", LIKE(curr));
+
+        fprintf(file, "%s\n", wordToString(PENULIS_KICAUAN(curr)));
+        fprintf(file, "%s\n", wordToString(datetimeToWord(WAKTU_KICAUAN(curr))));
+    }
+
+    fclose(file); // Close the file
+}
+
+void WritePenggunaConfig(char namafile[])
+{
+    FILE *file = fopen(namafile, "w");
+
+    if (file == NULL)
+    {
+        printf("Error opening file for writing.\n");
+        return;
+    }
+
+    fprintf(file, "%d\n", banyakPengguna);
+
+    // Loop through the list and write each Pengguna's information
     for (int i = 0; i < banyakPengguna; i++)
     {
-        printf("Nama : ");
-        displayWord(dataPengguna[i].nama);
-        printf("\n");
-        printf("Sandi : ");
-        displayWord(dataPengguna[i].sandi);
-        printf("\n");
-        printf("Bio : ");
-        displayWord(dataPengguna[i].bio);
-        printf("\n");
-        printf("Nomor : ");
-        displayWord(dataPengguna[i].nomor);
-        printf("\n");
-        printf("Weton : ");
-        displayWord(dataPengguna[i].weton);
-        printf("\n");
-        printf("Tipe Akun : %d\n", dataPengguna[i].tipe_akun);
-        printf("Profil : \n");
-        displayProfil(dataPengguna[i].profil);
-        printf("Draf Kicau: \n");
-        DisplayStackDraf(dataPengguna[i].draf);
+        fprintf(file, "%s\n", wordToString(dataPengguna[i].nama));
+        fprintf(file, "%s\n", wordToString(dataPengguna[i].sandi));
+        fprintf(file, "%s\n", wordToString(dataPengguna[i].bio));
+        fprintf(file, "%s\n", wordToString(dataPengguna[i].nomor));
+        fprintf(file, "%s\n", wordToString(dataPengguna[i].weton));
 
-        printf("\n");
+        // Determine the account type
+        if (dataPengguna[i].tipe_akun == 0)
+        {
+            fprintf(file, "Publik\n");
+        }
+        else
+        {
+            fprintf(file, "Privat\n");
+        }
+
+        for (int j = 0; j < 5; j++)
+        {
+            for (int k = 0; k < 10; k++)
+            {
+                if (k != 9)
+                    fprintf(file, "%c ", dataPengguna[i].profil.mem[j][k].TabWord[0]);
+                else
+
+                    fprintf(file, "%c", dataPengguna[i].profil.mem[j][k].TabWord[0]);
+            }
+            fprintf(file, "\n");
+        }
     }
-    displayMatrix(matrixPertemanan);
-    displayMatrix(matrixPermintaan);
-    printList(ListKicauanData);
+
+    for (int i = 0; i < ROW_EFF(matrixPertemanan); i++)
+    {
+        for (int j = 0; j < COL_EFF(matrixPertemanan); j++)
+        {
+            if (j != COL_EFF(matrixPertemanan) - 1)
+                fprintf(file, "%d ", ELMT(matrixPertemanan, i, j));
+            else
+                fprintf(file, "%d", ELMT(matrixPertemanan, i, j));
+        }
+        fprintf(file, "\n");
+    }
+
+    fprintf(file, "%d\n", ROW_EFF(matrixPermintaan)); // Write the number of permintaan
+
+    // write matrixPermintaan
+    for (int i = 0; i < ROW_EFF(matrixPermintaan); i++)
+    {
+        for (int j = 0; j < COL_EFF(matrixPermintaan); j++)
+        {
+            if (j != COL_EFF(matrixPermintaan) - 1)
+                fprintf(file, "%d ", ELMT(matrixPermintaan, i, j));
+            else
+                fprintf(file, "%d", ELMT(matrixPermintaan, i, j));
+        }
+        fprintf(file, "\n");
+    }
+
+    fclose(file);
+}
+
+void WriteDrafConfig(char namafile[])
+{
+    FILE *file = fopen(namafile, "w"); // Open the file for writing
+
+    if (file == NULL)
+    {
+        printf("Gagal Membuat File.\n");
+        return;
+    }
+
+    fprintf(file, "%d\n", BanyakPenggunaDenganDraf); // Write the number of Pengguna
+
+    int i = 0;
+    int j = 0;
+    int temp = BanyakPenggunaDenganDraf;
+
+    while (i < banyakPengguna && j < temp)
+    {
+        printf("Nilai i = %d, nilai j = %d banyak pengguna = %d  banyak draf = %d \n", i, j, banyakPengguna, BanyakPenggunaDenganDraf);
+        Pengguna Curr = dataPengguna[i];
+        if (!isEmptyStackDraf(Curr.draf))
+        {
+            fprintf(file, "%s %d\n", wordToString(Curr.nama), lengthStackDraf(Curr.draf));
+            j++;
+            StackDraf Copy = CopyStackDraf(Curr.draf);
+            while (!isEmptyStackDraf(Copy))
+            {
+                DrafKicau val;
+                DeleteDraf(&Copy, &val);
+                // isi draf
+                fprintf(file, "%s\n", wordToString(ISI_DRAF(val)));
+
+                // Write the timestamp of the DrafKicau
+                fprintf(file, "%s\n", wordToString(datetimeToWord(WAKTU_DRAF(val))));
+            }
+        }
+        i++;
+    }
+    fclose(file); // Close the file
 }

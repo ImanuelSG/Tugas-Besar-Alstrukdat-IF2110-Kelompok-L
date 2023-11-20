@@ -4,9 +4,10 @@
 #include "ADT_Tambahan\\Pengguna\pengguna.h"
 #include "ADT_Tambahan\\Kicauan\\Command_Kicauan.h"
 #include "ADT_Tambahan\\Balasan\\Command_Balasan.h"
+#include "ADT_Tambahan\\teman\\graf_teman.h"
+#include "ADT_Tambahan\\teman\\driverGraf.h"
 
 #define not(n) !n
-
 /* Header Note */
 // Yang bikin char machine skill isu gk ngerti ada karakter backslash n :(
 // Nanti harusnya clearFirstCharacter gk butuh karena gua udh modif ignore blanks buat
@@ -16,6 +17,8 @@ int main()
 {
 
     nl;
+    CreateGrafTeman(&dataTeman);
+
     initializeKeyWords();
     displayBurbir();
     FILE *f;
@@ -46,6 +49,7 @@ int main()
             else if (isSameWord(perintah, stringToWord("MASUK", 5)))
             {
                 Masuk();
+                // displayGrafStuff();
             }
 
             else if (isSameWord(perintah, stringToWord("KELUAR", 6)))
@@ -88,39 +92,38 @@ int main()
 
             else if (isSameWord(perintah, stringToWord("DAFTAR_TEMAN", 12)))
             {
-                printf("Panggil fungsi DAFTAR_TEMAN");
+                // displayGrafStuff();
+                DAFTAR_TEMAN();
             }
 
             else if (isSameWord(perintah, stringToWord("HAPUS_TEMAN", 11)))
             {
-                printf("Panggil fungsi HAPUS_TEMAN");
+                HAPUS_TEMAN();
             }
 
             else if (isSameWord(perintah, stringToWord("TAMBAH_TEMAN", 12)))
             {
-                printf("Panggil fungsi TAMBAH_TEMAN");
+                TAMBAH_TEMAN();
             }
 
             else if (isSameWord(perintah, stringToWord("DAFTAR_PERMINTAAN_PERTEMANAN", 28)))
             {
-                printf("Panggil fungsi DAFTAR_PERMINTAAN_PERTEMANAN");
+               DAFTAR_PERMINTAAN_PERTEMANAN();
             }
 
             else if (isSameWord(perintah, stringToWord("SETUJUI_PERTEMANAN", 18)))
             {
-                printf("Panggil fungsi SETUJUI_PERTEMANAN");
+                SETUJUI_PERTEMANAN();
             }
 
             /*-------------------------------KICAU-----------------------------------*/
 
-            else if (isSameWord(perintah, stringToWord("KICAU", 5)))
-            {
-                printf("Panggil fungsi KICAU");
+            else if (isSameWord(perintah, stringToWord("KICAU", 5))) {
+                KICAU();
             }
 
-            else if (isSameWord(perintah, stringToWord("KICAUAN", 7)))
-            {
-                printf("Panggil fungsi KICAUAN");
+            else if (isSameWord(perintah, stringToWord("KICAUAN", 7))) {
+                KICAUAN();
             }
 
             else if (isSameWord(perintah, stringToWord("SUKA_KICAUAN", 12)))

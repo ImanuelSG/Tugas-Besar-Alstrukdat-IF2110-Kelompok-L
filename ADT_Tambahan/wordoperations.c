@@ -152,6 +152,41 @@ DATETIME wordToDatetime(Word w)
     return D;
 }
 
+Word datetimeToWord(DATETIME D)
+{
+    Word w;
+    int day, month, year, hour, minute, second;
+    day = Day(D);
+    month = Month(D);
+    year = Year(D);
+    hour = Hour(Time(D));
+    minute = Minute(Time(D));
+    second = Second(Time(D));
+
+    w.TabWord[0] = digitToChar(day / 10);
+    w.TabWord[1] = digitToChar(day % 10);
+    w.TabWord[2] = '/';
+    w.TabWord[3] = digitToChar(month / 10);
+    w.TabWord[4] = digitToChar(month % 10);
+    w.TabWord[5] = '/';
+    w.TabWord[6] = digitToChar(year / 1000);
+    w.TabWord[7] = digitToChar((year / 100) % 10);
+    w.TabWord[8] = digitToChar((year / 10) % 10);
+    w.TabWord[9] = digitToChar(year % 10);
+    w.TabWord[10] = ' ';
+    w.TabWord[11] = digitToChar(hour / 10);
+    w.TabWord[12] = digitToChar(hour % 10);
+    w.TabWord[13] = ':';
+    w.TabWord[14] = digitToChar(minute / 10);
+    w.TabWord[15] = digitToChar(minute % 10);
+    w.TabWord[16] = ':';
+    w.TabWord[17] = digitToChar(second / 10);
+    w.TabWord[18] = digitToChar(second % 10);
+    w.Length = 19;
+
+    return w;
+}
+
 char* wordToString(Word w) {
     int i;
     char* benang = (char*) malloc (w.Length + 1);

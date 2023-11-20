@@ -65,8 +65,15 @@ int makePuluhanfromWord(Word w, int index1, int index2);
 
 DATETIME wordToDatetime(Word w);
 
+/**
+ * @brief Mengubah data datetime menjadi kata (untuk save)
+ * 
+ * @param D 
+ * @return Word 
+ */
+Word datetimeToWord(DATETIME D);
 
-char* wordToString(Word w);
+char *wordToString(Word w);
 /* Mengembalikan string literal (array of char) dari word */
 /* IMPORTANT: ADA PENAMBAHAN 'NULL' CHARACTER (\0) DI AKHIR*/
 
