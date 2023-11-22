@@ -2,6 +2,9 @@
   "files.associations": {
     "matrix.h": "c",
     "globalvar.h": "c",
-    "wordoperations.h": "c"
+    "wordoperations.h": "c",
+    "graf_teman.h": "c",
+    "pengguna.h": "c",
+    "command_balasan.h": "c"
   }
 }

@@ -5,6 +5,7 @@
 #include "../wordoperations.h"
 #include "../utils/utils.h"
 #include "../DrafKicauan/StackDraf.h"
+#include "../teman/graf_teman.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -30,11 +31,13 @@ void InsertPengguna(Pengguna akun)
 {
     dataPengguna.contents[banyakPengguna] = akun;
     banyakPengguna += 1;
+        // graf
+    TambahPenggunaGraf(&dataTeman, akun);
 }
 
 void Daftar()
 {
-    if (isLoggedIn == true)
+    if (isLoggedIn)
     {
         printf("Anda sudah masuk. Keluar terlebih dahulu untuk melakukan daftar.\n");
     }
@@ -75,13 +78,14 @@ void Daftar()
             CreateStackDraf(&draf);
             daftarPengguna.draf = draf;
             InsertPengguna(daftarPengguna);
+
         }
     }
 }
 
 void Masuk()
 {
-    if (isLoggedIn == true)
+    if (isLoggedIn)
     {
         printf("Wah Anda sudah masuk. Keluar dulu yuk!\n");
     }
@@ -157,7 +161,7 @@ void Masuk()
 
 void Keluar()
 {
-    if (isLoggedIn == false)
+    if (!isLoggedIn)
     {
         printf("Anda belum login! Masuk terlebih dahulu untuk menikmati layanan BurBir.\n");
     }

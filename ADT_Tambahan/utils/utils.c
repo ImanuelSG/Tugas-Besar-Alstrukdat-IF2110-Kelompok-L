@@ -1,4 +1,7 @@
 #include "utils.h"
+#include "../teman/graf_teman.h"
+
+GrafTeman dataTeman;
 
 int getIdPengguna(Word nama)
 {
@@ -15,7 +18,7 @@ int getIdPengguna(Word nama)
         }
         else
         {
-            displayProfil(dataPengguna[i].profil);
+            // displayProfil(dataPengguna[i].profil);
             i++;
         }
     }
@@ -26,10 +29,7 @@ int getIdPengguna(Word nama)
 }
 boolean isBerteman(Word namaA, Word namaB)
 {
-    int idA = getIdPengguna(namaA);
-    int idB = getIdPengguna(namaB);
-
-    return (ELMT(matrixPertemanan, idA, idB) == 1);
+    return isTeman(&dataTeman, *getPengguna(namaA), *getPengguna(namaB));
 }
 Pengguna *getPengguna(Word nama)
 {
