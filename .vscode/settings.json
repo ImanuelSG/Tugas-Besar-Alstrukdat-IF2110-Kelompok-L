@@ -3,12 +3,18 @@
     "matrix.h": "c",
     "globalvar.h": "c",
     "wordoperations.h": "c",
+<<<<<<< HEAD
     "adt_kicauan.h": "c",
     "datetime.h": "c",
     "boolean.h": "c",
     "command_balasan.h": "c",
     "treebalasan.h": "c",
     "adt_balasan.h": "c"
+=======
+    "graf_teman.h": "c",
+    "pengguna.h": "c",
+    "command_balasan.h": "c"
+>>>>>>> 8ecd845aaadba867b374144878b217cf934d9ec1
   }
 }
 {

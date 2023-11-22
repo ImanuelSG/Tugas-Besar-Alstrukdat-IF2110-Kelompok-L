@@ -81,6 +81,8 @@ void printListKicauan(ListKicauan l, Word NamaPengguna)
     /* F.S. Jika l tidak kosong: tercetak daftar kicauan pengguna dan temannya */
     /*      Penulisan dari kicauan terbaru ke yang terlama */
     ID i;
+    printf("%d", getLastIdxKicau(l));
+    printf("%d", getFirstIdxKicau(l));
     for (i = getLastIdxKicau(l); i >= getFirstIdxKicau(l); i--) {
         if (isBerteman(NamaPengguna, PENULIS_KICAUAN(ELMT_LIST_KICAUAN(l, i)))) {
             PrintKicauan(ELMT_LIST_KICAUAN(l, i), i);
@@ -127,6 +129,7 @@ void insertLastKicau(ListKicauan *l, Kicauan val) {
     }
     NEFF_LIST_KICAUAN(*l) += 1;
     ELMT_LIST_KICAUAN(*l, getLastIdxKicau(*l)) = val;
+    CURRENT_ID_KICAUAN += 1;
 }
 
 /* ********* MENGUBAH UKURAN ARRAY ********* */
