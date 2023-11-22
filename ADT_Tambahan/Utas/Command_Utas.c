@@ -3,7 +3,6 @@
 //BERHUBUNGAN GLOBAL
 ListDinUtas lDinUtas;
 int IDUtas = 0;
-//CreateListDinUtas(&lDinUtas, 100);
 
 void UTAS(ID IDKicau){
     //Membuat utas dengan index ke-0 nya kicauan utama (buat node baru)
@@ -15,6 +14,9 @@ void UTAS(ID IDKicau){
     else if (!isIDKicauValid(IDKicau)){
         //Kicauan dengan ID IDKicau tak dibuat oleh currentPengguna 
         printf("Utas ini bukan milik Anda!\n");
+    }
+    else if (isKicauanUtamaUtas(lDinUtas, IDKicau)){
+        printf("Kicauan ini sudah pernah menjadi utas!\n");
     }
     else{
         Utas newUtas;
@@ -52,7 +54,6 @@ void UTAS(ID IDKicau){
 }
 
 void SAMBUNG_UTAS(int IDUtas, int index){
-    /*Validasi IDUtas dan index*/
     if (!isIDUtasValid(lDinUtas, IDUtas)){
         //Utas dengan IDUtas tidak ditemukan di LDinUtas
         printf("Utas tidak ditemukan!\n");
@@ -78,7 +79,6 @@ void SAMBUNG_UTAS(int IDUtas, int index){
 }
 
 void HAPUS_UTAS(int IDUtas, int index){
-    /*Validasi IDUtas dan index*/
     if (!isIDUtasValid(lDinUtas, IDUtas)){
         //Utas dengan IDUtas tidak ditemukan di LDinUtas
         printf("Utas tidak ditemukan!\n");
@@ -104,7 +104,6 @@ void HAPUS_UTAS(int IDUtas, int index){
 }
 
 void CETAK_UTAS(int IDUtas){
-    /*Validasi IDUtas terhadap list din*/
     if (!isIDUtasValid(lDinUtas, IDUtas)){
         //Utas dengan IDUtas tidak ditemukan di LDinUtas
         printf("Utas tidak ditemukan!\n");

@@ -4,7 +4,9 @@
 #include "utas.h"
 #include "listdinutas.h"
 #include <stdio.h>
+
 extern ListDinUtas lDinUtas;
+
 /****************** PRIMITIF ADT UTAS ******************/
 void UTAS(ID IDKicau);
 void SAMBUNG_UTAS(int IDUtas, int index);

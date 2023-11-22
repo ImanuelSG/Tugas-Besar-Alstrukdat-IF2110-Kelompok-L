@@ -3,6 +3,7 @@
 #include "listdinutas.h"
 
 ListDinUtas lDinUtas;
+
 /* ********** KONSTRUKTOR ********** */
 void CreateListDinUtas(ListDinUtas *l, int capacity)
 /* I.S. l sembarang, capacity > 0 */
@@ -28,16 +29,6 @@ int listDinUtasLength(ListDinUtas l)
     return NEFF(l);
 }
 
-// /* *** Selektor INDEKS *** */
-// IdxType getFirstIdxListDinUtas(ListDinUtas l)
-// /* Prekondisi : List l tidak kosong */
-// /* Mengirimkan indeks elemen l pertama */{
-
-// }
-// IdxType getLastIdxListDinUtas(ListDinUtas l);
-// /* Prekondisi : List l tidak kosong */
-// /* Mengirimkan indeks elemen l terakhir */
-
 /* ********** Test Indeks yang valid ********** */
 boolean isIdxListDinUtasValid(ListDinUtas l, IdxType i)
 /* Mengirimkan true jika i adalah indeks yang valid utk kapasitas list l */
@@ -62,20 +53,8 @@ boolean isFullListDinUtas(ListDinUtas l)
     return (NEFF(l) == CAPACITY(l));
 }
 
-/* ********** BACA dan TULIS dengan INPUT/OUTPUT device ********** */
-/* *** Mendefinisikan isi list dari pembacaan *** */
-// void readListDinUtas(ListDinUtas *l);
-// /* I.S. l sembarang dan sudah dialokasikan sebelumnya */
-// /* F.S. List l terdefinisi */
-// /* Proses : membaca banyaknya elemen l dan mengisi nilainya */
-// /* 1. Baca banyaknya elemen diakhiri enter, misalnya N */
-// /*    Pembacaan diulangi sampai didapat N yang benar yaitu 0 <= N <= CAPACITY(l) */
-// /*    Jika N tidak valid, tidak diberikan pesan kesalahan */
-// /* 2. Jika 0 < N <= CAPACITY(l); Lakukan N kali: Baca elemen mulai dari indeks
-//       0 satu per satu diakhiri enter */
-// /*    Jika N = 0; hanya terbentuk l kosong */
 void printListDinUtas(ListDinUtas l)
-/* Proses : Menuliskan isi list dengan traversal*/
+/* Proses : Menuliskan kumpulan utas dengan traversal*/
 /* I.S. l boleh kosong */
 /* F.S. Kumpulan utas */{
   int i;
@@ -113,20 +92,24 @@ IdxType indexOfListDinUtas(ListDinUtas l, ElType val)
 }
 
 ListUtas getUtas(ListDinUtas l, int IDUtas){
+    /*Menghasilkan ListUtas dengan IDUtas*/
   return ELMTUTAS(l, IDUtas-1);
 }
 
 boolean isUtasAuthorValid(ListDinUtas l, int IDUtas, Pengguna currentPengguna){
+    /*Menghasilkan true jika ListUtas dengan IDUtas dibuat oleh currentPengguna*/
     ListUtas lUtas = getUtas(l,IDUtas);
     Utas U = getKicauanUtas(lUtas, 0);
     return isSameWord(PENULISUTAS(U), currentPengguna.nama);
 }
 boolean isBertemanUtasAuthor(ListDinUtas l, int IDUtas, Pengguna currentPengguna){
+    /*Menghasilkan true jika author ListUtas dengan IDUtas berteman dengan currentPengguna*/
     ListUtas lUtas = getUtas(l,IDUtas);
     Utas U = getKicauanUtas(lUtas, 0);
     return isBerteman(currentPengguna.nama,PENULISUTAS(U));
 }
 boolean isIDUtasValid(ListDinUtas lDinUtas, int IDUtas){
+/*IDUtas valid untuk kapasitas ListDinUtas*/
     return (IDUtas >= 1 && IDUtas <= NEFF(lDinUtas));
 }
 /* ********** MENAMBAH DAN MENGHAPUS ELEMEN DI AKHIR ********** */
@@ -138,14 +121,6 @@ void insertLastListDinUtas(ListDinUtas *l, ElType val)
     ELMTUTAS(*l, NEFF(*l)) = val;
     NEFF(*l) += 1;
 }
-
-// /* ********** MENGHAPUS ELEMEN ********** */
-// void deleteLastListDinUtas(ListDinUtas *l, ElType *val);
-// /* Proses : Menghapus elemen terakhir list */
-// /* I.S. List tidak kosong */
-// /* F.S. val adalah nilai elemen terakhir l sebelum penghapusan, */
-// /*      Banyaknya elemen list berkurang satu */
-// /*      List l mungkin menjadi kosong */
 
 /* ********* MENGUBAH UKURAN ARRAY ********* */
 void expandListDinUtas(ListDinUtas *l, int num)
@@ -167,12 +142,18 @@ void expandListDinUtas(ListDinUtas *l, int num)
     }
 }
 
-// void shrinkListDinUtas(ListDinUtas *l, int num);
-// /* Proses : Mengurangi capacity sebanyak num */
-// /* I.S. List sudah terdefinisi, ukuran capacity > num, dan nEff < capacity - num. */
-// /* F.S. Ukuran list berkurang sebanyak num. */
-
-// void compressListDinUtas(ListDinUtas *l);
-// /* Proses : Mengubah capacity sehingga capacity = nEff */
-// /* I.S. List tidak kosong */
-// /* F.S. Ukuran capacity = nEff */
+boolean isKicauanUtamaUtas(ListDinUtas l, ID IDKICAU){
+/*Menghasilkan true jika kicauan dengan IDKicau telah dijadikan sebuah kicauan utama*/
+    boolean isKicauanUtama = false;
+    int i = 0;
+    while (i < NEFF(l) && !isKicauanUtama){
+        ListUtas lUtas =  ELMTUTAS(l, i);
+        if (getKicauanUtas(lUtas, 0).IDKicau == IDKICAU){
+            isKicauanUtama = true;
+        }
+        else{
+            i++;
+        }
+    }
+    return isKicauanUtama;
+}

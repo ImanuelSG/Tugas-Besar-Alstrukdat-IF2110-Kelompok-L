@@ -17,8 +17,6 @@ typedef struct utas
 {
     int IDUtas; // autoincrement, index dari listdinutas + 1
     ID IDKicau; //jika bukan kicauan utama idKicau = IDX_UNDEF
-    //int index; //index utas
-    //Kicauan kicauanUtama;  //kicauan utama dari utas
     Word utasAuthor;
     DATETIME WaktuKicauan;
     Word Tweet; // Isi kicauan
@@ -26,8 +24,6 @@ typedef struct utas
 
 #define IDUTAS(U) (U).IDUtas
 #define IDKICAU(U) (U).IDKicau
-//#define KICAUANUTAMA(U) (U).kicauanUtama
-//#define INDEX(U) (U).index
 #define PENULISUTAS(U) (U).utasAuthor
 #define WAKTUUTAS(U) (U).WaktuKicauan
 #define TWEETUTAS(U)  (U).Tweet
@@ -55,8 +51,6 @@ typedef Address_Utas ListUtas; //pointer to NodeUtas
 #define IDX_UNDEF_ListUtas (-1)
 #define FIRST(l) (l)
 
-//extern ListUtas LIST_UTAS;
-
 /* PROTOTYPE BERKAITAN LINKED LIST UTAS*/
 void CreateListUtas(ListUtas *l);
 /* I.S. sembarang             */
@@ -68,12 +62,6 @@ boolean isEmptyUtas(ListUtas l);
 InfoType getKicauanUtas(ListUtas l, int idx);
 /* I.S. l terdefinisi, idx indeks yang valid dalam l, yaitu 0..length(l) */
 /* F.S. Mengembalikan kicauan utas pada indeks linked list ke-idx */
-
-// int indexOfUtas(ListUtas l, InfoType val);
-// /* I.S. l, val terdefinisi */
-// /* F.S. Mencari apakah ada elemen list l yang bernilai val */
-// /* Jika ada, mengembalikan indeks elemen pertama l yang bernilai val */
-// /* Mengembalikan IDX_UNDEF jika tidak ditemukan */
 
 void insertFirstUtas(ListUtas *l, InfoType val);
 /* I.S. l mungkin kosong */
@@ -92,11 +80,6 @@ void insertAtUtas(ListUtas *l, InfoType val, int idx);
 /* F.S. Melakukan alokasi sebuah NodeUtas dan */
 /* menyisipkan elemen dalam listUtas pada indeks ke-idx (bukan menimpa elemen di i) */
 /* yang bernilai val jika alokasi berhasil. Jika alokasi gagal: I.S.= F.S. */
-
-// void deleteFirstUtas(ListUtas *l, InfoType *val);
-/* I.S. List l tidak kosong  */
-/* F.S. Elemen pertama list dihapus: nilai info disimpan pada x */
-/*      dan alamat elemen pertama di-dealokasi */
 
 void deleteAtUtas(ListUtas *l, int idx, InfoType *val);
 /* I.S. list tidak kosong, idx indeks yang valid dalam l, yaitu 0..length(l) */
@@ -118,6 +101,7 @@ boolean isIDKicauValid(ID IDKicau);
 boolean isIndexUtasValid(ListUtas lUtas, int index);
 /*Mengirimkan true jika utas dengan index index ditemukan di ListUtas*/
 void printKicauanUtas(Utas U, int index);
+/* Kicauan yang merupakan bagian dari utas tercetak di layar*/ 
 void sambungKicauanUtas(Utas sambunganUtas, ID IDUtas, int index, ListUtas lUtas);
 
 #endif

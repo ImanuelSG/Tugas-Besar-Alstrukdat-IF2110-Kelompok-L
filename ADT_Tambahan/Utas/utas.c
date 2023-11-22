@@ -9,8 +9,6 @@ void createKicauanUtas(Utas *U, int IDUtas, ID IDKicau, Word utasAuthor, DATETIM
     //Membuat utas secara individual dari komponennya
     IDUTAS(*U) = IDUtas;
     IDKICAU(*U) = IDKicau;
-    //KICAUANUTAMA(*U) = kicauanUtama; 
-    //INDEX(*U) = index;
     PENULISUTAS(*U) = utasAuthor;
     WAKTUUTAS(*U) = WaktuKicauan;
     TWEETUTAS(*U) = Tweet;
@@ -26,7 +24,6 @@ Address_Utas newNodeKicauanUtas(InfoType val){
     return new;
 }
 
-//ListUtas LIST_UTAS;/////////
 /* PROTOTYPE BERKAITAN LINKED LIST UTAS*/
 void CreateListUtas(ListUtas *l)
 /* I.S. sembarang             */
@@ -99,16 +96,6 @@ void insertAtUtas(ListUtas *l, InfoType val, int idx)
         }
     }
 }
-
-// void deleteFirstUtas(ListUtas *l, InfoType *val)
-// /* I.S. List l tidak kosong  */
-// /* F.S. Elemen pertama list dihapus: nilai info disimpan pada x */
-// /*      dan alamat elemen pertama di-dealokasi */{
-//     Address_Utas temp = FIRST(*l);
-//     *val = INFO(temp);
-//     FIRST(*l) = NEXT(temp);
-//     free(temp);
-// }
 
 void deleteAtUtas(ListUtas *l, int idx, InfoType *val)
 /* I.S. list tidak kosong, idx indeks yang valid dalam l, yaitu 0..length(l) */

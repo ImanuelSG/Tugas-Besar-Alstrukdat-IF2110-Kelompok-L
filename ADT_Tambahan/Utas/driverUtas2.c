@@ -58,5 +58,5 @@ int main(){
     ListUtas lUtas = getUtas(lDinUtas,1);
     displayListUtas(lUtas);
 
-    HAPUS_UTAS(3, 3);
+    UTAS(1);
 }
