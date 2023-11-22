@@ -21,7 +21,7 @@ void TambahPenggunaGraf(GrafTeman* G, Pengguna V) {
     G->ListVertex[G->NEffVertex] = V;
     ++G->NEffVertex;
 }
-Request CreateRequest(Pengguna v1,Pengguna v2, int BanyakTeman){
+Request CreateRequest(Pengguna v1,Pengguna v2, int BanyakTeman) {
     Request R;
     R.pengirim = v1;
     R.penerima = v2;
@@ -125,8 +125,12 @@ void AcceptFriendRequest(GrafTeman* G, Request R) {
         Word search_pengirim = (G->ListOfFriendRequests[i].pengirim.nama);
         Word search_penerima = (G->ListOfFriendRequests[i].penerima.nama);
 
-        if (isSameWord(nama_penerima, search_penerima) && isSameWord(nama_penerima, search_penerima)) {
+        if (isSameWord(nama_pengirim, search_pengirim) && isSameWord(nama_penerima, search_penerima)) {
             found = true;
+            // displayWord(nama_penerima); newline;
+            // displayWord(search_penerima); newline;
+            // displayWord(nama_pengirim); newline;
+            // displayWord(search_pengirim); newline;
         }
         else {
             ++i;
@@ -134,16 +138,17 @@ void AcceptFriendRequest(GrafTeman* G, Request R) {
     }
 
     if(!found) {
-        printf("Something went wronG->.. there isn't a friend request with those details!\n");
+        printf("Something went wrong->.. ther isn't a friend request with those details!\n");
     }
 
     TambahPertemanan(G, R.pengirim, R.penerima);
 
-    while (i < G->NEffFriendRequests) {
+
+    printf("i = %d, ", G->NEffFriendRequests);
+    while (i < G->NEffFriendRequests - 1) {
         G->ListOfFriendRequests[i] = G->ListOfFriendRequests[i+1];
         ++i;
     }
-
 
     --G->NEffFriendRequests;
 
