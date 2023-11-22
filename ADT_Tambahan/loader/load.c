@@ -180,67 +180,85 @@ void ReadUtasConfig(char namafile[])
     }
 }
 
-// void parseId(Word w, int *idparent, int *idbalasan)
-// {
-//     int i = 0;
-//     int id = 0;
-//     int isneg = 1;
-//     while (w.TabWord[i] != ' ')
-//     {
-//         if (w.TabWord[i] == '-')
-//         {
-//             isneg = -1;
-//             i++;
-//         }
-//         else
-//         {
-//             id *= 10;
-//             id += charToDigit(w.TabWord[i]);
-//             i++;
-//         }
-//     }
-//     *idparent = id * isneg;
-//     int last = w.Length - 1;
-//     int num = 0;
-//     int pengkali = 1;
-//     while (w.TabWord[last] != ' ')
-//     {
-//         num += charToDigit(w.TabWord[last]) * pengkali;
-//         pengkali *= 10;
-//         last--;
-//     }
-//     *idbalasan = num;
-// }
+void parseId(Word w, int *idparent, int *idbalasan)
+{
+    int i = 0;
+    int id = 0;
+    int isneg = 1;
+    while (w.TabWord[i] != ' ')
+    {
+        if (w.TabWord[i] == '-')
+        {
+            isneg = -1;
+            i++;
+        }
+        else
+        {
+            id *= 10;
+            id += charToDigit(w.TabWord[i]);
+            i++;
+        }
+    }
+    *idparent = id * isneg;
+    int last = w.Length - 1;
+    int num = 0;
+    int pengkali = 1;
+    while (w.TabWord[last] != ' ')
+    {
+        num += charToDigit(w.TabWord[last]) * pengkali;
+        pengkali *= 10;
+        last--;
+    }
+    *idbalasan = num;
+}
 
-// void ReadBalasanConfig(char namafile[])
-// {
-//     int iteration;
-//     STARTBaris(namafile);
-//     iteration = wordToInteger(currentBaris);
-//     JUMLAH_KICAUAN_DENGAN_BALASAN = iteration;
+void ReadBalasanConfig(char namafile[])
+{
+    int iteration;
+    STARTBaris(namafile);
+    iteration = wordToInteger(currentBaris);
+    CreateListBalasan(&ListBalasanData, 100);
+    JUMLAH_KICAUAN_DENGAN_BALASAN = iteration;
 
-//     for (int i = 0; i < iteration; i++)
-//     {
-//         ADVBaris(); // curr baris == "ID Kicau Utama"
-//         ID IDKicauUtama = wordToInteger(currentBaris);
-//         ADVBaris(); // vurr baris == "jumlah balasan"
-//         int jumlahbalasan = wordToInteger(currentBaris);
-//         for (int j = 0; j < jumlahbalasan; j++)
-//         {
-//             ADVBaris();
-//             int idparent, idbalasan;
-//             parseId(currentBaris, &idparent, &idbalasan);
-//             ADVBaris();
-//             Word text = currentBaris;
-//             ADVBaris();
-//             Word Author = currentBaris;
-//             ADVBaris();
-//             DATETIME Waktu = wordToDatetime(currentBaris);
-//             Balasan B;
-//             CreateBalasan(&B, Author, Waktu, text, &ELMT_LIST_KICAUAN(ListKicauanData, IDKicauUtama));
-//         }
-//     }
-// }
+    for (int i = 0; i < iteration; i++)
+    {
+        ADVBaris(); // curr baris == "ID Kicau Utama"
+        ID IDKicauUtama = wordToInteger(currentBaris);
+        ADVBaris(); // curr baris == "jumlah balasan"
+        int jumlahbalasan = wordToInteger(currentBaris);
+        for (int j = 0; j < jumlahbalasan; j++)
+        {
+            ADVBaris();
+            int idparent, idbalasan;
+            parseId(currentBaris, &idparent, &idbalasan);
+
+            ADVBaris();
+            Word text = currentBaris;
+            ADVBaris();
+            Word Author = currentBaris;
+            ADVBaris();
+            DATETIME Waktu = wordToDatetime(currentBaris);
+            Balasan B;
+            Kicauan * K= &ELMT_LIST_KICAUAN(ListKicauanData, IDKicauUtama);
+            
+            CreateBalasan(&B, Author, Waktu, text, K);
+            currentPengguna.nama = Author;
+            
+            
+            
+            if (idbalasan == -1)
+            {
+                insertChild(&ELMT_LIST_BALASAN(ListBalasanData, IDKicauUtama), B);
+                PrintBalasan(ELMT_LIST_BALASAN(ListBalasanData, IDKicauUtama)->info_tree, 0);
+            }
+            else
+            {
+                Address P = searchTree(ELMT_LIST_BALASAN(ListBalasanData, IDKicauUtama), idparent);
+                insertChild(&P, B);
+            }
+        }
+    }
+}
 
 int isDirectoryExists(const char *path)
 {
@@ -373,7 +391,6 @@ void WriteDrafConfig(char namafile[])
 
     while (i < banyakPengguna && j < temp)
     {
-        printf("Nilai i = %d, nilai j = %d banyak pengguna = %d  banyak draf = %d \n", i, j, banyakPengguna, BanyakPenggunaDenganDraf);
         Pengguna Curr = dataPengguna[i];
         if (!isEmptyStackDraf(Curr.draf))
         {
@@ -393,5 +410,6 @@ void WriteDrafConfig(char namafile[])
         }
         i++;
     }
+    BanyakPenggunaDenganDraf = temp;
     fclose(file); // Close the file
 }
