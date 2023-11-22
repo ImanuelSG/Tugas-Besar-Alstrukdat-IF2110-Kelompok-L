@@ -6,6 +6,7 @@
 #include "../utils/utils.h"
 #include "../DrafKicauan/StackDraf.h"
 #include "../teman/graf_teman.h"
+#include "liststatikpengguna.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -31,6 +32,7 @@ void InsertPengguna(Pengguna akun)
 {
     dataPengguna.contents[banyakPengguna] = akun;
     banyakPengguna += 1;
+    dataPengguna.Neff += 1 ;
         // graf
     TambahPenggunaGraf(&dataTeman, akun);
 }

@@ -20,6 +20,7 @@ int main()
     CreateGrafTeman(&dataTeman);
 
     initializeKeyWords();
+    displayLogoBurbir();
     displayBurbir();
     FILE *f;
 

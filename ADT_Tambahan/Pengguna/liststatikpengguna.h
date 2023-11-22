@@ -6,25 +6,26 @@
 #ifndef ListStatikPengguna_H
 #define ListStatikPengguna_H
 
-#include "boolean.h"
+#include "../../ADT_Bawaan/boolean.h"
 #include "pengguna.h"
 
 /*  Kamus Umum */
-#define CAPACITY 20
+#define CAPACITUS 20
 /* Kapasitas penyimpanan */
-#define IDX_MIN 0
+#define IDX_MINUS 0
 /* Indeks minimum list */
-#define IDX_UNDEF -1
+#define IDX_UNDEFUS -1
 /* Indeks tak terdefinisi*/
-#define MARK -9999
+#define MARKUS -9999
 /* Nilai elemen tak terdefinisi*/
 
 /* Definisi elemen dan koleksi objek */
 typedef int IdxType;
 typedef struct {
-   Pengguna contents[CAPACITY]; /* memori tempat penyimpan elemen (container) */
+   Pengguna contents[CAPACITUS]; /* memori tempat penyimpan elemen (container) */
    int Neff ;
 } ListStatikPengguna;
+extern ListStatikPengguna dataPengguna;
 /* Indeks yang digunakan [0..CAPACITY-1] */
 /* Jika l adalah ListStatik, cara deklarasi dan akses: */
 /* Deklarasi : l : ListStatik */
@@ -35,7 +36,7 @@ typedef struct {
    Definisi elemen pertama: ELMT(l,i) dengan i=0 */
 
 /* ********** SELEKTOR ********** */
-#define ELMT(l, i) (l).contents[(i)]
+#define ELMTListStikStatik(l, i) (l).contents[(i)]
 
 /* ********** KONSTRUKTOR ********** */
 /* Konstruktor : create List kosong  */

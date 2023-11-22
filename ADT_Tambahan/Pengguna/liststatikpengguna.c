@@ -18,7 +18,7 @@ boolean isEmpty(ListStatikPengguna l) {
 /* Mengirimkan true jika List l kosong, mengirimkan false jika tidak */
 /* *** Test List penuh *** */
 boolean isFull(ListStatikPengguna l) {
-   return l.Neff == CAPACITY ;
+   return l.Neff == CAPACITUS ;
 }
 /* Mengirimkan true jika List l penuh, mengirimkan false jika tidak */
 
