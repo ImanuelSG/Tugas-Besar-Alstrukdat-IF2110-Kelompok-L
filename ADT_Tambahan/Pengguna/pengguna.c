@@ -30,6 +30,7 @@ void CreatePengguna(Pengguna *akun, Word NAMA, Word SANDI, Word BIO, Word NOMOR,
 void InsertPengguna(Pengguna akun)
 {
     dataPengguna.contents[banyakPengguna] = akun;
+    dataPengguna.Neff += 1 ;
     banyakPengguna += 1;
         // graf
     TambahPenggunaGraf(&dataTeman, akun);

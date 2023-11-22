@@ -8,8 +8,6 @@
 #include "../DrafKicauan/StackDraf.h"
 #include <stdio.h>
 
-extern Pengguna currentPengguna; /*Berisi Data Current Pengguna*/
-
 typedef struct
 {
     Word nama;

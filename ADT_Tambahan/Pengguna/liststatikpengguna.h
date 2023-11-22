@@ -6,7 +6,6 @@
 #ifndef ListStatikPengguna_H
 #define ListStatikPengguna_H
 
-#include "boolean.h"
 #include "pengguna.h"
 
 /*  Kamus Umum */
@@ -35,7 +34,6 @@ typedef struct {
    Definisi elemen pertama: ELMT(l,i) dengan i=0 */
 
 /* ********** SELEKTOR ********** */
-#define ELMT(l, i) (l).contents[(i)]
 
 /* ********** KONSTRUKTOR ********** */
 /* Konstruktor : create List kosong  */
