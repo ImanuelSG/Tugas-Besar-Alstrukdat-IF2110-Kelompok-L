@@ -9,7 +9,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-Pengguna dataPengguna[20]; /*List Pengguna*/
+// isloggedin untuk semua fungsi
+
+ListStatikPengguna dataPengguna; /*List Pengguna*/
 int banyakPengguna = 0;
 Pengguna currentPengguna;
 
@@ -27,8 +29,7 @@ void CreatePengguna(Pengguna *akun, Word NAMA, Word SANDI, Word BIO, Word NOMOR,
 
 void InsertPengguna(Pengguna akun)
 {
-
-    dataPengguna[banyakPengguna] = akun;
+    dataPengguna.contents[banyakPengguna] = akun;
     banyakPengguna += 1;
         // graf
     TambahPenggunaGraf(&dataTeman, akun);
@@ -99,26 +100,62 @@ void Masuk()
         while (idxPengguna == -1)
         {
             printf("Wah, nama yang Anda cari tidak ada. Masukkan nama lain!\n");
+
+            Word ya, no;
+            boolean valid ;
+            ya = stringToWord("YA", 2);
+            no = stringToWord("TIDAK", 5); 
+
+            printf("Ingin melanjutkan? (YA/TIDAK)\n");
+            STARTKalimat();
+                if (isSameWord(currentWord, ya))
+                {}
+                else if (isSameWord(currentWord, no))
+                {
+                    idxPengguna = -999 ;
+                    break ;
+                }
+                else
+                {
+                    valid = false;
+                    while (!valid)
+                    {
+                        valid = true;
+                        printf("(YA/TIDAK) huruf besar!\n");
+                        STARTKalimat();
+                        if (isSameWord(currentWord, ya)){
+
+                        }
+                        else if (isSameWord(currentWord, no))
+                        {
+                            idxPengguna = -999 ;
+                            break ;
+                        }
+                        else
+                            valid = false;
+                    }
+                }
             printf("Masukkan nama: ");
             STARTKalimat();
             printf("\n");
             idxPengguna = getIdPengguna(currentWord);
         }
-
-        printf("Masukkan kata sandi: ");
-        STARTKalimat();
-        printf("\n");
-        while (!isSameWord(dataPengguna[idxPengguna].sandi, currentWord))
-        {
-            printf("Wah, kata sandi yang Anda masukkan belum tepat. Periksa kembali kata sandi Anda!\n");
+        if (idxPengguna != -999) {
             printf("Masukkan kata sandi: ");
             STARTKalimat();
             printf("\n");
-        }
-        printf("Anda telah berhasil masuk. Mari menjelajahi BurBir bersama Ande-Ande Lumut!\n");
+            while (!isSameWord(dataPengguna.contents[idxPengguna].sandi, currentWord))
+            {
+                printf("Wah, kata sandi yang Anda masukkan belum tepat. Periksa kembali kata sandi Anda!\n");
+                printf("Masukkan kata sandi: ");
+                STARTKalimat();
+                printf("\n");
+            }
+            printf("Anda telah berhasil masuk. Mari menjelajahi BurBir bersama Ande-Ande Lumut!\n");
 
-        isLoggedIn = true;
-        currentPengguna = dataPengguna[idxPengguna];
+            isLoggedIn = true;
+            currentPengguna = dataPengguna.contents[idxPengguna];
+        }
     }
 }
 
