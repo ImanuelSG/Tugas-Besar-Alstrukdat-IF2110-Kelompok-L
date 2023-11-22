@@ -5,7 +5,6 @@
 #include "../../ADT_Bawaan/boolean.h"
 #include "../../ADT_Bawaan/wordmachine/wordmachine.h"
 #include "../../ADT_Bawaan/datetime/datetime.h"
-#include "../Globals/globalvar.h"
 #include "../Kicauan/ADT_Kicauan.h"
 
 /* ********** DEFINISI TYPE BALASAN ********** */

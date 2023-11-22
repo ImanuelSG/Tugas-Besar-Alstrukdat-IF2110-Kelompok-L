@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "ADT_Balasan.h"
 #include "../utils/utils.h"
+#include "../Globals/globalvar.h"
 
 /* ********** PRIMITIF-PRIMITIF UNTUK TYPE BALASAN ********** */
 /* *** KONSTRUKTOR *** */

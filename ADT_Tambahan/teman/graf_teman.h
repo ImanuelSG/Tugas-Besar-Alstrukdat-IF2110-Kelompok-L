@@ -70,6 +70,7 @@ Request* ListOfFriendRequests(GrafTeman* G, Pengguna user);
 void DisplayTeman(GrafTeman* G, Pengguna user);
 void DisplayFriendRequests(GrafTeman* G, Pengguna user);
 
+void UpdateMatrixPertemanan(GrafTeman* G, Matrix pertemanan, Matrix friendReq);
 
 /* main.c Commands*/
 void DAFTAR_TEMAN();

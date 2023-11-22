@@ -1,5 +1,9 @@
 #include "graf_teman.h"
 #include "../utils/utils.h"
+#include "../Globals/globalvar.h"
+#include "../Pengguna/liststatikpengguna.h"
+#include "../../ADT_Bawaan/matrix/matrix.h"
+
 #include <stdio.h>
 #define newline printf("\n")
 // aku benci syntax printf scanf
@@ -44,7 +48,7 @@ void CreateGrafTeman(GrafTeman* G) {
 
     int i;
     for(i = 0; i < banyakPengguna; i++) {
-        TambahPenggunaGraf(G, dataPengguna[i]);
+        TambahPenggunaGraf(G, dataPengguna.contents[i]);
     }
 
     int j;
@@ -53,7 +57,7 @@ void CreateGrafTeman(GrafTeman* G) {
 
             if (i != j) {
                 if (ELMT(matrixPertemanan, i, j)) {
-                    TambahPertemanan(G, dataPengguna[i], dataPengguna[j]);
+                    TambahPertemanan(G, dataPengguna.contents[i], dataPengguna.contents[j]);
                 }
             }
         }
@@ -63,8 +67,8 @@ void CreateGrafTeman(GrafTeman* G) {
     printf("roweff %d\n", ROW_EFF(matrixPertemanan));
     for (i = 0; i < ROW_EFF(matrixPermintaan); i++) {
 
-        Pengguna v1 = dataPengguna[ELMT(matrixPertemanan, i, 0)];
-        Pengguna v2 = dataPengguna[ELMT(matrixPertemanan, i, 1)];
+        Pengguna v1 = dataPengguna.contents[ELMT(matrixPertemanan, i, 0)];
+        Pengguna v2 = dataPengguna.contents[ELMT(matrixPertemanan, i, 1)];
         int BanyakTeman = ELMT(matrixPertemanan, i, 2);
 
         Request R = CreateRequest(v1, v2, BanyakTeman);
@@ -274,6 +278,24 @@ void DisplayFriendRequests(GrafTeman* G, Pengguna user) {
     }
 }
 
+void UpdateMatrixPertemanan(GrafTeman* G, Matrix pertemanan, Matrix friendReq) {
+    int i,j;
+    createMatrix(G->NEffVertex, G->NEffVertex, &matrixPertemanan);
+    for (i = 0; i < (G->NEffEdges); i++) {
+        int idx1 = getIdPengguna(G->ListOfEdges[i].vertex1.nama);
+        int idx2 = getIdPengguna(G->ListOfEdges[i].vertex2.nama);
+        ELMT(matrixPertemanan, idx1, idx2) = 1;
+        ELMT(matrixPertemanan, idx2, idx1) = 1;
+    }
+
+    int k;
+    createMatrix(G->NEffFriendRequests, 3, &matrixPermintaan);
+    for (k = 0; k < G->NEffFriendRequests; k++) {
+        ELMT(matrixPermintaan, k, 0) = getIdPengguna(G->ListOfFriendRequests[k].penerima.nama);
+        ELMT(matrixPermintaan, k, 1) = getIdPengguna(G->ListOfFriendRequests[k].penerima.nama);
+        ELMT(matrixPermintaan, k, 2) = G->ListOfFriendRequests[k].BanyaknyaTeman;
+    }
+}
 
 
 

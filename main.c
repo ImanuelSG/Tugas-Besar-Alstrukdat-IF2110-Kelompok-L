@@ -20,6 +20,7 @@ int main()
     CreateGrafTeman(&dataTeman);
 
     initializeKeyWords();
+    displayLogoBurbir();
     displayBurbir();
     FILE *f;
 
@@ -148,17 +149,29 @@ int main()
 
             else if (isSameWord(perintah, stringToWord("BALAS", 5)))
             {
-                printf("Panggil fungsi BALAS");
+                ADVWORD();
+                int id_kicau = wordToInteger(currentWord);
+                ADVWORD();
+                int id_balasan = wordToInteger(currentWord);
+                
+                BALAS(id_kicau, id_balasan);
             }
 
             else if (isSameWord(perintah, stringToWord("BALASAN", 7)))
             {
-                printf("Panggil fungsi BALASAN");
+                ADVWORD();
+                int id_kicau = wordToInteger(currentWord);
+                BALASAN(id_kicau);
             }
 
             else if (isSameWord(perintah, stringToWord("HAPUS_BALASAN", 13)))
             {
-                printf("Panggil fungsi HAPUS_BALASAN");
+                ADVWORD();
+                int id_kicau = wordToInteger(currentWord);
+                ADVWORD();
+                int id_balasan = wordToInteger(currentWord);
+
+                HAPUS_BALASAN(id_kicau, id_balasan);
             }
 
             /*------------------------------ DRAF ---------------------------------*/
