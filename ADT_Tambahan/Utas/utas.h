@@ -19,7 +19,7 @@ typedef struct utas
     ID IDKicau; //jika bukan kicauan utama idKicau = IDX_UNDEF
     //int index; //index utas
     //Kicauan kicauanUtama;  //kicauan utama dari utas
-    Pengguna utasAuthor;
+    Word utasAuthor;
     DATETIME WaktuKicauan;
     Word Tweet; // Isi kicauan
 } Utas;
@@ -33,27 +33,29 @@ typedef struct utas
 #define TWEETUTAS(U)  (U).Tweet
 
 /* ****************** KONSTRUKTOR ADT UTAS *******************/
-void createKicauanUtas(Utas *U, int IDUtas, ID IDKicau, Pengguna utasAuthor, DATETIME WaktuKicauan, Word Tweet);
+void createKicauanUtas(Utas *U, int IDUtas, ID IDKicau, Word utasAuthor, DATETIME WaktuKicauan, Word Tweet);
 /*Menyusun utas dari komponennya*/
 
 /* ****************** Definisi Node Utas *******************/
 typedef Utas InfoType;
-typedef struct nodeutas* Address;
+typedef struct nodeutas* Address_Utas;
 typedef struct nodeutas {
     InfoType info;
-    Address next;
+    Address_Utas next;
 } NodeUtas;
 
 #define INFO(p) (p)->info
 #define NEXT(p) (p)->next
 
-Address newNodeKicauanUtas(InfoType val);
+Address_Utas newNodeKicauanUtas(InfoType val);
 /*Node berisi kicauan utas*/
 
 /* ****************** Definisi Linked List Utas  *******************/
-typedef Address ListUtas; //pointer to NodeUtas
-#define IDX_UNDEF (-1)
+typedef Address_Utas ListUtas; //pointer to NodeUtas
+#define IDX_UNDEF_ListUtas (-1)
 #define FIRST(l) (l)
+
+//extern ListUtas LIST_UTAS;
 
 /* PROTOTYPE BERKAITAN LINKED LIST UTAS*/
 void CreateListUtas(ListUtas *l);
@@ -113,7 +115,6 @@ boolean IDKicauFound(ID IDKicau);
 /*Mengirimkan true jika kicauan dengan IDKicau tidak ditemukan di listKicauan*/
 boolean isIDKicauValid(ID IDKicau);
 /*Mengirimkan true jika kicauan dengan IDKicau dibuat oleh currentPengguna */
-boolean isIDUtasValid(ListDinUtas lDinUtas, int IDUtas);
 boolean isIndexUtasValid(ListUtas lUtas, int index);
 /*Mengirimkan true jika utas dengan index index ditemukan di ListUtas*/
 void printKicauanUtas(Utas U, int index);

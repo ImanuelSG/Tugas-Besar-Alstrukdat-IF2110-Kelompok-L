@@ -8,7 +8,7 @@ int IDUtas = 0;
 void UTAS(ID IDKicau){
     //Membuat utas dengan index ke-0 nya kicauan utama (buat node baru)
     //setelah linked list listUtas terbuat, insert ke listdin listDinUtas
-    if (!IDKicauFound(IDKicau)){
+    if (!isIdxEffKicau(ListKicauanData, IDKicau)){
         //Kicauan dengan ID IDKicau tidak ditemukan di listKicauan
         printf("Kicauan tidak ditemukan\n");
     }
@@ -21,18 +21,17 @@ void UTAS(ID IDKicau){
         ListUtas lUtas;
         int index = 0;
         IDUtas ++;
-        Kicauan kicauanUtama = ELMT_LIST_KICAUAN(ListKicauanData, IDKicau-1);
+        Kicauan kicauanUtama = ELMT_LIST_KICAUAN(ListKicauanData, IDKicau);
 
         printf("Utas berhasil dibuat!\n"); printf("\n");
-        createKicauanUtas(&newUtas, IDUtas, IDKicau, currentPengguna, WAKTU_KICAUAN(kicauanUtama), TWEET(kicauanUtama));
+        createKicauanUtas(&newUtas, IDUtas, IDKicau, currentPengguna.nama, WAKTU_KICAUAN(kicauanUtama), TWEET(kicauanUtama));
         CreateListUtas(&lUtas); //membuat lUtas kosong
         insertFirstUtas(&lUtas, newUtas); //memasukkan newUtas ke lUtas
         insertLastListDinUtas(&lDinUtas, lUtas); //memasukkan lUtas baru ke lDinUtas
-    
+
         Utas sambunganUtas;
         index++;
         sambungKicauanUtas(sambunganUtas, IDUtas, index, lUtas);
-        //insertLastListDinUtas(&lDinUtas, lUtas);
 
         Word Ya;
         Ya.TabWord[0] = 'Y'; Ya.TabWord[1] = 'A';
@@ -64,7 +63,10 @@ void SAMBUNG_UTAS(int IDUtas, int index){
     }
     else{
         ListUtas lUtas = getUtas(lDinUtas,IDUtas);
-        if (!isIndexUtasValid(lUtas, index)) { 
+        if (index == 0){
+            printf("Anda tidak bisa menyambung pada kicauan utama!\n");
+        }
+        else if (!isIndexUtasValid(lUtas, index)) { 
             //Utas dengan index tidak ditemukan di lUtas
             printf("Index terlalu tinggi!");
         }

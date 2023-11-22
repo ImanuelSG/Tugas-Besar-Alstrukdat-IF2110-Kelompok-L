@@ -5,7 +5,7 @@
 #define GRAF_TEMAN_H 
 
 #include "../Pengguna/pengguna.h"
-#include "../Globals/globalvar.h"
+#include "../../ADT_Bawaan/matrix/matrix.h"
 
 #define MAKS_PENGGUNA 20
 
@@ -38,7 +38,8 @@ typedef struct {
 } GrafTeman;
 
 
-
+extern Matrix matrixPertemanan;/*Matrix Pertemanan*/
+extern Matrix matrixPermintaan;/*Matrix Permintaan*/
 extern GrafTeman dataTeman;
 
 // tes

@@ -127,6 +127,7 @@ void insertLastKicau(ListKicauan *l, Kicauan val) {
     }
     NEFF_LIST_KICAUAN(*l) += 1;
     ELMT_LIST_KICAUAN(*l, getLastIdxKicau(*l)) = val;
+    CURRENT_ID_KICAUAN+=1;
 }
 
 /* ********* MENGUBAH UKURAN ARRAY ********* */

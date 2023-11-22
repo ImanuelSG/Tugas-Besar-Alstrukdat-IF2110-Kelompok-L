@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "listdinutas.h"
 
+ListDinUtas lDinUtas;
 /* ********** KONSTRUKTOR ********** */
 void CreateListDinUtas(ListDinUtas *l, int capacity)
 /* I.S. l sembarang, capacity > 0 */
@@ -118,12 +119,15 @@ ListUtas getUtas(ListDinUtas l, int IDUtas){
 boolean isUtasAuthorValid(ListDinUtas l, int IDUtas, Pengguna currentPengguna){
     ListUtas lUtas = getUtas(l,IDUtas);
     Utas U = getKicauanUtas(lUtas, 0);
-    return isSameWord(PENULISUTAS(U).nama, currentPengguna.nama);
+    return isSameWord(PENULISUTAS(U), currentPengguna.nama);
 }
 boolean isBertemanUtasAuthor(ListDinUtas l, int IDUtas, Pengguna currentPengguna){
     ListUtas lUtas = getUtas(l,IDUtas);
     Utas U = getKicauanUtas(lUtas, 0);
-    return isBerteman(currentPengguna.nama,PENULISUTAS(U).nama);
+    return isBerteman(currentPengguna.nama,PENULISUTAS(U));
+}
+boolean isIDUtasValid(ListDinUtas lDinUtas, int IDUtas){
+    return (IDUtas >= 1 && IDUtas <= NEFF(lDinUtas));
 }
 /* ********** MENAMBAH DAN MENGHAPUS ELEMEN DI AKHIR ********** */
 /* *** Menambahkan elemen terakhir *** */

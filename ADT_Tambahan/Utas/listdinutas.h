@@ -42,7 +42,7 @@ typedef struct listdinutas
 #define ELMTUTAS(l, i) (l).buffer[i]
 #define CAPACITY(l) (l).capacity
 
-extern ListDinUtas lDinUtas;
+//extern ListDinUtas lDinUtas;
 
 /* ********** KONSTRUKTOR ********** */
 void CreateListDinUtas(ListDinUtas *l, int capacity);
@@ -110,6 +110,7 @@ IdxType indexOfListDinUtas(ListDinUtas l, ElType val);
 ListUtas getUtas(ListDinUtas l, int IDUtas);
 boolean isUtasAuthorValid(ListDinUtas l, int IDUtas, Pengguna currentPengguna);
 boolean isBertemanUtasAuthor(ListDinUtas l, int IDUtas, Pengguna currentPengguna);
+boolean isIDUtasValid(ListDinUtas lDinUtas, int IDUtas);
 
 /* ********** MENAMBAH DAN MENGHAPUS ELEMEN DI AKHIR ********** */
 /* *** Menambahkan elemen terakhir *** */

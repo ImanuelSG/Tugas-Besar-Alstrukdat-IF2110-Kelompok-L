@@ -1,6 +1,5 @@
-#include "StackDraf.h"
-#include "../Kicauan/listdinkicauan.h"
 #include <stdio.h>
+#include "Command_Draf.h"
 
 void BUAT_DRAF(StackDraf *s, Word Penulis)
 {
@@ -14,7 +13,7 @@ void BUAT_DRAF(StackDraf *s, Word Penulis)
     else
     {
         printf("Apakah anda ingin menghapus, menyimpan, atau menerbitkan draf ini?\n");
-        STARTKalimat();
+        STARTWORD();
         printf("\n");
         Word HAPUS = stringToWord("HAPUS", 5);
         Word SIMPAN = stringToWord("SIMPAN", 6);
@@ -33,7 +32,6 @@ void BUAT_DRAF(StackDraf *s, Word Penulis)
             printf("Draf telah berhasil disimpan!\n");
         }
         else if (isSameWord(currentWord, TERBIT))
-
         {
             Kicauan K;
             DATETIME WaktuKicauan;

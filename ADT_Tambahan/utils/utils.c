@@ -1,7 +1,6 @@
 #include "utils.h"
 #include "../teman/graf_teman.h"
 
-GrafTeman dataTeman;
 
 int getIdPengguna(Word nama)
 {

@@ -1,11 +1,11 @@
 #include <stdlib.h>
 #include "StackDraf.h"
 #include <stdio.h>
-/* Prototype manajemen memori */
+
 
 int BanyakPenggunaDenganDraf = 0;
 
-AddressDraf newNode(ElTypeDraf x)
+AddressDraf newNodeDraf(ElTypeDraf x)
 {
     AddressDraf P = (AddressDraf)malloc(sizeof(Node));
     if (P != NULL)
@@ -67,7 +67,7 @@ void DisplayStackDraf(StackDraf s)
 void SimpanDraf(StackDraf *s, ElTypeDraf x)
 {
 
-    AddressDraf Num = newNode(x);
+    AddressDraf Num = newNodeDraf(x);
     if (Num != NULL)
     {
         if (isEmptyStackDraf(*s))
@@ -96,11 +96,7 @@ void DeleteDraf(StackDraf *s, ElTypeDraf *x)
     }
     free(p);
 }
-/* Menghapus Top dari StackDraf s */
-/* I.S. s tidak kosong */
-/* F.S. x adalah nilai elemen Top yang lama, */
-/*      elemen Top yang lama didealokasi */
-/* Pada dasarnya adalah operasi deleteFirst pada list linier */
+
 void ReverseStackDraf(StackDraf *s)
 {
     StackDraf temp;
@@ -112,4 +108,31 @@ void ReverseStackDraf(StackDraf *s)
         SimpanDraf(&temp, x);
     }
     *s = temp;
+}
+
+StackDraf CopyStackDraf(StackDraf s)
+{
+    StackDraf copy;
+    CreateStackDraf(&copy);
+
+    StackDraf temp;
+    CreateStackDraf(&temp);
+
+    ElTypeDraf x;
+
+    
+    while (!isEmptyStackDraf(s))
+    {
+        DeleteDraf(&s, &x);
+        SimpanDraf(&temp, x);
+    }
+
+    // Copy the temporary stack to the copy stack and reverse it back
+    while (!isEmptyStackDraf(temp))
+    {
+        DeleteDraf(&temp, &x);
+        SimpanDraf(&copy, x);
+    }
+
+    return copy;
 }
