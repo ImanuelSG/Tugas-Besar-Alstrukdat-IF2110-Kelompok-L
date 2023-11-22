@@ -1,10 +1,7 @@
 #include "globalvar.h"
 #include <stdlib.h>
 
-boolean isLoggedIn ;
 
-Matrix matrixPertemanan;
+boolean isLoggedIn = false;
 
-Matrix matrixPermintaan;
 
-ListBalasan ListBalasanData;

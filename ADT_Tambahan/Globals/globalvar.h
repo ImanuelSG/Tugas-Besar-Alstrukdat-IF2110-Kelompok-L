@@ -8,8 +8,4 @@
 extern boolean isLoggedIn; /*True jika ada pengguna sedang login, false sebaliknya.*/
 
 
-extern Matrix matrixPertemanan;/*Matrix Pertemanan*/
-
-extern Matrix matrixPermintaan;/*Matrix Permintaan*/
-
 #endif

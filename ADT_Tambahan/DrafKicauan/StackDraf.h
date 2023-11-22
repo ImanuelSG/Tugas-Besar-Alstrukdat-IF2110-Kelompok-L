@@ -83,4 +83,5 @@ void DeleteDraf(StackDraf *s, ElTypeDraf *x);
 
 void ReverseStackDraf(StackDraf *s);
 
+StackDraf CopyStackDraf(StackDraf s);
 #endif
