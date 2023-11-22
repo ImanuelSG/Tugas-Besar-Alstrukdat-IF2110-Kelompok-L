@@ -35,14 +35,22 @@ int listLengthKicau(ListKicauan l) {
 ID getFirstIdxKicau(ListKicauan l) {
 /* Prekondisi : List l tidak kosong */
 /* Mengirimkan indeks elemen l pertama */
-    return IDX_MIN_LIST_KICAUAN;
+    if (NEFF_LIST_KICAUAN(l) == 0) {
+        return IDX_UNDEF;
+    } else {
+        return IDX_MIN_LIST_KICAUAN;
+    }
 }
 
 ID getLastIdxKicau(ListKicauan l) {
 /* Prekondisi : List l tidak kosong */
 /* Mengirimkan indeks elemen l terakhir */
 /* indeks dimulai dari 1 */
-    return NEFF_LIST_KICAUAN(l);
+    if (NEFF_LIST_KICAUAN(l) == 0) {
+        return IDX_UNDEF;
+    } else {
+        return NEFF_LIST_KICAUAN(l);
+    }
 }
 
 /* ********** Test Indeks yang valid ********** */
@@ -80,14 +88,20 @@ void printListKicauan(ListKicauan l, Word NamaPengguna)
     /* I.S. l boleh kosong */
     /* F.S. Jika l tidak kosong: tercetak daftar kicauan pengguna dan temannya */
     /*      Penulisan dari kicauan terbaru ke yang terlama */
-    ID i;
-    printf("%d", getLastIdxKicau(l));
-    printf("%d", getFirstIdxKicau(l));
-    for (i = getLastIdxKicau(l); i >= getFirstIdxKicau(l); i--) {
-        if (isBerteman(NamaPengguna, PENULIS_KICAUAN(ELMT_LIST_KICAUAN(l, i)))) {
-            PrintKicauan(ELMT_LIST_KICAUAN(l, i), i);
+    if (!isEmptyListKicau(l)) {
+        ID i;
+        printf("%d", getLastIdxKicau(l));
+        printf("%d", getFirstIdxKicau(l));
+        for (i = getLastIdxKicau(l); i >= getFirstIdxKicau(l); i--) {
+            if (isBerteman(NamaPengguna, PENULIS_KICAUAN(ELMT_LIST_KICAUAN(l, i)))) {
+                PrintKicauan(ELMT_LIST_KICAUAN(l, i), i);
+            }
         }
     }
+    else {
+        printf("Tidak ada kicauan yang dapat ditampilkan!\n");
+    }
+    
 }
 
 void printList(ListKicauan l)
@@ -97,11 +111,15 @@ void printList(ListKicauan l)
     /* I.S. l boleh kosong */
     /* F.S. Jika l tidak kosong: tercetak daftar seluruh kicauan */
     /*      Penulisan dari kicauan terbaru ke yang terlama */
-    ID i;
+    if (!isEmptyListKicau(l)) {
+        ID i;
 
-    for (i = getLastIdxKicau(l); i >= getFirstIdxKicau(l); i--) {
-        PrintKicauan(ELMT_LIST_KICAUAN(l, i), i);
-        printf("\n");
+        for (i = getLastIdxKicau(l); i >= getFirstIdxKicau(l); i--) {
+            PrintKicauan(ELMT_LIST_KICAUAN(l, i), i);
+        }
+    }
+    else {
+        printf("Tidak ada kicauan yang dapat ditampilkan!\n");
     }
 }
 

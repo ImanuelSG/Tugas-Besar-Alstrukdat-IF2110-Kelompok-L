@@ -1,5 +1,7 @@
 #include "graf_teman.h"
 #include "../utils/utils.h"
+#include "../Globals/globalvar.h"
+#include "../../ADT_Bawaan/matrix/matrix.h"
 
 #define newline printf("\n")
 // aku benci syntax printf scanf
@@ -273,6 +275,24 @@ void DisplayFriendRequests(GrafTeman* G, Pengguna user) {
     }
 }
 
+void UpdateMatrixPertemanan(GrafTeman* G, Matrix pertemanan, Matrix friendReq) {
+    int i,j;
+    createMatrix(G->NEffVertex, G->NEffVertex, &matrixPertemanan);
+    for (i = 0; i < (G->NEffEdges); i++) {
+        int idx1 = getIdPengguna(G->ListOfEdges[i].vertex1.nama);
+        int idx2 = getIdPengguna(G->ListOfEdges[i].vertex2.nama);
+        ELMT(matrixPertemanan, idx1, idx2) = 1;
+        ELMT(matrixPertemanan, idx2, idx1) = 1;
+    }
+
+    int k;
+    createMatrix(G->NEffFriendRequests, 3, &matrixPermintaan);
+    for (k = 0; k < G->NEffFriendRequests; k++) {
+        ELMT(matrixPermintaan, k, 0) = getIdPengguna(G->ListOfFriendRequests[k].penerima.nama);
+        ELMT(matrixPermintaan, k, 1) = getIdPengguna(G->ListOfFriendRequests[k].penerima.nama);
+        ELMT(matrixPermintaan, k, 2) = G->ListOfFriendRequests[k].BanyaknyaTeman;
+    }
+}
 
 
 

@@ -6,6 +6,7 @@
 #include "../Profil/profil.h"
 #include "../DrafKicauan/StackDraf.h"
 #include <stdio.h>
+/*Berisi Data Current Pengguna*/
 
 typedef struct
 {

@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "ADT_Balasan.h"
 #include "../utils/utils.h"
+#include "../Globals/globalvar.h"
 
 /* ********** PRIMITIF-PRIMITIF UNTUK TYPE BALASAN ********** */
 /* *** KONSTRUKTOR *** */
@@ -34,16 +35,16 @@ void PrintBalasan(Balasan B, int indentasi) {
     | <Isi balasan>
 */ 
    printf("\n");
-   Pengguna *Penulis_Balasan = getPengguna(PENULIS_BALASAN(B));
-   if (!isBerteman(currentPengguna.nama, PENULIS_BALASAN(B)) && (*Penulis_Balasan).tipe_akun == 1) {
+   
+   if (!isBerteman(currentPengguna.nama, PENULIS_BALASAN(B)) && getPengguna(PENULIS_BALASAN(B))->tipe_akun == 1) {
       PrintIndentasi(indentasi);    printf("| ID = %d\n", ID_BALASAN(B));
       PrintIndentasi(indentasi);    printf("| PRIVAT\n");
       PrintIndentasi(indentasi);    printf("| PRIVAT\n");
       PrintIndentasi(indentasi);    printf("| PRIVAT\n");
    } else {
       PrintIndentasi(indentasi);    printf("| ID = %d\n", ID_BALASAN(B));
-      PrintIndentasi(indentasi);    printf("| "); PrintWord(PENULIS_BALASAN(B)); printf("\n");
+      PrintIndentasi(indentasi);    printf("| "); displayWord(PENULIS_BALASAN(B)); printf("\n");
       PrintIndentasi(indentasi);    printf("| "); TulisDATETIME(WAKTU_BALASAN(B)); printf("\n");
-      PrintIndentasi(indentasi);    printf("| "); PrintWord(ISI_BALASAN(B)); printf("\n");
+      PrintIndentasi(indentasi);    printf("| "); displayWord(ISI_BALASAN(B)); printf("\n");
    }
 }
