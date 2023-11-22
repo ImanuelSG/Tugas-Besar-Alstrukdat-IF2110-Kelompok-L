@@ -3,17 +3,17 @@
 #ifndef MATRIX_H
 #define MATRIX_H
 
-#include "boolean.h"
+#include "../boolean.h"
 
 /* Ukuran maksimum baris dan kolom */
 #define ROW_CAP 100
 #define COL_CAP 100
 
 typedef int IdxType; /* Index baris, kolom */
-typedef int ElType;
+typedef int ElTypeMatrix;
 typedef struct
 {
-   ElType mem[ROW_CAP][COL_CAP];
+   ElTypeMatrix mem[ROW_CAP][COL_CAP];
    int rowEff; /* banyaknya/ukuran baris yg terdefinisi */
    int colEff; /* banyaknya/ukuran kolom yg terdefinisi */
 } Matrix;
@@ -44,7 +44,8 @@ IdxType getLastIdxCol(Matrix m);
 /* Mengirimkan Index kolom terbesar m */
 boolean isIdxEff(Matrix m, IdxType i, IdxType j);
 /* Mengirimkan true jika i, j adalah Index efektif bagi m */
-ElType getElmtDiagonal(Matrix m, IdxType i);
+// Mengirimkan elemen m(i,i)
+
 /* Mengirimkan elemen m(i,i) */
 
 /* ********** Assignment  Matrix ********** */
@@ -60,11 +61,11 @@ void readMatrix(Matrix *m, int nRow, int nCol);
 /* Contoh: Jika nRow = 3 dan nCol = 3, maka contoh cara membaca isi matriks :
 1 2 3
 4 5 6
-8 9 10 
+8 9 10
 */
 void displayMatrix(Matrix m);
 /* I.S. m terdefinisi */
-/* F.S. Nilai m(i,j) ditulis ke layar per baris per kolom, masing-masing elemen per baris 
+/* F.S. Nilai m(i,j) ditulis ke layar per baris per kolom, masing-masing elemen per baris
    dipisahkan sebuah spasi. Baris terakhir tidak diakhiri dengan newline */
 /* Proses: Menulis nilai setiap elemen m ke layar dengan traversal per baris dan per kolom */
 /* Contoh: menulis matriks 3x3 (ingat di akhir tiap baris, tidak ada spasi)
@@ -83,12 +84,12 @@ Matrix subtractMatrix(Matrix m1, Matrix m2);
 Matrix multiplyMatrix(Matrix m1, Matrix m2);
 /* Prekondisi : Ukuran kolom efektif m1 = ukuran baris efektif m2 */
 /* Mengirim hasil perkalian matriks: salinan m1 * m2 */
-Matrix multiplyMatrixWithMod(Matrix m1,Matrix m2,int mod);
+Matrix multiplyMatrixWithMod(Matrix m1, Matrix m2, int mod);
 /* Prekondisi : Ukuran kolom efektif m1 = ukuran baris efektif m2 */
 /* Mengirim hasil perkalian matriks: salinan (m1 * m2)%mod, artinya setiap elemen matrix hasil perkalian m1 * m2 dilakukan modulo terhadap mod */
-Matrix multiplyByConst(Matrix m, ElType x);
+Matrix multiplyByConst(Matrix m, ElTypeMatrix x);
 /* Mengirim hasil perkalian setiap elemen m dengan x */
-void pMultiplyByConst(Matrix *m, ElType k);
+void pMultiplyByConst(Matrix *m, ElTypeMatrix k);
 /* I.S. m terdefinisi, k terdefinisi */
 /* F.S. Mengalikan setiap elemen m dengan k */
 
@@ -111,13 +112,13 @@ int countElmt(Matrix m);
 boolean isSquare(Matrix m);
 /* Mengirimkan true jika m adalah matriks dg ukuran baris dan kolom sama */
 boolean isSymmetric(Matrix m);
-/* Mengirimkan true jika m adalah matriks simetri : isSquare(m) 
+/* Mengirimkan true jika m adalah matriks simetri : isSquare(m)
    dan untuk setiap elemen m, m(i,j)=m(j,i) */
 boolean isIdentity(Matrix m);
-/* Mengirimkan true jika m adalah matriks satuan: isSquare(m) dan 
+/* Mengirimkan true jika m adalah matriks satuan: isSquare(m) dan
    setiap elemen diagonal m bernilai 1 dan elemen yang bukan diagonal bernilai 0 */
 boolean isSparse(Matrix m);
-/* Mengirimkan true jika m adalah matriks sparse: matriks “jarang” dengan definisi: 
+/* Mengirimkan true jika m adalah matriks sparse: matriks “jarang” dengan definisi:
    hanya maksimal 5% dari memori matriks yang efektif bukan bernilai 0 */
 Matrix negation(Matrix m);
 /* Menghasilkan salinan m dengan setiap elemen dinegasikan (dikalikan -1) */
@@ -135,6 +136,6 @@ Matrix transpose(Matrix m);
 void pTranspose(Matrix *m);
 /* I.S. m terdefinisi dan IsSquare(m) */
 /* F.S. m "di-transpose", yaitu setiap elemen m(i,j) ditukar nilainya dengan elemen m(j,i) */
-boolean isSegitigaBawah (Matrix m);
+boolean isSegitigaBawah(Matrix m);
 
 #endif

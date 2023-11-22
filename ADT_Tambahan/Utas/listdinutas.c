@@ -111,6 +111,20 @@ IdxType indexOfListDinUtas(ListDinUtas l, ElType val)
     return idx;
 }
 
+ListUtas getUtas(ListDinUtas l, int IDUtas){
+  return ELMTUTAS(l, IDUtas-1);
+}
+
+boolean isUtasAuthorValid(ListDinUtas l, int IDUtas, Pengguna currentPengguna){
+    ListUtas lUtas = getUtas(l,IDUtas);
+    Utas U = getKicauanUtas(lUtas, 0);
+    return isSameWord(PENULISUTAS(U).nama, currentPengguna.nama);
+}
+boolean isBertemanUtasAuthor(ListDinUtas l, int IDUtas, Pengguna currentPengguna){
+    ListUtas lUtas = getUtas(l,IDUtas);
+    Utas U = getKicauanUtas(lUtas, 0);
+    return isBerteman(currentPengguna.nama,PENULISUTAS(U).nama);
+}
 /* ********** MENAMBAH DAN MENGHAPUS ELEMEN DI AKHIR ********** */
 /* *** Menambahkan elemen terakhir *** */
 void insertLastListDinUtas(ListDinUtas *l, ElType val)

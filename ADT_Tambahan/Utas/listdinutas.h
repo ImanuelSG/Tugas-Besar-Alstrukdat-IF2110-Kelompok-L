@@ -17,7 +17,7 @@
 /* Definisi elemen dan koleksi objek */
 typedef ListUtas ElType; /* type elemen listdin */
 typedef int IdxType;
-typedef struct
+typedef struct listdinutas
 {
     ElType *buffer; /* memori tempat penyimpan elemen (container) */
     int nEff;       /* >=0, banyaknya elemen efektif */
@@ -35,11 +35,14 @@ typedef struct
   Definisi elemen pertama : l.buffer[i] dengan i=0
   Definisi elemen terakhir yang terdefinisi: l.buffer[i] dengan i=l.capacity */
 
+
 /* ********** SELEKTOR ********** */
 #define NEFF(l) (l).nEff
 #define BUFFER(l) (l).buffer
 #define ELMTUTAS(l, i) (l).buffer[i]
 #define CAPACITY(l) (l).capacity
+
+extern ListDinUtas lDinUtas;
 
 /* ********** KONSTRUKTOR ********** */
 void CreateListDinUtas(ListDinUtas *l, int capacity);
@@ -57,10 +60,10 @@ int listDinUtasLength(ListDinUtas l);
 /* Mengirimkan nol jika list l kosong */
 
 /* *** Selektor INDEKS *** */
-IdxType getFirstIdxListDinUtas(ListDinUtas l);
-/* Prekondisi : List l tidak kosong */
-/* Mengirimkan indeks elemen l pertama */
-IdxType getLastIdxListDinUtas(ListDinUtas l);
+// IdxType getFirstIdxListDinUtas(ListDinUtas l);
+// /* Prekondisi : List l tidak kosong */
+// /* Mengirimkan indeks elemen l pertama */
+// IdxType getLastIdxListDinUtas(ListDinUtas l);
 /* Prekondisi : List l tidak kosong */
 /* Mengirimkan indeks elemen l terakhir */
 
@@ -104,6 +107,9 @@ IdxType indexOfListDinUtas(ListDinUtas l, ElType val);
 /* Search apakah ada elemen List l yang bernilai val */
 /* Jika ada, menghasilkan indeks i terkecil, dengan elemen ke-i = val */
 /* Jika tidak ada ATAU LIST KOSONG, mengirimkan IDX_LISTDIN_UNDEF */
+ListUtas getUtas(ListDinUtas l, int IDUtas);
+boolean isUtasAuthorValid(ListDinUtas l, int IDUtas, Pengguna currentPengguna);
+boolean isBertemanUtasAuthor(ListDinUtas l, int IDUtas, Pengguna currentPengguna);
 
 /* ********** MENAMBAH DAN MENGHAPUS ELEMEN DI AKHIR ********** */
 /* *** Menambahkan elemen terakhir *** */

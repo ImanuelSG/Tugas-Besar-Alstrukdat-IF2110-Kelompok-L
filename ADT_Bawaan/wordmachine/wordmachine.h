@@ -10,7 +10,8 @@
 #define NMax 280
 #define BLANK ' '
 
-typedef struct {
+typedef struct
+{
    char TabWord[NMax]; /* container penyimpan kata, indeks yang dipakai [0..NMax-1] */
    int Length;
 } Word;
@@ -23,7 +24,8 @@ void IgnoreBlanks();
 /* Mengabaikan satu atau beberapa BLANK
    I.S. : currentChar sembarang
    F.S. : currentChar ≠ BLANK atau currentChar = MARK */
-   
+
+void IgnoreBackslashN();
 
 void STARTWORD();
 /* I.S. : currentChar sembarang

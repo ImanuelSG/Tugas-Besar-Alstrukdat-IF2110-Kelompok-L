@@ -4,33 +4,36 @@
 #include "../../ADT_Bawaan/wordmachine/wordmachine.h"
 #include "../../ADT_Bawaan/datetime/datetime.h"
 #include "../../ADT_Bawaan/boolean.h"
-#include "../Kicauan/ADT_Kicauan.h"
+#include "../Pengguna/pengguna.h"
+#include "../Kicauan/listdinkicauan.h"
 #include "../Globals/globalvar.h"
+#include "../utils/utils.h"
 #include "../wordoperations.h"
 #include <stdio.h>
 
+Pengguna currentPengguna;
 /* Definisi Tipe Data Utas*/
 typedef struct utas
 {
     int IDUtas; // autoincrement, index dari listdinutas + 1
     ID IDKicau; //jika bukan kicauan utama idKicau = IDX_UNDEF
-    Kicauan kicauanUtama; //kicauan utama dari utas
-    int index; //index utas
+    //int index; //index utas
+    //Kicauan kicauanUtama;  //kicauan utama dari utas
     Pengguna utasAuthor;
     DATETIME WaktuKicauan;
-    Word Tweet;           // Isi kicauan
+    Word Tweet; // Isi kicauan
 } Utas;
 
 #define IDUTAS(U) (U).IDUtas
 #define IDKICAU(U) (U).IDKicau
-#define KICAUANUTAMA(U) (U).kicauanUtama
-#define INDEX(U) (U).index
+//#define KICAUANUTAMA(U) (U).kicauanUtama
+//#define INDEX(U) (U).index
 #define PENULISUTAS(U) (U).utasAuthor
-#define WAKTUKICAUAN(U) (U).WaktuKicauan
-#define TWEET(U)  (U).Tweet
+#define WAKTUUTAS(U) (U).WaktuKicauan
+#define TWEETUTAS(U)  (U).Tweet
 
 /* ****************** KONSTRUKTOR ADT UTAS *******************/
-void createKicauanUtas(Utas *U, int IDUtas, ID IDKicau, int index, Pengguna utasAuthor, DATETIME WaktuKicauan, Word Tweet);
+void createKicauanUtas(Utas *U, int IDUtas, ID IDKicau, Pengguna utasAuthor, DATETIME WaktuKicauan, Word Tweet);
 /*Menyusun utas dari komponennya*/
 
 /* ****************** Definisi Node Utas *******************/
@@ -45,7 +48,7 @@ typedef struct nodeutas {
 #define NEXT(p) (p)->next
 
 Address newNodeKicauanUtas(InfoType val);
-/*Node berisi kicauan pada utas*/
+/*Node berisi kicauan utas*/
 
 /* ****************** Definisi Linked List Utas  *******************/
 typedef Address ListUtas; //pointer to NodeUtas
@@ -62,7 +65,7 @@ boolean isEmptyUtas(ListUtas l);
 
 InfoType getKicauanUtas(ListUtas l, int idx);
 /* I.S. l terdefinisi, idx indeks yang valid dalam l, yaitu 0..length(l) */
-/* F.S. Mengembalikan nilai elemen l pada indeks idx */
+/* F.S. Mengembalikan kicauan utas pada indeks linked list ke-idx */
 
 // int indexOfUtas(ListUtas l, InfoType val);
 // /* I.S. l, val terdefinisi */
@@ -73,7 +76,7 @@ InfoType getKicauanUtas(ListUtas l, int idx);
 void insertFirstUtas(ListUtas *l, InfoType val);
 /* I.S. l mungkin kosong */
 /* F.S. Melakukan alokasi sebuah elemen dan */
-/* menambahkan elemen pertama dengan nilai val jika alokasi berhasil. */
+/* menambahkan elemen pertama linked list dengan nilai val jika alokasi berhasil.*/
 /* Jika alokasi gagal: I.S.= F.S. */
 
 void insertLastUtas(ListUtas *l, InfoType val);
@@ -84,11 +87,11 @@ void insertLastUtas(ListUtas *l, InfoType val);
 
 void insertAtUtas(ListUtas *l, InfoType val, int idx);
 /* I.S. l tidak mungkin kosong, idx indeks yang valid dalam l, yaitu 0..length(l) */
-/* F.S. Melakukan alokasi sebuah elemen dan */
-/* menyisipkan elemen dalam list pada indeks ke-idx (bukan menimpa elemen di i) */
+/* F.S. Melakukan alokasi sebuah NodeUtas dan */
+/* menyisipkan elemen dalam listUtas pada indeks ke-idx (bukan menimpa elemen di i) */
 /* yang bernilai val jika alokasi berhasil. Jika alokasi gagal: I.S.= F.S. */
 
-void deleteFirstUtas(ListUtas *l, InfoType *val);
+// void deleteFirstUtas(ListUtas *l, InfoType *val);
 /* I.S. List l tidak kosong  */
 /* F.S. Elemen pertama list dihapus: nilai info disimpan pada x */
 /*      dan alamat elemen pertama di-dealokasi */
@@ -110,13 +113,10 @@ boolean IDKicauFound(ID IDKicau);
 /*Mengirimkan true jika kicauan dengan IDKicau tidak ditemukan di listKicauan*/
 boolean isIDKicauValid(ID IDKicau);
 /*Mengirimkan true jika kicauan dengan IDKicau dibuat oleh currentPengguna */
+boolean isIDUtasValid(ListDinUtas lDinUtas, int IDUtas);
+boolean isIndexUtasValid(ListUtas lUtas, int index);
+/*Mengirimkan true jika utas dengan index index ditemukan di ListUtas*/
 void printKicauanUtas(Utas U, int index);
-
-// void UTAS(ID IDKicau);
-// void SAMBUNG_UTAS(int IDUtas, int index);
-// /*Validasi IDUtas*/
-// /*Search at index in listUtas*/
-// void HAPUS_UTAS(int IDUtas, int index);
-// void CETAK_UTAS(int IDUtas);
+void sambungKicauanUtas(Utas sambunganUtas, ID IDUtas, int index, ListUtas lUtas);
 
 #endif

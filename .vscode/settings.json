@@ -1,7 +1,10 @@
 {
-    "files.associations": {
-        "listlinier.h": "c",
-        "boolean.h": "c"
-    },
-    "C_Cpp.errorSquiggles": "enabled"
+  "files.associations": {
+    "matrix.h": "c",
+    "globalvar.h": "c",
+    "wordoperations.h": "c",
+    "graf_teman.h": "c",
+    "pengguna.h": "c",
+    "command_balasan.h": "c"
+  }
 }

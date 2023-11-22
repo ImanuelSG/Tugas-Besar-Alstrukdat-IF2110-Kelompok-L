@@ -8,8 +8,6 @@
 /****************** PRIMITIF ADT UTAS ******************/
 void UTAS(ID IDKicau);
 void SAMBUNG_UTAS(int IDUtas, int index);
-/*Validasi IDUtas*/
-/*Search at index in listUtas*/
 void HAPUS_UTAS(int IDUtas, int index);
 void CETAK_UTAS(int IDUtas);
 

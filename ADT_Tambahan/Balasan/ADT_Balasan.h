@@ -2,9 +2,9 @@
 #ifndef __BALASAN_H__
 #define __BALASAN_H__
 
-#include "../boolean.h"
-#include "../wordmachine/wordmachine.h"
-#include "../datetime/datetime.h"
+#include "../../ADT_Bawaan/boolean.h"
+#include "../../ADT_Bawaan/wordmachine/wordmachine.h"
+#include "../../ADT_Bawaan/datetime/datetime.h"
 #include "../Globals/globalvar.h"
 #include "../Kicauan/ADT_Kicauan.h"
 
@@ -25,7 +25,7 @@ typedef struct {
 /* ********** PRIMITIF-PRIMITIF UNTUK TYPE BALASAN ********** */
 /* *** KONSTRUKTOR *** */
 /* MEMBUAT STRUCT BALASAN */
-void CreateBalasan(Balasan *B, Word Penulis, DATETIME Waktu, Word Isi, Kicauan K);
+void CreateBalasan(Balasan *B, Word Penulis, DATETIME Waktu, Word Isi, Kicauan *K);
 /* I.S. B sembarang */
 /* F.S. B terdefinisi dengan IDBalasan = IDBalasan terakhir + 1, PenulisBalasan = Penulis, WaktuBalasan = Waktu, IsiBalasan = Isi */
 

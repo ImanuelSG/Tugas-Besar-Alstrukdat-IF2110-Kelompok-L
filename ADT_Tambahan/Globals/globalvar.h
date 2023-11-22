@@ -1,20 +1,20 @@
 #ifndef GLOBALVAR_H
 #define GLOBALVAR_H
 
-#include "../pengguna.h"
-#include "../Kicauan/ADT_Kicauan.h"
-#include "../Kicauan/listdinkicauan.h"
-#include "boolean.h"
+#include "../../ADT_Bawaan/boolean.h"
+#include "../../ADT_Bawaan/matrix/matrix.h"
+#include "../Balasan/treebalasan.h"
 
-extern Pengguna currentPengguna; /*Berisi Data Current Pengguna*/
+
 
 extern boolean isLoggedIn; /*True jika ada pengguna sedang login, false sebaliknya.*/
 
-extern int jumlahpengguna; /*Berisi jumlah pengguna saat ini*/
 
-extern ListKicauan LIST_KICAUAN_DATA; /*Berisi List Kicauan saat ini*/
+extern Matrix matrixPertemanan;/*Matrix Pertemanan*/
 
-extern ID CURRENT_ID_KICAUAN;
+extern Matrix matrixPermintaan;/*Matrix Permintaan*/
+
+extern ListBalasan ListBalasanData;/*List Dari Balasan yang ada*/
 
 extern ListUtas LIST_UTAS;
 

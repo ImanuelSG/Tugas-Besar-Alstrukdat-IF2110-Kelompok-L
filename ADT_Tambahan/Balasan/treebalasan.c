@@ -2,41 +2,42 @@
 #include <stdlib.h>
 #include "treebalasan.h"
 
+ListBalasan ListBalasanData; /*Berisi List Balasan saat ini*/
 /* ********** PRIMITIF-PRIMITIF UNTUK TYPE ADT TREE UNTUK BALASAN ********** */
-Tree NewTree (ElType root, Tree left_child, Tree right_sibling) {
+Tree NewTree (ElTypeBalasan root, Tree left_child, Tree right_sibling) {
 /* Menghasilkan sebuah pohon dari root, left_child, dan right_sibling 
    Menghasilkan pohon kosong (NULL) jika alokasi gagal */
    Tree p = (Address) malloc(sizeof(TreeNode));
    if (p!=NULL) {
-      INFO(p) = root;
+      INFO_TREE(p) = root;
       LEFT_CHILD(p) = left_child;
       RIGHT_SIBLING(p) = right_sibling;
    }
    return p;
 }
 
-void CreateTree (Tree *p, ElType root, Tree left_child, Tree right_sibling) {
+void CreateTree (Tree *p, ElTypeBalasan root, Tree left_child, Tree right_sibling) {
 /* I.S. Sembarang
    F.S. Menghasilkan sebuah pohon p
    Menghasilkan sebuah pohon biner p dari akar, l, dan r, jika alokasi berhasil
    Menghasilkan pohon p yang kosong (NULL) jika alokasi gagal */ 
    *p = (Address) malloc(sizeof(TreeNode));
    if (p!=NULL) {
-      INFO(*p) = root;
+      INFO_TREE(*p) = root;
       LEFT_CHILD(*p) = left_child;
       RIGHT_SIBLING(*p) = right_sibling;
    }
 }
 
-Address newTreeNode(ElType val) {
+Address newTreeNode(ElTypeBalasan val) {
 /* Alokasi sebuah address p, bernilai tidak NULL jika berhasil */
 /* Mengirimkan address hasil alokasi sebuah elemen bernilai val
    Jika alokasi berhasil, maka address tidak NULL, dan misalnya 
-   menghasilkan p, maka p↑.info=val, p↑.left_Child=NULL, p↑.right_Sibling=NULL 
+   menghasilkan p, maka p↑.INFO_TREE=val, p↑.left_Child=NULL, p↑.right_Sibling=NULL 
    Jika alokasi gagal, mengirimkan NULL */
    Address p = (Address) malloc(sizeof(TreeNode));
    if (p!=NULL) {
-      INFO(p) = val;
+      INFO_TREE(p) = val;
       LEFT_CHILD(p) = NULL;
       RIGHT_SIBLING(p) = NULL;
    }
@@ -55,7 +56,7 @@ boolean isTreeEmpty (Tree p) {
    return (p == NULL);
 }
 
-boolean isOneElmt (Tree p) {
+boolean isOneElmtTree (Tree p) {
 /* Mengirimkan true jika p tidak kosong dan hanya terdiri atas 1 elemen */
    return (!isTreeEmpty(p) && LEFT_CHILD(p) == NULL && RIGHT_SIBLING(p) == NULL);
 }
@@ -84,7 +85,7 @@ Address searchTree (Tree p, ID id) {
    if (isTreeEmpty(p)) {
       return NULL;
    } else {
-      if (ID_BALASAN(INFO(p)) == id) {
+      if (ID_BALASAN(INFO_TREE(p)) == id) {
          return p;
       } else {
          Address temp = searchTree(LEFT_CHILD(p), id);
@@ -105,13 +106,13 @@ void searchBeforeTree (Tree p, ID id, Address *before, Address *loc) {
       *loc = NULL;
       *before = NULL;
    } else {
-      if (ID_BALASAN(INFO(p)) == id) { // menangani kasus hanya 1 elemen
+      if (ID_BALASAN(INFO_TREE(p)) == id) { // menangani kasus hanya 1 elemen
          *loc = p;
          *before = NULL;
          return;
       } else {
          if (LEFT_CHILD(p) != NULL) {
-            if (ID_BALASAN(INFO(LEFT_CHILD(p))) == id) {
+            if (ID_BALASAN(INFO_TREE(LEFT_CHILD(p))) == id) {
                *loc = LEFT_CHILD(p);
                *before = p;
                return;
@@ -123,7 +124,7 @@ void searchBeforeTree (Tree p, ID id, Address *before, Address *loc) {
             }
          }
          if (RIGHT_SIBLING(p) != NULL) {
-            if (ID_BALASAN(INFO(RIGHT_SIBLING(p))) == id) {
+            if (ID_BALASAN(INFO_TREE(RIGHT_SIBLING(p))) == id) {
                *loc = RIGHT_SIBLING(p);
                *before = p;
                return;
@@ -152,14 +153,14 @@ void printTree(Tree p, int h) {
          6
    Penulisan setiap node juga diakhiri newline */
    if (p!=NULL) {
-      PrintBalasan(INFO(p), h);
+      PrintBalasan(INFO_TREE(p), h);
       printTree(LEFT_CHILD(p), h+3);
       printTree(RIGHT_SIBLING(p), h);
    }
 }
 
 /* ****** Penambahan dan Penghapusan Elemen ****** */
-void insertChild(Tree *p, ElType val) {
+void insertChild(Tree *p, ElTypeBalasan val) {
 /* I.S. p boleh kosong */
 /* F.S. Jika alokasi berhasil, maka p menjadi pohon dengan simpul left_child bernilai val */
 /*      Jika alokasi gagal, maka p tetap */
@@ -181,7 +182,7 @@ void insertChild(Tree *p, ElType val) {
    }
 }
 
-void insertSiblingLast(Tree *p, ElType val) {
+void insertSiblingLast(Tree *p, ElTypeBalasan val) {
 /* I.S. p boleh kosong */
 /* F.S. Jika alokasi berhasil, maka p menjadi pohon dengan tambahan simpul right_sibling bernilai val */
 /*      Jika alokasi gagal, maka p tetap */
@@ -206,7 +207,7 @@ void deleteTree(Tree *p) {
 /*      right_sibling tidak ikut di-dealokasi */
    Address before = NULL;
    Address loc = NULL;
-   searchBeforeTree(*p, ID_BALASAN(INFO(*p)), &before, &loc);
+   searchBeforeTree(*p, ID_BALASAN(INFO_TREE(*p)), &before, &loc);
    
    if (*p == LEFT_CHILD(before)) {
       LEFT_CHILD(before) = RIGHT_SIBLING(*p);
@@ -214,4 +215,34 @@ void deleteTree(Tree *p) {
       RIGHT_SIBLING(before) = RIGHT_SIBLING(*p);
    }
    deallocTreeNode(*p);
+}
+
+
+/* ********** DEFINISI TYPE LIST BALASAN ********** */
+void CreateListBalasan(ListBalasan *l, int capacity) {
+/* I.S. sembarang */
+/* F.S. Terbentuk list l kosong dengan kapasitas capacity */
+   CAPACITY_LIST_BALASAN(*l) = capacity;
+   BUFFER_LIST_BALASAN(*l) = (Tree *) malloc (capacity * sizeof(Tree));
+   for (int i = 0; i < capacity; i++) {
+      ELMT_LIST_BALASAN(*l, i) = NULL;
+   }
+}
+
+boolean isIdxValidBalas(ListBalasan l, ID i) {
+/* Mengirimkan true jika i adalah indeks yang valid utk kapasitas list l */
+/* yaitu antara indeks yang terdefinisi utk container*/
+   return ((i >= IDX_MIN_LIST_BALASAN) && (i < CAPACITY_LIST_BALASAN(l)));
+}
+
+/* ********* MENGUBAH UKURAN ARRAY ********* */
+void expandListBalas(ListBalasan *l, int num) {
+/* Proses : Menambahkan capacity l sebanyak num */
+/* I.S. List sudah terdefinisi */
+/* F.S. Ukuran list bertambah sebanyak num */
+   CAPACITY_LIST_BALASAN(*l) += num;
+   BUFFER_LIST_BALASAN(*l) = (Tree *) realloc (BUFFER_LIST_BALASAN(*l), CAPACITY_LIST_BALASAN(*l) * sizeof(Tree));
+   for (int i = CAPACITY_LIST_BALASAN(*l) - num; i < CAPACITY_LIST_BALASAN(*l); i++) {
+      ELMT_LIST_BALASAN(*l, i) = NULL;
+   }
 }
