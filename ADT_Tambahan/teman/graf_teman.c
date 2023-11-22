@@ -1,5 +1,7 @@
 #include "graf_teman.h"
 #include "../utils/utils.h"
+#include "../Globals/globalvar.h"
+#include "../../ADT_Bawaan/matrix/matrix.h"
 
 #define newline printf("\n")
 // aku benci syntax printf scanf
