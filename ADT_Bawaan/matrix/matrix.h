@@ -127,9 +127,6 @@ void pNegation(Matrix *m);
 /* F.S. m di-invers, yaitu setiap elemennya dinegasikan (dikalikan -1) */
 Matrix submatrix(Matrix m, int idxbaris, int idxkolom, int size);
 
-float determinant(Matrix m);
-/* Prekondisi: isSquare(m) */
-/* Menghitung nilai determinan m */
 Matrix transpose(Matrix m);
 /* I.S. m terdefinisi dan IsSquare(m) */
 /* F.S. menghasilkan salinan transpose dari m, yaitu setiap elemen m(i,j) ditukar nilainya dengan elemen m(j,i) */

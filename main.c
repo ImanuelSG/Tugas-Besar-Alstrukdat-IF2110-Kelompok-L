@@ -1,11 +1,11 @@
 /* Main */
-#include "ADT_Tambahan\\wordsimilarity.h"
-#include "ADT_Tambahan\\inisialisasi\\inisialisasiperintah.h"
-#include "ADT_Tambahan\\Pengguna\pengguna.h"
-#include "ADT_Tambahan\\Kicauan\\Command_Kicauan.h"
-#include "ADT_Tambahan\\Balasan\\Command_Balasan.h"
-#include "ADT_Tambahan\\teman\\graf_teman.h"
-#include "ADT_Tambahan\\teman\\driverGraf.h"
+#include "ADT_Tambahan/wordsimilarity.h"
+#include "ADT_Tambahan/inisialisasi/inisialisasiperintah.h"
+#include "ADT_Tambahan/Pengguna/pengguna.h"
+#include "ADT_Tambahan/Kicauan/Command_Kicauan.h"
+#include "ADT_Tambahan/Balasan/Command_Balasan.h"
+#include "ADT_Tambahan/teman/graf_teman.h"
+#include "ADT_Tambahan/teman/driverGraf.h"
 
 #define not(n) !n
 /* Header Note */
@@ -204,7 +204,7 @@ int main()
                 ADVWORD();
                 int index = wordToInteger(currentWord);
 
-                printf("Panggil fungsi SAMBUNG_UTAS dengan parameter [IDUtas] [index]: %d", id, index);
+                printf("Panggil fungsi SAMBUNG_UTAS dengan parameter [IDUtas] [index]: %d %d", id, index);
                 nl;
             }
 
@@ -215,11 +215,11 @@ int main()
                 ADVWORD();
                 int index = wordToInteger(currentWord);
 
-                printf("Panggil fungsi HAPUS_UTAS dengan parameter [IDUtas] [index]: %d", id, index);
+                printf("Panggil fungsi HAPUS_UTAS dengan parameter [IDUtas] [index]: %d %d", id, index);
                 nl;
             }
 
-            else if (isSameWord(perintah, stringToWord("CETAK_UTAS", 12)))
+            else if (isSameWord(perintah, stringToWord("CETAK_UTAS", 10)))
             {
                 ADVWORD();
                 int id = wordToInteger(currentWord);

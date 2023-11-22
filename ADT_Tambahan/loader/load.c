@@ -10,6 +10,8 @@ void ReadPenggunaConfig(char namafile[])
     Word nama, password, bio, nomor, weton, temp;
     MatrixProfil profil;
 
+    CreateListStatik(&dataPengguna);
+
     STARTBaris(namafile);
     iteration = wordToInteger(currentBaris);
     ADVBaris();
@@ -312,14 +314,14 @@ void WritePenggunaConfig(char namafile[])
     // Loop through the list and write each Pengguna's information
     for (int i = 0; i < banyakPengguna; i++)
     {
-        fprintf(file, "%s\n", wordToString(dataPengguna[i].nama));
-        fprintf(file, "%s\n", wordToString(dataPengguna[i].sandi));
-        fprintf(file, "%s\n", wordToString(dataPengguna[i].bio));
-        fprintf(file, "%s\n", wordToString(dataPengguna[i].nomor));
-        fprintf(file, "%s\n", wordToString(dataPengguna[i].weton));
+        fprintf(file, "%s\n", wordToString(ELMTListStatik(dataPengguna, i).nama));
+        fprintf(file, "%s\n", wordToString(ELMTListStatik(dataPengguna, i).sandi));
+        fprintf(file, "%s\n", wordToString(ELMTListStatik(dataPengguna, i).bio));
+        fprintf(file, "%s\n", wordToString(ELMTListStatik(dataPengguna, i).nomor));
+        fprintf(file, "%s\n", wordToString(ELMTListStatik(dataPengguna, i).weton));
 
         // Determine the account type
-        if (dataPengguna[i].tipe_akun == 0)
+        if (ELMTListStatik(dataPengguna, i).tipe_akun == 0)
         {
             fprintf(file, "Publik\n");
         }
@@ -333,10 +335,10 @@ void WritePenggunaConfig(char namafile[])
             for (int k = 0; k < 10; k++)
             {
                 if (k != 9)
-                    fprintf(file, "%c ", dataPengguna[i].profil.mem[j][k].TabWord[0]);
+                    fprintf(file, "%c ", ELMTListStatik(dataPengguna, i).profil.mem[j][k].TabWord[0]);
                 else
 
-                    fprintf(file, "%c", dataPengguna[i].profil.mem[j][k].TabWord[0]);
+                    fprintf(file, "%c", ELMTListStatik(dataPengguna, i).profil.mem[j][k].TabWord[0]);
             }
             fprintf(file, "\n");
         }
@@ -390,7 +392,7 @@ void WriteDrafConfig(char namafile[])
 
     while (i < banyakPengguna && j < temp)
     {
-        Pengguna Curr = dataPengguna[i];
+        Pengguna Curr = ELMTListStatik(dataPengguna, i);
         if (!isEmptyStackDraf(Curr.draf))
         {
             fprintf(file, "%s %d\n", wordToString(Curr.nama), lengthStackDraf(Curr.draf));

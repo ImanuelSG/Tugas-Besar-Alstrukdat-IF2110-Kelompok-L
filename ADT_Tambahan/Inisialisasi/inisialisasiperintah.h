@@ -4,7 +4,7 @@
 #define _INIT_
 
 #include <stdio.h>
-#include "..\\wordoperations.h"
+#include "../wordoperations.h"
 #define nl printf("\n")
 
 extern Word KeyWords[100];

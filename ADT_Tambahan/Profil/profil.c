@@ -6,14 +6,13 @@
 #include "../wordoperations.h"
 #include "../Pengguna/liststatikpengguna.h"
 #include "../Pengguna/pengguna.h"
-
-ListStatikPengguna dataPengguna;
+#include "../Globals/globalvar.h"
 
 boolean cekWeton(Word weton, Word *kata)
 {
     Word kembali;
-    Word pahing, kliwon, wage, pon, legi ;
-    pahing = stringToWord("pahing", 6) ;
+    Word pahing, kliwon, wage, pon, legi;
+    pahing = stringToWord("pahing", 6);
     // char pahing[6];
     // pahing[0] = 'p';
     // pahing[1] = 'a';
@@ -22,7 +21,7 @@ boolean cekWeton(Word weton, Word *kata)
     // pahing[4] = 'n';
     // pahing[5] = 'g';
 
-    kliwon = stringToWord("kliwon", 6) ;
+    kliwon = stringToWord("kliwon", 6);
     // char kliwon[6];
     // kliwon[0] = 'k';
     // kliwon[1] = 'l';
@@ -31,20 +30,20 @@ boolean cekWeton(Word weton, Word *kata)
     // kliwon[4] = 'o';
     // kliwon[5] = 'n';
 
-    wage = stringToWord("wage" , 4) ;
+    wage = stringToWord("wage", 4);
     // char wage[4];
     // wage[0] = 'w';
     // wage[1] = 'a';
     // wage[2] = 'g';
     // wage[3] = 'e';
 
-    pon = stringToWord("pon" , 3) ;
+    pon = stringToWord("pon", 3);
     // char pon[3];
     // pon[0] = 'p';
     // pon[1] = 'o';
     // pon[2] = 'n';
 
-    legi = stringToWord("legi", 4) ;
+    legi = stringToWord("legi", 4);
     // char legi[4];
     // legi[0] = 'l';
     // legi[1] = 'e';
@@ -63,7 +62,7 @@ boolean cekWeton(Word weton, Word *kata)
                 valid = false;
             }
         }
-        kembali = pahing ;
+        kembali = pahing;
     }
     else if (weton.Length == 6 && (weton.TabWord[0] == 'k' || weton.TabWord[0] == 'K'))
     {
@@ -74,7 +73,7 @@ boolean cekWeton(Word weton, Word *kata)
                 valid = false;
             }
         }
-        kembali = kliwon ;
+        kembali = kliwon;
     }
     else if (weton.Length == 4 && (weton.TabWord[0] == 'w' || weton.TabWord[0] == 'W'))
     {
@@ -85,7 +84,7 @@ boolean cekWeton(Word weton, Word *kata)
                 valid = false;
             }
         }
-        kembali = wage ;
+        kembali = wage;
     }
     else if (weton.Length == 4 && (weton.TabWord[0] == 'l' || weton.TabWord[0] == 'L'))
     {
@@ -96,7 +95,7 @@ boolean cekWeton(Word weton, Word *kata)
                 valid = false;
             }
         }
-        kembali = legi ;
+        kembali = legi;
     }
     else if (weton.Length == 3)
     {
@@ -107,7 +106,7 @@ boolean cekWeton(Word weton, Word *kata)
                 valid = false;
             }
         }
-        kembali = pon ;
+        kembali = pon;
     }
     else if (weton.Length == 0)
     {
@@ -154,7 +153,8 @@ void displayProfil(MatrixProfil profil)
 
 void Ganti_Profil()
 {
-    if (isLoggedIn) {
+    if (isLoggedIn)
+    {
         // display nama, bio, nomor, weton
         printf("| Nama: ");
         displayWord(currentPengguna.nama);
@@ -220,14 +220,16 @@ void Ganti_Profil()
         currentPengguna.weton = weton;
         printf("Profil anda sudah berhasil diperbaharui!\n");
     }
-    else {
-        printf("Maaf, anda belum login!\n") ;
+    else
+    {
+        printf("Maaf, anda belum login!\n");
     }
 }
 
 void Atur_Jenis_Akun()
 {
-    if (isLoggedIn) {
+    if (isLoggedIn)
+    {
         char y[2];
         y[0] = 'Y';
         y[1] = 'A';
@@ -310,14 +312,16 @@ void Atur_Jenis_Akun()
             }
         }
     }
-    else {
-        printf("Maaf, anda belum login!\n") ;
+    else
+    {
+        printf("Maaf, anda belum login!\n");
     }
 }
 
 void Lihat_Profil(Word nama)
 {
-    if (isLoggedIn) {
+    if (isLoggedIn)
+    {
         int id;
         id = getIdPengguna(nama);
 
@@ -354,7 +358,8 @@ void Lihat_Profil(Word nama)
 
 void Ubah_Foto_Profil()
 {
-    if (isLoggedIn) {
+    if (isLoggedIn)
+    {
         // display profil
         int id;
         id = getIdPengguna(currentPengguna.nama);

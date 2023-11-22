@@ -11,7 +11,7 @@
 #include "../utils/utils.h"
 #include "../Balasan/treebalasan.h"
 #include "../teman/graf_teman.h"
-
+#include "../Pengguna/liststatikpengguna.h"
 #include <stdio.h>
 #include <sys/stat.h>
 

@@ -36,7 +36,7 @@ extern ListStatikPengguna dataPengguna;
    Definisi elemen pertama: ELMT(l,i) dengan i=0 */
 
 /* ********** SELEKTOR ********** */
-#define ELMTListStikStatik(l, i) (l).contents[(i)]
+#define ELMTListStatik(l, i) (l).contents[(i)]
 
 /* ********** KONSTRUKTOR ********** */
 /* Konstruktor : create List kosong  */

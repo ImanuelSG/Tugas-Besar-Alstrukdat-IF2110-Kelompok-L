@@ -33,25 +33,25 @@ int main()
     for (int i = 0; i < banyakPengguna; i++)
     {
         printf("Nama : ");
-        displayWord(dataPengguna[i].nama);
+        displayWord(ELMTListStatik(dataPengguna,i).nama);
         printf("\n");
         printf("Sandi : ");
-        displayWord(dataPengguna[i].sandi);
+        displayWord(ELMTListStatik(dataPengguna,i).sandi);
         printf("\n");
         printf("Bio : ");
-        displayWord(dataPengguna[i].bio);
+        displayWord(ELMTListStatik(dataPengguna,i).bio);
         printf("\n");
         printf("Nomor : ");
-        displayWord(dataPengguna[i].nomor);
+        displayWord(ELMTListStatik(dataPengguna,i).nomor);
         printf("\n");
         printf("Weton : ");
-        displayWord(dataPengguna[i].weton);
+        displayWord(ELMTListStatik(dataPengguna,i).weton);
         printf("\n");
-        printf("Tipe Akun : %d\n", dataPengguna[i].tipe_akun);
+        printf("Tipe Akun : %d\n", ELMTListStatik(dataPengguna,i).tipe_akun);
         printf("Profil : \n");
-        displayProfil(dataPengguna[i].profil);
+        displayProfil(ELMTListStatik(dataPengguna,i).profil);
         printf("Draf Kicau: \n");
-        DisplayStackDraf(dataPengguna[i].draf);
+        DisplayStackDraf(ELMTListStatik(dataPengguna,i).draf);
 
         printf("\n");
     }

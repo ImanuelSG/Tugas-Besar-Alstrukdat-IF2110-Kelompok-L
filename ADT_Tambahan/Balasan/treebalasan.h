@@ -145,10 +145,8 @@ void expandListBalas(ListBalasan *l, int num);
 /* I.S. List sudah terdefinisi */
 /* F.S. Ukuran list bertambah sebanyak num */
 
-int getBalasanLength(Tree p);
 
 int countNodes(Tree p);
 
-Address findRealParent(Tree root, Address node);
 
 #endif

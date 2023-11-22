@@ -339,7 +339,6 @@ int countNodes(Tree p) {
     if (isTreeEmpty(p)) {
         return 0;
     } else {
-        // Count the current node and recursively count its left child and right sibling
         return 1 + countNodes(LEFT_CHILD(p)) + countNodes(RIGHT_SIBLING(p));
     }
 }

@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "..\\wordoperations.h"
+#include "../wordoperations.h"
 #include "inisialisasiperintah.h"
-#include "..\\wordsimilarity.h"
+#include "../wordsimilarity.h"
 #include "../../pcolor.h"
 
 Word KeyWords[100];
@@ -93,15 +93,15 @@ void displayBurbir()
 {
     printf(".______    __    __  .______      .______    __  .______");
     nl;
-    printf("|   _  \\  |  |  |  | |   _  \\     |   _  \\  |  | |   _  \\    ");
+    printf("|   _  /  |  |  |  | |   _  /     |   _  /  |  | |   _  /    ");
     nl;
     printf("|  |_)  | |  |  |  | |  |_)  |    |  |_)  | |  | |  |_)  |    ");
     nl;
     printf("|   _  <  |  |  |  | |      /     |   _  <  |  | |      /     ");
     nl;
-    printf("|  |_)  | |  `--'  | |  |\\  \\----.|  |_)  | |  | |  |\\  \\----. ");
+    printf("|  |_)  | |  `--'  | |  |/  /----.|  |_)  | |  | |  |/  /----. ");
     nl;
-    printf("|______/   \\______/  | _| `._____||______/  |__| | _| `._____| ");
+    printf("|______/   /______/  | _| `._____||______/  |__| | _| `._____| ");
     nl;
 
     printf("Selamat datang di BurBir.\n");

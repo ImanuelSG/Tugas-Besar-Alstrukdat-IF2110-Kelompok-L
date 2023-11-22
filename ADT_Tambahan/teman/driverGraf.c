@@ -2,7 +2,7 @@
 #include "driverGraf.h"
 #include "../Pengguna/pengguna.h"
 #include <stdio.h>
-
+#include "../Globals/globalvar.h"
 void displayGrafStuff() {
 
     printf("%d %d %d", dataTeman.NEffVertex, dataTeman.NEffEdges, dataTeman.NEffFriendRequests);
