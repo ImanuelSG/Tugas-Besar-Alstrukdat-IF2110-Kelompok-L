@@ -9,5 +9,4 @@ Matrix matrixPermintaan;
 
 ListBalasan ListBalasanData;
 
-
-ListUtas LIST_UTAS;
+ListDinUtas lDinUtas;
