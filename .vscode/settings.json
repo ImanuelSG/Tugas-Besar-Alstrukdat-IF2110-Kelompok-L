@@ -13,8 +13,15 @@
 =======
     "graf_teman.h": "c",
     "pengguna.h": "c",
+<<<<<<< HEAD
     "command_balasan.h": "c"
 >>>>>>> 8ecd845aaadba867b374144878b217cf934d9ec1
+=======
+    "command_balasan.h": "c",
+    "boolean.h": "c",
+    "stackdraf.h": "c",
+    "liststatikpengguna.h": "c"
+>>>>>>> e6d93b9235de9a69189623ca76220e0f5c089320
   }
 }
 {

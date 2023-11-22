@@ -1,4 +1,5 @@
 #include "utils.h"
+#include "../Pengguna/liststatikpengguna.h"
 #include "../teman/graf_teman.h"
 
 GrafTeman dataTeman;
@@ -12,7 +13,7 @@ int getIdPengguna(Word nama)
     {
         // printf("%d <--nama    datapenggunai--> %d", nama.Length, dataPengguna[i].nama.Length);
 
-        if (isSameWord(nama, dataPengguna[i].nama))
+        if (isSameWord(nama, dataPengguna.contents[i].nama))
         {
             found = true;
         }
@@ -37,7 +38,7 @@ Pengguna *getPengguna(Word nama)
     boolean found = false;
     while (!found && i < banyakPengguna)
     {
-        if (isSameWord(nama, dataPengguna[i].nama))
+        if (isSameWord(nama, dataPengguna.contents[i].nama))
         {
             found = true;
         }
@@ -45,7 +46,7 @@ Pengguna *getPengguna(Word nama)
             i++;
     }
     if (found)
-        return &dataPengguna[i];
+        return &dataPengguna.contents[i];
     else
         return NULL;
 }

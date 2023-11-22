@@ -115,7 +115,7 @@ void BacaKalimat()
    IgnoreBackslashN();
    while ((currentChar != MARK) && (i < NMax))
    {
-      IgnoreBackslashN();
+
       currentWord.TabWord[i] = currentChar;
       ADV();
       i++;

@@ -5,11 +5,16 @@
 /* KICAU */
 void KICAU() {
 /* Membuat sebuah Kicauan */
+
+// NANTI APUS
+    ListKicauan ListKicauanData;
+    CreateListDinKicauan(&ListKicauanData, 1);
     Word NewTweet;
 
     printf("\nMasukkan kicauan:\n");
     STARTKalimat();
     NewTweet = currentWord;
+    displayWord(NewTweet);
 
     if (IsAllBlank(NewTweet)) {
         printf("\nKicauan tidak boleh hanya berisi spasi!\n");
@@ -18,13 +23,17 @@ void KICAU() {
         Kicauan NewKicauan;
         DATETIME WaktuKicauan;
 
+        // printf("p bacadatetime\n");
         BacaDATETIME(&WaktuKicauan);
         
+        // printf("p createKicauan\n");
         CreateKicauan(&NewKicauan, currentPengguna.nama, WaktuKicauan, NewTweet, 0);
+        // printf("p insertLast\n");
         insertLastKicau(&ListKicauanData, NewKicauan);
 
         printf("\nSelamat! kicauan telah diterbitkan!\n");
         printf("Detil kicauan:");
+        // printf("p printkicauan\n");
         PrintKicauan(NewKicauan, CURRENT_ID_KICAUAN);
         printf("\n");
     }

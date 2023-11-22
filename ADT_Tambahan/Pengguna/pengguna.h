@@ -6,7 +6,6 @@
 #include "../Profil/profil.h"
 #include "../DrafKicauan/StackDraf.h"
 #include <stdio.h>
-/*Berisi Data Current Pengguna*/
 
 typedef struct
 {
@@ -20,8 +19,7 @@ typedef struct
     StackDraf draf;
 } Pengguna;
 
-extern int banyakPengguna;
-extern Pengguna dataPengguna[20]; /*List Pengguna*/
+extern int banyakPengguna; /*List Pengguna*/
 extern Pengguna currentPengguna;  /*Berisi Data Current Pengguna*/
 
 void CreatePengguna(Pengguna *akun, Word nama, Word sandi, Word bio, Word nomor, Word weton, int tipe_akun, MatrixProfil profil, StackDraf draf);
