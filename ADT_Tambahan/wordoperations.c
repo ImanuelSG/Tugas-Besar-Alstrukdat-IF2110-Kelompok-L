@@ -174,3 +174,11 @@ Word DuplicateWord(Word w) {
 
     return w_out;
 }
+
+Word PointerDuplicateWord(Word w, Word* w_hasil) {
+    w_hasil->Length = w.Length;
+    int i;
+    for(i = 0; i < w.Length; i++) {
+        w_hasil->TabWord[i] = w.TabWord[i];
+    }
+}

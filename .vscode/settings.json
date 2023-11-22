@@ -8,6 +8,7 @@
     "command_balasan.h": "c",
     "boolean.h": "c",
     "stackdraf.h": "c",
-    "liststatikpengguna.h": "c"
+    "liststatikpengguna.h": "c",
+    "initperintah_driver.C": "cpp"
   }
 }

@@ -15,6 +15,7 @@ boolean isAKeyWord(Word w);
 // Mengembalikan true jika w adalah keyword perintah
 
 void displayLogoBurbir();
+void displayWordBlue();
 void displayBurbir();
 // Prosedur menampilkan tampilan awal program
 
