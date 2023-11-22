@@ -9,8 +9,9 @@
 #include "../Kicauan/listdinkicauan.h"
 #include "../DrafKicauan/StackDraf.h"
 #include "../utils/utils.h"
-#include "../teman/graf_teman.h"
 #include "../Balasan/treebalasan.h"
+#include "../teman/graf_teman.h"
+
 #include <stdio.h>
 #include <sys/stat.h>
 

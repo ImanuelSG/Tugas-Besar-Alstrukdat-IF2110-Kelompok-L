@@ -14,6 +14,7 @@ typedef struct {
     Word PenulisBalasan;     // Username pengguna pembuat balasan
     DATETIME WaktuBalasan;   // Waktu balasan dibuat (diambil dari waktu lokal)
     Word IsiBalasan;         // Isi balasan
+    ID IDParent;
 } Balasan;
 
 /* ********** SELEKTOR BALASAN ********** */
@@ -21,11 +22,12 @@ typedef struct {
 #define PENULIS_BALASAN(B) (B).PenulisBalasan
 #define WAKTU_BALASAN(B) (B).WaktuBalasan
 #define ISI_BALASAN(B) (B).IsiBalasan
+#define ID_PARENT(B) (B).IDParent
 
 /* ********** PRIMITIF-PRIMITIF UNTUK TYPE BALASAN ********** */
 /* *** KONSTRUKTOR *** */
 /* MEMBUAT STRUCT BALASAN */
-void CreateBalasan(Balasan *B, Word Penulis, DATETIME Waktu, Word Isi, Kicauan *K);
+void CreateBalasan(Balasan *B, Word Penulis, DATETIME Waktu, Word Isi, Kicauan *K, ID IDParent);
 /* I.S. B sembarang */
 /* F.S. B terdefinisi dengan IDBalasan = IDBalasan terakhir + 1, PenulisBalasan = Penulis, WaktuBalasan = Waktu, IsiBalasan = Isi */
 
@@ -38,5 +40,5 @@ void PrintBalasan(Balasan B, int indentasi);
     | <Waktu post balasan>
     | <Isi balasan>
 */
-
+void PrintBalasanOnly(Balasan B, int indentasi);
 #endif

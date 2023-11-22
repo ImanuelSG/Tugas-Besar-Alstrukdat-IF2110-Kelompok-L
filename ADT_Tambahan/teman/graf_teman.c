@@ -1,6 +1,6 @@
 #include "graf_teman.h"
 #include "../utils/utils.h"
-
+#include <stdio.h>
 #define newline printf("\n")
 // aku benci syntax printf scanf
 
@@ -37,6 +37,7 @@ void TambahPertemanan(GrafTeman* G, Pengguna v1, Pengguna v2) {
 
 }
 void CreateGrafTeman(GrafTeman* G) {
+    printf("Hoho");
     G->NEffVertex = 0;
     G->NEffEdges = 0;
     G->NEffFriendRequests = 0;

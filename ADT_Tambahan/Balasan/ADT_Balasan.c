@@ -6,17 +6,16 @@
 /* ********** PRIMITIF-PRIMITIF UNTUK TYPE BALASAN ********** */
 /* *** KONSTRUKTOR *** */
 /* MEMBUAT STRUCT BALASAN */
-void CreateBalasan(Balasan *B, Word Penulis, DATETIME Waktu, Word Isi, Kicauan *K)
+void CreateBalasan(Balasan *B, Word Penulis, DATETIME Waktu, Word Isi, Kicauan *K, ID IDParent)
 {
    /* I.S. B sembarang */
-   
    /* F.S. B terdefinisi dengan IDBalasan = IDBalasan terakhir + 1, PenulisBalasan = Penulis, WaktuBalasan = Waktu, IsiBalasan = Isi */
    PENULIS_BALASAN(*B) = Penulis;
    WAKTU_BALASAN(*B) = Waktu;
    ISI_BALASAN(*B) = Isi;
-   
    CURRENT_ID_BALASAN(*K) += 1;
    ID_BALASAN(*B) = CURRENT_ID_BALASAN(*K);
+   ID_PARENT(*B) = IDParent;
 }
 
 void PrintIndentasi(int indentasi)
@@ -39,7 +38,7 @@ void PrintBalasan(Balasan B, int indentasi)
        | <Isi balasan>
    */
    printf("\n");
-   
+
    if (!isBerteman(currentPengguna.nama, PENULIS_BALASAN(B)) && getPengguna(PENULIS_BALASAN(B))->tipe_akun == 1)
    {
       PrintIndentasi(indentasi);
@@ -68,4 +67,30 @@ void PrintBalasan(Balasan B, int indentasi)
       PrintWord(ISI_BALASAN(B));
       printf("\n");
    }
+}
+
+void PrintBalasanOnly(Balasan B, int indentasi)
+{
+   /* I.S. K terdefinisi */
+   /* F.S. Struct Kicauan tercetak di layar dengan format:
+       | ID = <idbalasan>
+       | <Nama Pengguna>
+       | <Waktu post balasan>
+       | <Isi balasan>
+   */
+   printf("\n");
+   PrintIndentasi(indentasi);
+   printf("| ID = %d\n", ID_BALASAN(B));
+   PrintIndentasi(indentasi);
+   printf("| ");
+   PrintWord(PENULIS_BALASAN(B));
+   printf("\n");
+   PrintIndentasi(indentasi);
+   printf("| ");
+   TulisDATETIME(WAKTU_BALASAN(B));
+   printf("\n");
+   PrintIndentasi(indentasi);
+   printf("| ");
+   PrintWord(ISI_BALASAN(B));
+   printf("\n");
 }

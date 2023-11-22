@@ -23,7 +23,9 @@ int main()
     char *path_config4_str = wordToString(path_config4);
     char *path_config5_str = wordToString(path_config5);
 
+   
     ReadPenggunaConfig(path_config1_str);
+   
     ReadKicauanConfig(path_config2_str);
     ReadDrafConfig(path_config4_str);
     ReadBalasanConfig(path_config3_str);
@@ -57,6 +59,7 @@ int main()
     WriteKicauanConfig("kicauantes2.config");
     WritePenggunaConfig("penggunates2.config");
     WriteDrafConfig("draftes2.config");
+    WriteBalasanConfig("balasantes2.config");
     displayMatrix(matrixPertemanan);
     displayMatrix(matrixPermintaan);
 

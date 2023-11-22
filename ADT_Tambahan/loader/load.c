@@ -114,6 +114,7 @@ void ReadKicauanConfig(char namafile[])
 
 void ReadDrafConfig(char namafile[])
 {
+
     int iteration, banyak;
     Word username, isi;
     DATETIME Date;
@@ -239,17 +240,15 @@ void ReadBalasanConfig(char namafile[])
             ADVBaris();
             DATETIME Waktu = wordToDatetime(currentBaris);
             Balasan B;
-            Kicauan * K= &ELMT_LIST_KICAUAN(ListKicauanData, IDKicauUtama);
-            
-            CreateBalasan(&B, Author, Waktu, text, K);
-            currentPengguna.nama = Author;
-            
-            
-            
-            if (idbalasan == -1)
+            Kicauan *K = &ELMT_LIST_KICAUAN(ListKicauanData, IDKicauUtama);
+            //*ini untuk memastikan ID gasalah*//
+            CURRENT_ID_BALASAN(*K) = idbalasan - 1;
+
+            CreateBalasan(&B, Author, Waktu, text, K, idparent);
+
+            if (idparent == -1)
             {
                 insertChild(&ELMT_LIST_BALASAN(ListBalasanData, IDKicauUtama), B);
-                PrintBalasan(ELMT_LIST_BALASAN(ListBalasanData, IDKicauUtama)->info_tree, 0);
             }
             else
             {
@@ -411,5 +410,67 @@ void WriteDrafConfig(char namafile[])
         i++;
     }
     BanyakPenggunaDenganDraf = temp;
-    fclose(file); // Close the file
+    fclose(file);
 }
+
+void writeBalasanToFile(Tree p, FILE *file)
+{
+    if (p != NULL)
+    {
+
+        fprintf(file, "%d %d\n", ID_PARENT(INFO_TREE(p)), ID_BALASAN(INFO_TREE(p)));
+        fprintf(file, "%s\n", wordToString(ISI_BALASAN(INFO_TREE(p))));
+        fprintf(file, "%s\n", wordToString(PENULIS_BALASAN(INFO_TREE(p))));
+        fprintf(file, "%s\n", wordToString(datetimeToWord(WAKTU_BALASAN(INFO_TREE(p)))));
+        if (RIGHT_SIBLING(p) != NULL)
+        {
+            writeBalasanToFile(RIGHT_SIBLING(p), file);
+        }
+        if (LEFT_CHILD(p) != NULL)
+        {
+            writeBalasanToFile(LEFT_CHILD(p), file);
+        }
+    }
+}
+
+void WriteBalasanConfig(char namafile[])
+{
+    FILE *file = fopen(namafile, "w"); // Open the file for writing
+    int j = 1;
+    if (file == NULL)
+    {
+        printf("Gagal Membuat File.\n");
+        return;
+    }
+    int count = JUMLAH_KICAUAN_DENGAN_BALASAN;
+    fprintf(file, "%d\n", count); //
+    j = 1;
+    while (count > 0)
+    {
+        while (j < CAPACITY_LIST_BALASAN(ListBalasanData))
+        {
+            if (ELMT_LIST_BALASAN(ListBalasanData, j) != NULL)
+            {
+                fprintf(file, "%d\n", j);
+                break;
+            }
+            else
+            {
+                j++;
+            }
+        }
+        Tree P = ELMT_LIST_BALASAN(ListBalasanData, j);
+        fprintf(file, "%d\n", countNodes(P));
+        if (P != NULL)
+        {
+            writeBalasanToFile(P, file);
+        }
+        count--;
+        j++;
+    }
+    fclose(file);
+}
+
+// void WriteUtasConfig(char namefile[])
+// {
+// }
