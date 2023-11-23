@@ -4,7 +4,7 @@
 #ifndef __KICAUAN_H__
 #define __KICAUAN_H__
 
-#include "../../ADT_Bawaan/boolean.h"
+#include "../boolean.h"
 #include "../../ADT_Bawaan/wordmachine/wordmachine.h"
 #include "../../ADT_Bawaan/datetime/datetime.h"
 
