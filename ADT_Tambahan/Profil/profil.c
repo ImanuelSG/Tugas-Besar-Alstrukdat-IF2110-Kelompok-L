@@ -11,48 +11,17 @@
 boolean cekWeton(Word weton, Word *kata)
 {
     Word kembali;
-    Word pahing, kliwon, wage, pon, legi;
-    pahing = stringToWord("pahing", 6);
-    // char pahing[6];
-    // pahing[0] = 'p';
-    // pahing[1] = 'a';
-    // pahing[2] = 'h';
-    // pahing[3] = 'i';
-    // pahing[4] = 'n';
-    // pahing[5] = 'g';
-
-    kliwon = stringToWord("kliwon", 6);
-    // char kliwon[6];
-    // kliwon[0] = 'k';
-    // kliwon[1] = 'l';
-    // kliwon[2] = 'i';
-    // kliwon[3] = 'w';
-    // kliwon[4] = 'o';
-    // kliwon[5] = 'n';
-
-    wage = stringToWord("wage", 4);
-    // char wage[4];
-    // wage[0] = 'w';
-    // wage[1] = 'a';
-    // wage[2] = 'g';
-    // wage[3] = 'e';
-
-    pon = stringToWord("pon", 3);
-    // char pon[3];
-    // pon[0] = 'p';
-    // pon[1] = 'o';
-    // pon[2] = 'n';
-
-    legi = stringToWord("legi", 4);
-    // char legi[4];
-    // legi[0] = 'l';
-    // legi[1] = 'e';
-    // legi[2] = 'g';
-    // legi[3] = 'i';
+    Word pahing, kliwon, wage, pon, legi ;
+    pahing = stringToWord("pahing", 6) ;
+    kliwon = stringToWord("kliwon", 6) ;
+    wage = stringToWord("wage" , 4) ;
+    pon = stringToWord("pon" , 3) ;
+    legi = stringToWord("legi", 4) ;
 
     boolean valid;
     valid = true;
     int i;
+
     if (weton.Length == 6 && (weton.TabWord[0] == 'p' || weton.TabWord[0] == 'P'))
     {
         for (i = 0; i < weton.Length; i++)
@@ -110,6 +79,7 @@ boolean cekWeton(Word weton, Word *kata)
     }
     else if (weton.Length == 0)
     {
+        printf("Woohoo!\n");
         kembali = weton;
         valid = true;
     }
@@ -153,8 +123,9 @@ void displayProfil(MatrixProfil profil)
 
 void Ganti_Profil()
 {
-    if (isLoggedIn)
-    {
+    if (isLoggedIn) {
+
+        currentWord.Length = 0;
         // display nama, bio, nomor, weton
         printf("| Nama: ");
         displayWord(currentPengguna.nama);
@@ -175,7 +146,7 @@ void Ganti_Profil()
             printf("Masukkan bio akun:\n");
             STARTKalimat();
         }
-        currentPengguna.bio = currentWord;
+        currentPengguna.bio = DuplicateWord(currentWord);
 
         // input no.hp
         printf("Masukkan No HP :\n"); // maksimum merupakan panjang dari adt word itu sendiri
@@ -191,6 +162,10 @@ void Ganti_Profil()
                 valid = false;
             }
         }
+
+        if (currentWord.Length == 0) {
+            valid = true;
+        }
         while (!valid)
         {
             valid = true;
@@ -205,8 +180,7 @@ void Ganti_Profil()
                 }
             }
         }
-        currentPengguna.nomor = currentWord;
-
+        PointerDuplicateWord(currentWord, &currentPengguna.nomor);
         // input weton
         Word weton;
         printf("Masukkan weton : \n");
@@ -217,13 +191,16 @@ void Ganti_Profil()
             printf("Masukkan weton : \n");
             STARTKalimat();
         }
-        currentPengguna.weton = weton;
+        currentPengguna.weton = DuplicateWord(weton);
         printf("Profil anda sudah berhasil diperbaharui!\n");
+
+        
     }
     else
     {
         printf("Maaf, anda belum login!\n");
     }
+        printf("%d\n", currentWord.Length);
 }
 
 void Atur_Jenis_Akun()
@@ -324,6 +301,11 @@ void Lihat_Profil(Word nama)
     {
         int id;
         id = getIdPengguna(nama);
+        printf("%d", id);
+        printf("%d", dataPengguna.contents[id].nama.Length);
+        printf("%d", dataPengguna.contents[id].bio.Length);
+        printf("%d", dataPengguna.contents[id].nomor.Length);
+        printf("%d", dataPengguna.contents[id].weton.Length);
 
         if (id == -1)
         {

@@ -3,9 +3,7 @@
 
 int main()
 {
-    char namaFile[100];
-    scanf("%s", &namaFile);
-    startMKarFile(namaFile);
+    startMKarFile("tes.config");
     int i = 0;
     while (!EOPFile)
     {
@@ -13,7 +11,12 @@ int main()
         {
             printf("Ini NextLine");
         }
-        printf("%c%d", currentCharFile, i);
+        else if (currentCharFile == '\r')
+        {
+            printf("Ini Carriage Return");
+        }
+        else
+            printf("%c", currentCharFile);
         advMKarFile();
         i++;
     }

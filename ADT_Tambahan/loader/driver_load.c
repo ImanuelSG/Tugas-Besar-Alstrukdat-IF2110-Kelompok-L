@@ -24,11 +24,11 @@ int main()
     char *path_config5_str = wordToString(path_config5);
 
    
-    ReadPenggunaConfig(path_config1_str);
+    ReadPenggunaConfig("penggunates2.config");
    
-    ReadKicauanConfig(path_config2_str);
-    ReadDrafConfig(path_config4_str);
-    ReadBalasanConfig(path_config3_str);
+    ReadKicauanConfig("kicauantes2.config");
+    ReadDrafConfig("draftes2.config");
+    ReadBalasanConfig("balasantes2.config");
 
     for (int i = 0; i < banyakPengguna; i++)
     {

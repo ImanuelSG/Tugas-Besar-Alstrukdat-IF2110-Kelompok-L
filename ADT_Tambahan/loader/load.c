@@ -178,7 +178,7 @@ void ReadUtasConfig(char namafile[])
             Word Author = currentBaris;
             ADVBaris();
             DATETIME Waktu = wordToDatetime(currentBaris);
-            /*Create Utas and insert it to the list*/
+            
         }
     }
 }
