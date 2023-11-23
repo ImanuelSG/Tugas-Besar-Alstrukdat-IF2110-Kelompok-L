@@ -5,6 +5,9 @@
     "wordoperations.h": "c",
     "graf_teman.h": "c",
     "pengguna.h": "c",
-    "command_balasan.h": "c"
+    "command_balasan.h": "c",
+    "boolean.h": "c",
+    "stackdraf.h": "c",
+    "liststatikpengguna.h": "c"
   }
 }

@@ -3,7 +3,6 @@
 
 #include "../../ADT_Bawaan/wordmachine/wordmachine.h"
 #include "../../ADT_Bawaan/charmachine/charmachine.h"
-#include "liststatikpengguna.h"
 #include "../Profil/profil.h"
 #include "../DrafKicauan/StackDraf.h"
 #include <stdio.h>
@@ -20,8 +19,7 @@ typedef struct
     StackDraf draf;
 } Pengguna;
 
-extern int banyakPengguna;
-extern ListStatikPengguna dataPengguna; /*List Pengguna*/
+extern int banyakPengguna; /*List Pengguna*/
 extern Pengguna currentPengguna;  /*Berisi Data Current Pengguna*/
 
 void CreatePengguna(Pengguna *akun, Word nama, Word sandi, Word bio, Word nomor, Word weton, int tipe_akun, MatrixProfil profil, StackDraf draf);

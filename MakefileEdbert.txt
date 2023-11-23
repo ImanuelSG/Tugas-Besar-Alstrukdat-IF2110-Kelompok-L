@@ -1,0 +1,46 @@
+CC = gcc
+CFLAGS = -Wall -std=c11
+
+SRC_LIB = $(SRC_CHAR) $(SRC_WORD) $(SRC_PCOLOR) 
+OBJ_LIB = $(SRC_LIB:.c=.o)
+
+SRC_AWAS = $(SRC_KICAUAN) $(SRC_DRAFT) $(SRC_PENGGUNA) $(SRC_PROFIL) $(SRC_BALASAN)
+
+SRC_CHAR = ADT_Bawaan/charmachine/charmachine.c
+SRC_WORD = ADT_Bawaan/wordmachine/wordmachine.c
+
+SRC_KICAUAN = ADT_Tambahan/Kicauan/Command_Kicauan.c
+SRC_DRAFT = ADT_Tambahan/Drafkicauan/COmmand_Draf.c
+SRC_PENGGUNA = ADT_Tambahan/Pengguna/pengguna.c
+SRC_PROFIL = ADT_Tambahan/Profil/profil.c
+SRC_BALASAN = ADT_Tambahan/Balasan/Command_Balasan.c
+
+SRC_PCOLOR = pcolor.c
+
+OBJ_CHAR = $(SRC_CHAR:.c=.o)
+OBJ_WORD = $(SRC_WORD:.c=.o)
+
+
+# wordmachine: $(OBJ_CHAR) $(OBJ_WORD)
+# 	$(CC) $(CFLAGS) -o $@ $^ 
+
+
+vanson: $(OBJ_LIB) util.c main.c globalVar.h globalVar.c $(SRC_AWAS)
+	$(CC) $(CFLAGS) -o $@  main.c globalVar.c $(SRC_LIB) -lm
+# TARGET = myprogram
+
+# .PHONY: all clean
+
+# all: $(TARGET)
+
+# $(TARGET): $(OBJ_LIB) $(MAIN_OBJ) $(SRC_AWAS)
+# 	$(CC) $(CFLAGS) -o $@ $^
+
+# # $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+# # 	$(CC) $(CFLAGS) -c -o $@ $<
+
+# $(MAIN_OBJ): main.c
+# 	$(CC) $(CFLAGS) -c -o $@ $<
+
+# clean:
+# 	rm -f $(OBJ_DIR)/*.o $(TARGET)

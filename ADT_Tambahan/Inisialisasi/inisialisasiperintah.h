@@ -14,6 +14,7 @@ void initializeKeyWords();
 boolean isAKeyWord(Word w);
 // Mengembalikan true jika w adalah keyword perintah
 
+void displayLogoBurbir();
 void displayBurbir();
 // Prosedur menampilkan tampilan awal program
 

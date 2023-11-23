@@ -4,12 +4,16 @@
 #include "../../pcolor.c"
 #include "../utils/utils.h"
 #include "../wordoperations.h"
+#include "../Pengguna/liststatikpengguna.h"
+#include "../Pengguna/pengguna.h"
+
+ListStatikPengguna dataPengguna;
 
 boolean cekWeton(Word weton, Word *kata)
 {
     Word kembali;
     Word pahing, kliwon, wage, pon, legi ;
-    pahing = stringToWord('pahing', 6) ;
+    pahing = stringToWord("pahing", 6) ;
     // char pahing[6];
     // pahing[0] = 'p';
     // pahing[1] = 'a';
@@ -18,7 +22,7 @@ boolean cekWeton(Word weton, Word *kata)
     // pahing[4] = 'n';
     // pahing[5] = 'g';
 
-    kliwon = stringToWord('kliwon', 6) ;
+    kliwon = stringToWord("kliwon", 6) ;
     // char kliwon[6];
     // kliwon[0] = 'k';
     // kliwon[1] = 'l';
@@ -27,20 +31,20 @@ boolean cekWeton(Word weton, Word *kata)
     // kliwon[4] = 'o';
     // kliwon[5] = 'n';
 
-    wage = stringToWord('wage' , 4) ;
+    wage = stringToWord("wage" , 4) ;
     // char wage[4];
     // wage[0] = 'w';
     // wage[1] = 'a';
     // wage[2] = 'g';
     // wage[3] = 'e';
 
-    pon = stringToWord('pon' , 3) ;
+    pon = stringToWord("pon" , 3) ;
     // char pon[3];
     // pon[0] = 'p';
     // pon[1] = 'o';
     // pon[2] = 'n';
 
-    legi = stringToWord('legi', 4) ;
+    legi = stringToWord("legi", 4) ;
     // char legi[4];
     // legi[0] = 'l';
     // legi[1] = 'e';

@@ -20,6 +20,7 @@ int main()
     CreateGrafTeman(&dataTeman);
 
     initializeKeyWords();
+    displayLogoBurbir();
     displayBurbir();
     FILE *f;
 
@@ -117,9 +118,6 @@ int main()
             }
 
             /*-------------------------------KICAU-----------------------------------*/
-
-
-        /*-------------------------------KICAU-----------------------------------*/
 
             else if (isSameWord(perintah, stringToWord("KICAU", 5))) {
                 KICAU();
