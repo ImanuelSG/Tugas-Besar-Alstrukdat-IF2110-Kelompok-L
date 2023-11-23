@@ -289,6 +289,9 @@ void insertLast(ListDin *l, ElType val) {
 /* I.S. List l boleh kosong, tetapi tidak penuh */
 /* F.S. val adalah elemen terakhir l yang baru */
 /* ********** MENGHAPUS ELEMEN ********** */
+    if (isFull(*l)) {
+        expandList(l, 5) ;
+    }
     ELMT(*l, NEFF(*l)) = val;
     NEFF(*l) += 1;
 }

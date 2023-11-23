@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "listdinkicauan.h"
 #include "../utils/utils.h"
+#include "../Balasan/treebalasan.h"
 
 ListKicauan ListKicauanData;
 /* ********** PRIMITIF-PRIMITIF UNTUK TYPE LISTKICAUAN ********** */
@@ -35,14 +36,22 @@ int listLengthKicau(ListKicauan l) {
 ID getFirstIdxKicau(ListKicauan l) {
 /* Prekondisi : List l tidak kosong */
 /* Mengirimkan indeks elemen l pertama */
-    return IDX_MIN_LIST_KICAUAN;
+    if (NEFF_LIST_KICAUAN(l) == 0) {
+        return IDX_UNDEF;
+    } else {
+        return IDX_MIN_LIST_KICAUAN;
+    }
 }
 
 ID getLastIdxKicau(ListKicauan l) {
 /* Prekondisi : List l tidak kosong */
 /* Mengirimkan indeks elemen l terakhir */
 /* indeks dimulai dari 1 */
-    return NEFF_LIST_KICAUAN(l);
+    if (NEFF_LIST_KICAUAN(l) == 0) {
+        return IDX_UNDEF;
+    } else {
+        return NEFF_LIST_KICAUAN(l);
+    }
 }
 
 /* ********** Test Indeks yang valid ********** */
@@ -73,33 +82,39 @@ boolean isFullListKicau(ListKicauan l) {
 }
 
 /* ********** TULIS LIST ********** */
-void printListKicauan(ListKicauan l, Word NamaPengguna)
-{
-    /* Proses : Menuliskan isi list dengan traversal,
-       list yang ditulis hanya Kicauan milik pengguna beserta teman-temannya
-    /* I.S. l boleh kosong */
-    /* F.S. Jika l tidak kosong: tercetak daftar kicauan pengguna dan temannya */
-    /*      Penulisan dari kicauan terbaru ke yang terlama */
-    ID i;
-    for (i = getLastIdxKicau(l); i >= getFirstIdxKicau(l); i--) {
-        if (isBerteman(NamaPengguna, PENULIS_KICAUAN(ELMT_LIST_KICAUAN(l, i)))) {
-            PrintKicauan(ELMT_LIST_KICAUAN(l, i), i);
+void printListKicauan(ListKicauan l, Word NamaPengguna) {
+/* Proses : Menuliskan isi list dengan traversal,
+   list yang ditulis hanya Kicauan milik pengguna beserta teman-temannya
+/* I.S. l boleh kosong */
+/* F.S. Jika l tidak kosong: tercetak daftar kicauan pengguna dan temannya */
+/*      Penulisan dari kicauan terbaru ke yang terlama */
+    if (!isEmptyListKicau(l)) {
+        ID i;
+        for (i = getLastIdxKicau(l); i >= getFirstIdxKicau(l); i--) {
+            if (isBerteman(NamaPengguna, PENULIS_KICAUAN(ELMT_LIST_KICAUAN(l, i)))) {
+                PrintKicauan(ELMT_LIST_KICAUAN(l, i), i);
+            }
         }
+    }
+    else {
+        printf("Tidak ada kicauan yang dapat ditampilkan!\n");
     }
 }
 
-void printList(ListKicauan l)
-{
+void printList(ListKicauan l) {
     /* Proses : Menuliskan isi list dengan traversal,
        list yang ditulis hanya Kicauan milik pengguna beserta teman-temannya
     /* I.S. l boleh kosong */
     /* F.S. Jika l tidak kosong: tercetak daftar seluruh kicauan */
     /*      Penulisan dari kicauan terbaru ke yang terlama */
-    ID i;
-
-    for (i = getLastIdxKicau(l); i >= getFirstIdxKicau(l); i--) {
-        PrintKicauan(ELMT_LIST_KICAUAN(l, i), i);
-        printf("\n");
+    if (!isEmptyListKicau(l)) {
+        ID i;
+        for (i = getLastIdxKicau(l); i >= getFirstIdxKicau(l); i--) {
+            PrintKicauan(ELMT_LIST_KICAUAN(l, i), i);
+        }
+    }
+    else {
+        printf("Tidak ada kicauan yang dapat ditampilkan!\n");
     }
 }
 
@@ -124,9 +139,11 @@ void insertLastKicau(ListKicauan *l, Kicauan val) {
 /* F.S. val adalah elemen terakhir l yang baru */
     if (isFullListKicau(*l)) {
         expandListKicau(l, 50);
+        expandListBalas(&ListBalasanData, 50);
     }
     NEFF_LIST_KICAUAN(*l) += 1;
     ELMT_LIST_KICAUAN(*l, getLastIdxKicau(*l)) = val;
+    CURRENT_ID_KICAUAN += 1;
 }
 
 /* ********* MENGUBAH UKURAN ARRAY ********* */

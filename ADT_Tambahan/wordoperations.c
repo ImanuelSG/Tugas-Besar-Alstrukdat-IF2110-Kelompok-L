@@ -87,16 +87,24 @@ char digitToChar(int num)
 NOTE: Masukan hanya berupa integer[0..9] */
 
 int wordToInteger(Word w)
-{
-    int res = 0;
-    int i;
-    for (i = 0; i < w.Length; i++)
+{   
+    int i, sign, res = 0;
+    if (w.TabWord[0] == '-')
+    {
+        sign = -1;
+        i = 1;
+    } else {
+        sign = 1;
+        i = 0;
+    }
+    
+    for (i; i < w.Length; i++)
     {
         res *= 10;
         res += charToDigit(w.TabWord[i]);
     }
 
-    return res;
+    return res*sign;
 }
 /* Mengubah kata menjadi integer
 NOTE: Masukan hanya berupa kata yang karakternya adalah digit semua */
@@ -173,4 +181,12 @@ Word DuplicateWord(Word w) {
     }
 
     return w_out;
+}
+
+Word PointerDuplicateWord(Word w, Word* w_hasil) {
+    w_hasil->Length = w.Length;
+    int i;
+    for(i = 0; i < w.Length; i++) {
+        w_hasil->TabWord[i] = w.TabWord[i];
+    }
 }

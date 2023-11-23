@@ -15,10 +15,10 @@ int main() {
     STARTWORD();
     Word w1 = currentWord;
     if (isAKeyWord((currentWord))) {
-        print("Yay\n");
+        printf("Yay\n");
     }
     else {
-        print("UwU\n");
+        printf("UwU\n");
     }
 
     // lvd

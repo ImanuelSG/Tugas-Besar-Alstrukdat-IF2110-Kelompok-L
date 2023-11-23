@@ -73,4 +73,7 @@ char* wordToString(Word w);
 Word DuplicateWord(Word W);
 /* Returns a copy of W */
 
+Word PointerDuplicateWord(Word W, Word* w_hasil);
+
+
 #endif

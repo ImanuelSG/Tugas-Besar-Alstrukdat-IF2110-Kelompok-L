@@ -27,7 +27,8 @@ int main()
     inputConfigFile(f);
     // load (f);
     printf("File berhasil dimuat!\n");
-
+    CreateListDinKicauan(&ListKicauanData,10);
+    CreateListBalasan(&ListBalasanData,10);
     // boolean firstInput = true;
     boolean stopped = false;
 
@@ -120,7 +121,7 @@ int main()
             /*-------------------------------KICAU-----------------------------------*/
 
             else if (isSameWord(perintah, stringToWord("KICAU", 5))) {
-                KICAU();
+                KICAU(); nl;
             }
 
             else if (isSameWord(perintah, stringToWord("KICAUAN", 7))) {

@@ -62,7 +62,7 @@ void CreateGrafTeman(GrafTeman* G) {
     }
 
     int k;
-    printf("roweff %d\n", ROW_EFF(matrixPertemanan));
+//    printf("roweff %d\n", ROW_EFF(matrixPertemanan));
     for (i = 0; i < ROW_EFF(matrixPermintaan); i++) {
 
         Pengguna v1 = dataPengguna.contents[ELMT(matrixPertemanan, i, 0)];

@@ -6,6 +6,7 @@
 #include "../wordoperations.h"
 #include "../Pengguna/liststatikpengguna.h"
 #include "../Pengguna/pengguna.h"
+#include "../../ADT_Bawaan/charmachine/charmachine.h"
 
 ListStatikPengguna dataPengguna;
 
@@ -14,46 +15,15 @@ boolean cekWeton(Word weton, Word *kata)
     Word kembali;
     Word pahing, kliwon, wage, pon, legi ;
     pahing = stringToWord("pahing", 6) ;
-    // char pahing[6];
-    // pahing[0] = 'p';
-    // pahing[1] = 'a';
-    // pahing[2] = 'h';
-    // pahing[3] = 'i';
-    // pahing[4] = 'n';
-    // pahing[5] = 'g';
-
     kliwon = stringToWord("kliwon", 6) ;
-    // char kliwon[6];
-    // kliwon[0] = 'k';
-    // kliwon[1] = 'l';
-    // kliwon[2] = 'i';
-    // kliwon[3] = 'w';
-    // kliwon[4] = 'o';
-    // kliwon[5] = 'n';
-
     wage = stringToWord("wage" , 4) ;
-    // char wage[4];
-    // wage[0] = 'w';
-    // wage[1] = 'a';
-    // wage[2] = 'g';
-    // wage[3] = 'e';
-
     pon = stringToWord("pon" , 3) ;
-    // char pon[3];
-    // pon[0] = 'p';
-    // pon[1] = 'o';
-    // pon[2] = 'n';
-
     legi = stringToWord("legi", 4) ;
-    // char legi[4];
-    // legi[0] = 'l';
-    // legi[1] = 'e';
-    // legi[2] = 'g';
-    // legi[3] = 'i';
 
     boolean valid;
     valid = true;
     int i;
+
     if (weton.Length == 6 && (weton.TabWord[0] == 'p' || weton.TabWord[0] == 'P'))
     {
         for (i = 0; i < weton.Length; i++)
@@ -111,6 +81,7 @@ boolean cekWeton(Word weton, Word *kata)
     }
     else if (weton.Length == 0)
     {
+        printf("Woohoo!\n");
         kembali = weton;
         valid = true;
     }
@@ -161,7 +132,7 @@ void Ganti_Profil()
         printf("\n| Bio Akun: ");
         displayWord(currentPengguna.bio);
         printf("\n| No HP: ");
-        displayWord(currentPengguna.nomor);
+        printListNomor(currentPengguna.nomor);
         printf("\n| Weton: ");
         displayWord(currentPengguna.weton);
         printf("\n");
@@ -175,11 +146,23 @@ void Ganti_Profil()
             printf("Masukkan bio akun:\n");
             STARTKalimat();
         }
-        currentPengguna.bio = currentWord;
+        dataPengguna.contents[getIdPengguna(currentPengguna.nama)].bio = DuplicateWord(currentWord);
+        currentPengguna.bio = DuplicateWord(currentWord) ;
 
         // input no.hp
-        printf("Masukkan No HP :\n"); // maksimum merupakan panjang dari adt word itu sendiri
-        STARTKalimat();
+        printf("\nMasukkan No HP :\n"); // maksimum merupakan panjang dari adt word itu sendiri
+        ListDinNomor nomor ;
+        int panjangNomor = 0 ;
+        START() ;
+        while (currentChar != MARK) {
+            if (panjangNomor == 0) {
+                insertLastNomor(&nomor, currentChar) ;
+            }
+            else {
+                ADV() ;
+                insertLastNomor(&nomor, currentChar) ;
+            }
+        }
         // validasi nomor telpon
         boolean valid;
         valid = true;
@@ -190,6 +173,10 @@ void Ganti_Profil()
             {
                 valid = false;
             }
+        }
+
+        if (currentWord.Length == 0) {
+            valid = true;
         }
         while (!valid)
         {
@@ -205,20 +192,26 @@ void Ganti_Profil()
                 }
             }
         }
-        currentPengguna.nomor = currentWord;
+        dataPengguna.contents[getIdPengguna(currentPengguna.nama)].nomor = nomor;
+        currentPengguna.nomor = nomor ;
 
         // input weton
         Word weton;
-        printf("Masukkan weton : \n");
+        printf("\nMasukkan weton : \n");
         STARTKalimat();
         while (!cekWeton(currentWord, &weton))
         {
+            printf("\n") ;
             printf("Weton anda tidak valid!\n");
             printf("Masukkan weton : \n");
             STARTKalimat();
         }
-        currentPengguna.weton = weton;
+        dataPengguna.contents[getIdPengguna(currentPengguna.nama)].weton = DuplicateWord(weton);
+        currentPengguna.weton = DuplicateWord(currentWord) ;
+
         printf("Profil anda sudah berhasil diperbaharui!\n");
+
+        
     }
     else {
         printf("Maaf, anda belum login!\n") ;
@@ -228,19 +221,9 @@ void Ganti_Profil()
 void Atur_Jenis_Akun()
 {
     if (isLoggedIn) {
-        char y[2];
-        y[0] = 'Y';
-        y[1] = 'A';
-        char n[5];
-        n[0] = 'T';
-        n[1] = 'I';
-        n[2] = 'D';
-        n[3] = 'A';
-        n[4] = 'K';
-
         Word ya, no;
-        ya = stringToWord(y, 2);
-        no = stringToWord(n, 5);
+        ya = stringToWord("YA", 2);
+        no = stringToWord("TIDAK", 5);
 
         boolean valid;
         if (currentPengguna.tipe_akun == 0)
@@ -249,7 +232,8 @@ void Atur_Jenis_Akun()
             STARTKalimat();
             if (isSameWord(currentWord, ya))
             {
-                currentPengguna.tipe_akun = 1;
+                dataPengguna.contents[getIdPengguna(currentPengguna.nama)].tipe_akun = 1;
+                currentPengguna.tipe_akun = 1 ;
             }
             else if (isSameWord(currentWord, no))
             {
@@ -265,7 +249,8 @@ void Atur_Jenis_Akun()
                     STARTKalimat();
                     if (isSameWord(currentWord, ya))
                     {
-                        currentPengguna.tipe_akun = 1;
+                        dataPengguna.contents[getIdPengguna(currentPengguna.nama)].tipe_akun = 1;
+                        currentPengguna.tipe_akun = 1 ;
                     }
                     else if (isSameWord(currentWord, no))
                     {
@@ -282,7 +267,8 @@ void Atur_Jenis_Akun()
             STARTKalimat();
             if (isSameWord(currentWord, ya))
             {
-                currentPengguna.tipe_akun = 0;
+                dataPengguna.contents[getIdPengguna(currentPengguna.nama)].tipe_akun = 0;
+                currentPengguna.tipe_akun = 0 ;
             }
             else if (isSameWord(currentWord, no))
             {
@@ -298,7 +284,8 @@ void Atur_Jenis_Akun()
                     STARTKalimat();
                     if (isSameWord(currentWord, ya))
                     {
-                        currentPengguna.tipe_akun = 0;
+                        dataPengguna.contents[getIdPengguna(currentPengguna.nama)].tipe_akun = 0;
+                        currentPengguna.tipe_akun = 0 ;
                     }
                     else if (isSameWord(currentWord, no))
                     {
@@ -334,7 +321,7 @@ void Lihat_Profil(Word nama)
             printf("\n| Bio Akun: ");
             displayWord(dataPengguna.contents[id].bio);
             printf("\n| No HP: ");
-            displayWord(dataPengguna.contents[id].nomor);
+            printListNomor(dataPengguna.contents[id].nomor);
             printf("\n| Weton: ");
             displayWord(dataPengguna.contents[id].weton);
             printf("\n");
@@ -365,7 +352,7 @@ void Ubah_Foto_Profil()
         // input profil baru
         printf("Masukkan foto profil yang baru\n");
         int i, j;
-        STARTKalimat();
+        STARTWORD() ;
         for (i = 0; i < 5; i++)
         {
             for (j = 0; j < 10; j++)
@@ -373,11 +360,13 @@ void Ubah_Foto_Profil()
                 if (i == 0 && j == 0)
                 {
                     dataPengguna.contents[id].profil.mem[i][j] = currentWord;
+                    currentPengguna.profil.mem[i][j] = currentWord ;
                 }
                 else
                 {
                     ADVWORD();
                     dataPengguna.contents[id].profil.mem[i][j] = currentWord;
+                    currentPengguna.profil.mem[i][j] = currentWord ;
                 }
             }
         }
