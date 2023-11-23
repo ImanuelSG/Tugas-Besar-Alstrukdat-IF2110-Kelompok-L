@@ -15,7 +15,15 @@ void STARTBaris(char namafile[])
     {
         EndBaris = false;
         CopyBaris();
-        advMKarFile();
+        if (currentCharFile == '\n')
+        {
+            advMKarFile();
+        }
+        else if (currentCharFile == '\r')
+        {
+            advMKarFile();
+            advMKarFile();
+        }
     }
 }
 
@@ -28,14 +36,22 @@ void ADVBaris()
     else
     {
         CopyBaris();
-        advMKarFile();
+        if (currentCharFile == '\n')
+        {
+            advMKarFile();
+        }
+        else if (currentCharFile == '\r')
+        {
+            advMKarFile();
+            advMKarFile();
+        }
     }
 }
 
 void CopyBaris()
 {
     int i = 0;
-    while ((currentCharFile != '\n') && !EOPFile)
+    while ((currentCharFile != '\n') && !EOPFile && (currentCharFile != '\r'))
     {
         currentBaris.TabWord[i] = currentCharFile;
         advMKarFile();
@@ -50,7 +66,8 @@ void PrintBaris(Word B)
     {
         if (B.TabWord[i] != '\n')
             printf("%c", B.TabWord[i]);
-        else{
+        else
+        {
             printf("ini slashn\n");
         }
     }

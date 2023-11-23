@@ -34,7 +34,7 @@ extern int BanyakPenggunaDenganDraf;
 #define TOP(s) (s).addrTop->INFODRAF
 
 /* Prototype manajemen memori */
-AddressDraf newNode(ElTypeDraf x);
+AddressDraf newNodeDraf(ElTypeDraf x);
 /* Mengembalikan alamat sebuah Node hasil alokasi dengan INFODRAF = x,
    atau
    NULL jika alokasi gagal */
@@ -83,4 +83,5 @@ void DeleteDraf(StackDraf *s, ElTypeDraf *x);
 
 void ReverseStackDraf(StackDraf *s);
 
+StackDraf CopyStackDraf(StackDraf s);
 #endif

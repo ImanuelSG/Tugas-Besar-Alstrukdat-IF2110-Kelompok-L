@@ -1,1 +1,0 @@
-gcc wordmachine.c charmachine.c pengguna.c wordoperations.c -o tes

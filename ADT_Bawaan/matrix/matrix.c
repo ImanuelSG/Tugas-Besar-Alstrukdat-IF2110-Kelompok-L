@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <math.h>
 #include "matrix.h"
 
 /* ********** DEFINISI PROTOTIPE PRIMITIF ********** */
@@ -356,23 +355,6 @@ Matrix minor(Matrix m, int i, int j) {
     return temp;
 }
 
-float determinant(Matrix m) {
-/* Prekondisi: isSquare(m) */
-/* Menghitung nilai determinan m */
-    float det = 0;
-    int i;
-    
-    if (ROW_EFF(m) == 1) {
-        det = ELMT(m, 0, 0);
-    } else if ((ROW_EFF(m) == 2) && (COL_EFF(m) == 2)) {
-        det = ELMT(m, 0, 0) * ELMT(m, 1, 1) - ELMT(m, 0, 1) * ELMT(m, 1, 0);
-    } else {
-        for (i = 0; i < COL_EFF(m); i++) {
-            det += pow(-1, i) * ELMT(m, 0, i) * determinant(minor(m, 0, i));
-        }
-    }
-    return det;
-}
 
 Matrix transpose(Matrix m) {
 /* I.S. m terdefinisi dan IsSquare(m) */
@@ -393,28 +375,4 @@ void pTranspose(Matrix *m) {
 /* I.S. m terdefinisi dan IsSquare(m) */
 /* F.S. m "di-transpose", yaitu setiap elemen m(i,j) ditukar nilainya dengan elemen m(j,i) */
     copyMatrix(transpose(*m), m);
-}
-
-boolean isSegitigaBawah (Matrix m) {
-/* Mengirimkan true jika m adalah matriks segitiga bawah */
-    int i = 0;
-    int j = i+1;
-    boolean reset = false;
-    boolean notsegbawah= false;
-
-    while (!(i == getLastIdxRow (m) && j >getLastIdxCol(m))  && notsegbawah==false) {
-        if (ELMT(m,i,j) != 0){
-            notsegbawah = true;
-        }
-        
-        if (j == getLastIdxCol(m) & i!= getLastIdxRow (m)){
-            i ++ ;
-            j = i+1;
-        } else{
-            j++;
-        }
-
-    }
-
-    return (!notsegbawah);
 }

@@ -8,7 +8,6 @@
 #include "../../ADT_Bawaan/wordmachine/wordmachine.h"
 #include "../Pengguna/pengguna.h"
 #include "../../ADT_Bawaan/matrix/matrix.h"
-#include "../Globals/globalvar.h"
 #include "../wordoperations.h"
 #include <stdio.h>
 

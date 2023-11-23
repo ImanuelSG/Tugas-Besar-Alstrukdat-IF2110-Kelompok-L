@@ -5,8 +5,10 @@
 #include <stdio.h>
 #include "wordoperations.h"
 
-boolean isSameWord (Word w1, Word w2) {
-    if (w1.Length == w2.Length) {
+boolean isSameWord(Word w1, Word w2)
+{
+    if (w1.Length == w2.Length)
+    {
         int i = 0;
         boolean same = true;
 
@@ -150,8 +152,8 @@ DATETIME wordToDatetime(Word w)
     int day, month, year, hour, minute, second;
     day = makePuluhanfromWord(w, 0, 1);
     month = makePuluhanfromWord(w, 3, 4);
-    year = charToDigit(w.TabWord[6]) * 1000 + charToDigit(w.TabWord[7])* 100 + charToDigit(w.TabWord[8]) * 10 + charToDigit(w.TabWord[9]);
-   
+    year = charToDigit(w.TabWord[6]) * 1000 + charToDigit(w.TabWord[7]) * 100 + charToDigit(w.TabWord[8]) * 10 + charToDigit(w.TabWord[9]);
+
     hour = makePuluhanfromWord(w, 11, 12);
     minute = makePuluhanfromWord(w, 14, 15);
     second = makePuluhanfromWord(w, 17, 18);
@@ -160,33 +162,75 @@ DATETIME wordToDatetime(Word w)
     return D;
 }
 
-char* wordToString(Word w) {
+Word datetimeToWord(DATETIME D)
+{
+    Word w;
+    int day, month, year, hour, minute, second;
+    day = Day(D);
+    month = Month(D);
+    year = Year(D);
+    hour = Hour(Time(D));
+    minute = Minute(Time(D));
+    second = Second(Time(D));
+
+    w.TabWord[0] = digitToChar(day / 10);
+    w.TabWord[1] = digitToChar(day % 10);
+    w.TabWord[2] = '/';
+    w.TabWord[3] = digitToChar(month / 10);
+    w.TabWord[4] = digitToChar(month % 10);
+    w.TabWord[5] = '/';
+    w.TabWord[6] = digitToChar(year / 1000);
+    w.TabWord[7] = digitToChar((year / 100) % 10);
+    w.TabWord[8] = digitToChar((year / 10) % 10);
+    w.TabWord[9] = digitToChar(year % 10);
+    w.TabWord[10] = ' ';
+    w.TabWord[11] = digitToChar(hour / 10);
+    w.TabWord[12] = digitToChar(hour % 10);
+    w.TabWord[13] = ':';
+    w.TabWord[14] = digitToChar(minute / 10);
+    w.TabWord[15] = digitToChar(minute % 10);
+    w.TabWord[16] = ':';
+    w.TabWord[17] = digitToChar(second / 10);
+    w.TabWord[18] = digitToChar(second % 10);
+    w.Length = 19;
+
+    return w;
+}
+
+char *wordToString(Word w)
+{
     int i;
-    char* benang = (char*) malloc (w.Length + 1);
-    for (i = 0; i < w.Length; i++) {
+    char *benang = (char *)malloc(w.Length + 1);
+    for (i = 0; i < w.Length; i++)
+    {
         benang[i] = w.TabWord[i];
     }
 
-    benang [w.Length] = KARAKTER_NULL;
+    benang[w.Length] = KARAKTER_NULL;
 
     return benang;
 }
 
-Word DuplicateWord(Word w) {
+Word DuplicateWord(Word w)
+{
     Word w_out;
     w_out.Length = w.Length;
     int i;
-    for(i = 0; i < w.Length; i++) {
+    for (i = 0; i < w.Length; i++)
+    {
         w_out.TabWord[i] = w.TabWord[i];
     }
 
     return w_out;
 }
 
-Word PointerDuplicateWord(Word w, Word* w_hasil) {
+Word PointerDuplicateWord(Word w, Word *w_hasil)
+{
     w_hasil->Length = w.Length;
     int i;
-    for(i = 0; i < w.Length; i++) {
+    for (i = 0; i < w.Length; i++)
+    {
         w_hasil->TabWord[i] = w.TabWord[i];
     }
+    return *w_hasil;
 }

@@ -1,12 +1,12 @@
 #include "profil.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "../../pcolor.c"
+#include "../../pcolor.h"
 #include "../utils/utils.h"
 #include "../wordoperations.h"
 #include "../Pengguna/liststatikpengguna.h"
 #include "../Pengguna/pengguna.h"
-#include "../../ADT_Bawaan/charmachine/charmachine.h"
+#include "../Globals/globalvar.h"
 
 ListStatikPengguna dataPengguna;
 
@@ -33,7 +33,7 @@ boolean cekWeton(Word weton, Word *kata)
                 valid = false;
             }
         }
-        kembali = pahing ;
+        kembali = pahing;
     }
     else if (weton.Length == 6 && (weton.TabWord[0] == 'k' || weton.TabWord[0] == 'K'))
     {
@@ -44,7 +44,7 @@ boolean cekWeton(Word weton, Word *kata)
                 valid = false;
             }
         }
-        kembali = kliwon ;
+        kembali = kliwon;
     }
     else if (weton.Length == 4 && (weton.TabWord[0] == 'w' || weton.TabWord[0] == 'W'))
     {
@@ -55,7 +55,7 @@ boolean cekWeton(Word weton, Word *kata)
                 valid = false;
             }
         }
-        kembali = wage ;
+        kembali = wage;
     }
     else if (weton.Length == 4 && (weton.TabWord[0] == 'l' || weton.TabWord[0] == 'L'))
     {
@@ -66,7 +66,7 @@ boolean cekWeton(Word weton, Word *kata)
                 valid = false;
             }
         }
-        kembali = legi ;
+        kembali = legi;
     }
     else if (weton.Length == 3)
     {
@@ -77,7 +77,7 @@ boolean cekWeton(Word weton, Word *kata)
                 valid = false;
             }
         }
-        kembali = pon ;
+        kembali = pon;
     }
     else if (weton.Length == 0)
     {
@@ -213,8 +213,9 @@ void Ganti_Profil()
 
         
     }
-    else {
-        printf("Maaf, anda belum login!\n") ;
+    else
+    {
+        printf("Maaf, anda belum login!\n");
     }
 }
 
@@ -297,14 +298,16 @@ void Atur_Jenis_Akun()
             }
         }
     }
-    else {
-        printf("Maaf, anda belum login!\n") ;
+    else
+    {
+        printf("Maaf, anda belum login!\n");
     }
 }
 
 void Lihat_Profil(Word nama)
 {
-    if (isLoggedIn) {
+    if (isLoggedIn)
+    {
         int id;
         id = getIdPengguna(nama);
 
@@ -341,7 +344,8 @@ void Lihat_Profil(Word nama)
 
 void Ubah_Foto_Profil()
 {
-    if (isLoggedIn) {
+    if (isLoggedIn)
+    {
         // display profil
         int id;
         id = getIdPengguna(currentPengguna.nama);

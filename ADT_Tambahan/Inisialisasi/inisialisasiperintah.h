@@ -4,7 +4,7 @@
 #define _INIT_
 
 #include <stdio.h>
-#include "..\\wordoperations.h"
+#include "../wordoperations.h"
 #define nl printf("\n")
 
 extern Word KeyWords[100];
@@ -19,7 +19,7 @@ void displayWordBlue();
 void displayBurbir();
 // Prosedur menampilkan tampilan awal program
 
-void inputConfigFile(FILE *file);
+void inputConfigFile();
 // Prosedur meminta string file input
 
 boolean validatePath(Word foldername);

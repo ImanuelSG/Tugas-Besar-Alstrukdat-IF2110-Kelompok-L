@@ -7,9 +7,10 @@
 /* ********** PRIMITIF-PRIMITIF UNTUK TYPE BALASAN ********** */
 /* *** KONSTRUKTOR *** */
 /* MEMBUAT STRUCT BALASAN */
-void CreateBalasan(Balasan *B, Word Penulis, DATETIME Waktu, Word Isi, Kicauan *K, ID IDParent) {
-/* I.S. B sembarang */
-/* F.S. B terdefinisi dengan IDBalasan = IDBalasan terakhir + 1, PenulisBalasan = Penulis, WaktuBalasan = Waktu, IsiBalasan = Isi */
+void CreateBalasan(Balasan *B, Word Penulis, DATETIME Waktu, Word Isi, Kicauan *K, ID IDParent)
+{
+   /* I.S. B sembarang */
+   /* F.S. B terdefinisi dengan IDBalasan = IDBalasan terakhir + 1, PenulisBalasan = Penulis, WaktuBalasan = Waktu, IsiBalasan = Isi */
    PENULIS_BALASAN(*B) = Penulis;
    WAKTU_BALASAN(*B) = Waktu;
    ISI_BALASAN(*B) = Isi;
@@ -22,12 +23,22 @@ void PrintIndentasi(int indentasi) {
 /* I.S. indentasi terdefinisi */
 /* F.S. mencetak spasi sebanyak indentasi */
    int i;
-   for (i = 0; i < indentasi; i++) {
+   for (i = 0; i < indentasi; i++)
+   {
       printf(" ");
    }
 }
 
 /* MENCETAK STRUCT BALASAN */
+void PrintBalasan(Balasan B, int indentasi)
+{
+   /* I.S. K terdefinisi */
+   /* F.S. Struct Kicauan tercetak di layar dengan format:
+       | ID = <idbalasan>
+       | <Nama Pengguna>
+       | <Waktu post balasan>
+       | <Isi balasan>
+   */
 void PrintBalasan(Balasan B, int indentasi) {
 /* I.S. K terdefinisi */
 /* F.S. Struct Kicauan tercetak di layar dengan format:

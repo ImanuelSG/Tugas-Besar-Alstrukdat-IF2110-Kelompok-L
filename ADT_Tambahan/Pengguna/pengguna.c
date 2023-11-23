@@ -31,9 +31,9 @@ void CreatePengguna(Pengguna *akun, Word NAMA, Word SANDI, Word BIO, ListDinNomo
 void InsertPengguna(Pengguna akun)
 {
     dataPengguna.contents[banyakPengguna] = akun;
-    dataPengguna.Neff += 1 ;
     banyakPengguna += 1;
-        // graf
+    dataPengguna.Neff += 1;
+    // graf
     TambahPenggunaGraf(&dataTeman, akun);
 }
 
@@ -82,7 +82,6 @@ void Daftar()
             CreateStackDraf(&draf);
             daftarPengguna.draf = draf;
             InsertPengguna(daftarPengguna);
-
         }
     }
 }
@@ -98,7 +97,6 @@ void Masuk()
         printf("Masukkan nama: ");
         STARTKalimat();
         printf("\n");
-        boolean found = false;
         int idxPengguna = getIdPengguna(currentWord);
 
         while (idxPengguna == -1)
@@ -106,9 +104,9 @@ void Masuk()
             printf("Wah, nama yang Anda cari tidak ada. Masukkan nama lain!\n");
 
             Word ya, no;
-            boolean valid ;
+            boolean valid;
             ya = stringToWord("YA", 2);
-            no = stringToWord("TIDAK", 5); 
+            no = stringToWord("TIDAK", 5);
 
             printf("Ingin melanjutkan? (YA/TIDAK)\n");
             STARTKalimat();
@@ -146,7 +144,8 @@ void Masuk()
                 idxPengguna = getIdPengguna(currentWord);
             }
         }
-        if (idxPengguna != -999) {
+        if (idxPengguna != -999)
+        {
             printf("Masukkan kata sandi: ");
             STARTKalimat();
             printf("\n");
