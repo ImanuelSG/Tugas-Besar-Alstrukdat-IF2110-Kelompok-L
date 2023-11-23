@@ -34,6 +34,15 @@ int main() {
     | ID = 2
         | ID = 6
 */
+// Menyiapkan list balasan
+    ListBalasan ListB;
+    CreateListBalasan(&ListB, 3);
+    printf("isidxvalid 0: %d\n", isIdxValidBalas(ListB, 0));      // 0 (karena indeks dimulai dari 1)
+    printf("isidxvalid 2: %d\n", isIdxValidBalas(ListB, 2));      // 1
+    printf("isidxvalid 3: %d\n", isIdxValidBalas(ListB, 3));      // 0
+    printf("capacity: %d\n", CAPACITY_LIST_BALASAN(ListB));       // 3
+
+// Menyiapkan balasan
     Balasan B1, B2, B3, B4, B5, B6, B7;
     Word balasan1, balasan2, balasan3, balasan4, balasan5, balasan6, balasan7;
     Word author1, author2, author3, author4, author5, author6, author7;
@@ -88,8 +97,6 @@ int main() {
     BacaDATETIME(&time7);
     CreateBalasan(&B7, author7, time7, balasan7, &K1, 5);
 
-    ListBalasan ListB;
-    CreateListBalasan(&ListB, 5);    
     insertSiblingLast(&ELMT_LIST_BALASAN(ListB, 1), B1);
     insertSiblingLast(&ELMT_LIST_BALASAN(ListB, 1), B2);
 
@@ -98,28 +105,53 @@ int main() {
     insertChild(&balas1, B4);
 
     Address balas4 = searchTree(ELMT_LIST_BALASAN(ListB, 1), 4);
+    printf("\nID balas4: %d\n", ID_BALASAN(INFO_TREE(balas4)));           // 4
     insertChild(&balas4, B5);
 
     Address balas2 = searchTree(ELMT_LIST_BALASAN(ListB, 1), 2);
+    printf("ID balas2: %d\n", ID_BALASAN(INFO_TREE(balas2)));           // 2
     insertChild(&balas2, B6);
 
     Address balas5 = searchTree(ELMT_LIST_BALASAN(ListB, 1), 5);
+    printf("ID balas5: %d\n", ID_BALASAN(INFO_TREE(balas5)));           // 5
     insertChild(&balas5, B7);
 
-    printf("List Balasan:\n");
+    printf("\nistreeempty 1: %d\n", isTreeEmpty(ELMT_LIST_BALASAN(ListB, 1)));      // 0
+    printf("istreeempty 2: %d\n", isTreeEmpty(ELMT_LIST_BALASAN(ListB, 2)));      // 1
+    printf("isoneelmt 1: %d\n", isOneElmtTree(ELMT_LIST_BALASAN(ListB, 1)));      // 0
+    printf("isunerleft 1: %d\n", isUnerLeft(ELMT_LIST_BALASAN(ListB, 1)));        // 0
+    printf("isunerright 1: %d\n", isUnerRight(ELMT_LIST_BALASAN(ListB, 1)));      // 0
+    printf("isbinary 1: %d\n", isBinary(ELMT_LIST_BALASAN(ListB, 1)));            // 1
+    printf("countnodes 1: %d\n", countNodes(ELMT_LIST_BALASAN(ListB, 1)));        // 7
+    
+    printf("Tree Balasan sebelum di lakukan expand:");
     printTree(ELMT_LIST_BALASAN(ListB, 1), 0);
 
     printf("\n");
+    expandListBalas(&ListB, 2);
+    printf("Tree Balasan setelah di lakukan expand:\n");
+    printf("isidxvalid 4: %d\n", isIdxValidBalas(ListB, 4));      // 1
+    printf("isidxvalid 5: %d\n", isIdxValidBalas(ListB, 5));      // 0
+    printf("capacity: %d\n", CAPACITY_LIST_BALASAN(ListB));       // 5
+
+    printTree(ELMT_LIST_BALASAN(ListB, 1), 0);
+
     Address loc, before;
     searchBeforeTree(ELMT_LIST_BALASAN(ListB, 1), 5, &before, &loc);
-    printf("before: %d\n", ID_BALASAN(INFO_TREE(before)));
-    printf("loc: %d\n", ID_BALASAN(INFO_TREE(loc)));
+    printf("\nbefore 5: %d\n", ID_BALASAN(INFO_TREE(before)));          // 4
+    printf("loc 5: %d\n", ID_BALASAN(INFO_TREE(loc)));                // 5
 
     printf("**************************************************************\n");
-    deleteTree(&ELMT_LIST_BALASAN(ListB, 1), 1);
+//    K1
+//    | ID = 2
+//        | ID = 6
+    deleteTree(&ELMT_LIST_BALASAN(ListB, 1), 1);                    // ID 1 dan anaknya terhapus
     printTree(ELMT_LIST_BALASAN(ListB, 1), 0);
 
     printf("**************************************************************\n");
-    deleteTree(&ELMT_LIST_BALASAN(ListB, 1), 2);
-    printTree(ELMT_LIST_BALASAN(ListB, 1), 0);
+//   K1
+    printf("Kosong\n");
+    printf("istreeempty 1: %d\n", isTreeEmpty(ELMT_LIST_BALASAN(ListB, 1)));      // 1
+    deleteTree(&ELMT_LIST_BALASAN(ListB, 1), 2);                    // ID 2 dan anaknya terhapus
+    printTree(ELMT_LIST_BALASAN(ListB, 1), 0);                      // balasan jadi kosong
 }

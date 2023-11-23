@@ -41,7 +41,6 @@ void BALAS(ID id_Kicau, ID id_Balasan) {
                     printf("\nSelamat! balasan telah diterbitkan!\n");
                     printf("Detil balasan:");
                     PrintBalasan(Struct_Balasan, 0);
-                    printf("\n");
                 }
             }
         }
@@ -80,7 +79,6 @@ void BALAS(ID id_Kicau, ID id_Balasan) {
                         printf("\nSelamat! balasan telah diterbitkan!\n");
                         printf("Detil balasan:");
                         PrintBalasan(Struct_Balasan, 0);
-                        printf("\n");
                     }
                 }
             }
@@ -107,7 +105,7 @@ void BALASAN(ID id_Kicau) {
 
         else { // pengguna berteman or penulis kicauan publik
 
-            if (LEFT_CHILD(ELMT_LIST_BALASAN(ListBalasanData, id_Kicau)) != NULL) { // balasan ada
+            if ((ELMT_LIST_BALASAN(ListBalasanData, id_Kicau)) != NULL) { // balasan ada
                 printTree(ELMT_LIST_BALASAN(ListBalasanData, id_Kicau), 0);
             }
             else { // balasan tidak ada

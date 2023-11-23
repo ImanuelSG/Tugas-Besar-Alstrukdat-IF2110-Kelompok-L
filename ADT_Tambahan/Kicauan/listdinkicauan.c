@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "listdinkicauan.h"
 #include "../utils/utils.h"
+#include "../Balasan/treebalasan.h"
 
 ListKicauan ListKicauanData;
 /* ********** PRIMITIF-PRIMITIF UNTUK TYPE LISTKICAUAN ********** */
@@ -138,6 +139,7 @@ void insertLastKicau(ListKicauan *l, Kicauan val) {
 /* F.S. val adalah elemen terakhir l yang baru */
     if (isFullListKicau(*l)) {
         expandListKicau(l, 50);
+        expandListBalas(&ListBalasanData, 50);
     }
     NEFF_LIST_KICAUAN(*l) += 1;
     ELMT_LIST_KICAUAN(*l, getLastIdxKicau(*l)) = val;

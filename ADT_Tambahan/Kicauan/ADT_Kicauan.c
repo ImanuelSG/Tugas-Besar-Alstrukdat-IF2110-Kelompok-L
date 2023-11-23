@@ -31,7 +31,7 @@ void PrintKicauan(Kicauan K, ID id) {
     printf("| ");   PrintWord(PENULIS_KICAUAN(K));      printf("\n");
     printf("| ");   TulisDATETIME(WAKTU_KICAUAN(K));    printf("\n");
     printf("| ");   PrintWord(TWEET(K));                printf("\n");
-    printf("| Disukai: %d\n", LIKE(K));
+    printf("| Disukai: %d", LIKE(K));
 }
 
 /* MENAMBAH LIKE */

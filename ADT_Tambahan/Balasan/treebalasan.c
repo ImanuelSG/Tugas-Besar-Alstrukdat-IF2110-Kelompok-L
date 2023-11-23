@@ -59,25 +59,41 @@ boolean isTreeEmpty(Tree p) {
 
 boolean isOneElmtTree(Tree p) {
 /* Mengirimkan true jika p tidak kosong dan hanya terdiri atas 1 elemen */
-   return (!isTreeEmpty(p) && LEFT_CHILD(p) == NULL && RIGHT_SIBLING(p) == NULL);
+   if (isTreeEmpty(p)) {
+      return false;
+   } else {
+      return (LEFT_CHILD(p) == NULL && RIGHT_SIBLING(p) == NULL);
+   }
 }
 
 boolean isUnerLeft(Tree p) {
 /* Mengirimkan true jika pohon biner tidak kosong, p adalah pohon unerleft:
    hanya mempunyai subpohon kiri */
-   return (!isTreeEmpty(p) && LEFT_CHILD(p) != NULL && RIGHT_SIBLING(p) == NULL);
+   if (isTreeEmpty(p)) {
+      return false;
+   } else {
+      return (LEFT_CHILD(p) != NULL && RIGHT_SIBLING(p) == NULL);
+   }
 }
 
 boolean isUnerRight(Tree p) {
 /* Mengirimkan true jika pohon biner tidak kosong, p adalah pohon unerright:
    hanya mempunyai subpohon kanan */
-   return (!isTreeEmpty(p) && LEFT_CHILD(p) == NULL && RIGHT_SIBLING(p) != NULL);
+   if (isTreeEmpty(p)) {
+      return false;
+   } else {
+      return (LEFT_CHILD(p) == NULL && RIGHT_SIBLING(p) != NULL);
+   }
 }
 
 boolean isBinary(Tree p) {
 /* Mengirimkan true jika pohon biner tidak kosong, p adalah pohon biner:
   mempunyai subpohon kiri dan subpohon kanan */
-   return (!isTreeEmpty(p) && LEFT_CHILD(p) != NULL && RIGHT_SIBLING(p) != NULL);
+   if (isTreeEmpty(p)) {
+      return false;
+   } else {
+      return (LEFT_CHILD(p) != NULL && RIGHT_SIBLING(p) != NULL);
+   }
 }
 
 int countNodes(Tree p) {
@@ -171,7 +187,7 @@ void printTree(Tree p, int h) {
          6
    Penulisan setiap node juga diakhiri newline */
    if (p != NULL) {
-      PrintBalasanOnly(INFO_TREE(p), h);
+      PrintBalasan(INFO_TREE(p), h);
       if (LEFT_CHILD(p) != NULL) {
          printTree(LEFT_CHILD(p), h + 3);
       }
@@ -226,8 +242,8 @@ void insertSiblingLast(Tree *p, ElTypeBalasan val) {
 }
 
 void deleteTree(Tree *root, int ID_Balasan) {
-/* I.S. p terdefinisi */
-/* F.S. semua simpul p di-dealokasi secara kaskade */
+/* I.S. ID_Balasan terdefinisi, root adalah akar (node paling atas pada pohon) */
+/* F.S. Simpul dengan ID_Balasan di di-dealokasi secara kaskade */
 /*      kaskade adalah proses dealokasi parent dan semua anak dan keturunannya */
 /*      right_sibling tidak ikut di-dealokasi */
    Address before = NULL;

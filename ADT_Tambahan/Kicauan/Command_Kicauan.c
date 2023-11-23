@@ -24,7 +24,6 @@ void KICAU() {
         printf("\nSelamat! kicauan telah diterbitkan!\n");
         printf("Detil kicauan:");
         PrintKicauan(NewKicauan, CURRENT_ID_KICAUAN);
-        printf("\n");
     }
 }
 
@@ -41,12 +40,12 @@ void SUKA_KICAUAN(ID IDKicauan) {
     Pengguna *Penulis_Kicau = getPengguna(PENULIS_KICAUAN(ELMT_LIST_KICAUAN(ListKicauanData, IDKicauan)));
     printf("\n");
     if (!isIdxEffKicau(ListKicauanData, IDKicauan)) { // IDKicauan tidak valid
-        printf("Tidak ditemukan kicauan dengan ID = %d;\n", IDKicauan);
+        printf("Tidak ditemukan kicauan dengan ID = %d;", IDKicauan);
     }
     else {
         if (!isBerteman(currentPengguna.nama, PENULIS_KICAUAN(ELMT_LIST_KICAUAN(ListKicauanData, IDKicauan))) 
             && (*Penulis_Kicau).tipe_akun == 1) {
-            printf("Wah, kicauan tersebut dibuat oleh akun privat! Ikuti akun itu dulu ya\n");
+            printf("Wah, kicauan tersebut dibuat oleh akun privat! Ikuti akun itu dulu ya");
         }
         else { /* akun privat dan berteman, atau akun bersifat publik */
             AddLike(&ELMT_LIST_KICAUAN(ListKicauanData, IDKicauan));
@@ -55,7 +54,6 @@ void SUKA_KICAUAN(ID IDKicauan) {
             PrintKicauan(ELMT_LIST_KICAUAN(ListKicauanData, IDKicauan), IDKicauan);
         }
     }
-    printf("\n");
 }
 
 /* UBAH_KICAUAN */
@@ -63,8 +61,8 @@ void UBAH_KICAUAN(ID IDKicauan) {
 /* Mengubah isi kicauan yang dipilih pengguna */
     printf("\n");
 
-    if (isIdxEffKicau(ListKicauanData, IDKicauan)) { // IDKicauan tidak valid
-        printf("Tidak ditemukan kicauan dengan ID = %d!;\n", IDKicauan);
+    if (!isIdxEffKicau(ListKicauanData, IDKicauan)) { // IDKicauan tidak valid
+        printf("Tidak ditemukan kicauan dengan ID = %d!", IDKicauan);
     }
     else { // IDKicauan valid
         if (isSameWord(PENULIS_KICAUAN(ELMT_LIST_KICAUAN(ListKicauanData, IDKicauan)), currentPengguna.nama)) { // kicauan milik pengguna
@@ -74,7 +72,7 @@ void UBAH_KICAUAN(ID IDKicauan) {
             NewTweet = currentWord;
 
             if (IsAllBlank(NewTweet)) {
-                printf("\nKicauan tidak boleh hanya berisi spasi!\n");
+                printf("\nKicauan tidak boleh hanya berisi spasi!");
             }
             else { // tweet valid
                 EditTweet(&ELMT_LIST_KICAUAN(ListKicauanData, IDKicauan), NewTweet);
@@ -84,9 +82,7 @@ void UBAH_KICAUAN(ID IDKicauan) {
             }
         }
         else {
-            printf("Kicauan dengan ID = %d bukan milikmu!\n", IDKicauan); // kicauan bukan milik pengguna
+            printf("Kicauan dengan ID = %d bukan milikmu!", IDKicauan); // kicauan bukan milik pengguna
         }
     }
-
-    printf("\n");
 }
