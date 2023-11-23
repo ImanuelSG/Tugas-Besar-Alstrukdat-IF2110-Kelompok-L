@@ -1,5 +1,5 @@
-#ifndef LOAD
-#define LOAD
+#ifndef LOADANDSAVE_H
+#define LOADANDSAVE_H
 
 #include "../MesinBarisFile/MBarisFile.h"
 #include "../Pengguna/pengguna.h"
@@ -12,6 +12,7 @@
 #include "../Balasan/treebalasan.h"
 #include "../teman/graf_teman.h"
 #include "../Pengguna/liststatikpengguna.h"
+#include "../Utas/listdinutas.h"
 #include <stdio.h>
 #include <sys/stat.h>
 
@@ -46,11 +47,21 @@ void ReadBalasanConfig(char namafile[]);
  */
 void ReadUtasConfig(char namafile[]);
 /**
+ * @brief Untuk MencariTahu Apakah Directory Ada
+ *
+ * @param path
+ * @return int
+ */
+
+int isDirectoryExists(char *path);
+/**
  * @brief  Prosedur Menulis Config Pengguna
  *
  * @param namafile relatif terhadap posisi pemanggilan prosedur
  */
+
 void WritePenggunaConfig(char namafile[]);
+
 /**
  * @brief Prosedur Menulis Config Kicauan
  *
@@ -80,12 +91,17 @@ void WriteUtasConfig(char namafile[]);
  *
  * @param namafolder relatif terhadap posisi pemanggilan prosedur
  */
-void Load(char namafolder[]);
+void SIMPAN(Word namafolder);
+/**
+ * @brief Prosedur Membuat Directory
+ *
+ */
+void createDirectory(const char *path);
 /**
  * @brief Prosedur Menulis Konfigurasi
  *
  * @param namafolder relatif terhadap posisi pemanggilan prosedur
  */
-void Save(char namafolder[]);
+void MUAT(Word namafolder);
 
 #endif

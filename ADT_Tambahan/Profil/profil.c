@@ -1,7 +1,7 @@
 #include "profil.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "../../pcolor.c"
+#include "../../pcolor.h"
 #include "../utils/utils.h"
 #include "../wordoperations.h"
 #include "../Pengguna/liststatikpengguna.h"

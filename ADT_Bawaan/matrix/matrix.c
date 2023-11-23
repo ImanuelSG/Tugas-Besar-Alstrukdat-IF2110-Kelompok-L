@@ -376,27 +376,3 @@ void pTranspose(Matrix *m) {
 /* F.S. m "di-transpose", yaitu setiap elemen m(i,j) ditukar nilainya dengan elemen m(j,i) */
     copyMatrix(transpose(*m), m);
 }
-
-boolean isSegitigaBawah (Matrix m) {
-/* Mengirimkan true jika m adalah matriks segitiga bawah */
-    int i = 0;
-    int j = i+1;
-    boolean reset = false;
-    boolean notsegbawah= false;
-
-    while (!(i == getLastIdxRow (m) && j >getLastIdxCol(m))  && notsegbawah==false) {
-        if (ELMT(m,i,j) != 0){
-            notsegbawah = true;
-        }
-        
-        if (j == getLastIdxCol(m) & i!= getLastIdxRow (m)){
-            i ++ ;
-            j = i+1;
-        } else{
-            j++;
-        }
-
-    }
-
-    return (!notsegbawah);
-}

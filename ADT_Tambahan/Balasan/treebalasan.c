@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include "treebalasan.h"
 
-int BanyakKicauanDenganBalasan;
 ListBalasan ListBalasanData; /*Berisi List Balasan saat ini*/
 /* ********** PRIMITIF-PRIMITIF UNTUK TYPE ADT TREE UNTUK BALASAN ********** */
 Tree NewTree(ElTypeBalasan root, Tree left_child, Tree right_sibling)

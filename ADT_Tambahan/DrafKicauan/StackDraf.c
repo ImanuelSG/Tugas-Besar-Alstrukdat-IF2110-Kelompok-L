@@ -3,7 +3,7 @@
 #include <stdio.h>
 
 
-int BanyakPenggunaDenganDraf = 0;
+int BanyakPenggunaDenganDraf;
 
 AddressDraf newNodeDraf(ElTypeDraf x)
 {

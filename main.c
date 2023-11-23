@@ -5,7 +5,7 @@
 #include "ADT_Tambahan/Kicauan/Command_Kicauan.h"
 #include "ADT_Tambahan/Balasan/Command_Balasan.h"
 #include "ADT_Tambahan/teman/graf_teman.h"
-#include "ADT_Tambahan/teman/driverGraf.h"
+#include "ADT_Tambahan/Loader/load.h"
 
 #define not(n) !n
 /* Header Note */
@@ -17,18 +17,17 @@ int main()
 {
 
     nl;
-    CreateGrafTeman(&dataTeman);
 
     initializeKeyWords();
     displayLogoBurbir();
     displayBurbir();
-    FILE *f;
 
-    inputConfigFile(f);
-    // load (f);
+    inputConfigFile();
+    CreateGrafTeman(&dataTeman);
+
     printf("File berhasil dimuat!\n");
 
-    // boolean firstInput = true;
+    
     boolean stopped = false;
 
     while (not(stopped))
@@ -109,7 +108,7 @@ int main()
 
             else if (isSameWord(perintah, stringToWord("DAFTAR_PERMINTAAN_PERTEMANAN", 28)))
             {
-               DAFTAR_PERMINTAAN_PERTEMANAN();
+                DAFTAR_PERMINTAAN_PERTEMANAN();
             }
 
             else if (isSameWord(perintah, stringToWord("SETUJUI_PERTEMANAN", 18)))
@@ -119,11 +118,14 @@ int main()
 
             /*-------------------------------KICAU-----------------------------------*/
 
-            else if (isSameWord(perintah, stringToWord("KICAU", 5))) {
+            else if (isSameWord(perintah, stringToWord("KICAU", 5)))
+            {
                 KICAU();
             }
 
-            else if (isSameWord(perintah, stringToWord("KICAUAN", 7))) {
+            else if (isSameWord(perintah, stringToWord("KICAUAN", 7)))
+            {
+
                 KICAUAN();
             }
 
@@ -153,7 +155,7 @@ int main()
                 int id_kicau = wordToInteger(currentWord);
                 ADVWORD();
                 int id_balasan = wordToInteger(currentWord);
-                
+
                 BALAS(id_kicau, id_balasan);
             }
 
@@ -231,12 +233,23 @@ int main()
 
             else if (isSameWord(perintah, stringToWord("SIMPAN", 6)))
             {
-                printf("Panggil fungsi SIMPAN");
+                printf("Silahkan masukan folder untuk Menyimpan: ");
+                START();
+                ADVWORD();
+                Word folderNameWord = currentWord;
+                SIMPAN(folderNameWord);
             }
 
             else if (isSameWord(perintah, stringToWord("MUAT", 4)))
             {
-                printf("Panggil fungsi MUAT");
+                if (isLoggedIn)
+                {
+                    printf("Anda harus keluar terlebih dahulu untuk melakukan pemuatan.");
+                }
+                else
+                {
+                    inputConfigFile();
+                }
             }
         }
 

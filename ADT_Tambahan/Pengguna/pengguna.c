@@ -32,8 +32,8 @@ void InsertPengguna(Pengguna akun)
 {
     dataPengguna.contents[banyakPengguna] = akun;
     banyakPengguna += 1;
-    dataPengguna.Neff += 1 ;
-        // graf
+    dataPengguna.Neff += 1;
+    // graf
     TambahPenggunaGraf(&dataTeman, akun);
 }
 
@@ -80,7 +80,6 @@ void Daftar()
             CreateStackDraf(&draf);
             daftarPengguna.draf = draf;
             InsertPengguna(daftarPengguna);
-
         }
     }
 }
@@ -96,7 +95,6 @@ void Masuk()
         printf("Masukkan nama: ");
         STARTKalimat();
         printf("\n");
-        boolean found = false;
         int idxPengguna = getIdPengguna(currentWord);
 
         while (idxPengguna == -1)
@@ -104,45 +102,47 @@ void Masuk()
             printf("Wah, nama yang Anda cari tidak ada. Masukkan nama lain!\n");
 
             Word ya, no;
-            boolean valid ;
+            boolean valid;
             ya = stringToWord("YA", 2);
-            no = stringToWord("TIDAK", 5); 
+            no = stringToWord("TIDAK", 5);
 
             printf("Ingin melanjutkan? (YA/TIDAK)\n");
             STARTKalimat();
-                if (isSameWord(currentWord, ya))
-                {}
-                else if (isSameWord(currentWord, no))
+            if (isSameWord(currentWord, ya))
+            {
+            }
+            else if (isSameWord(currentWord, no))
+            {
+                idxPengguna = -999;
+                break;
+            }
+            else
+            {
+                valid = false;
+                while (!valid)
                 {
-                    idxPengguna = -999 ;
-                    break ;
-                }
-                else
-                {
-                    valid = false;
-                    while (!valid)
+                    valid = true;
+                    printf("(YA/TIDAK) huruf besar!\n");
+                    STARTKalimat();
+                    if (isSameWord(currentWord, ya))
                     {
-                        valid = true;
-                        printf("(YA/TIDAK) huruf besar!\n");
-                        STARTKalimat();
-                        if (isSameWord(currentWord, ya)){
-
-                        }
-                        else if (isSameWord(currentWord, no))
-                        {
-                            idxPengguna = -999 ;
-                            break ;
-                        }
-                        else
-                            valid = false;
                     }
+                    else if (isSameWord(currentWord, no))
+                    {
+                        idxPengguna = -999;
+                        break;
+                    }
+                    else
+                        valid = false;
                 }
+            }
             printf("Masukkan nama: ");
             STARTKalimat();
             printf("\n");
             idxPengguna = getIdPengguna(currentWord);
         }
-        if (idxPengguna != -999) {
+        if (idxPengguna != -999)
+        {
             printf("Masukkan kata sandi: ");
             STARTKalimat();
             printf("\n");

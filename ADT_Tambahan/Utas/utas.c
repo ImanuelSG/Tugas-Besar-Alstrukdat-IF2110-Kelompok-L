@@ -1,29 +1,50 @@
 #include "utas.h"
+#include "listdinutas.h"
 #include <stdlib.h>
 #include <stdio.h>
 
-ListUtas LIST_UTAS;
+int IDUtas;
+/* ****************** KONSTRUKTOR ADT UTAS *******************/
+void createKicauanUtas(Utas *U, int IDUtas, ID IDKicau, Word utasAuthor, DATETIME WaktuKicauan, Word Tweet)
+{
+    // Membuat utas secara individual dari komponennya
+    IDUTAS(*U) = IDUtas;
+    IDKICAU(*U) = IDKicau;
+    PENULISUTAS(*U) = utasAuthor;
+    WAKTUUTAS(*U) = WaktuKicauan;
+    TWEETUTAS(*U) = Tweet;
+}
+
+/* ****************** Definisi Node Utas *******************/
+Address_Utas newNodeKicauanUtas(InfoType val)
+{
+    Address_Utas new = (Address_Utas)malloc(sizeof(NodeUtas));
+    if (new != NULL)
+    {
+
+        INFO(new) = val;
+        NEXT(new) = NULL;
+    }
+
+    return new;
+}
+
 /* PROTOTYPE BERKAITAN LINKED LIST UTAS*/
-/****************** PEMBUATAN LIST KOSONG ******************/
-void CreateList(ListUtas *l)
+void CreateListUtas(ListUtas *l)
 /* I.S. sembarang             */
-/* F.S. Terbentuk list utas kosong */ {
+/* F.S. Terbentuk linked list utas kosong */ {
     FIRST(*l) = NULL;
 }
-
-/****************** TEST LIST KOSONG ******************/
 boolean isEmptyUtas(ListUtas l)
 {
-    /* Mengirim true jika list kosong */
+    /* Mengirim true jika linked list kosong */
     return (FIRST(l) == NULL);
 }
-
-/****************** GETTER SETTER ******************/
-ElTypeUtas getKicauanUtas(ListUtas l, int idx)
+InfoType getKicauanUtas(ListUtas l, int idx)
 {
     /* I.S. l terdefinisi, idx indeks yang valid dalam l, yaitu 0..length(l) */
-    /* F.S. Mengembalikan utas pada indeks idx */
-    Address p = FIRST(l);
+    /* F.S. Mengembalikan kicauan utas pada indeks linked list ke-idx */
+    Address_Utas p = FIRST(l);
     int i = 0;
     while (i < idx)
     {
@@ -32,40 +53,136 @@ ElTypeUtas getKicauanUtas(ListUtas l, int idx)
     }
     return INFO(p);
 }
+void insertFirstUtas(ListUtas *l, InfoType val)
+/* I.S. l mungkin kosong */
+/* F.S. Melakukan alokasi sebuah elemen dan */
+/* menambahkan elemen pertama linked list dengan nilai val jika alokasi berhasil. */
+/* Jika alokasi gagal: I.S.= F.S. */ {
+    Address_Utas new = newNodeKicauanUtas(val);
 
-void setELMTKicau(ListUtas *l, int idx, ElTypeUtas val)
-{
-    /* I.S. l terdefinisi, idx indeks yang valid dalam l, yaitu 0..length(l) */
-    /* F.S. Mengubah elemen l pada indeks ke-idx menjadi val */
-    Address p = FIRST(*l);
-    int i = 0;
-    while (i < idx)
+    if (new != NULL)
     {
-        i++;
-        p = NEXT(p);
+        NEXT(new) = FIRST(*l);
+        FIRST(*l) = new;
     }
-    INFO(p) = val;
 }
 
+void insertLastUtas(ListUtas *l, InfoType val)
+/* I.S. l mungkin kosong */
+/* F.S. Melakukan alokasi sebuah elemen dan */
+/* menambahkan elemen list di akhir: elemen terakhir yang baru */
+/* bernilai val jika alokasi berhasil. Jika alokasi gagal: I.S.= F.S. */ {
+    if (isEmptyUtas(*l))
+    {
+        insertFirstUtas(l, val);
+    }
+    else
+    {
+        Address_Utas new = newNodeKicauanUtas(val);
+        if (new != NULL)
+        {
+            Address_Utas last = FIRST(*l);
+            while (NEXT(last) != NULL)
+            {
+                last = NEXT(last);
+            }
+            NEXT(last) = new;
+        }
+    }
+}
+
+void insertAtUtas(ListUtas *l, InfoType val, int idx)
+/* I.S. l tidak mungkin kosong, idx indeks yang valid dalam l, yaitu 0..length(l) */
+/* F.S. Melakukan alokasi sebuah NodeUtas dan */
+/* menyisipkan elemen dalam listUtas pada indeks ke-idx (bukan menimpa elemen di i) */
+/* yang bernilai val jika alokasi berhasil. Jika alokasi gagal: I.S.= F.S. */ {
+
+    if (idx == 0)
+    {
+
+        insertFirstUtas(l, val);
+    }
+    else
+    {
+
+        Address_Utas new = newNodeKicauanUtas(val);
+
+        if (new != NULL)
+        {
+
+            Address_Utas p = FIRST(*l);
+
+            for (int i = 0; i < idx - 1; i++)
+            {
+                p = NEXT(p);
+            }
+
+            NEXT(new) = NEXT(p);
+
+            NEXT(p) = new;
+        }
+    }
+}
+
+void deleteAtUtas(ListUtas *l, int idx, InfoType *val)
+/* I.S. list tidak kosong, idx indeks yang valid dalam l, yaitu 0..length(l) */
+/* F.S. val diset dengan elemen l pada indeks ke-idx. */
+/*      Elemen l pada indeks ke-idx dihapus dari l */ {
+    Address_Utas p = FIRST(*l);
+    for (int i = 0; i < idx - 1; i++)
+    {
+        p = NEXT(p);
+    }
+    Address_Utas temp = NEXT(p);
+    *val = INFO(temp);
+    NEXT(p) = NEXT(temp);
+    free(temp);
+}
+
+void displayListUtas(ListUtas l)
+/* I.S. List berisi utas */
+/* F.S. Serangkaian utas tercetak ke layar*/ {
+    Address_Utas p = FIRST(l);
+    int index = 0;
+    while (p != NULL)
+    {
+        printKicauanUtas(INFO(p), index);
+        p = NEXT(p);
+        index++;
+    }
+}
+
+int lengthListUtas(ListUtas l)
+/* Mengirimkan banyaknya utas; mengirimkan 0 jika linked list kosong */
+{
+    int count = 0;
+    Address_Utas p = FIRST(l);
+    while (p != NULL)
+    {
+        count++;
+        p = NEXT(p);
+    }
+    return count;
+}
+
+/***************** FUNGSI TAMBAHAN UNTUK ADT UTAS *****************/
 boolean IDKicauFound(ID IDKicau)
 {
+    /*Mengirimkan true jika kicauan dengan IDKicau tidak ditemukan di listKicauan*/
     return isIdxEffKicau(ListKicauanData, IDKicau);
 }
 boolean isIDKicauValid(ID IDKicau)
 {
-    return wordCompare(PENULIS_KICAUAN(ELMTKicau(ListKicauanData, IDKicau)), currentPengguna.nama);
+    /*Mengirimkan true jika kicauan dengan IDKicau dibuat oleh currentPengguna */
+    return isSameWord(PENULIS_KICAUAN(ELMT_LIST_KICAUAN(ListKicauanData, IDKicau)), currentPengguna.nama);
 }
-void createKicauanUtas(Utas *U, int IDUtas, ID IDKicau, int index, Pengguna utasAuthor, DATETIME WaktuKicauan, Word Tweet)
+
+boolean isIndexUtasValid(ListUtas lUtas, int index)
 {
-    // Membuat node untuk utas secara individual
-    IDUTAS(*U) = IDUtas;
-    IDKICAU(*U) = IDKicau;
-    KICAUANUTAMA(*U) = ELMTKicau(ListKicauanData, IDKicau);
-    INDEX(*U) = index;
-    PENULISUTAS(*U) = currentPengguna;
-    WAKTUKICAUAN(*U) = WaktuKicauan;
-    TWEET(*U) = Tweet;
+    int len = lengthListUtas(lUtas);
+    return (index > 0 && index < len);
 }
+
 void printKicauanUtas(Utas U, int index)
 {
     /* I.S. U terdefinisi */
@@ -73,52 +190,46 @@ void printKicauanUtas(Utas U, int index)
     printf("\n");
     if (index == 0)
     {
-        printf("| ID = %d\n", IDUTAS(U));
+        printf("| ID = %d\n", IDKICAU(U));
         printf("| ");
-        printWord(PENULISUTAS(U));
+        PrintWord(PENULISUTAS(U));
         printf("\n");
         printf("| ");
-        TulisDATETIME(WAKTU_KICAUAN(KICAUANUTAMA(U)));
+        TulisDATETIME(WAKTUUTAS(U));
         printf("\n");
         printf("| ");
-        printWord(TWEET(KICAUANUTAMA(U)));
+        PrintWord(TWEETUTAS(U));
         printf("\n");
     }
     else
     {
-        printf("\t");
+        printf("   ");
         printf("| INDEX = %d\n", index);
-        printf("\t");
+        printf("   ");
         printf("| ");
-        printWord(PENULISUTAS(U));
+        PrintWord(PENULISUTAS(U));
         printf("\n");
-        printf("\t");
+        printf("   ");
         printf("| ");
-        TulisDATETIME(WAKTUKICAUAN(U));
+        TulisDATETIME(WAKTUUTAS(U));
         printf("\n");
-        printf("\t");
+        printf("   ");
         printf("| ");
-        printWord(TWEET(U));
+        PrintWord(TWEETUTAS(U));
         printf("\n");
     }
 }
 
-void UTAS(ID IDKicau)
+void sambungKicauanUtas(Utas sambunganUtas, ID IDUtas, int index, ListUtas lUtas)
 {
-    // Mencari apakah id kicauan utama valid, lalu membuat utas
-    // dengan index ke-0 nya kicauan utama (buat node baru)
-    // setelah linked list terbuat, insert ke listdin listUtas
-    if (!IDKicauFound(IDKicau))
-    {
-        printf("Kicauan tidak ditemukan\n");
-    }
-    else if (!isIDKicauValid(IDKicau))
-    {
-        printf("Utas ini bukan milik Anda!\n");
-    }
-    else
-    {
+    DATETIME WaktuSambunganUtas;
+    BacaDATETIME(&WaktuSambunganUtas);
 
-        // insert ke listdin
-    }
+    Word tweetSambunganUtas;
+    printf("\nMasukkan kicauan: \n");
+    STARTKalimat();
+    tweetSambunganUtas = currentWord;
+
+    createKicauanUtas(&sambunganUtas, IDUtas, -1, currentPengguna.nama, WaktuSambunganUtas, tweetSambunganUtas);
+    insertAtUtas(&lUtas, sambunganUtas, index);
 }

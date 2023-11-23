@@ -38,7 +38,7 @@ typedef struct
    int capacity;    /* ukuran list */
 } ListBalasan;
 
-extern int BanyakKicauanDenganBalasan;
+
 extern ListBalasan ListBalasanData; /*Berisi List Balasan saat ini*/
 /* ********** SELEKTOR LIST BALASAN ********** */
 #define BUFFER_LIST_BALASAN(l) (l).buffer

@@ -19,7 +19,7 @@ void displayWordBlue();
 void displayBurbir();
 // Prosedur menampilkan tampilan awal program
 
-void inputConfigFile(FILE *file);
+void inputConfigFile();
 // Prosedur meminta string file input
 
 boolean validatePath(Word foldername);

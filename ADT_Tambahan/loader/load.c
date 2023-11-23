@@ -1,6 +1,14 @@
 #include "load.h"
-
+#include <sys/stat.h>
 #include <stdio.h>
+#include <stdlib.h>
+
+
+#ifdef _WIN32
+#include <direct.h>
+#else
+#include <sys/stat.h>
+#endif
 
 void ReadPenggunaConfig(char namafile[])
 {
@@ -9,6 +17,7 @@ void ReadPenggunaConfig(char namafile[])
     Pengguna pengguna;
     Word nama, password, bio, nomor, weton, temp;
     MatrixProfil profil;
+    banyakPengguna = 0;
 
     CreateListStatik(&dataPengguna);
 
@@ -43,7 +52,7 @@ void ReadPenggunaConfig(char namafile[])
         for (int j = 0; j < 5; j++)
         {
             ADVBaris();
-            int n = 0;
+
             for (int k = 0; k < 10; k++)
             {
                 profil.mem[j][k].TabWord[0] = currentBaris.TabWord[k * 2];
@@ -85,7 +94,7 @@ void ReadKicauanConfig(char namafile[])
     CreateListDinKicauan(&ListKicauanData, 100);
     int iteration, like;
     Kicauan kicau;
-    Word Penulis, WaktuKicauan, Tweet;
+    Word Penulis, Tweet;
     DATETIME Waktu;
 
     STARTBaris(namafile);
@@ -121,7 +130,9 @@ void ReadDrafConfig(char namafile[])
     Word username, isi;
     DATETIME Date;
     STARTBaris(namafile);
+    BanyakPenggunaDenganDraf = 0;
     iteration = wordToInteger(currentBaris);
+
     ADVBaris(); // baris == "username"
     for (int i = 0; i < iteration; i++)
     {
@@ -155,30 +166,46 @@ void ReadDrafConfig(char namafile[])
 
 void ReadUtasConfig(char namafile[])
 {
-    int iteration, like;
+    int iteration;
 
-    Word Penulis, WaktuKicauan, Tweet;
-    DATETIME Waktu;
-
+    CreateListDinUtas(&lDinUtas, 100);
     STARTBaris(namafile); // curr baris == iteration
 
     iteration = wordToInteger(currentBaris);
-
+    IDUtas = 0;
     for (int i = 0; i < iteration; i++)
     {
         ADVBaris(); // curr baris == "ID"
+
+        Utas newUtas;
+        ListUtas lUtas;
+
+        int index = 0;
+        IDUtas++;
+
         ID IDKicauUtama = wordToInteger(currentBaris);
-        ADVBaris(); // curr baris == jumlahUtas
+        Kicauan kicauanUtama = ELMT_LIST_KICAUAN(ListKicauanData, IDKicauUtama);
+        createKicauanUtas(&newUtas, IDUtas, IDKicauUtama, PENULIS_KICAUAN(kicauanUtama), WAKTU_KICAUAN(kicauanUtama), TWEET(kicauanUtama));
+        CreateListUtas(&lUtas);           // membuat lUtas kosong
+        insertFirstUtas(&lUtas, newUtas); // memasukkan newUtas ke lUtas
+
+        // memasukkan newUtas ke lUtas
+        insertLastListDinUtas(&lDinUtas, lUtas); // memasukkan lUtas baru ke lDinUtas
+        ADVBaris();                              // curr baris == jumlahUtas
         int jumlahUtas = wordToInteger(currentBaris);
         for (int i = 0; i < jumlahUtas; i++)
         {
+            index++;
             ADVBaris();
             Word Text = currentBaris;
             ADVBaris();
             Word Author = currentBaris;
             ADVBaris();
             DATETIME Waktu = wordToDatetime(currentBaris);
-            
+            Utas nextUtas;
+            createKicauanUtas(&nextUtas, IDUtas, -1, Author, Waktu, Text);
+            // Print nextUtas
+            insertAtUtas(&lUtas, nextUtas, index); // Insert nextUtas into lUtas
         }
     }
 }
@@ -261,16 +288,25 @@ void ReadBalasanConfig(char namafile[])
     }
 }
 
-int isDirectoryExists(const char *path)
+int isDirectoryExists(char *path)
 {
     struct stat info;
+
     if (stat(path, &info) != 0)
     {
-
+        /*Akses Error*/
         return 0;
     }
-
-    return S_ISDIR(info.st_mode);
+    else if (S_ISDIR(info.st_mode))
+    {
+        /*Directory ada*/
+        return 1;
+    }
+    else
+    {
+        /* Engga ada */
+        return 0;
+    }
 }
 
 void WriteKicauanConfig(char namafile[])
@@ -305,7 +341,7 @@ void WritePenggunaConfig(char namafile[])
 
     if (file == NULL)
     {
-        printf("Error opening file for writing.\n");
+        printf("Gagal Membuat File :(\n");
         return;
     }
 
@@ -380,7 +416,7 @@ void WriteDrafConfig(char namafile[])
 
     if (file == NULL)
     {
-        printf("Gagal Membuat File.\n");
+        printf("Gagal Membuat File :(\n");
         return;
     }
 
@@ -415,7 +451,7 @@ void WriteDrafConfig(char namafile[])
     fclose(file);
 }
 
-void writeBalasanToFile(Tree p, FILE *file)
+void WriteBalasanToFile(Tree p, FILE *file)
 {
     if (p != NULL)
     {
@@ -426,11 +462,11 @@ void writeBalasanToFile(Tree p, FILE *file)
         fprintf(file, "%s\n", wordToString(datetimeToWord(WAKTU_BALASAN(INFO_TREE(p)))));
         if (RIGHT_SIBLING(p) != NULL)
         {
-            writeBalasanToFile(RIGHT_SIBLING(p), file);
+            WriteBalasanToFile(RIGHT_SIBLING(p), file);
         }
         if (LEFT_CHILD(p) != NULL)
         {
-            writeBalasanToFile(LEFT_CHILD(p), file);
+            WriteBalasanToFile(LEFT_CHILD(p), file);
         }
     }
 }
@@ -441,7 +477,7 @@ void WriteBalasanConfig(char namafile[])
     int j = 1;
     if (file == NULL)
     {
-        printf("Gagal Membuat File.\n");
+        printf("Gagal Membuat File :(\n");
         return;
     }
     int count = JUMLAH_KICAUAN_DENGAN_BALASAN;
@@ -465,7 +501,7 @@ void WriteBalasanConfig(char namafile[])
         fprintf(file, "%d\n", countNodes(P));
         if (P != NULL)
         {
-            writeBalasanToFile(P, file);
+            WriteBalasanToFile(P, file);
         }
         count--;
         j++;
@@ -473,6 +509,144 @@ void WriteBalasanConfig(char namafile[])
     fclose(file);
 }
 
-// void WriteUtasConfig(char namefile[])
-// {
-// }
+void WriteUtasConfig(char namafile[])
+{
+    FILE *file = fopen(namafile, "w");
+
+    if (file == NULL)
+    {
+        printf("Gagal Membuat File :(\n");
+        return;
+    }
+
+    // Jumlah Utas
+    fprintf(file, "%d\n", NEFF(lDinUtas));
+
+    // Loop Sejumlah Utas
+    for (int i = 0; i < NEFF(lDinUtas); i++)
+    {
+
+        ListUtas currentlist = ELMTUTAS(lDinUtas, i);
+        fprintf(file, "%d\n", currentlist->info.IDKicau);
+        fprintf(file, "%d\n", lengthListUtas(currentlist) - 1);
+        for (int j = 1; j < lengthListUtas(currentlist); j++)
+        {
+            Utas currentelmtutas = getKicauanUtas(currentlist, j);
+            fprintf(file, "%s\n", wordToString(TWEETUTAS(currentelmtutas)));
+            fprintf(file, "%s\n", wordToString(PENULISUTAS(currentelmtutas)));
+            fprintf(file, "%s\n", wordToString(datetimeToWord(WAKTUUTAS(currentelmtutas))));
+        }
+    }
+
+    // Close the file
+    fclose(file);
+}
+
+void SIMPAN(Word foldername)
+{
+    Word path_config1, path_config2, path_config3, path_config4, path_config5;
+
+    path_config1 = DuplicateWord(foldername);
+    path_config2 = DuplicateWord(foldername);
+    path_config3 = DuplicateWord(foldername);
+    path_config4 = DuplicateWord(foldername);
+    path_config5 = DuplicateWord(foldername);
+
+    appendWord(&path_config1, stringToWord("/pengguna.config", 16));
+    appendWord(&path_config2, stringToWord("/kicauan.config", 15));
+    appendWord(&path_config3, stringToWord("/balasan.config", 15));
+    appendWord(&path_config4, stringToWord("/draf.config", 12));
+    appendWord(&path_config5, stringToWord("/utas.config", 12));
+
+    char *path_config1_str = wordToString(path_config1);
+    char *path_config2_str = wordToString(path_config2);
+    char *path_config3_str = wordToString(path_config3);
+    char *path_config4_str = wordToString(path_config4);
+    char *path_config5_str = wordToString(path_config5);
+    char *stringfolder = wordToString(foldername);
+
+    if (isDirectoryExists(stringfolder) == 0)
+    {
+        printf("Belum terdapat folder%s. Akan dilakukan pembuatan folder %s terlebih dahulu.\n", stringfolder, stringfolder);
+        printf("Mohon tunggu...\n");
+        for (int i = 1; i <= 3; i++)
+        {
+           
+
+            printf("%d...\n", i);
+        }
+        createDirectory(stringfolder);
+        printf("Folder %s sudah berhasil dibuat.\n", stringfolder);
+    }
+
+    printf("Anda akan melakukan penyimpanan di %s.\n", stringfolder);
+    printf("Mohon tunggu...\n");
+
+    // Simulating save process with a delay
+    for (int i = 1; i <= 3; i++)
+    {
+        
+        printf("%d...\n", i);
+    }
+    WritePenggunaConfig(path_config1_str);
+    WriteKicauanConfig(path_config2_str);
+    WriteBalasanConfig(path_config3_str);
+    WriteDrafConfig(path_config4_str);
+    WriteUtasConfig(path_config5_str);
+
+    printf("Penyimpanan telah berhasil dilakukan!\n");
+}
+
+void createDirectory(const char *path)
+{
+#ifdef _WIN32
+    if (_mkdir(path) == -1)
+    {
+        perror("Error creating directory");
+        exit(EXIT_FAILURE);
+    }
+#else
+    if (mkdir(path, 0777) == -1)
+    {
+        perror("Error creating directory");
+        exit(EXIT_FAILURE);
+    }
+#endif
+}
+
+void MUAT(Word foldername)
+{
+    Word path_config1, path_config2, path_config3, path_config4, path_config5;
+
+    path_config1 = DuplicateWord(foldername);
+    path_config2 = DuplicateWord(foldername);
+    path_config3 = DuplicateWord(foldername);
+    path_config4 = DuplicateWord(foldername);
+    path_config5 = DuplicateWord(foldername);
+
+    appendWord(&path_config1, stringToWord("/pengguna.config", 16));
+    appendWord(&path_config2, stringToWord("/kicauan.config", 15));
+    appendWord(&path_config3, stringToWord("/balasan.config", 15));
+    appendWord(&path_config4, stringToWord("/draf.config", 12));
+    appendWord(&path_config5, stringToWord("/utas.config", 12));
+
+    char *path_config1_str = wordToString(path_config1);
+    char *path_config2_str = wordToString(path_config2);
+    char *path_config3_str = wordToString(path_config3);
+    char *path_config4_str = wordToString(path_config4);
+    char *path_config5_str = wordToString(path_config5);
+
+    printf("Anda akan melakukan pemuatan dari %s.\n", wordToString(foldername));
+    printf("Mohon tunggu...\n");
+
+    for (int i = 1; i <= 3; i++)
+    {
+        printf("%d...\n", i);
+        
+    }
+    ReadPenggunaConfig(path_config1_str);
+    ReadKicauanConfig(path_config2_str);
+    ReadBalasanConfig(path_config3_str);
+    ReadDrafConfig(path_config4_str);
+    ReadUtasConfig(path_config5_str);
+}
