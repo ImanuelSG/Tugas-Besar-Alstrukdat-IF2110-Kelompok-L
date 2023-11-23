@@ -2,7 +2,7 @@
 #ifndef __BALASAN_H__
 #define __BALASAN_H__
 
-#include "../../ADT_Bawaan/boolean.h"
+#include "../boolean.h"
 #include "../../ADT_Bawaan/wordmachine/wordmachine.h"
 #include "../../ADT_Bawaan/datetime/datetime.h"
 #include "../Kicauan/ADT_Kicauan.h"
@@ -13,6 +13,7 @@ typedef struct {
     Word PenulisBalasan;     // Username pengguna pembuat balasan
     DATETIME WaktuBalasan;   // Waktu balasan dibuat (diambil dari waktu lokal)
     Word IsiBalasan;         // Isi balasan
+    ID IDParent;
 } Balasan;
 
 /* ********** SELEKTOR BALASAN ********** */
@@ -20,13 +21,18 @@ typedef struct {
 #define PENULIS_BALASAN(B) (B).PenulisBalasan
 #define WAKTU_BALASAN(B) (B).WaktuBalasan
 #define ISI_BALASAN(B) (B).IsiBalasan
+#define ID_PARENT(B) (B).IDParent
 
 /* ********** PRIMITIF-PRIMITIF UNTUK TYPE BALASAN ********** */
 /* *** KONSTRUKTOR *** */
 /* MEMBUAT STRUCT BALASAN */
-void CreateBalasan(Balasan *B, Word Penulis, DATETIME Waktu, Word Isi, Kicauan *K);
+void CreateBalasan(Balasan *B, Word Penulis, DATETIME Waktu, Word Isi, Kicauan *K, ID IDParent);
 /* I.S. B sembarang */
 /* F.S. B terdefinisi dengan IDBalasan = IDBalasan terakhir + 1, PenulisBalasan = Penulis, WaktuBalasan = Waktu, IsiBalasan = Isi */
+
+void PrintIndentasi(int indentasi);
+/* I.S. indentasi terdefinisi */
+/* F.S. mencetak spasi sebanyak indentasi */
 
 /* MENCETAK STRUCT BALASAN */
 void PrintBalasan(Balasan B, int indentasi);
@@ -37,5 +43,8 @@ void PrintBalasan(Balasan B, int indentasi);
     | <Waktu post balasan>
     | <Isi balasan>
 */
+
+void PrintBalasanOnly(Balasan B, int indentasi);
+/* I.S. memprint semua balasan (hanya untuk tes) */
 
 #endif

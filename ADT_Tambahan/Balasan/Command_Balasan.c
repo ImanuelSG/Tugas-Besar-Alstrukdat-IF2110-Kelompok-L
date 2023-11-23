@@ -12,12 +12,12 @@ void BALAS(ID id_Kicau, ID id_Balasan) {
     if (id_Balasan == -1) {
         if (isIdxEffKicau(ListKicauanData, id_Kicau)) { // ID_Kicau valid
             Pengguna *Penulis_Kicau = getPengguna(PENULIS_KICAUAN(ELMT_LIST_KICAUAN(ListKicauanData, id_Kicau)));
-            
-            if (!isBerteman(currentPengguna.nama, PENULIS_KICAUAN(ELMT_LIST_KICAUAN(ListKicauanData, id_Kicau))) 
-                 && (*Penulis_Kicau).tipe_akun == 1) { // penulis kicauan privat dan tidak berteman
+
+            if (!isBerteman(currentPengguna.nama, PENULIS_KICAUAN(ELMT_LIST_KICAUAN(ListKicauanData, id_Kicau))) && (*Penulis_Kicau).tipe_akun == 1) {
+                // penulis kicauan privat dan tidak berteman
                 printf("Wah, akun tersebut merupakan akun privat dan anda belum berteman dengan akun tersebut!\n");
-            } 
-            else {/*pengguna berteman or penulis kicauan publik*/ 
+            }
+            else { /*pengguna berteman or penulis kicauan publik*/
                 Word NewBalasan;
 
                 printf("\nMasukkan balasan:\n");
@@ -32,8 +32,11 @@ void BALAS(ID id_Kicau, ID id_Balasan) {
                     DATETIME WaktuBalasan;
 
                     BacaDATETIME(&WaktuBalasan);
-                    CreateBalasan(&Struct_Balasan, currentPengguna.nama, WaktuBalasan, NewBalasan, &ELMT_LIST_KICAUAN(ListKicauanData, id_Kicau));
-                    insertChild(&ELMT_LIST_BALASAN(ListBalasanData, id_Kicau), Struct_Balasan);
+                    CreateBalasan(&Struct_Balasan, currentPengguna.nama, WaktuBalasan, NewBalasan, &ELMT_LIST_KICAUAN(ListKicauanData, id_Kicau), id_Balasan);
+                    if (&ELMT_LIST_BALASAN(ListBalasanData, id_Kicau) == NULL) {
+                        JUMLAH_KICAUAN_DENGAN_BALASAN += 1;
+                    }
+                    insertSiblingLast(&ELMT_LIST_BALASAN(ListBalasanData, id_Kicau), Struct_Balasan);
 
                     printf("\nSelamat! balasan telah diterbitkan!\n");
                     printf("Detil balasan:");
@@ -41,23 +44,22 @@ void BALAS(ID id_Kicau, ID id_Balasan) {
                     printf("\n");
                 }
             }
-        } 
+        }
         else { // kicauan tidak ada
             printf("Wah, tidak terdapat kicauan yang ingin Anda balas!\n");
         }
-    } 
-    
+    }
+
     else { // id_Balasan != -1
-        if (isIdxEffKicau(ListKicauanData, id_Kicau)) {// kicauan ada
-            if(searchTree(ELMT_LIST_BALASAN(ListBalasanData, id_Kicau), id_Balasan) != NULL) { // balasan ada
+        if (isIdxEffKicau(ListKicauanData, id_Kicau)) { // kicauan ada
+            if (searchTree(ELMT_LIST_BALASAN(ListBalasanData, id_Kicau), id_Balasan) != NULL) { // balasan ada
                 Address balas = searchTree(ELMT_LIST_BALASAN(ListBalasanData, id_Kicau), id_Balasan);
                 Pengguna *Penulis_Balasan = getPengguna(PENULIS_BALASAN(INFO_TREE(balas)));
-                
-                if (!isBerteman(currentPengguna.nama, PENULIS_BALASAN(INFO_TREE(balas))) 
-                    && (*Penulis_Balasan).tipe_akun == 1) {// penulis balasan privat dan tidak berteman
+
+                if (!isBerteman(currentPengguna.nama, PENULIS_BALASAN(INFO_TREE(balas))) && (*Penulis_Balasan).tipe_akun == 1) { // penulis balasan privat dan tidak berteman
                     printf("Wah, akun tersebut merupakan akun privat dan anda belum berteman dengan akun tersebut!\n");
-                } 
-                else {/*pengguna berteman or penulis kicauan publik*/ 
+                }
+                else { /*pengguna berteman or penulis kicauan publik*/
                     Word NewBalasan;
 
                     printf("\nMasukkan balasan:\n");
@@ -72,7 +74,7 @@ void BALAS(ID id_Kicau, ID id_Balasan) {
                         DATETIME WaktuBalasan;
 
                         BacaDATETIME(&WaktuBalasan);
-                        CreateBalasan(&Struct_Balasan, currentPengguna.nama, WaktuBalasan, NewBalasan, &ELMT_LIST_KICAUAN(ListKicauanData, id_Kicau));
+                        CreateBalasan(&Struct_Balasan, currentPengguna.nama, WaktuBalasan, NewBalasan, &ELMT_LIST_KICAUAN(ListKicauanData, id_Kicau), id_Balasan);
                         insertChild(&balas, Struct_Balasan);
 
                         printf("\nSelamat! balasan telah diterbitkan!\n");
@@ -85,7 +87,7 @@ void BALAS(ID id_Kicau, ID id_Balasan) {
             else { // balasan tidak ada
                 printf("Wah, tidak terdapat balasan yang ingin Anda balas!\n");
             }
-        } 
+        }
         else { // kicauan tidak ada
             printf("Wah, tidak terdapat kicauan yang ingin Anda balas!\n");
         }
@@ -98,24 +100,21 @@ void BALASAN(ID id_Kicau) {
 /* Terurut berdasarkan struktur tree */
     if (isIdxEffKicau(ListKicauanData, id_Kicau)) { // ID_Kicau valid
         Pengguna *Penulis_Kicau = getPengguna(PENULIS_KICAUAN(ELMT_LIST_KICAUAN(ListKicauanData, id_Kicau)));
-        
-        if (!isBerteman(currentPengguna.nama, PENULIS_KICAUAN(ELMT_LIST_KICAUAN(ListKicauanData, id_Kicau))) 
-             && (*Penulis_Kicau).tipe_akun == 1) { // penulis kicuan privat dan tidak berteman
+
+        if (!isBerteman(currentPengguna.nama, PENULIS_KICAUAN(ELMT_LIST_KICAUAN(ListKicauanData, id_Kicau))) && (*Penulis_Kicau).tipe_akun == 1) { // penulis kicuan privat dan tidak berteman
             printf("Wah, kicauan tersebut dibuat oleh pengguna dengan akun privat!\n");
-        } 
-        
+        }
+
         else { // pengguna berteman or penulis kicauan publik
-            
-            if (LEFT_CHILD(ELMT_LIST_BALASAN(ListBalasanData, id_Kicau)) != NULL) {// balasan ada
+
+            if (LEFT_CHILD(ELMT_LIST_BALASAN(ListBalasanData, id_Kicau)) != NULL) { // balasan ada
                 printTree(ELMT_LIST_BALASAN(ListBalasanData, id_Kicau), 0);
-            } 
+            }
             else { // balasan tidak ada
                 printf("Belum terdapat balasan apapun pada kicauan tersebut. Yuk balas kicauan tersebut!\n");
             }
-            
         }
-    } 
-    
+    }
     else { // kicauan tidak ada
         printf("Tidak terdapat kicauan dengan id tersebut!\n");
     }
@@ -123,26 +122,29 @@ void BALASAN(ID id_Kicau) {
 
 /* HAPUS_BALASAN */
 void HAPUS_BALASAN(ID id_Kicau, ID id_Balasan) {
-/* Menghapus balasan dengan id_Balasan pada kicauan dengan id_Kicau */
+    /* Menghapus balasan dengan id_Balasan pada kicauan dengan id_Kicau */
     if (isIdxEffKicau(ListKicauanData, id_Kicau)) { /*kicauan ada*/
-        
-        if (searchTree(ELMT_LIST_BALASAN(ListBalasanData, id_Kicau), id_Balasan) != NULL) {/*balasan ada*/
+
+        if (searchTree(ELMT_LIST_BALASAN(ListBalasanData, id_Kicau), id_Balasan) != NULL) { /*balasan ada*/
             Address balas = searchTree(ELMT_LIST_BALASAN(ListBalasanData, id_Kicau), id_Balasan);
-            
-            if (isSameWord(PENULIS_BALASAN(INFO_TREE(balas)), currentPengguna.nama)) {/*milik pengguna*/
-                deleteTree(&balas);
+
+            if (isSameWord(PENULIS_BALASAN(INFO_TREE(balas)), currentPengguna.nama)) { /*milik pengguna*/
+                deleteTree(&ELMT_LIST_BALASAN(ListBalasanData, id_Kicau), id_Balasan);
+                if (ELMT_LIST_BALASAN(ListBalasanData, id_Kicau) == NULL) {
+                    JUMLAH_KICAUAN_DENGAN_BALASAN -= 1;
+                }
                 printf("Balasan berhasil dihapus.\n");
-            } 
+            }
             else { // bukan milik pengguna
                 printf("Hei, ini balasan punya siapa? Jangan dihapus ya!\n");
             }
-        } 
-        
+        }
+
         else { // balasan tidak ada
             printf("Balasan tidak ditemukan.\n");
         }
     }
-    
+
     else { // kicauan tidak ada
         printf("Tidak terdapat kicauan dengan id tersebut!\n");
     }
