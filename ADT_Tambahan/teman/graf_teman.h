@@ -5,6 +5,7 @@
 #define GRAF_TEMAN_H 
 
 #include "../Pengguna/pengguna.h"
+#include "FriendRequest.h"
 #include "../Globals/globalvar.h"
 
 #define MAKS_PENGGUNA 20
@@ -19,12 +20,6 @@ typedef struct {
 } Edge;
 
 typedef struct {
-    Pengguna penerima;
-    Pengguna pengirim;
-    int BanyaknyaTeman;
-} Request;
-
-typedef struct {
 
     int NEffVertex;
     Vertex ListVertex[MAKS_PENGGUNA];
@@ -32,12 +27,7 @@ typedef struct {
     int NEffEdges;
     Edge ListOfEdges[MAKS_PENGGUNA * MAKS_PENGGUNA];
 
-    int NEffFriendRequests;
-    Request ListOfFriendRequests[MAKS_PENGGUNA * MAKS_PENGGUNA]; // Edges that have not yet been added; Awaiting accept friend.
-
 } GrafTeman;
-
-
 
 extern GrafTeman dataTeman;
 
@@ -49,7 +39,6 @@ void CreateEdge(Edge* E, Pengguna v1, Pengguna v2);
 void CreateGrafTeman(GrafTeman* G); // Graf yang dibuat sudah diisi data dari variabel global;
 
 /* Setters Getters */
-Request CreateRequest(Pengguna v1, Pengguna v2, int BanyakTeman);
 void TambahPenggunaGraf(GrafTeman* G, Pengguna V);                         // Add vertex
 void TambahPertemanan(GrafTeman* G, Pengguna v1, Pengguna v2);        // Add Edge
 void HapusPertemanan(GrafTeman* G, Pengguna v1, Pengguna v2);         // Remove Edge
@@ -57,19 +46,14 @@ void HapusPertemanan(GrafTeman* G, Pengguna v1, Pengguna v2);         // Remove 
 /* Boolean function */
 boolean isTeman(GrafTeman* G, Pengguna user1, Pengguna user2); // sama dengan adjacent(G, x, y)
 
-void SendFriendRequest(GrafTeman* G, Request R);        // Add Friend Request Edge
-void AcceptFriendRequest(GrafTeman* G, Request R);      // Approve friend request
+void SendFriendRequest(ListOfPriorityQueueFriendRequests* pq, int id_penerima, Request req);        // Add Friend Request Edge
+
+void AcceptFriendRequest(ListOfPriorityQueueFriendRequests* pq, int id_penerima, GrafTeman* G);      // Approve friend request
 // this will add the requested friend request as an actual edge to the graph
 
-int BanyakTeman(GrafTeman* G, Pengguna user);                                         // Amount of Edges
-Request* ListOfFriendRequests(GrafTeman* G, Pengguna user);
+int BanyakTeman(GrafTeman* G, Pengguna user);       // Amount of Edges
 
-
-/* Procedures */
-void DisplayTeman(GrafTeman* G, Pengguna user);
-void DisplayFriendRequests(GrafTeman* G, Pengguna user);
-
-void UpdateMatrixPertemanan(GrafTeman* G, Matrix pertemanan, Matrix friendReq);
+void UpdateMatrixPertemanan(GrafTeman* G, ListOfPriorityQueueFriendRequests* listpq, Matrix* pertemanan, Matrix* friendReq);
 
 /* main.c Commands*/
 void DAFTAR_TEMAN();
