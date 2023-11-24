@@ -18,6 +18,9 @@ void UTAS(ID IDKicau){
     else if (isKicauanUtamaUtas(lDinUtas, IDKicau)){
         printf("Kicauan ini sudah pernah menjadi utas!\n");
     }
+    else if (ELMT_LIST_BALASAN(ListBalasanData, IDKicau) == NULL){
+        printf("Kicauan ini sudah memiliki balasan!\n");
+    }
     else{
         Utas newUtas;
         ListUtas lUtas;

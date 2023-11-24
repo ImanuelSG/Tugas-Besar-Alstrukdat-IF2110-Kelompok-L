@@ -4,6 +4,7 @@
 #include "../../ADT_Bawaan/wordmachine/wordmachine.h"
 #include "../../ADT_Bawaan/datetime/datetime.h"
 #include "../../ADT_Bawaan/boolean.h"
+#include "../Balasan/treebalasan.h"
 #include "../Pengguna/pengguna.h"
 #include "../Kicauan/listdinkicauan.h"
 #include "../Globals/globalvar.h"
@@ -15,11 +16,11 @@ Pengguna currentPengguna;
 /* Definisi Tipe Data Utas*/
 typedef struct utas
 {
-    int IDUtas; // autoincrement, index dari listdinutas + 1
-    ID IDKicau; //jika bukan kicauan utama idKicau = IDX_UNDEF
-    Word utasAuthor;
-    DATETIME WaktuKicauan;
-    Word Tweet; // Isi kicauan
+    int IDUtas;             // ID dari utas, autoincrement
+    ID IDKicau;             // ID dari kicauan utama, jika utas bukan kicauan utama, idKicau = IDX_UNDEF
+    Word utasAuthor;        //Penulis utas
+    DATETIME WaktuKicauan; //Waktu pembuatan utas
+    Word Tweet;             // Isi utas
 } Utas;
 
 #define IDUTAS(U) (U).IDUtas

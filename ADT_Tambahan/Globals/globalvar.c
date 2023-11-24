@@ -3,7 +3,3 @@
 
 
 boolean isLoggedIn = false;
-
-
-
-ListDinUtas lDinUtas;

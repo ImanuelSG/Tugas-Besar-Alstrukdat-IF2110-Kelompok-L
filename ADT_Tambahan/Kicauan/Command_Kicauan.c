@@ -14,7 +14,7 @@ void KICAU() {
     if (IsAllBlank(NewTweet)) {
         printf("\nKicauan tidak boleh hanya berisi spasi!\n");
     }
-    else { // tweet valid
+    else { // tweet valid 
         Kicauan NewKicauan;
         DATETIME WaktuKicauan;
 

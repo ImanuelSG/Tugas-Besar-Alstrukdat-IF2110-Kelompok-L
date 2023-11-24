@@ -118,6 +118,9 @@ void insertLastListDinUtas(ListDinUtas *l, ElType val)
 /* Proses: Menambahkan val sebagai elemen terakhir list */
 /* I.S. List l boleh kosong, tetapi tidak penuh */
 /* F.S. val adalah elemen terakhir l yang baru */{
+    if (isFullListDinUtas(*l)) {
+        expandListDinUtas(l, 50);
+    }
     ELMTUTAS(*l, NEFF(*l)) = val;
     NEFF(*l) += 1;
 }

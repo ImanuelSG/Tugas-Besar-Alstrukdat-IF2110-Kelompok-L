@@ -173,7 +173,7 @@ void sambungKicauanUtas(Utas sambunganUtas, ID IDUtas, int index, ListUtas lUtas
     BacaDATETIME(&WaktuSambunganUtas);
 
     Word tweetSambunganUtas;
-    printf("\nMasukkan kicauan: \n");
+     printf("\nMasukkan kicauan: \n");
     STARTKalimat();
     tweetSambunganUtas = currentWord;
 

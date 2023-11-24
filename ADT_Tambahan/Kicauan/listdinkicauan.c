@@ -76,7 +76,7 @@ boolean isFullListKicau(ListKicauan l) {
 void printListKicauan(ListKicauan l, Word NamaPengguna)
 {
     /* Proses : Menuliskan isi list dengan traversal,
-       list yang ditulis hanya Kicauan milik pengguna beserta teman-temannya
+       list yang ditulis hanya Kicauan milik pengguna beserta teman-temannya*/
     /* I.S. l boleh kosong */
     /* F.S. Jika l tidak kosong: tercetak daftar kicauan pengguna dan temannya */
     /*      Penulisan dari kicauan terbaru ke yang terlama */
@@ -91,10 +91,11 @@ void printListKicauan(ListKicauan l, Word NamaPengguna)
 void printList(ListKicauan l)
 {
     /* Proses : Menuliskan isi list dengan traversal,
-       list yang ditulis hanya Kicauan milik pengguna beserta teman-temannya
+       list yang ditulis hanya Kicauan milik pengguna beserta teman-temannya*/
     /* I.S. l boleh kosong */
     /* F.S. Jika l tidak kosong: tercetak daftar seluruh kicauan */
     /*      Penulisan dari kicauan terbaru ke yang terlama */
+
     ID i;
 
     for (i = getLastIdxKicau(l); i >= getFirstIdxKicau(l); i--) {
