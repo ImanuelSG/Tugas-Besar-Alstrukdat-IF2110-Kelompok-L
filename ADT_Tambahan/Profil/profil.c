@@ -312,7 +312,7 @@ void Lihat_Profil(Word nama)
             printf("Pengguna tidak ditemukan!\n");
         }
 
-        else if (dataPengguna.contents[id].tipe_akun == 0 || id == getIdPengguna(currentPengguna.nama))
+        else if (dataPengguna.contents[id].tipe_akun == 0 || id == getIdPengguna(currentPengguna.nama) || isBerteman(currentPengguna.nama, nama))
         {
             // display nama, bio, nomor, weton
             printf("| Nama: ");

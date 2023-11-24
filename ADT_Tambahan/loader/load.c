@@ -90,7 +90,7 @@ void ReadPenggunaConfig(char namafile[])
 
 void ReadKicauanConfig(char namafile[])
 {
-    CreateListDinKicauan(&ListKicauanData, 100);
+    CreateListDinKicauan(&ListKicauanData, 61);
     int iteration, like;
     Kicauan kicau;
     Word Penulis, Tweet;

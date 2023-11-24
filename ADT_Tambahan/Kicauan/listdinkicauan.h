@@ -18,8 +18,8 @@
 typedef struct
 {
    Kicauan *buffer; /* memori tempat penyimpan elemen (container) */
-   int nEff;       /* >= 0, banyaknya elemen efektif */
-   int capacity;   /* ukuran list */
+   int nEff;        /* >= 0, banyaknya elemen efektif */
+   int capacity;    /* ukuran list */
 } ListKicauan;
 /* Indeks yang digunakan [1..capacity-1] */
 /* Jika l adalah : ListKicauan, cara deklarasi dan akses: */
@@ -93,7 +93,7 @@ void printListKicauan(ListKicauan l, Word NamaPengguna);
 /* Jika list kosong : menulis [] */
 
 void printList(ListKicauan l);
-/* Proses : Menuliskan isi list dengan traversal,
+/* Proses : Menuliskan isi list dengan traversal,*/
 /* list yang ditulis hanya Kicauan milik pengguna beserta teman-temannya */
 /* I.S. l boleh kosong */
 /* F.S. Jika l tidak kosong: tercetak daftar seluruh kicauan */

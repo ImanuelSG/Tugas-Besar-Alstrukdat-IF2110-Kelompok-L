@@ -4,7 +4,6 @@
 
 #include "../Pengguna/liststatikpengguna.h"
 
-
 Matrix matrixPermintaan;
 Matrix matrixPertemanan;
 /* *** Kreator *** */
@@ -112,11 +111,11 @@ void initializeFriendRequests()
 
     for (i = 0; i < ROW_EFF(matrixPermintaan); i++)
     {
-        int id_pengguna = ELMT(matrixPermintaan, i, 0);
-        int id_pengirim = ELMT(matrixPermintaan, i, 1);
+        int pengirim = ELMT(matrixPermintaan, i, 0);
+        int penerima = ELMT(matrixPermintaan, i, 1);
 
         Request req;
-        newRequest(&req, dataPengguna.contents[id_pengirim], ELMT(matrixPermintaan, i, 2));
-        enqueueFriendReq(&dataFriendRequest.buffer[id_pengguna], req);
+        newRequest(&req, dataPengguna.contents[pengirim], ELMT(matrixPermintaan, i, 2));
+        enqueueFriendReq(&dataFriendRequest.buffer[penerima], req);
     }
 }

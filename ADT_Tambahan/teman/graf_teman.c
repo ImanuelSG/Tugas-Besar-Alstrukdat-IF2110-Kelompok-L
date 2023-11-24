@@ -184,7 +184,7 @@ void DisplayTeman(GrafTeman *G, Pengguna user)
 
         if ((isTeman(G, G->ListVertex[i], user)) && !isSameWord(G->ListVertex[i].nama, currentPengguna.nama))
         {
-            
+
             printf("| ");
             displayWord(G->ListVertex[i].nama);
             newline;
@@ -211,8 +211,8 @@ void UpdateMatrixPertemanan(GrafTeman *G, ListOfPriorityQueueFriendRequests *lis
         while (!isEmptyFriendReq(&listpq->buffer[i]))
         {
             dequeueFriendReq(&listpq->buffer[i], &req);
-            ELMT(*friendReq, row, 0) = i;
-            ELMT(*friendReq, row, 1) = getIdPengguna(req.sender.nama);
+            ELMT(*friendReq, row, 0) = getIdPengguna(req.sender.nama);
+            ELMT(*friendReq, row, 1) = i;
             ELMT(*friendReq, row, 2) = req.BanyakTeman;
         }
     }
@@ -233,7 +233,7 @@ void DAFTAR_TEMAN()
     else
     {
         DisplayTeman(&dataTeman, currentPengguna);
-        newline;
+        
     }
 }
 
@@ -249,7 +249,7 @@ void HAPUS_TEMAN()
     {
 
         printf("Masukkan nama pengguna: ");
-        STARTWORD();
+        STARTKalimat();
         Word query_user = currentWord;
         if (isSameWord(query_user, currentPengguna.nama))
         {
@@ -271,7 +271,7 @@ void HAPUS_TEMAN()
                 printf("Apakah anda yakin ingin menghapus ");
                 displayWord(query_user);
                 printf(" dari daftar teman anda?(YA/TIDAK): ");
-                STARTWORD();
+                STARTKalimat();
 
                 if (isSameWord(currentWord, stringToWord("YA", 2)))
                 {
@@ -291,7 +291,7 @@ void HAPUS_TEMAN()
                 {
                     printf("Input tidak dikenali. Perhatikan lagi instruksi input yang diberikan");
                     newline;
-                    newline;
+                    
                 }
 
             } while (!correct_input);
@@ -323,7 +323,7 @@ void TAMBAH_TEMAN()
     {
 
         printf("Masukkan nama pengguna: ");
-        STARTWORD();
+        STARTKalimat();
         query_user = currentWord;
         newRequest(&R, currentPengguna, BanyakTeman(&dataTeman, currentPengguna));
 
@@ -349,16 +349,6 @@ void TAMBAH_TEMAN()
             int id_penerima = getIdPengguna(query_user);
             int i = dataFriendRequest.buffer[id_penerima].idxHead;
 
-            if (i == IDX_TIDAK_TERDEFIINISI)
-            {
-                printf("Yay!\n");
-            }
-            else
-            {
-                printf("id = %d\n", id_penerima);
-                printf("i = %d\n", i);
-            }
-
             while ((!udah_ngirim) && (i != dataFriendRequest.buffer[id_penerima].idxTail))
             {
 
@@ -372,7 +362,6 @@ void TAMBAH_TEMAN()
                 {
                     ++i;
                     i = i % MAX_PEOPLE;
-                    printf("%d", i);
                 }
             }
 
@@ -411,13 +400,7 @@ void TAMBAH_TEMAN()
     }
     else if (kasus == 5)
     {
-        printf("Woi ah apesi!\n");
-        printf("%d", R.BanyakTeman);
-        newline;
-        displayWord(R.sender.nama);
-        newline;
-        printf("%d", getIdPengguna(query_user));
-        newline;
+
         SendFriendRequest(&dataFriendRequest, getIdPengguna(query_user), R);
         printf("Permintaan pertemanan kepada ");
         displayWord(query_user);
@@ -425,7 +408,7 @@ void TAMBAH_TEMAN()
     }
     else if (kasus == 6)
     {
-        printf("Anda tidak bisa berteman dengan diri sendiri... Silakan cari teman yang merupakan pengguna lain.\n.");
+        printf("Anda tidak bisa berteman dengan diri sendiri... Silakan cari teman yang merupakan pengguna lain.\n");
     }
 }
 
@@ -459,7 +442,7 @@ void SETUJUI_PERTEMANAN()
 {
 
     int id = getIdPengguna(currentPengguna.nama);
-    printf("%d", lengthFriendReq(&dataFriendRequest.buffer[id]));
+    
 
     if (lengthFriendReq(&dataFriendRequest.buffer[id]) == 0)
     {
@@ -486,7 +469,7 @@ void SETUJUI_PERTEMANAN()
         do
         {
             printf("Apakah Anda ingin menyetujui permintaan pertemanan ini? (YA/TIDAK) ");
-            STARTWORD();
+            STARTKalimat();
 
             if (isSameWord(currentWord, stringToWord("YA", 2)))
             {

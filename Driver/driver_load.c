@@ -1,4 +1,4 @@
-#include "load.h"
+#include "../ADT_Tambahan/Loader/load.h"
 
 int main()
 {
@@ -60,6 +60,7 @@ int main()
     printf("***************MATRIX PERMINTAAN***************\n");
     displayMatrix(matrixPermintaan);
     printf("***************DATA BALASAN***************\n");
+    currentPengguna = ELMTListStatik(dataPengguna, 0);
     printTree(ELMT_LIST_BALASAN(ListBalasanData, 5), 0);
 
     printf("Silahkan masukan folder untuk Menyimpan: ");

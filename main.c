@@ -83,7 +83,7 @@ int main()
                 if (isLoggedIn)
                 {
                     Lihat_Profil(nama);
-                    nl;
+                    
                 }
                 else
                 {
@@ -182,51 +182,91 @@ int main()
 
             else if (isSameWord(perintah, stringToWord("KICAU", 5)))
             {
-                KICAU();
-                nl;
+                if (not(isLoggedIn))
+                {
+                    printf("Anda belum masuk! Masuk untuk menikmati layanan Burbir.\n");
+                }
+                else
+                {
+                    KICAU();
+                    nl;
+                }
             }
 
             else if (isSameWord(perintah, stringToWord("KICAUAN", 7)))
             {
-
-                KICAUAN();
+                if (not(isLoggedIn))
+                {
+                    printf("Anda belum masuk! Masuk untuk menikmati layanan Burbir.\n");
+                }
+                else
+                {
+                    KICAUAN();
+                }
             }
 
             else if (isSameWord(perintah, stringToWord("SUKA_KICAUAN", 12)))
             {
-                ADVWORD();
-                int id = wordToInteger(currentWord);
-
-                SUKA_KICAUAN(id);
-                nl;
+                if (not(isLoggedIn))
+                {
+                    printf("Anda belum masuk! Masuk untuk menikmati layanan Burbir.\n");
+                }
+                else
+                {
+                    ADVWORD();
+                    int id = wordToInteger(currentWord);
+                    SUKA_KICAUAN(id);
+                    nl;
+                }
             }
 
             else if (isSameWord(perintah, stringToWord("UBAH_KICAUAN", 12)))
             {
-                ADVWORD();
-                int id = wordToInteger(currentWord);
+                if (not(isLoggedIn))
+                {
+                    printf("Anda belum masuk! Masuk untuk menikmati layanan Burbir.\n");
+                }
+                else
+                {
+                    ADVWORD();
+                    int id = wordToInteger(currentWord);
 
-                UBAH_KICAUAN(id);
-                nl;
+                    UBAH_KICAUAN(id);
+                    nl;
+                }
             }
 
             /*-------------------------------BALASAN----------------------------------*/
 
             else if (isSameWord(perintah, stringToWord("BALAS", 5)))
             {
-                ADVWORD();
-                int id_kicau = wordToInteger(currentWord);
-                ADVWORD();
-                int id_balasan = wordToInteger(currentWord);
+                if (not(isLoggedIn))
+                {
+                    printf("Anda belum masuk! Masuk untuk menikmati layanan Burbir.\n");
+                }
+                else
+                {
+                    ADVWORD();
+                    int id_kicau = wordToInteger(currentWord);
+                    ADVWORD();
+                    int id_balasan = wordToInteger(currentWord);
 
-                BALAS(id_kicau, id_balasan);
+                    BALAS(id_kicau, id_balasan);
+                }
             }
 
             else if (isSameWord(perintah, stringToWord("BALASAN", 7)))
             {
-                ADVWORD();
-                int id_kicau = wordToInteger(currentWord);
-                BALASAN(id_kicau);
+                if (not(isLoggedIn))
+                {
+                    printf("Anda belum masuk! Masuk untuk menikmati layanan Burbir.\n");
+                }
+                else
+                {
+                    ADVWORD();
+                    int id_kicau = wordToInteger(currentWord);
+                    BALASAN(id_kicau);
+                }
             }
 
             else if (isSameWord(perintah, stringToWord("HAPUS_BALASAN", 13)))
@@ -331,6 +371,6 @@ int main()
         nl;
     }
 
-        printf("Anda telah keluar dari program BurBir. Sampai jumpa di penjelajahan berikutnya.");
+    printf("Anda telah keluar dari program BurBir. Sampai jumpa di penjelajahan berikutnya.");
     nl;
 }
