@@ -33,7 +33,7 @@ void ReadPenggunaConfig(char namafile[])
         password = currentBaris;
         ADVBaris();
         bio = currentBaris;
-        ADVBaris();
+        advMKarFile();
         nomor = currentBaris;
         ADVBaris();
         weton = currentBaris;
@@ -55,7 +55,7 @@ void ReadPenggunaConfig(char namafile[])
             for (int k = 0; k < 10; k++)
             {
                 profil.mem[j][k].TabWord[0] = currentBaris.TabWord[k * 2];
-                // To Place the index in the right position
+                
             }
         }
         StackDraf S;
@@ -95,7 +95,7 @@ void ReadKicauanConfig(char namafile[])
     Kicauan kicau;
     Word Penulis, Tweet;
     DATETIME Waktu;
-
+    ID CURRENT_ID_KICAUAN = 0;
     STARTBaris(namafile);
 
     iteration = wordToInteger(currentBaris);
@@ -276,7 +276,7 @@ void ReadBalasanConfig(char namafile[])
 
             if (idparent == -1)
             {
-                insertChild(&ELMT_LIST_BALASAN(ListBalasanData, IDKicauUtama), B);
+                insertSiblingLast(&ELMT_LIST_BALASAN(ListBalasanData, IDKicauUtama), B);
             }
             else
             {
@@ -428,22 +428,21 @@ void WriteDrafConfig(char namafile[])
     while (i < banyakPengguna && j < temp)
     {
         Pengguna Curr = ELMTListStatik(dataPengguna, i);
-        
+
         if (!isEmptyStackDraf(Curr.draf))
         {
             fprintf(file, "%s %d\n", wordToString(Curr.nama), lengthStackDraf(Curr.draf));
             j++;
 
             StackDraf Copy = CopyStackDraf(Curr.draf);
-            
 
             while (!isEmptyStackDraf(Copy))
             {
 
                 DrafKicau val;
-                
+
                 DeleteDraf(&Copy, &val);
-                
+
                 // isi draf
                 fprintf(file, "%s\n", wordToString(ISI_DRAF(val)));
 
@@ -488,7 +487,7 @@ void WriteBalasanConfig(char namafile[])
         return;
     }
     int count = JUMLAH_KICAUAN_DENGAN_BALASAN;
-    
+
     fprintf(file, "%d\n", count); //
     j = 1;
     while (count > 0)

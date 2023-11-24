@@ -1,5 +1,4 @@
 #include "graf_teman.h"
-#include "driverGraf.h"
 #include "../Pengguna/pengguna.h"
 #include <stdio.h>
 #include "../Globals/globalvar.h"
@@ -22,7 +21,6 @@ void displayGrafStuff() {
         else {
             printf("Bruh");
         }
-
         // int a = BanyakTeman(&dataTeman ,currentPengguna);
     }
 }

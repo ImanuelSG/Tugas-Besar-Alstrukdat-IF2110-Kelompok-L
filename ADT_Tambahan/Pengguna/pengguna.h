@@ -5,6 +5,7 @@
 #include "../../ADT_Bawaan/charmachine/charmachine.h"
 #include "../Profil/profil.h"
 #include "../DrafKicauan/StackDraf.h"
+#include "listdinNomor.h"
 #include <stdio.h>
 
 typedef struct
@@ -12,7 +13,7 @@ typedef struct
     Word nama;
     Word sandi;
     Word bio;
-    Word nomor;
+    ListDinNomor nomor;
     Word weton;
     int tipe_akun;
     MatrixProfil profil;
@@ -22,7 +23,7 @@ typedef struct
 extern int banyakPengguna; /*List Pengguna*/
 extern Pengguna currentPengguna;  /*Berisi Data Current Pengguna*/
 
-void CreatePengguna(Pengguna *akun, Word nama, Word sandi, Word bio, Word nomor, Word weton, int tipe_akun, MatrixProfil profil, StackDraf draf);
+void CreatePengguna(Pengguna *akun, Word nama, Word sandi, Word bio, ListDinNomor nomor, Word weton, int tipe_akun, MatrixProfil profil, StackDraf draf);
 
 void InsertPengguna(Pengguna akun); // masukin pengguna ke data pengguan
 

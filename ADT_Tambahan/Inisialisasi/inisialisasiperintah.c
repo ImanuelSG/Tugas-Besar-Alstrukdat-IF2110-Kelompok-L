@@ -113,7 +113,7 @@ void displayBurbir()
     printf("|______/   /______/  | _| `._____||______/  |__| | _| `._____| ");
     nl;
 
-    printf("Selamat datang di BurBir.\n");
+    printf("\n\nSelamat datang di BurBir.\n");
     printf("Aplikasi untuk studi kualitatif mengenai perilaku manusia dengan menggunakan metode");
     printf(" pengambilan data berupa) Focused Group Discussion kedua di zamannya.\n");
 }
@@ -301,8 +301,6 @@ void initializeKeyWords()
     i++;
     KeyWords[i] = stringToWord("TAMBAH_TEMAN", 12);
     i++;
-    KeyWords[i] = stringToWord("BATAL_TAMBAH_TEMAN", 18);
-    i++;
     KeyWords[i] = stringToWord("DAFTAR_PERMINTAAN_PERTEMANAN", 28);
     i++;
     KeyWords[i] = stringToWord("SETUJUI_PERTEMANAN", 18);
@@ -339,8 +337,5 @@ void initializeKeyWords()
     i++;
 
     KeyWords[i] = stringToWord("SIMPAN", 6);
-    i++;
-
-    KeyWords[i] = stringToWord("MUAT", 4);
     i++;
 }

@@ -30,7 +30,7 @@ void insertLast(ListStatikPengguna *l, Pengguna val) {
       (*l).contents[(*l).Neff] = val ;
       (*l).Neff += 1 ;      
    }
-}
+} 
 /* Proses: Menambahkan val sebagai elemen terakhir List */
 /* I.S. List l boleh kosong, tetapi tidak penuh */
 /* F.S. val adalah elemen terakhir l yang baru */

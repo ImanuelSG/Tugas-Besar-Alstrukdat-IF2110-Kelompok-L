@@ -13,10 +13,9 @@
 // isloggedin untuk semua fungsi
 
 ListStatikPengguna dataPengguna; /*List Pengguna*/
-int banyakPengguna = 0;
 Pengguna currentPengguna;
-
-void CreatePengguna(Pengguna *akun, Word NAMA, Word SANDI, Word BIO, Word NOMOR, Word WETON, int TIPE_AKUN, MatrixProfil PROFIL, StackDraf DRAF)
+ 
+void CreatePengguna(Pengguna *akun, Word NAMA, Word SANDI, Word BIO, ListDinNomor NOMOR, Word WETON, int TIPE_AKUN, MatrixProfil PROFIL, StackDraf DRAF)
 {
     (*akun).nama = NAMA;
     (*akun).sandi = SANDI;
@@ -69,9 +68,11 @@ void Daftar()
             daftarPengguna.sandi = currentWord;
             printf("Pengguna telah berhasil terdaftar. Masuk untuk menikmati fitur-fitur BurBir.\n");
 
+            ListDinNomor nomor ;
+            CreateListDinNomor(&nomor);
             daftarPengguna.tipe_akun = 0;
             daftarPengguna.bio.Length = 0;
-            daftarPengguna.nomor.Length = 0;
+            daftarPengguna.nomor = nomor;
             daftarPengguna.weton.Length = 0;
             MatrixProfil profil;
             createProfilDefault(&profil);
@@ -109,12 +110,11 @@ void Masuk()
             printf("Ingin melanjutkan? (YA/TIDAK)\n");
             STARTKalimat();
             if (isSameWord(currentWord, ya))
-            {
-            }
+            {}
             else if (isSameWord(currentWord, no))
             {
-                idxPengguna = -999;
-                break;
+                idxPengguna = -999 ;
+                break ;
             }
             else
             {
@@ -124,22 +124,24 @@ void Masuk()
                     valid = true;
                     printf("(YA/TIDAK) huruf besar!\n");
                     STARTKalimat();
-                    if (isSameWord(currentWord, ya))
-                    {
+                    if (isSameWord(currentWord, ya)){
+
                     }
                     else if (isSameWord(currentWord, no))
                     {
-                        idxPengguna = -999;
-                        break;
+                        idxPengguna = -999 ;
+                        break ;
                     }
                     else
                         valid = false;
                 }
             }
-            printf("Masukkan nama: ");
-            STARTKalimat();
-            printf("\n");
-            idxPengguna = getIdPengguna(currentWord);
+            if (idxPengguna != -999) {
+                printf("Masukkan nama: ");
+                STARTKalimat();
+                printf("\n");
+                idxPengguna = getIdPengguna(currentWord);
+            }
         }
         if (idxPengguna != -999)
         {
