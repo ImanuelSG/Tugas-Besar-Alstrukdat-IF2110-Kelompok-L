@@ -8,8 +8,7 @@
 #define newline printf("\n")
 // aku benci syntax printf scanf
 
-Matrix matrixPermintaan;
-Matrix matrixPertemanan;
+ListOfPriorityQueueFriendRequests dataFriendRequest;
 GrafTeman dataTeman;
 
 /* Konstruktor */
@@ -22,15 +21,7 @@ void TambahPenggunaGraf(GrafTeman *G, Pengguna V)
 {
     G->ListVertex[G->NEffVertex] = V;
     ++G->NEffVertex;
-}
-Request CreateRequest(Pengguna v1, Pengguna v2, int BanyakTeman)
-{
-    Request R;
-    R.pengirim = v1;
-    R.penerima = v2;
-    R.BanyaknyaTeman = BanyakTeman;
-
-    return R;
+    TambahPertemanan(G, V, V);
 }
 
 void TambahPertemanan(GrafTeman *G, Pengguna v1, Pengguna v2)
@@ -46,7 +37,6 @@ void CreateGrafTeman(GrafTeman *G)
 {
     G->NEffVertex = 0;
     G->NEffEdges = 0;
-    G->NEffFriendRequests = 0;
 
     int i;
     for (i = 0; i < banyakPengguna; i++)
@@ -67,18 +57,6 @@ void CreateGrafTeman(GrafTeman *G)
                 }
             }
         }
-    }
-
-    for (i = 0; i < ROW_EFF(matrixPermintaan); i++)
-    {
-
-        Pengguna v1 = dataPengguna.contents[ELMT(matrixPermintaan, i, 0)];
-        Pengguna v2 = dataPengguna.contents[ELMT(matrixPermintaan, i, 1)];
-        int BanyakTeman = ELMT(matrixPertemanan, i, 2);
-
-        Request R = CreateRequest(v1, v2, BanyakTeman);
-
-        SendFriendRequest(G, R);
     }
 }
 
@@ -110,7 +88,6 @@ void HapusPertemanan(GrafTeman *G, Pengguna v1, Pengguna v2)
 
     do
     {
-
         G->ListOfEdges[i] = G->ListOfEdges[i + 1];
         i++;
     } while (i < G->NEffEdges);
@@ -118,51 +95,21 @@ void HapusPertemanan(GrafTeman *G, Pengguna v1, Pengguna v2)
     --G->NEffEdges;
 }
 
-void SendFriendRequest(GrafTeman *G, Request R)
+void SendFriendRequest(ListOfPriorityQueueFriendRequests *listpq, int id_penerima, Request req)
 {
-    G->ListOfFriendRequests[G->NEffFriendRequests] = R;
-    ++G->NEffFriendRequests;
+    enqueueFriendReq(&listpq->buffer[id_penerima], req);
 }
 
-void AcceptFriendRequest(GrafTeman *G, Request R)
+void AcceptFriendRequest(ListOfPriorityQueueFriendRequests *listpq, int id_penerima, GrafTeman *G)
 {
 
-    boolean found = false;
-    int i = 0;
+    Request req;
+    dequeueFriendReq(&listpq->buffer[id_penerima], &req);
 
-    while ((!found) && (i < G->NEffFriendRequests))
-    {
+    Pengguna user1 = dataPengguna.contents[id_penerima];
+    Pengguna user2 = (req.sender);
 
-        Word nama_pengirim = (R.pengirim.nama);
-        Word nama_penerima = (R.penerima.nama);
-
-        Word search_pengirim = (G->ListOfFriendRequests[i].pengirim.nama);
-        Word search_penerima = (G->ListOfFriendRequests[i].penerima.nama);
-
-        if (isSameWord(nama_pengirim, search_pengirim) && isSameWord(nama_penerima, search_penerima))
-        {
-            found = true;
-        }
-        else
-        {
-            ++i;
-        }
-    }
-
-    if (!found)
-    {
-        printf("Something went wronG->.. there isn't a friend request with those details!\n");
-    }
-
-    TambahPertemanan(G, R.pengirim, R.penerima);
-
-    while (i < G->NEffFriendRequests)
-    {
-        G->ListOfFriendRequests[i] = G->ListOfFriendRequests[i + 1];
-        ++i;
-    }
-
-    --G->NEffFriendRequests;
+    TambahPertemanan(G, user1, user2);
 
 } // Approve friend request
 
@@ -173,15 +120,13 @@ int BanyakTeman(GrafTeman *G, Pengguna user)
 
     for (i = 0; i < G->NEffVertex; i++)
     {
-        if (isTeman(G, G->ListVertex[i], user))
+        if (isTeman(G, G->ListVertex[i], user) && !isSameWord(user.nama, G->ListVertex[i].nama))
         {
             ++count;
         }
     }
 
     return count;
-
-    return 0;
 }
 
 /* Boolean functions */
@@ -197,16 +142,12 @@ boolean isTeman(GrafTeman *G, Pengguna user1, Pengguna user2)
 
         int id1 = getIdPengguna(user1.nama);
         int id2 = getIdPengguna(user2.nama);
-        // printf("id1 = %d\n", id1);
-        // printf("id2 = %d\n", id2);
 
         int id_search1 = getIdPengguna(G->ListOfEdges[i].vertex1.nama);
         int id_search2 = getIdPengguna(G->ListOfEdges[i].vertex2.nama);
-        // printf("id_search1 = %d\n", id_search1);
-        // printf("id_search2 = %d\n", id_search2);
+
         if ((id1 == id_search1 && id2 == id_search2) || (id1 == id_search2 && id2 == id_search1))
         {
-
             found = true;
         }
         else
@@ -217,63 +158,11 @@ boolean isTeman(GrafTeman *G, Pengguna user1, Pengguna user2)
 
     return found;
 }
-Request *SortedListOfFriendRequests(GrafTeman *G, Pengguna user)
+
+int amountOfFriendRquests(ListOfPriorityQueueFriendRequests *listpq, Pengguna user)
 {
-
-    Request *requests;
-    requests = (Request *)malloc(20 * (sizeof(Request)));
-    int NEffRequests = 0;
-
-    int i;
-    for (i = 0; i < G->NEffFriendRequests; i++)
-    {
-
-        Word search = G->ListOfFriendRequests[i].penerima.nama;
-
-        if (isSameWord(search, user.nama))
-        {
-            requests[NEffRequests] = G->ListOfFriendRequests[i];
-            NEffRequests++;
-        }
-    }
-
-    int j;
-
-    for (i = 0; i < NEffRequests; i++)
-    {
-        for (j = i + 1; j < NEffRequests; j++)
-        {
-            if (requests[i].BanyaknyaTeman < requests[j].BanyaknyaTeman)
-            {
-                Request tmp = requests[j];
-                requests[j] = requests[i];
-                requests[i] = tmp;
-            }
-        }
-    }
-
-    return requests;
-}
-
-int amountOfFriendRquests(GrafTeman *G, Pengguna user)
-{
-
-    int amount = 0;
-    int i;
-    for (i = 0; i < G->NEffFriendRequests; i++)
-    {
-
-        int id = getIdPengguna(user.nama);
-        int search_id = getIdPengguna(G->ListOfFriendRequests[i].penerima.nama);
-
-        if (id == search_id)
-        {
-
-            amount++;
-        }
-    }
-
-    return amount;
+    int id_pengguna = getIdPengguna(user.nama);
+    return lengthFriendReq(&listpq->buffer[id_pengguna]);
 }
 
 /* Procedures */
@@ -292,62 +181,40 @@ void DisplayTeman(GrafTeman *G, Pengguna user)
 
     for (i = 0; i < G->NEffVertex; i++)
     {
-        if ((isTeman(G, G->ListVertex[i], user)))
+
+        if ((isTeman(G, G->ListVertex[i], user)) && !isSameWord(G->ListVertex[i].nama, currentPengguna.nama))
         {
+            
             printf("| ");
             displayWord(G->ListVertex[i].nama);
             newline;
         }
     }
 }
-void DisplayFriendRequests(GrafTeman *G, Pengguna user)
-{
 
+void UpdateMatrixPertemanan(GrafTeman *G, ListOfPriorityQueueFriendRequests *listpq, Matrix *pertemanan, Matrix *friendReq)
+{
     int i;
-    Request *requests = SortedListOfFriendRequests(G, user);
-    int NEffRequests = amountOfFriendRquests(G, user);
-
-    if (0 == NEffRequests)
-    {
-        printf("Tidak ada yang mau berteman dengan Anda! :(\n");
-    }
-    else
-    {
-
-        printf("Terdapat %d permintaan pertemanan untuk Anda.", NEffRequests);
-        newline;
-
-        for (i = 0; i < NEffRequests; i++)
-        {
-
-            printf("| ");
-            displayWord(requests[i].pengirim.nama);
-            newline;
-            printf("| Jumlah teman: %d", requests[i].BanyaknyaTeman);
-            newline;
-        }
-    }
-}
-
-void UpdateMatrixPertemanan(GrafTeman *G, Matrix pertemanan, Matrix friendReq)
-{
-
-    createMatrix(G->NEffVertex, G->NEffVertex, &matrixPertemanan);
-    for (int i = 0; i < (G->NEffEdges); i++)
+    createMatrix(G->NEffVertex, G->NEffVertex, pertemanan);
+    for (i = 0; i < (G->NEffEdges); i++)
     {
         int idx1 = getIdPengguna(G->ListOfEdges[i].vertex1.nama);
         int idx2 = getIdPengguna(G->ListOfEdges[i].vertex2.nama);
-        ELMT(matrixPertemanan, idx1, idx2) = 1;
-        ELMT(matrixPertemanan, idx2, idx1) = 1;
+        ELMT(*pertemanan, idx1, idx2) = 1;
+        ELMT(*pertemanan, idx2, idx1) = 1;
     }
 
-    int k;
-    createMatrix(G->NEffFriendRequests, 3, &matrixPermintaan);
-    for (k = 0; k < G->NEffFriendRequests; k++)
+    Request req;
+    int row = 0;
+    for (i = 0; i < 20; i++)
     {
-        ELMT(matrixPermintaan, k, 0) = getIdPengguna(G->ListOfFriendRequests[k].penerima.nama);
-        ELMT(matrixPermintaan, k, 1) = getIdPengguna(G->ListOfFriendRequests[k].penerima.nama);
-        ELMT(matrixPermintaan, k, 2) = G->ListOfFriendRequests[k].BanyaknyaTeman;
+        while (!isEmptyFriendReq(&listpq->buffer[i]))
+        {
+            dequeueFriendReq(&listpq->buffer[i], &req);
+            ELMT(*friendReq, row, 0) = i;
+            ELMT(*friendReq, row, 1) = getIdPengguna(req.sender.nama);
+            ELMT(*friendReq, row, 2) = req.BanyakTeman;
+        }
     }
 }
 
@@ -357,104 +224,97 @@ void UpdateMatrixPertemanan(GrafTeman *G, Matrix pertemanan, Matrix friendReq)
 
 void DAFTAR_TEMAN()
 {
-    if (isLoggedIn)
+    if (BanyakTeman(&dataTeman, currentPengguna) == 0)
     {
-        if (BanyakTeman(&dataTeman, currentPengguna) == 0)
-        {
-            displayWord(currentPengguna.nama);
-            printf(" belum mempunyai teman.");
-            newline;
-        }
-        else
-        {
-            DisplayTeman(&dataTeman, currentPengguna);
-        }
+        displayWord(currentPengguna.nama);
+        printf(" belum mempunyai teman.");
+        newline;
     }
     else
     {
-        printf("Anda belum melakukan login!");
+        DisplayTeman(&dataTeman, currentPengguna);
         newline;
     }
 }
 
 void HAPUS_TEMAN()
 {
-    if (isLoggedIn)
+
+    if (BanyakTeman(&dataTeman, currentPengguna) == 0)
+    {
+        printf("Anda belum berteman!\n");
+    }
+
+    else
     {
 
-        if (BanyakTeman(&dataTeman, currentPengguna) == 0)
+        printf("Masukkan nama pengguna: ");
+        STARTWORD();
+        Word query_user = currentWord;
+        if (isSameWord(query_user, currentPengguna.nama))
         {
-            printf("Anda belum berteman!\n");
+            printf("Anda tidak bisa menghapus diri sendiri... Silakan masukkan pengguna lain.");
+            newline;
+        }
+        else if (getIdPengguna(query_user) == -1)
+        {
+            printf("Tidak ditemukan pengguna dengan nama ");
+            displayWord(query_user);
+        }
+
+        else if (isTeman(&dataTeman, *getPengguna(query_user), currentPengguna))
+        {
+
+            boolean correct_input = false;
+            do
+            {
+                printf("Apakah anda yakin ingin menghapus ");
+                displayWord(query_user);
+                printf(" dari daftar teman anda?(YA/TIDAK): ");
+                STARTWORD();
+
+                if (isSameWord(currentWord, stringToWord("YA", 2)))
+                {
+                    correct_input = true;
+                    HapusPertemanan(&dataTeman, *getPengguna(query_user), currentPengguna);
+                    displayWord(query_user);
+                    printf(" telah berhasil dihapus dari daftar pertemanan Anda.\n");
+                }
+
+                else if (isSameWord(currentWord, stringToWord("TIDAK", 5)))
+                {
+                    correct_input = true;
+                    printf("Penghapusan teman dibatalkan.\n");
+                }
+
+                else
+                {
+                    printf("Input tidak dikenali. Perhatikan lagi instruksi input yang diberikan");
+                    newline;
+                    newline;
+                }
+
+            } while (!correct_input);
         }
 
         else
         {
-
-            printf("Masukkan nama pengguna: ");
-            STARTWORD();
-            Word query_user = currentWord;
-
-            if (getIdPengguna(query_user) == -1)
-            {
-                printf("Tidak ditemukan pengguna dengan nama ");
-                displayWord(query_user);
-            }
-
-            else if (isTeman(&dataTeman, *getPengguna(query_user), currentPengguna))
-            {
-
-                boolean correct_input = false;
-                do
-                {
-                    printf("Apakah anda yakin ingin menghapus ");
-                    displayWord(query_user);
-                    printf(" dari daftar teman anda?(YA/TIDAK): ");
-                    STARTWORD();
-
-                    if (isSameWord(currentWord, stringToWord("YA", 2)))
-                    {
-                        correct_input = true;
-                        HapusPertemanan(&dataTeman, *getPengguna(query_user), currentPengguna);
-                        displayWord(query_user);
-                        printf(" telah berhasil dihapus dari daftar pertemanan Anda.\n");
-                    }
-
-                    else if (isSameWord(currentWord, stringToWord("TIDAK", 5)))
-                    {
-                        correct_input = true;
-                        printf("Penghapusan teman dibatalkan.\n");
-                    }
-
-                    else
-                    {
-                        printf("Input tidak dikenali.");
-                        newline;
-                        newline;
-                    }
-
-                } while (!correct_input);
-            }
-
-            else
-            {
-                displayWord(query_user);
-                printf(" bukan teman Anda");
-                newline;
-            }
+            displayWord(query_user);
+            printf(" bukan teman Anda");
+            newline;
         }
-    }
-    else
-    {
-        printf("Anda belum masuk! Masuk terlebih dahulu untuk menikmati layanan BurBir.");
-        newline;
     }
 }
 
 void TAMBAH_TEMAN()
 {
 
+    Word query_user;
+    Request R;
+    int id_pengirim = getIdPengguna(currentPengguna.nama);
+
     int kasus;
-    if (amountOfFriendRquests(&dataTeman, currentPengguna) != 0)
+    if (amountOfFriendRquests(&dataFriendRequest, currentPengguna) != 0)
     {
         kasus = 1;
     }
@@ -464,7 +324,8 @@ void TAMBAH_TEMAN()
 
         printf("Masukkan nama pengguna: ");
         STARTWORD();
-        Word query_user = currentWord;
+        query_user = currentWord;
+        newRequest(&R, currentPengguna, BanyakTeman(&dataTeman, currentPengguna));
 
         if (getIdPengguna(query_user) == -1)
         {
@@ -484,27 +345,34 @@ void TAMBAH_TEMAN()
         else
         {
 
-            Request R = CreateRequest(currentPengguna, *getPengguna(query_user), BanyakTeman(&dataTeman, currentPengguna));
-
             boolean udah_ngirim = false;
-            int i = 0;
+            int id_penerima = getIdPengguna(query_user);
+            int i = dataFriendRequest.buffer[id_penerima].idxHead;
 
-            while ((!udah_ngirim) && (i < dataTeman.NEffFriendRequests))
+            if (i == IDX_TIDAK_TERDEFIINISI)
+            {
+                printf("Yay!\n");
+            }
+            else
+            {
+                printf("id = %d\n", id_penerima);
+                printf("i = %d\n", i);
+            }
+
+            while ((!udah_ngirim) && (i != dataFriendRequest.buffer[id_penerima].idxTail))
             {
 
-                int id_pengirim = getIdPengguna(R.pengirim.nama);
-                int id_penerima = getIdPengguna(R.penerima.nama);
+                int search_id_pengirim = getIdPengguna(dataFriendRequest.buffer[id_penerima].buffer[i].sender.nama);
 
-                int search_id_pengirim = getIdPengguna(dataTeman.ListOfFriendRequests[i].pengirim.nama);
-                int search_id_penerima = getIdPengguna(dataTeman.ListOfFriendRequests[i].penerima.nama);
-
-                if ((id_pengirim == search_id_pengirim) && (id_penerima == search_id_penerima))
+                if ((id_pengirim == search_id_pengirim))
                 {
                     udah_ngirim = true;
                 }
                 else
                 {
                     ++i;
+                    i = i % MAX_PEOPLE;
+                    printf("%d", i);
                 }
             }
 
@@ -536,36 +404,64 @@ void TAMBAH_TEMAN()
     }
     else if (kasus == 4)
     {
-        printf("Anda sudah mengirimkan permintaan pertemanan kepada .");
-        displayWord(currentWord);
-        printf("Silakan tunggu hingga permintaan Anda disetujui.");
+        printf("Anda sudah mengirimkan permintaan pertemanan kepada ");
+        displayWord(query_user);
+        printf(". Silakan tunggu hingga permintaan Anda disetujui.");
         newline;
     }
     else if (kasus == 5)
     {
-        SendFriendRequest(&dataTeman, CreateRequest(currentPengguna, *getPengguna(currentWord), BanyakTeman(&dataTeman, currentPengguna)));
+        printf("Woi ah apesi!\n");
+        printf("%d", R.BanyakTeman);
+        newline;
+        displayWord(R.sender.nama);
+        newline;
+        printf("%d", getIdPengguna(query_user));
+        newline;
+        SendFriendRequest(&dataFriendRequest, getIdPengguna(query_user), R);
         printf("Permintaan pertemanan kepada ");
-        displayWord(currentWord);
+        displayWord(query_user);
         printf(" telah dikirim. Tunggu beberapa saat hingga permintaan Anda disetujui.");
     }
     else if (kasus == 6)
     {
-        printf("Anda tidak bisa berteman dengan diri sendiri. Silakan cari teman yang merupakan pengguna lain.\n.");
+        printf("Anda tidak bisa berteman dengan diri sendiri... Silakan cari teman yang merupakan pengguna lain.\n.");
     }
 }
 
 void DAFTAR_PERMINTAAN_PERTEMANAN()
 {
-    DisplayFriendRequests(&dataTeman, currentPengguna);
+    int id = getIdPengguna(currentPengguna.nama);
+    int i;
+
+    if (isEmptyFriendReq(&dataFriendRequest.buffer[id]))
+    {
+        printf("Tidak ada permintaan pertemanan untuk Anda.\n");
+    }
+
+    else
+    {
+        int banyak_teman_ini_orang = lengthFriendReq(&dataFriendRequest.buffer[id]);
+        printf("Terdapat %d permintaan pertemanan untuk Anda.\n", banyak_teman_ini_orang);
+        for (i = 0; i < banyak_teman_ini_orang; i++)
+        {
+            Request req = dataFriendRequest.buffer[id].buffer[(dataFriendRequest.buffer[id].idxHead + i) % MAX_PEOPLE];
+            printf("| ");
+            displayWord(req.sender.nama);
+            newline;
+            printf("| Jumlah teman: %d", req.BanyakTeman);
+            newline;
+        }
+    }
 }
 
 void SETUJUI_PERTEMANAN()
 {
 
-    Request *requests = SortedListOfFriendRequests(&dataTeman, currentPengguna);
-    int NEffRequests = amountOfFriendRquests(&dataTeman, currentPengguna);
+    int id = getIdPengguna(currentPengguna.nama);
+    printf("%d", lengthFriendReq(&dataFriendRequest.buffer[id]));
 
-    if (NEffRequests == 0)
+    if (lengthFriendReq(&dataFriendRequest.buffer[id]) == 0)
     {
         printf("Tidak ada permintaan pertemanan untuk Anda.");
     }
@@ -573,15 +469,17 @@ void SETUJUI_PERTEMANAN()
     else
     {
 
+        Request req = dataFriendRequest.buffer[id].buffer[dataFriendRequest.buffer[id].idxHead];
+
         printf("Permintaan pertemanan teratas dari ");
-        displayWord(requests[0].pengirim.nama);
+        displayWord(req.sender.nama);
         newline;
 
         printf("| ");
-        displayWord(requests[0].pengirim.nama);
+        displayWord(req.sender.nama);
         newline;
 
-        printf("| Jumlah teman: %d", requests[0].BanyaknyaTeman);
+        printf("| Jumlah teman: %d", req.BanyakTeman);
         newline;
 
         boolean correct_input = false;
@@ -593,22 +491,22 @@ void SETUJUI_PERTEMANAN()
             if (isSameWord(currentWord, stringToWord("YA", 2)))
             {
                 correct_input = true;
-                AcceptFriendRequest(&dataTeman, requests[0]);
+                AcceptFriendRequest(&dataFriendRequest, getIdPengguna(currentPengguna.nama), &dataTeman);
 
                 printf("Permintaan pertemanan dari ");
-                displayWord(requests[0].pengirim.nama);
+                displayWord(req.sender.nama);
                 printf(" telah disetujui. Selamat! Anda telah berteman dengan ");
-                displayWord(requests[0].pengirim.nama);
+                displayWord(req.sender.nama);
             }
 
             else if (isSameWord(currentWord, stringToWord("TIDAK", 5)))
             {
                 correct_input = true;
-                AcceptFriendRequest(&dataTeman, requests[0]);
+                AcceptFriendRequest(&dataFriendRequest, getIdPengguna(currentPengguna.nama), &dataTeman);
+                HapusPertemanan(&dataTeman, currentPengguna, req.sender);
 
-                HapusPertemanan(&dataTeman, currentPengguna, requests[0].pengirim);
                 printf("Permintaan pertemanan dari ");
-                displayWord(requests[0].pengirim.nama);
+                displayWord(req.sender.nama);
                 printf(" telah ditolak.");
             }
 

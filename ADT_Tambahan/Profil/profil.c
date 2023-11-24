@@ -80,7 +80,6 @@ boolean cekWeton(Word weton, Word *kata)
     }
     else if (weton.Length == 0)
     {
-        printf("Woohoo!\n");
         kembali = weton;
         valid = true;
     }
@@ -146,9 +145,11 @@ void Ganti_Profil()
             printf("Masukkan bio akun:\n");
             STARTKalimat();
         }
-        dataPengguna.contents[getIdPengguna(currentPengguna.nama)].bio = DuplicateWord(currentWord);
-        currentPengguna.bio = DuplicateWord(currentWord);
 
+        currentPengguna.bio = DuplicateWord(currentWord);
+        dataPengguna.contents[getIdPengguna(currentPengguna.nama)].bio = DuplicateWord(currentPengguna.bio);
+
+        currentWord.Length = 0;
         // input no.hp
         printf("\nMasukkan No HP :\n"); // maksimum merupakan panjang dari adt word itu sendiri
         STARTKalimat();
@@ -182,10 +183,10 @@ void Ganti_Profil()
                 }
             }
         }
-        dataPengguna.contents[getIdPengguna(currentPengguna.nama)].nomor = DuplicateWord(currentWord);
         currentPengguna.nomor = DuplicateWord(currentWord);
-
+        dataPengguna.contents[getIdPengguna(currentPengguna.nama)].nomor = DuplicateWord(currentPengguna.nomor);
         // input weton
+        currentWord.Length = 0;
         Word weton;
         printf("\nMasukkan weton : \n");
         STARTKalimat();
@@ -196,10 +197,11 @@ void Ganti_Profil()
             printf("Masukkan weton : \n");
             STARTKalimat();
         }
-        dataPengguna.contents[getIdPengguna(currentPengguna.nama)].weton = DuplicateWord(weton);
-        currentPengguna.weton = DuplicateWord(currentWord);
 
+        currentPengguna.weton = DuplicateWord(currentWord);
+        dataPengguna.contents[getIdPengguna(currentPengguna.nama)].weton = DuplicateWord(currentPengguna.weton);
         printf("Profil anda sudah berhasil diperbaharui!\n");
+
     }
     else
     {
@@ -295,10 +297,15 @@ void Atur_Jenis_Akun()
 
 void Lihat_Profil(Word nama)
 {
-    if (isLoggedIn)
-    {
+    if (isLoggedIn) {
+        
         int id;
         id = getIdPengguna(nama);
+        // printf("%d", id);
+        // printf("%d", currentPengguna.nama.Length);
+        // printf("%d", currentPengguna.bio.Length);
+        // printf("%d", currentPengguna.nomor.Length);
+        // printf("%d", currentPengguna.weton.Length);
 
         if (id == -1)
         {

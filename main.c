@@ -32,7 +32,7 @@ int main()
     //     displayWord(dataTeman.ListOfEdges[i].vertex1.nama);
     //     displayWord(dataTeman.ListOfEdges[i].vertex2.nama);
     // }
-
+    initializeFriendRequests();
     printf("File berhasil dimuat!\n");
 
     boolean stopped = false;
@@ -80,19 +80,39 @@ int main()
             {
                 STARTKalimat();
                 Word nama = currentWord;
-
-                Lihat_Profil(nama);
-                nl;
+                if (isLoggedIn)
+                {
+                    Lihat_Profil(nama);
+                    nl;
+                }
+                else
+                {
+                    printf("Anda belum masuk! Masuk untuk menikmati layanan Burbir.\n");
+                }
             }
 
             else if (isSameWord(perintah, stringToWord("ATUR_JENIS_AKUN", 15)))
             {
-                Atur_Jenis_Akun();
+                if (isLoggedIn)
+                {
+                    Atur_Jenis_Akun();
+                }
+                else
+                {
+                    printf("Anda belum masuk! Masuk untuk menikmati layanan Burbir.\n");
+                }
             }
 
             else if (isSameWord(perintah, stringToWord("UBAH_FOTO_PROFIL", 16)))
             {
-                Ubah_Foto_Profil();
+                if (isLoggedIn)
+                {
+                    Ubah_Foto_Profil();
+                }
+                else
+                {
+                    printf("Anda belum masuk! Masuk untuk menikmati layanan Burbir.\n");
+                }
             }
 
             /*-------------------------------TEMAN-----------------------------------*/
@@ -100,27 +120,62 @@ int main()
             else if (isSameWord(perintah, stringToWord("DAFTAR_TEMAN", 12)))
             {
                 // displayGrafStuff();
-                DAFTAR_TEMAN();
+                if (not(isLoggedIn))
+                {
+                    printf("Anda belum masuk! Masuk untuk menikmati layanan Burbir.\n");
+                }
+                else
+                {
+                    DAFTAR_TEMAN();
+                }
             }
 
             else if (isSameWord(perintah, stringToWord("HAPUS_TEMAN", 11)))
             {
-                HAPUS_TEMAN();
+                if (not(isLoggedIn))
+                {
+                    printf("Anda belum masuk! Masuk untuk menikmati layanan Burbir.\n");
+                }
+                else
+                {
+                    HAPUS_TEMAN();
+                }
             }
 
             else if (isSameWord(perintah, stringToWord("TAMBAH_TEMAN", 12)))
             {
-                TAMBAH_TEMAN();
+                if (not(isLoggedIn))
+                {
+                    printf("Anda belum masuk! Masuk untuk menikmati layanan Burbir.\n");
+                }
+                else
+                {
+                    TAMBAH_TEMAN();
+                }
             }
 
             else if (isSameWord(perintah, stringToWord("DAFTAR_PERMINTAAN_PERTEMANAN", 28)))
             {
-                DAFTAR_PERMINTAAN_PERTEMANAN();
+                if (not(isLoggedIn))
+                {
+                    printf("Anda belum masuk! Masuk untuk menikmati layanan Burbir.\n");
+                }
+                else
+                {
+                    DAFTAR_PERMINTAAN_PERTEMANAN();
+                }
             }
 
             else if (isSameWord(perintah, stringToWord("SETUJUI_PERTEMANAN", 18)))
             {
-                SETUJUI_PERTEMANAN();
+                if (not(isLoggedIn))
+                {
+                    printf("Anda belum masuk! Masuk untuk menikmati layanan Burbir.\n");
+                }
+                else
+                {
+                    SETUJUI_PERTEMANAN();
+                }
             }
 
             /*-------------------------------KICAU-----------------------------------*/
@@ -251,6 +306,7 @@ int main()
                 START();
                 ADVWORD();
                 Word folderNameWord = currentWord;
+                UpdateMatrixPertemanan(&dataTeman, &dataFriendRequest, &matrixPertemanan, &matrixPermintaan);
                 SIMPAN(folderNameWord);
             }
 
@@ -275,6 +331,6 @@ int main()
         nl;
     }
 
-    printf("Anda telah keluar dari program BurBir. Sampai jumpa di penjelajahan berikutnya.");
+        printf("Anda telah keluar dari program BurBir. Sampai jumpa di penjelajahan berikutnya.");
     nl;
 }
