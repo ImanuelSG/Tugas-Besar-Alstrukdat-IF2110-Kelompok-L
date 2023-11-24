@@ -167,15 +167,15 @@ void Ganti_Profil()
         boolean valid;
         valid = true;
         int i;
-        for (i = 0; i < currentWord.Length; i++)
+        for (i = 0; i < nomor.nEff; i++)
         {
-            if (currentWord.TabWord[i] < 48 || currentWord.TabWord[i] > 57)
+            if (nomor.buffer[i] < 48 || nomor.buffer[i] > 57)
             {
                 valid = false;
             }
         }
 
-        if (currentWord.Length == 0) {
+        if (nomor.nEff == 0) {
             valid = true;
         }
         while (!valid)
@@ -183,10 +183,20 @@ void Ganti_Profil()
             valid = true;
             printf("No HP tidak valid. Masukkan lagi yuk!\n");
             printf("Masukkan No HP :\n");
-            STARTKalimat();
-            for (i = 0; i < currentWord.Length; i++)
+            panjangNomor = 0 ;
+            START() ;
+            while (currentChar != MARK) {
+                if (panjangNomor == 0) {
+                    insertLastNomor(&nomor, currentChar) ;
+                }
+                else {
+                    ADV() ;
+                    insertLastNomor(&nomor, currentChar) ;
+                }
+            }
+            for (i = 0; i < nomor.nEff; i++)
             {
-                if (currentWord.TabWord[i] < 48 || currentWord.TabWord[i] > 57)
+                if (nomor.buffer[i] < 48 || nomor.buffer[i] > 57)
                 {
                     valid = false;
                 }
