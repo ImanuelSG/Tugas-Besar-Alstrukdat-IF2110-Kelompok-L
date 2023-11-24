@@ -59,10 +59,9 @@ void CreateGrafTeman(GrafTeman *G)
     {
         for (j = 0; j < banyakPengguna; j++)
         {
-
-            if (i != j)
+            if (ELMT(matrixPertemanan, i, j))
             {
-                if (ELMT(matrixPertemanan, i, j))
+                if (!isTeman(G, dataPengguna.contents[i], dataPengguna.contents[j]))
                 {
                     TambahPertemanan(G, dataPengguna.contents[i], dataPengguna.contents[j]);
                 }
@@ -70,12 +69,11 @@ void CreateGrafTeman(GrafTeman *G)
         }
     }
 
-    
     for (i = 0; i < ROW_EFF(matrixPermintaan); i++)
     {
 
-        Pengguna v1 = dataPengguna.contents[ELMT(matrixPertemanan, i, 0)];
-        Pengguna v2 = dataPengguna.contents[ELMT(matrixPertemanan, i, 1)];
+        Pengguna v1 = dataPengguna.contents[ELMT(matrixPermintaan, i, 0)];
+        Pengguna v2 = dataPengguna.contents[ELMT(matrixPermintaan, i, 1)];
         int BanyakTeman = ELMT(matrixPertemanan, i, 2);
 
         Request R = CreateRequest(v1, v2, BanyakTeman);
@@ -199,11 +197,16 @@ boolean isTeman(GrafTeman *G, Pengguna user1, Pengguna user2)
 
         int id1 = getIdPengguna(user1.nama);
         int id2 = getIdPengguna(user2.nama);
+        // printf("id1 = %d\n", id1);
+        // printf("id2 = %d\n", id2);
+
         int id_search1 = getIdPengguna(G->ListOfEdges[i].vertex1.nama);
         int id_search2 = getIdPengguna(G->ListOfEdges[i].vertex2.nama);
-
+        // printf("id_search1 = %d\n", id_search1);
+        // printf("id_search2 = %d\n", id_search2);
         if ((id1 == id_search1 && id2 == id_search2) || (id1 == id_search2 && id2 == id_search1))
         {
+
             found = true;
         }
         else

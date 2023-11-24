@@ -6,6 +6,7 @@
 #include "ADT_Tambahan/Balasan/Command_Balasan.h"
 #include "ADT_Tambahan/teman/graf_teman.h"
 #include "ADT_Tambahan/Loader/load.h"
+#include "ADT_Tambahan/DrafKicauan/Command_Draf.h"
 
 #define not(n) !n
 /* Header Note */
@@ -24,10 +25,15 @@ int main()
 
     inputConfigFile();
     CreateGrafTeman(&dataTeman);
+    // printf("%d %d", dataTeman.NEffVertex, dataTeman.NEffEdges);
+    // for (int i = 0; i < dataTeman.NEffEdges; i++)
+    // {
+    //     displayWord(dataTeman.ListOfEdges[i].vertex1.nama);
+    //     displayWord(dataTeman.ListOfEdges[i].vertex2.nama);
+    // }
 
     printf("File berhasil dimuat!\n");
 
-    
     boolean stopped = false;
 
     while (not(stopped))
@@ -121,6 +127,7 @@ int main()
             else if (isSameWord(perintah, stringToWord("KICAU", 5)))
             {
                 KICAU();
+                nl;
             }
 
             else if (isSameWord(perintah, stringToWord("KICAUAN", 7)))
@@ -180,12 +187,18 @@ int main()
 
             else if (isSameWord(perintah, stringToWord("BUAT_DRAF", 9)))
             {
-                printf("Panggil fungsi BUAT_DRAF");
+                Word Penulis = currentPengguna.nama;
+                int i = getIdPengguna(currentPengguna.nama);
+                StackDraf *S = &dataPengguna.contents[i].draf;
+                BUAT_DRAF(S, Penulis);
             }
 
             else if (isSameWord(perintah, stringToWord("LIHAT_DRAF", 10)))
             {
-                printf("Panggil fungsi LIHAT_DRAF");
+                Word Penulis = currentPengguna.nama;
+                int i = getIdPengguna(currentPengguna.nama);
+                StackDraf *S = &dataPengguna.contents[i].draf;
+                LIHAT_DRAF(S, Penulis);
             }
 
             /*------------------------------ UTAS ----------------------------------*/

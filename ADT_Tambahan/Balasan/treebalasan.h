@@ -5,15 +5,15 @@
 #ifndef __TREEBALASAN_H__
 #define __TREEBALASAN_H__
 
-#include "../../ADT_Bawaan/boolean.h"
+#include "../boolean.h"
 #include "ADT_Balasan.h"
+#include "../Kicauan/ADT_Kicauan.h"
 
 /* ********** DEFINISI TYPE ADT TREE UNTUK BALASAN ********** */
 /* ADT TREE DENGAN REPRESENTASI LEFT-CHILD RIGHT-SIBLING */
 typedef Balasan ElTypeBalasan;
 typedef struct treeNode *Address;
-typedef struct treeNode
-{
+typedef struct treeNode {
    ElTypeBalasan info_tree;
    Address left_Child;
    Address right_Sibling;
@@ -32,8 +32,7 @@ typedef Address Tree;
 #define IDX_MIN_LIST_BALASAN 1 /* Indeks minimum list */
 #define IDX_UNDEF 0            /* Indeks tak terdefinisi*/
 
-typedef struct
-{
+typedef struct {
    Address *buffer; /* memori tempat penyimpan elemen (container) */
    int capacity;    /* ukuran list */
 } ListBalasan;
@@ -86,6 +85,9 @@ boolean isBinary(Tree p);
 /* Mengirimkan true jika pohon biner tidak kosong, p adalah pohon biner:
   mempunyai subpohon kiri dan subpohon kanan */
 
+int countNodes(Tree p);
+/* Mengirimkan banyaknya node sebuah pohon */
+
 Address searchTree(Tree p, ID id);
 /* Mengirimkan address simpul dengan id=id jika ada pada pohon biner p
    Mengirimkan NULL jika tidak ada */
@@ -121,7 +123,7 @@ void insertSiblingLast(Tree *p, ElTypeBalasan val);
 /* F.S. Jika alokasi berhasil, maka p menjadi pohon dengan tambahan simpul saudara bernilai val pada posisi i */
 /*      Jika alokasi gagal, maka p tetap */
 
-void deleteTree(Tree *p);
+void deleteTree(Tree *root, int ID_Balasan);
 /* I.S. p terdefinisi */
 /* F.S. semua simpul p di-dealokasi secara kaskade */
 /*      kaskade adalah proses dealokasi parent dan semua anak dan keturunannya */
@@ -130,10 +132,6 @@ void deleteTree(Tree *p);
 void CreateListBalasan(ListBalasan *l, int capacity);
 /* I.S. sembarang */
 /* F.S. Terbentuk list l kosong dengan kapasitas capacity */
-
-int listLengthBalasan(ListBalasan l);
-/* Mengirimkan banyaknya elemen efektif list */
-/* Mengirimkan nol jika list l kosong */
 
 boolean isIdxValidBalas(ListBalasan l, ID i);
 /* Mengirimkan true jika i adalah indeks yang valid utk kapasitas list l */
@@ -145,8 +143,6 @@ void expandListBalas(ListBalasan *l, int num);
 /* I.S. List sudah terdefinisi */
 /* F.S. Ukuran list bertambah sebanyak num */
 
-
-int countNodes(Tree p);
 
 
 #endif

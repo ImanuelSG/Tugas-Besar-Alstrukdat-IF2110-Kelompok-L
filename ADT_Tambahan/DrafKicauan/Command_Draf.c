@@ -41,6 +41,7 @@ void BUAT_DRAF(StackDraf *s, Word Penulis)
             printf("Selamat! Draf kicauan telah diterbitkan!\n");
             printf("Detil kicauan:\n");
             PrintKicauan(K, CURRENT_ID_KICAUAN);
+            printf("\n");
         }
         else
         {

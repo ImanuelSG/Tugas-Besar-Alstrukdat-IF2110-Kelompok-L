@@ -2,7 +2,6 @@
 #include "StackDraf.h"
 #include <stdio.h>
 
-
 int BanyakPenggunaDenganDraf;
 
 AddressDraf newNodeDraf(ElTypeDraf x)
@@ -120,18 +119,20 @@ StackDraf CopyStackDraf(StackDraf s)
 
     ElTypeDraf x;
 
-    
     while (!isEmptyStackDraf(s))
     {
         DeleteDraf(&s, &x);
         SimpanDraf(&temp, x);
+        SimpanDraf(&copy, x);
     }
 
-    // Copy the temporary stack to the copy stack and reverse it back
+    ReverseStackDraf(&copy);
+
+    // Restore the original stack
     while (!isEmptyStackDraf(temp))
     {
         DeleteDraf(&temp, &x);
-        SimpanDraf(&copy, x);
+        SimpanDraf(&s, x);
     }
 
     return copy;

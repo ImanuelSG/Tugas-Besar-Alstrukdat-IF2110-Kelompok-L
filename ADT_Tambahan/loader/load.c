@@ -3,7 +3,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
 #ifdef _WIN32
 #include <direct.h>
 #else
@@ -429,15 +428,22 @@ void WriteDrafConfig(char namafile[])
     while (i < banyakPengguna && j < temp)
     {
         Pengguna Curr = ELMTListStatik(dataPengguna, i);
+        
         if (!isEmptyStackDraf(Curr.draf))
         {
             fprintf(file, "%s %d\n", wordToString(Curr.nama), lengthStackDraf(Curr.draf));
             j++;
+
             StackDraf Copy = CopyStackDraf(Curr.draf);
+            
+
             while (!isEmptyStackDraf(Copy))
             {
+
                 DrafKicau val;
+                
                 DeleteDraf(&Copy, &val);
+                
                 // isi draf
                 fprintf(file, "%s\n", wordToString(ISI_DRAF(val)));
 
@@ -448,6 +454,7 @@ void WriteDrafConfig(char namafile[])
         i++;
     }
     BanyakPenggunaDenganDraf = temp;
+
     fclose(file);
 }
 
@@ -481,6 +488,7 @@ void WriteBalasanConfig(char namafile[])
         return;
     }
     int count = JUMLAH_KICAUAN_DENGAN_BALASAN;
+    
     fprintf(file, "%d\n", count); //
     j = 1;
     while (count > 0)
@@ -571,7 +579,6 @@ void SIMPAN(Word foldername)
         printf("Mohon tunggu...\n");
         for (int i = 1; i <= 3; i++)
         {
-           
 
             printf("%d...\n", i);
         }
@@ -585,7 +592,7 @@ void SIMPAN(Word foldername)
     // Simulating save process with a delay
     for (int i = 1; i <= 3; i++)
     {
-        
+
         printf("%d...\n", i);
     }
     WritePenggunaConfig(path_config1_str);
@@ -642,7 +649,6 @@ void MUAT(Word foldername)
     for (int i = 1; i <= 3; i++)
     {
         printf("%d...\n", i);
-        
     }
     ReadPenggunaConfig(path_config1_str);
     ReadKicauanConfig(path_config2_str);

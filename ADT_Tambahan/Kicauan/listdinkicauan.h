@@ -7,7 +7,7 @@
 #ifndef __LISTDINKICAUAN_H__
 #define __LISTDINKICAUAN_H__
 
-#include "../../ADT_Bawaan/boolean.h"
+#include "../boolean.h"
 #include "ADT_Kicauan.h"
 
 /* ********** DEFINISI TYPE LIST DINAMIK UNTUK KICAUAN ********** */
