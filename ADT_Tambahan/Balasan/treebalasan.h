@@ -13,12 +13,10 @@
 /* ADT TREE DENGAN REPRESENTASI LEFT-CHILD RIGHT-SIBLING */
 typedef Balasan ElTypeBalasan;
 typedef struct treeNode *Address;
-typedef struct treeNode
-{
+typedef struct treeNode {
    ElTypeBalasan info_tree;
    Address left_Child;
    Address right_Sibling;
-   
 } TreeNode;
 
 typedef Address Tree;
@@ -33,12 +31,10 @@ typedef Address Tree;
 #define IDX_MIN_LIST_BALASAN 1 /* Indeks minimum list */
 #define IDX_UNDEF 0            /* Indeks tak terdefinisi*/
 
-typedef struct
-{
+typedef struct {
    Address *buffer; /* memori tempat penyimpan elemen (container) */
    int capacity;    /* ukuran list */
 } ListBalasan;
-
 
 extern ListBalasan ListBalasanData; /*Berisi List Balasan saat ini*/
 /* ********** SELEKTOR LIST BALASAN ********** */
@@ -144,7 +140,5 @@ void expandListBalas(ListBalasan *l, int num);
 /* Proses : Menambahkan capacity l sebanyak num */
 /* I.S. List sudah terdefinisi */
 /* F.S. Ukuran list bertambah sebanyak num */
-
-
 
 #endif

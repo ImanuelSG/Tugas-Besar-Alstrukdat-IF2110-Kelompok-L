@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include "treebalasan.h"
 
-
 ListBalasan ListBalasanData; /*Berisi List Balasan saat ini*/
 /* ********** PRIMITIF-PRIMITIF UNTUK TYPE ADT TREE UNTUK BALASAN ********** */
 Tree NewTree(ElTypeBalasan root, Tree left_child, Tree right_sibling) {
@@ -118,8 +117,7 @@ Address searchTree(Tree p, ID id) {
       }
       else {
          Address temp = searchTree(LEFT_CHILD(p), id);
-         if (temp == NULL)
-         {
+         if (temp == NULL) {
             temp = searchTree(RIGHT_SIBLING(p), id);
          }
          return temp;
@@ -151,8 +149,7 @@ void searchBeforeTree(Tree p, ID id, Address *before, Address *loc) {
             }
             else {
                searchBeforeTree(LEFT_CHILD(p), id, before, loc);
-               if (*loc != NULL)
-               {
+               if (*loc != NULL) {
                   return;
                }
             }
@@ -166,8 +163,7 @@ void searchBeforeTree(Tree p, ID id, Address *before, Address *loc) {
             }
             else {
                searchBeforeTree(RIGHT_SIBLING(p), id, before, loc);
-               if (*loc != NULL)
-               {
+               if (*loc != NULL) {
                   return;
                }
             }
@@ -201,16 +197,13 @@ void printTree(Tree p, int h) {
 }
 
 /* ****** Penambahan dan Penghapusan Elemen ****** */
-void insertChild(Tree *p, ElTypeBalasan val)
-{
-   /* I.S. p boleh kosong */
-   /* F.S. Jika alokasi berhasil, maka p menjadi pohon dengan simpul left_child bernilai val */
-   /*      Jika alokasi gagal, maka p tetap */
+void insertChild(Tree *p, ElTypeBalasan val) {
+/* I.S. p boleh kosong */
+/* F.S. Jika alokasi berhasil, maka p menjadi pohon dengan simpul left_child bernilai val */
+/*      Jika alokasi gagal, maka p tetap */
    Address pNew = newTreeNode(val);
-   if (pNew != NULL)
-   {
-      if (isTreeEmpty(*p))
-      {
+   if (pNew != NULL) {
+      if (isTreeEmpty(*p)) {
          *p = pNew;
       }
       else {
@@ -219,8 +212,7 @@ void insertChild(Tree *p, ElTypeBalasan val)
          }
          else {
             Tree temp = LEFT_CHILD(*p);
-            while (RIGHT_SIBLING(temp) != NULL)
-            {
+            while (RIGHT_SIBLING(temp) != NULL) {
                temp = RIGHT_SIBLING(temp);
             }
             RIGHT_SIBLING(temp) = pNew;
@@ -229,22 +221,18 @@ void insertChild(Tree *p, ElTypeBalasan val)
    }
 }
 
-void insertSiblingLast(Tree *p, ElTypeBalasan val)
-{
-   /* I.S. p boleh kosong */
-   /* F.S. Jika alokasi berhasil, maka p menjadi pohon dengan tambahan simpul right_sibling bernilai val */
-   /*      Jika alokasi gagal, maka p tetap */
+void insertSiblingLast(Tree *p, ElTypeBalasan val) {
+/* I.S. p boleh kosong */
+/* F.S. Jika alokasi berhasil, maka p menjadi pohon dengan tambahan simpul right_sibling bernilai val */
+/*      Jika alokasi gagal, maka p tetap */
    Address pNew = newTreeNode(val);
-   if (pNew != NULL)
-   {
-      if (isTreeEmpty(*p))
-      {
+   if (pNew != NULL) {
+      if (isTreeEmpty(*p)) {
          *p = pNew;
       }
       else {
          Tree temp = *p;
-         while (RIGHT_SIBLING(temp) != NULL)
-         {
+         while (RIGHT_SIBLING(temp) != NULL) {
             temp = RIGHT_SIBLING(temp);
          }
          RIGHT_SIBLING(temp) = pNew;
@@ -275,10 +263,9 @@ void deleteTree(Tree *root, int ID_Balasan) {
 }
 
 /* ********** DEFINISI TYPE LIST BALASAN ********** */
-void CreateListBalasan(ListBalasan *l, int capacity)
-{
-   /* I.S. sembarang */
-   /* F.S. Terbentuk list l kosong dengan kapasitas capacity */
+void CreateListBalasan(ListBalasan *l, int capacity) {
+/* I.S. sembarang */
+/* F.S. Terbentuk list l kosong dengan kapasitas capacity */
    CAPACITY_LIST_BALASAN(*l) = capacity;
    BUFFER_LIST_BALASAN(*l) = (Tree *)malloc(capacity * sizeof(Tree));
    for (int i = 0; i < capacity; i++) {
@@ -286,19 +273,17 @@ void CreateListBalasan(ListBalasan *l, int capacity)
    }
 }
 
-boolean isIdxValidBalas(ListBalasan l, ID i)
-{
-   /* Mengirimkan true jika i adalah indeks yang valid utk kapasitas list l */
-   /* yaitu antara indeks yang terdefinisi utk container*/
+boolean isIdxValidBalas(ListBalasan l, ID i) {
+/* Mengirimkan true jika i adalah indeks yang valid utk kapasitas list l */
+/* yaitu antara indeks yang terdefinisi utk container*/
    return ((i >= IDX_MIN_LIST_BALASAN) && (i < CAPACITY_LIST_BALASAN(l)));
 }
 
 /* ********* MENGUBAH UKURAN ARRAY ********* */
-void expandListBalas(ListBalasan *l, int num)
-{
-   /* Proses : Menambahkan capacity l sebanyak num */
-   /* I.S. List sudah terdefinisi */
-   /* F.S. Ukuran list bertambah sebanyak num */
+void expandListBalas(ListBalasan *l, int num) {
+/* Proses : Menambahkan capacity l sebanyak num */
+/* I.S. List sudah terdefinisi */
+/* F.S. Ukuran list bertambah sebanyak num */
    CAPACITY_LIST_BALASAN(*l) += num;
    BUFFER_LIST_BALASAN(*l) = (Tree *)realloc(BUFFER_LIST_BALASAN(*l), CAPACITY_LIST_BALASAN(*l) * sizeof(Tree));
    for (int i = CAPACITY_LIST_BALASAN(*l) - num; i < CAPACITY_LIST_BALASAN(*l); i++) {
