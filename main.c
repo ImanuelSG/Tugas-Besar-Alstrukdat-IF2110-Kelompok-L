@@ -7,6 +7,7 @@
 #include "ADT_Tambahan/teman/graf_teman.h"
 #include "ADT_Tambahan/Loader/load.h"
 #include "ADT_Tambahan/DrafKicauan/Command_Draf.h"
+#include "ADT_Tambahan/Utas/Command_Utas.h"
 
 #define not(n) !n
 /* Header Note */
@@ -77,7 +78,7 @@ int main()
 
             else if (isSameWord(perintah, stringToWord("LIHAT_PROFIL", 12)))
             {
-                ADVWORD();
+                STARTKalimat();
                 Word nama = currentWord;
 
                 Lihat_Profil(nama);
@@ -208,29 +209,29 @@ int main()
                 ADVWORD();
                 int id = wordToInteger(currentWord);
 
-                printf("Panggil fungsi UTAS dengan parameter [IDKicauan]: %d", id);
+                UTAS(id);
                 nl;
             }
 
-            else if (isSameWord(perintah, stringToWord("SAMBUNG_UTAS", 7)))
+            else if (isSameWord(perintah, stringToWord("SAMBUNG_UTAS", 12)))
             {
                 ADVWORD();
                 int id = wordToInteger(currentWord);
                 ADVWORD();
                 int index = wordToInteger(currentWord);
 
-                printf("Panggil fungsi SAMBUNG_UTAS dengan parameter [IDUtas] [index]: %d %d", id, index);
+                SAMBUNG_UTAS(id, index);
                 nl;
             }
 
-            else if (isSameWord(perintah, stringToWord("HAPUS_UTAS", 12)))
+            else if (isSameWord(perintah, stringToWord("HAPUS_UTAS", 10)))
             {
                 ADVWORD();
                 int id = wordToInteger(currentWord);
                 ADVWORD();
                 int index = wordToInteger(currentWord);
 
-                printf("Panggil fungsi HAPUS_UTAS dengan parameter [IDUtas] [index]: %d %d", id, index);
+                HAPUS_UTAS(id, index);
                 nl;
             }
 
@@ -239,7 +240,7 @@ int main()
                 ADVWORD();
                 int id = wordToInteger(currentWord);
 
-                printf("Panggil fungsi CETAK_UTAS dengan parameter [IDUtas]: %d", id);
+                CETAK_UTAS(id);
             }
 
             /*------------------------- SIMPAN DAN MUAT -----------------------------*/

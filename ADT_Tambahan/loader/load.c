@@ -33,7 +33,7 @@ void ReadPenggunaConfig(char namafile[])
         password = currentBaris;
         ADVBaris();
         bio = currentBaris;
-        advMKarFile();
+        ADVBaris();
         nomor = currentBaris;
         ADVBaris();
         weton = currentBaris;
@@ -95,7 +95,7 @@ void ReadKicauanConfig(char namafile[])
     Kicauan kicau;
     Word Penulis, Tweet;
     DATETIME Waktu;
-    ID CURRENT_ID_KICAUAN = 0;
+    CURRENT_ID_KICAUAN = 0;
     STARTBaris(namafile);
 
     iteration = wordToInteger(currentBaris);

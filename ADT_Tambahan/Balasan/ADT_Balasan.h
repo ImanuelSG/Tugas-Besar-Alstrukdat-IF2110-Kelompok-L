@@ -44,7 +44,6 @@ void PrintBalasan(Balasan B, int indentasi);
     | <Isi balasan>
 */
 
-void PrintBalasanOnly(Balasan B, int indentasi);
-/* I.S. memprint semua balasan (hanya untuk tes) */
+
 
 #endif

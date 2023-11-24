@@ -112,6 +112,7 @@ void printListKicauan(ListKicauan l, Word NamaPengguna)
             if (isBerteman(NamaPengguna, PENULIS_KICAUAN(ELMT_LIST_KICAUAN(l, i))))
             {
                 PrintKicauan(ELMT_LIST_KICAUAN(l, i), i);
+                printf("\n");
             }
         }
     }
