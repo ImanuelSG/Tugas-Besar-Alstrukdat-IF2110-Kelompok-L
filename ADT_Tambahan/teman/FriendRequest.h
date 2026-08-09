@@ -2,7 +2,7 @@
 #define FRIENDREQ_H
 
 #include "../Pengguna/pengguna.h"
-#include "../Utils/utils.h"
+#include "../utils/utils.h"
 
 #define MAX_PEOPLE 20
 #define IDX_TIDAK_TERDEFIINISI -1

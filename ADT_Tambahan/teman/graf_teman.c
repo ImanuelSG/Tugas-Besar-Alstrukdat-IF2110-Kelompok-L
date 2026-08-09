@@ -354,7 +354,7 @@ void TAMBAH_TEMAN()
 
                 int search_id_pengirim = getIdPengguna(dataFriendRequest.buffer[id_penerima].buffer[i].sender.nama);
 
-                if ((id_pengirim == search_id_pengirim))
+                if (id_pengirim == search_id_pengirim)
                 {
                     udah_ngirim = true;
                 }

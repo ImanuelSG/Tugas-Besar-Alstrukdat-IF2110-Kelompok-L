@@ -29,7 +29,7 @@ void UTAS(ID IDKicau){
         insertFirstUtas(&lUtas, newUtas); //memasukkan newUtas ke lUtas
         insertLastListDinUtas(&lDinUtas, lUtas); //memasukkan lUtas baru ke lDinUtas
 
-        Utas sambunganUtas;
+        Utas sambunganUtas = {0};
         index++;
         sambungKicauanUtas(sambunganUtas, IDUtas, index, lUtas);
 
@@ -43,7 +43,7 @@ void UTAS(ID IDKicau){
             STARTKalimat();
             confirmSambung = currentWord;
             if (isSameWord(confirmSambung,Ya)){
-                Utas nextUtas;
+                Utas nextUtas = {0};
                 index++;
                 sambungKicauanUtas(nextUtas, IDUtas, index, lUtas);
             }
@@ -70,7 +70,7 @@ void SAMBUNG_UTAS(int IDUtas, int index){
             printf("Index terlalu tinggi!");
         }
         else{
-            Utas sambunganUtas;
+            Utas sambunganUtas = {0};
             sambungKicauanUtas(sambunganUtas, IDUtas, index, lUtas);
         }
     }

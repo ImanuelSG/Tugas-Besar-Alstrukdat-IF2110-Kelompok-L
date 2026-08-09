@@ -2,7 +2,7 @@
 /* Definisi Mesin Karakter File*/
 
 #ifndef mKarFile
-#define mKarfile
+#define mKarFile
 
 #include "../../ADT_Bawaan/boolean.h"
 

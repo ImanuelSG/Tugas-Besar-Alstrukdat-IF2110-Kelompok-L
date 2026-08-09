@@ -64,7 +64,7 @@ void deleteChar(Word * w, char letter) {
     boolean flag = false;
     int idx;
     for (idx = 0; idx < (*w).Length; idx++) {
-        if (((*w).TabWord[idx] == letter)) {
+        if ((*w).TabWord[idx] == letter) {
             flag = true;
         }
         if (flag) {

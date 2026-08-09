@@ -1,4 +1,4 @@
-#include "../ADT_Tambahan/Loader/load.h"
+#include "../ADT_Tambahan/loader/load.h"
 
 int main()
 {

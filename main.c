@@ -1,11 +1,11 @@
 /* Main */
 #include "ADT_Tambahan/wordsimilarity.h"
-#include "ADT_Tambahan/inisialisasi/inisialisasiperintah.h"
+#include "ADT_Tambahan/Inisialisasi/inisialisasiperintah.h"
 #include "ADT_Tambahan/Pengguna/pengguna.h"
 #include "ADT_Tambahan/Kicauan/Command_Kicauan.h"
 #include "ADT_Tambahan/Balasan/Command_Balasan.h"
 #include "ADT_Tambahan/teman/graf_teman.h"
-#include "ADT_Tambahan/Loader/load.h"
+#include "ADT_Tambahan/loader/load.h"
 #include "ADT_Tambahan/DrafKicauan/Command_Draf.h"
 #include "ADT_Tambahan/Utas/Command_Utas.h"
 

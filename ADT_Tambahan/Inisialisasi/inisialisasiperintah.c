@@ -5,7 +5,7 @@
 #include "inisialisasiperintah.h"
 #include "../wordsimilarity.h"
 #include "../../pcolor.h"
-#include "../Loader/load.h"
+#include "../loader/load.h"
 Word KeyWords[100];
 void displayLogoBurbir()
 {

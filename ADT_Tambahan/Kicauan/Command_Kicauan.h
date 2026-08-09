@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 #include "listdinkicauan.h"
-#include "../Utils/utils.h"
+#include "../utils/utils.h"
 #include "../Globals/globalvar.h"
 #include "../wordoperations.h"
 

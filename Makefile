@@ -1,5 +1,9 @@
 CC = gcc
-CFLAGS = -Wall -Werror -std=c11
+# -Wno-deprecated-non-prototype: several ADT headers declare functions as
+# `void f();` and define them with parameters. That was ordinary C when this
+# was written; clang 15+ treats it as an error under -Werror. The declarations
+# want fixing properly, but not by rewriting every public header at once.
+CFLAGS = -Wall -Werror -Wno-deprecated-non-prototype -std=c11
 TARGET = start.exe
 SRC_DIR = .
 OBJ_DIR = obj
